@@ -1,6 +1,7 @@
 package com.ctrl.game;
 
 import com.model.player.FullPlayer;
+import com.model.player.PlayerDB;
 import com.model.player.ResumedPlayer;
 
 public class ConverterPlayer {
@@ -16,6 +17,13 @@ public class ConverterPlayer {
 		rp.setRating(full.getRating());	
 		
 		return rp;
+	}
+	
+	public PlayerDB FullToDB(FullPlayer pl) {
+		
+		// TODO implementar a convesão do objeto json para o objeto de persistencia.
+		return new PlayerDB();
+	
 	}
 
 }
