@@ -14,4 +14,9 @@ public class ResumedPlayerDAO {
 		return 0;
 	}
 
+	public ResumedPlayer getItem(int playerId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -33,7 +33,7 @@ public class PlayerController {
 	    			pl.getPlayerType().equals("standard")) {
 	    		
 	    			player = cp.FullToDB(pl);
-	    			pdao.Insert(player);
+	    			pdao.Insert(player);	    			
 	    		}	    		
 	    		
 	    	}
@@ -43,7 +43,7 @@ public class PlayerController {
 			wr = c.resource("https://www.easports.com/fifa/ultimate-team/api/fut/item?page="+pageToGo);
 		    json = wr.get(String.class);
 		    gson = new Gson();
-		    pg = gson.fromJson(json, Page.class);	 	    	
+		    pg = gson.fromJson(json, Page.class); 	    	
 	    	
 	    	
 	    }	    
