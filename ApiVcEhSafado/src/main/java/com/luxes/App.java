@@ -1,4 +1,4 @@
-package com.ApiFifa;
+package com.luxes;
 
 /**
  * Hello world!
