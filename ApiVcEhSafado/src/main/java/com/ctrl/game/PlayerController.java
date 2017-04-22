@@ -8,6 +8,8 @@ import javax.ws.rs.core.MediaType;
 import com.google.gson.Gson;
 import com.model.player.FullPlayer;
 import com.model.player.Page;
+import com.model.player.PlayerDB;
+import com.model.player.PlayerDBDao;
 
 public class PlayerController {
 	

@@ -1,10 +1,7 @@
 package com.view.player;
 
 import com.ctrl.game.PlayerController;
-import com.google.gson.Gson;
-import com.model.player.Page;
-
-import org.glassfish.jersey.client.*;
+//import org.glassfish.jersey.client.*;
 
 
 //import com.sun.jersey.api.client.Client;
