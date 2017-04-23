@@ -1,0 +1,19 @@
+<h1>Visualizar Player</h1>
+
+<div>
+    <table class="table table-striped">
+        <tr>
+            <th>ID</th>
+            <td>{{ player.id }}</td>
+        </tr>
+        <tr>
+            <th>Nome</th>
+			<td>{{ player.nome }}</td>
+		</tr>
+    </table>
+	<div class="text-center">
+		<a class="btn btn-default" [routerLink]="['/players']">
+			Voltar
+		</a>
+	</div>
+</div>
