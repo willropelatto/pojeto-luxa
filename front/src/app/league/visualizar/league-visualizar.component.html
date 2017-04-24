@@ -1,0 +1,19 @@
+<h1>Visualizar League</h1>
+
+<div>
+    <table class="table table-striped">
+        <tr>
+            <th>ID</th>
+            <td>{{ league.id }}</td>
+        </tr>
+        <tr>
+            <th>Nome</th>
+			<td>{{ league.nome }}</td>
+		</tr>
+    </table>
+	<div class="text-center">
+		<a class="btn btn-default" [routerLink]="['/leagues']">
+			Voltar
+		</a>
+	</div>
+</div>
