@@ -8,6 +8,7 @@ public class Team {
 	private String name;
 	private ResumedPlayer[] players;
 	private String luxa;
+	private double Budget;
 	
 	public String getName() {
 		return name;
@@ -32,5 +33,11 @@ public class Team {
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	public double getBudget() {
+		return Budget;
+	}
+	public void setBudget(double budget) {
+		Budget = budget;
 	}	
 }

@@ -8,8 +8,8 @@ import javax.ws.rs.core.MediaType;
 import com.google.gson.Gson;
 import com.model.player.FullPlayer;
 import com.model.player.Page;
-import com.model.player.PlayerDB;
-import com.model.player.PlayerDBDao;
+import com.model.player.PlayerEntity;
+import com.model.player.PlayerDao;
 
 public class PlayerController {
 	
@@ -27,8 +27,8 @@ public class PlayerController {
 	    
 	    ConverterPlayer cp = new ConverterPlayer();
 	    
-	    PlayerDBDao pdao = new PlayerDBDao();
-	    PlayerDB player;
+	    PlayerDao pdao = new PlayerDao();
+	    PlayerEntity player;
 	    FullPlayer pl;	    
 	    
 	    while (pg.getTotalPages() != pg.getPage()) {
@@ -41,7 +41,7 @@ public class PlayerController {
 	    			pl.getPlayerType().equals("standard")) {
 	    		
 	    			player = cp.FullToDB(pl);
-	    			pdao.Insert(player);
+	    			pdao.Save(player);
 	    		}	    		
 	    		
 	    	}

@@ -1,0 +1,19 @@
+<h1>Visualizar Team</h1>
+
+<div>
+    <table class="table table-striped">
+        <tr>
+            <th>ID</th>
+            <td>{{ team.id }}</td>
+        </tr>
+        <tr>
+            <th>Nome</th>
+			<td>{{ team.nome }}</td>
+		</tr>
+    </table>
+	<div class="text-center">
+		<a class="btn btn-default" [routerLink]="['/teams']">
+			Voltar
+		</a>
+	</div>
+</div>
