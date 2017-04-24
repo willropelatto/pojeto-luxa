@@ -7,7 +7,7 @@ public class Page {
 	private int totalResults;
 	private String type;
 	private int count;
-	private FullPlayerDAO[] items;
+	private FullPlayer[] items;
 	
 	public int getPage() {
 		return page;
@@ -39,10 +39,10 @@ public class Page {
 	public void setCount(int count) {
 		this.count = count;
 	}
-	public FullPlayerDAO[] getItems() {
+	public FullPlayer[] getItems() {
 		return items;
 	}
-	public void setItems(FullPlayerDAO[] items) {
+	public void setItems(FullPlayer[] items) {
 		this.items = items;
 	}
 
