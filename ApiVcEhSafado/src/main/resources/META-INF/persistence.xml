@@ -5,12 +5,12 @@
 			 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 			 xmlns="http://java.sun.com/xml/ns/persistence">
  
-   <persistence-unit name="persistence_unit_db_estudo" transaction-type="RESOURCE_LOCAL">
+   <persistence-unit name="persistence_unit_db_banco" transaction-type="RESOURCE_LOCAL">
       <provider>org.hibernate.ejb.HibernatePersistence</provider>
       <properties>
          <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
          <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-         <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/db_base"/>
+         <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/db_banco"/>
          <property name="javax.persistence.jdbc.user" value="root"/>
          <property name="javax.persistence.jdbc.password" value="root"/>
          <property name="hibernate.show_sql" value="true"/>
