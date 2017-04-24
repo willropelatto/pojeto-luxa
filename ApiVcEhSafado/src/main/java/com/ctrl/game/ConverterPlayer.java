@@ -21,8 +21,15 @@ public class ConverterPlayer {
 	
 	public PlayerEntity FullToDB(FullPlayer pl) {
 		
-		// TODO implementar a conves�o do objeto json para o objeto de persistencia.
-		return new PlayerEntity();
+		PlayerEntity player = new PlayerEntity();
+		
+		String name = pl.getFirstName()+ " " + pl.getLastName();
+		player.setName(name);
+		player.setPosition(pl.getPosition());
+		player.setBaseId(pl.getBaseId());
+		player.setRating(pl.getRating());
+		player.setIdLeague(0); 
+		return player;
 	
 	}
 
