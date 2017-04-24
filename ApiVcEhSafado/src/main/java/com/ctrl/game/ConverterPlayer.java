@@ -1,7 +1,7 @@
 package com.ctrl.game;
 
 import com.model.player.FullPlayer;
-import com.model.player.PlayerDB;
+import com.model.player.PlayerEntity;
 import com.model.player.ResumedPlayer;
 
 public class ConverterPlayer {
@@ -19,10 +19,10 @@ public class ConverterPlayer {
 		return rp;
 	}
 	
-	public PlayerDB FullToDB(FullPlayer pl) {
+	public PlayerEntity FullToDB(FullPlayer pl) {
 		
 		// TODO implementar a conves�o do objeto json para o objeto de persistencia.
-		return new PlayerDB();
+		return new PlayerEntity();
 	
 	}
 
