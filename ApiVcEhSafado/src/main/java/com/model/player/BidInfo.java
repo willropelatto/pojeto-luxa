@@ -6,6 +6,7 @@ public class BidInfo {
 	private double bidValue;
 	private int teamID;
 	private double originalValue;
+	private boolean bidAproved;
 	
 	public int getPlayerID() {
 		return playerID;
@@ -37,6 +38,13 @@ public class BidInfo {
 		this.bidValue = 0;
 		this.teamID = 0;
 		this.originalValue = 0;
+		this.bidAproved = false;
+	}
+	public boolean isBidAproved() {
+		return bidAproved;
+	}
+	public void setBidAproved(boolean bidAproved) {
+		this.bidAproved = bidAproved;
 	}
 	
 	
