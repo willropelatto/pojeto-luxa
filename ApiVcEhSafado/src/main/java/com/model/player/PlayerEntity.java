@@ -24,6 +24,8 @@ public class PlayerEntity {
     private Integer rating;
 	@Column(name="idLeague")
 	private Integer idLeague;
+	@Column(name="originalId")
+	private Integer originalId;
 	
 	
 	public Integer getId() {
@@ -35,6 +37,7 @@ public class PlayerEntity {
 	public String getPosition() {
 		return position;
 	}
+	
 	public void setPosition(String position) {
 		this.position = position;
 	}
@@ -63,5 +66,25 @@ public class PlayerEntity {
 		this.idLeague = idLeague;
 	}
 	
+	public Integer getOriginalId() {
+		return originalId;
+	}
+	public void setOriginalId(Integer originalId) {
+		this.originalId = originalId;
+	}
 	
+	
+	
+	/*
+ CREATE TABLE `tb_player` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `position` varchar(45) DEFAULT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  `baseid` int(11) DEFAULT NULL,
+  `rating` int(11) DEFAULT NULL,
+  `idleague` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
+
+  */
 }

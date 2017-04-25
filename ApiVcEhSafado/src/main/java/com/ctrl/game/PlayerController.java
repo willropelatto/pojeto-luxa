@@ -8,6 +8,8 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 
 import com.google.gson.Gson;
+import com.model.league.LeagueDao;
+import com.model.league.LeagueEntity;
 import com.model.player.FullPlayer;
 import com.model.player.League;
 import com.model.player.LeagueDAO;
@@ -15,29 +17,52 @@ import com.model.player.Page;
 import com.model.player.PlayerEntity;
 import com.model.player.PlayerDao;
 
+import java.util.ArrayList;
+
 public class PlayerController {
 	
+	public Boolean ContainInList(ArrayList<Integer> lista, int id) {
+		
+		Boolean encontrou = false;
+		
+		if (lista.size() > 0) {
+			for (int i = 0; i < lista.size(); i++) {
+				if (lista.get(i) == id) {
+					encontrou = true;
+				}
+			}
+		} 
+		
+		return encontrou;					
+		
+	}
+
 	public void UpdateStoredPlayers() {
 		
 	
-		Client client = ClientBuilder.newClient();
-		WebTarget target = client.target("https://www.easports.com/fifa/ultimate-team/api/fut/item?page=1");
-//		WebTarget target = client.target("http://smartwaysolucoes.com/item1.json");
-				
-	    String json = target.request(MediaType.APPLICATION_JSON).get().readEntity(String.class);	    
-	    Gson gson = new Gson();	    
+		 Client client = ClientBuilder.newClient();
+		 WebTarget target = client.target("https://www.easports.com/fifa/ultimate-team/api/fut/item?page=1");
+						
+	    String json = target.request(MediaType.APPLICATION_JSON).get().readEntity(String.class);
+	    
+	    Gson gson = new Gson();
+	    
 	    Page pg = gson.fromJson(json, Page.class);	   
 	    
-	    ConverterPlayer conversor = new ConverterPlayer();	    
+	    ConverterPlayer cp = new ConverterPlayer();
+	    ConverterLeague cl = new ConverterLeague();
 	    PlayerDao pdao = new PlayerDao();
 	    
 	    PlayerEntity player;
 	    FullPlayer fullPlay;	  
 	    
 	    ArrayList<League> leagues = new ArrayList<League>();	    
-	    
+
+      LeagueDao leagueDao = new LeagueDao();
+	    LeagueEntity league;
+
 	    while (pg.getTotalPages() >= pg.getPage()) {
-	    
+    
 	    	for (int i = 0; i < pg.getItems().length; i++) {
 	    		
 	    		fullPlay = pg.getItems()[i];    		
@@ -55,6 +80,8 @@ public class PlayerController {
 	    			
 	    			player = conversor.FullToDB(fullPlay);
 	    			pdao.Save(player);
+
+						
 	    		}	    		
 	    		
 	    	}
@@ -68,6 +95,7 @@ public class PlayerController {
 				gson = new Gson();
 				pg = gson.fromJson(json, Page.class);	
 			}
+
 	    	
 	    	
 	    }	    
@@ -76,7 +104,7 @@ public class PlayerController {
 	
 	public void UpdateTestMoacir() {
 		Client client = ClientBuilder.newClient();
-		WebTarget target = client.target("http://smartwaysolucoes.com/item1.json");
+		WebTarget target = client.target("http://smartwaysolucoes.com/item7.json");
 	    String json = target.request(MediaType.APPLICATION_JSON).get().readEntity(String.class);
 	    Gson gson = new Gson();
 	    Page pg = gson.fromJson(json, Page.class);	   

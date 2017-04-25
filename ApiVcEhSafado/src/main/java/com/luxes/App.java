@@ -8,7 +8,7 @@ public class App
     {      
         
 		PlayerController pc = new PlayerController();
-		pc.UpdateTestMoacir();
+		pc.UpdateStoredPlayers();
 		System.out.println("terminei");
 		
     }
