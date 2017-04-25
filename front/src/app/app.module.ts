@@ -14,6 +14,8 @@ import { PlayerModule} from './player';
 import { LeagueModule} from './league';
 import { TeamModule } from './team';
 
+import { BidinfoModule } from './bidinfo';
+
 
 
 
@@ -23,7 +25,8 @@ import { TeamModule } from './team';
     AppRoutingModule,
     PlayerModule,
     LeagueModule,
- //   TeamModule
+    TeamModule,
+    BidinfoModule
   ],
   declarations: [ 
     AppComponent

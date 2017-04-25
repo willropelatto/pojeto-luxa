@@ -1,0 +1,19 @@
+<h1>Cadastrar Transfermarket</h1>
+
+<div class="well">
+    <form role="form">
+        <div class="form-group">
+            <label class="control-label" for="nome">Nome</label>
+            <input type="text" class="form-control" name="name" 
+                id="name" [(ngModel)]="transfermarket.name">
+        </div>
+        <div class="form-group text-center">
+            <button class="btn btn-success" (click)="cadastrar()">
+                Cadastrar
+            </button>
+			<a class="btn btn-default" [routerLink]="['/transfermarkets']">
+                Voltar
+            </a>
+        </div>
+    </form>
+</div>

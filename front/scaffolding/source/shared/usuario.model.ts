@@ -8,5 +8,5 @@
 /*#export class #MODULO_CAP# {
 	constructor(
 		public id?: number,
-		public nome?: string){}
+		public name?: string){}
 }#*/

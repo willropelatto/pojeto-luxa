@@ -79,8 +79,8 @@ prompt.get(schema, function (err, input) {
 		path.join(pathDestino, '/cadastrar/' + modulo + '-cadastrar.component.html'));
 	fs.renameSync(path.join(pathDestino, '/cadastrar/usuario-cadastrar.component.ts'), 
 		path.join(pathDestino, '/cadastrar/' + modulo + '-cadastrar.component.ts'));
-	fs.renameSync(path.join(pathDestino, '/cadastrar/usuario-cadastrar.component.spec.ts'), 
-		path.join(pathDestino, '/cadastrar/' + modulo + '-cadastrar.component.spec.ts'));
+	//fs.renameSync(path.join(pathDestino, '/cadastrar/usuario-cadastrar.component.spec.ts'), 
+		//path.join(pathDestino, '/cadastrar/' + modulo + '-cadastrar.component.spec.ts'));
 	//editar
 	fs.renameSync(path.join(pathDestino, '/editar/usuario-editar.component.css'), 
 		path.join(pathDestino, '/editar/' + modulo + '-editar.component.css'));
@@ -88,8 +88,8 @@ prompt.get(schema, function (err, input) {
 		path.join(pathDestino, '/editar/' + modulo + '-editar.component.html'));
 	fs.renameSync(path.join(pathDestino, '/editar/usuario-editar.component.ts'), 
 		path.join(pathDestino, '/editar/' + modulo + '-editar.component.ts'));
-	fs.renameSync(path.join(pathDestino, '/editar/usuario-editar.component.spec.ts'), 
-		path.join(pathDestino, '/editar/' + modulo + '-editar.component.spec.ts'));
+	//fs.renameSync(path.join(pathDestino, '/editar/usuario-editar.component.spec.ts'), 
+		//path.join(pathDestino, '/editar/' + modulo + '-editar.component.spec.ts'));
 	//listar
 	fs.renameSync(path.join(pathDestino, '/listar/usuario-listar.component.css'), 
 		path.join(pathDestino, '/listar/' + modulo + '-listar.component.css'));
@@ -97,8 +97,8 @@ prompt.get(schema, function (err, input) {
 		path.join(pathDestino, '/listar/' + modulo + '-listar.component.html'));
 	fs.renameSync(path.join(pathDestino, '/listar/usuario-listar.component.ts'), 
 		path.join(pathDestino, '/listar/' + modulo + '-listar.component.ts'));
-	fs.renameSync(path.join(pathDestino, '/listar/usuario-listar.component.spec.ts'), 
-		path.join(pathDestino, '/listar/' + modulo + '-listar.component.spec.ts'));
+	//fs.renameSync(path.join(pathDestino, '/listar/usuario-listar.component.spec.ts'), 
+		//path.join(pathDestino, '/listar/' + modulo + '-listar.component.spec.ts'));
 	//visualizar
 	fs.renameSync(path.join(pathDestino, '/visualizar/usuario-visualizar.component.css'), 
 		path.join(pathDestino, '/visualizar/' + modulo + '-visualizar.component.css'));
@@ -106,15 +106,15 @@ prompt.get(schema, function (err, input) {
 		path.join(pathDestino, '/visualizar/' + modulo + '-visualizar.component.html'));
 	fs.renameSync(path.join(pathDestino, '/visualizar/usuario-visualizar.component.ts'), 
 		path.join(pathDestino, '/visualizar/' + modulo + '-visualizar.component.ts'));
-	fs.renameSync(path.join(pathDestino, '/visualizar/usuario-visualizar.component.spec.ts'), 
-		path.join(pathDestino, '/visualizar/' + modulo + '-visualizar.component.spec.ts'));
+	//fs.renameSync(path.join(pathDestino, '/visualizar/usuario-visualizar.component.spec.ts'), 
+		//path.join(pathDestino, '/visualizar/' + modulo + '-visualizar.component.spec.ts'));
 	//shared
 	fs.renameSync(path.join(pathDestino, '/shared/usuario.model.ts'), 
 		path.join(pathDestino, '/shared/' + modulo + '.model.ts'));
 	fs.renameSync(path.join(pathDestino, '/shared/usuario.service.ts'), 
 		path.join(pathDestino, '/shared/' + modulo + '.service.ts'));
-	fs.renameSync(path.join(pathDestino, '/shared/usuario.service.spec.ts'), 
-		path.join(pathDestino, '/shared/' + modulo + '.service.spec.ts'));
+//	fs.renameSync(path.join(pathDestino, '/shared/usuario.service.spec.ts'), 
+	//	path.join(pathDestino, '/shared/' + modulo + '.service.spec.ts'));
 
 	//replace
 	var arqModificados = '';

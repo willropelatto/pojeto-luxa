@@ -5,6 +5,7 @@
         <tr>
             <th>ID</th>
             <th>Nome</th>
+            <th>Técnico</th>
             <th class="text-right">
                 <a class="btn btn-success" 
                     [routerLink]="['/teams/cadastrar']">
@@ -14,7 +15,8 @@
         </tr>
         <tr *ngFor="let team of teams">
             <td>{{ team.id }}</td>
-            <td>{{ team.nome }}</td>
+            <td>{{ team.name }}</td>
+            <td>{{ team.luxa }}</td>            
             <td class="text-right">
 				<a class="btn btn-warning" 
                     [routerLink]="['/teams/visualizar/'+team.id]">
