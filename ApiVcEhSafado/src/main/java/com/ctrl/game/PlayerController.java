@@ -17,7 +17,8 @@ public class PlayerController {
 		
 	
 		Client client = ClientBuilder.newClient();
-		WebTarget target = client.target("https://www.easports.com/fifa/ultimate-team/api/fut/item?page=1"); 
+		//WebTarget target = client.target("https://www.easports.com/fifa/ultimate-team/api/fut/item?page=1");
+		WebTarget target = client.target("http://smartwaysolucoes.com/item1.json");
 				
 	    String json = target.request(MediaType.APPLICATION_JSON).get().readEntity(String.class);
 	    
@@ -48,7 +49,8 @@ public class PlayerController {
 	    	
 	    	int pageToGo = pg.getPage()+1;
 	    	
-			target = client.target("https://www.easports.com/fifa/ultimate-team/api/fut/item?page="+pageToGo); 
+			//target = client.target("https://www.easports.com/fifa/ultimate-team/api/fut/item?page="+pageToGo);
+	    	target = client.target("http://smartwaysolucoes.com/item"+pageToGo+".json");
 			json = target.request(MediaType.APPLICATION_JSON).get().readEntity(String.class);
 		    gson = new Gson();
 		    pg = gson.fromJson(json, Page.class);	 	    	
@@ -56,5 +58,30 @@ public class PlayerController {
 	    	
 	    }	    
 	    
+	}
+	
+	public void UpdateTestMoacir() {
+		Client client = ClientBuilder.newClient();
+		WebTarget target = client.target("http://smartwaysolucoes.com/item1.json");
+	    String json = target.request(MediaType.APPLICATION_JSON).get().readEntity(String.class);
+	    Gson gson = new Gson();
+	    Page pg = gson.fromJson(json, Page.class);	   
+	    ConverterPlayer cp = new ConverterPlayer();
+	    PlayerDao pdao = new PlayerDao();
+	    PlayerEntity player;
+	    FullPlayer pl;	    
+	    for (int i = 0; i < pg.getItems().length; i++) {
+	    		
+	    	pl = pg.getItems()[i];    		
+	    		
+	    	if (pl.getPlayerType().equals("rare") || 
+	    		pl.getPlayerType().equals("standard")) {
+	    	
+	    		player = cp.FullToDB(pl);
+	    		pdao.Save(player);
+	    	}	    		
+	    		
+	    }
+		
 	}
 }
