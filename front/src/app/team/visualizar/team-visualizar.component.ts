@@ -11,6 +11,8 @@ import { ActivatedRoute } from '@angular/router';
 
 import { Team, TeamService } from '../shared';
 
+import { Player } from '../../player';
+
 @Component({
 	selector: 'kz-team-visualizar',
 	templateUrl: './team-visualizar.component.html',
@@ -20,6 +22,10 @@ export class TeamVisualizarComponent implements OnInit {
 
 	private id: number;
 	private team: Team;
+	private players : Player[] = [
+		new Player(1,'Messi','PD',1,94),
+		new Player(2,'Cristiano Ronaldo','PE',2,93)
+	]
 
 	/**
 	 * Construtor.
@@ -38,5 +44,6 @@ export class TeamVisualizarComponent implements OnInit {
 	ngOnInit() {
 		this.id = +this.route.snapshot.params['id'];
 		this.team = this.teamService.buscarPorId(this.id);
+		this.team.players = this.players;
 	}
 }

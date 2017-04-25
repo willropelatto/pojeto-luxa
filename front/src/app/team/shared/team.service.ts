@@ -9,8 +9,13 @@ import { Injectable } from '@angular/core';
 
 import { Team } from './team.model';
 
+
+
 @Injectable()
 export class TeamService {
+
+	private teams: Team[];
+	
 
 	/**
 	 * Retorna listagem de todos os teams.
@@ -115,4 +120,6 @@ export class TeamService {
 	totalRegistros(): number {
 		return this.listarTodos().length;
 	}
+
+
 }

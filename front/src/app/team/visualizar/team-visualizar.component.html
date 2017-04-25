@@ -1,4 +1,4 @@
-<h1>Visualizar Team</h1>
+<h1>Visualizar Time</h1>
 
 <div>
     <table class="table table-striped">
@@ -8,12 +8,30 @@
         </tr>
         <tr>
             <th>Nome</th>
-			<td>{{ team.nome }}</td>
-		</tr>
+            <td>{{ team.name }}</td>
+        </tr>
+        <tr>
+            <th>Técnico</th>
+            <td>{{ team.luxa }}</td>
+        </tr>
     </table>
-	<div class="text-center">
-		<a class="btn btn-default" [routerLink]="['/teams']">
+    <div class="row">
+        <h3 class="text-center">Jogadores</h3>
+        <div class="col-md-4">
+            <ul class="list-group">
+                <li class="list-group-item" *ngFor="let player of team.players">
+                    {{ player.name }} 
+                    <span class="label label-primary">{{ player.position}}</span>
+                    <span class="badge">{{ player.rating }}</span>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+    <div class="text-center">
+        <a class="btn btn-default" [routerLink]="['/teams']">
 			Voltar
 		</a>
-	</div>
+    </div>
 </div>

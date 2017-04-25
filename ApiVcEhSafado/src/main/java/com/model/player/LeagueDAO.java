@@ -27,6 +27,11 @@ public class LeagueDAO {
 	public ArrayList<League> getItems() {
 		
 		return new ArrayList<League>();
+	}
+
+	public void Save(League league) {
+		// TODO Auto-generated method stub
+		
 	}	
 
 }

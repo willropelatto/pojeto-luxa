@@ -11,15 +11,16 @@ import { Routes, RouterModule } from '@angular/router';
 import { PlayerRoutes } from './player';
 
 import { LeagueRoutes } from './league'; 
-
 import { TeamRoutes } from './team';
 
+import { BidinfoRoutes } from './bidinfo';
 
 
 export const routes: Routes = [
   ...PlayerRoutes,
   ...LeagueRoutes,
- // ...TeamRoutes
+  ...TeamRoutes,
+  ...BidinfoRoutes
 ];
 
 @NgModule({

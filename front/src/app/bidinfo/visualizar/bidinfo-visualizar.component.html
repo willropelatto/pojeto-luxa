@@ -1,0 +1,19 @@
+<h1>Visualizar Bidinfo</h1>
+
+<div>
+    <table class="table table-striped">
+        <tr>
+            <th>ID</th>
+            <td>{{ bidinfo.id }}</td>
+        </tr>
+        <tr>
+            <th>Nome</th>
+			<td>{{ bidinfo.name }}</td>
+		</tr>
+    </table>
+	<div class="text-center">
+		<a class="btn btn-default" [routerLink]="['/bidinfos']">
+			Voltar
+		</a>
+	</div>
+</div>
