@@ -8,5 +8,8 @@
 export class Player {
 	constructor(
 		public id?: number,
-		public nome?: string){}
+		public name?: string,
+		public position?: string,
+		public baseId?: number,
+		public rating?: number){}
 }

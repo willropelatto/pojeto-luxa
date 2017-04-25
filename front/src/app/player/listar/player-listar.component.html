@@ -1,10 +1,13 @@
-<h1>Listagem de Players</h1>
+<h1>Listagem de Jogadores</h1>
 
 <div>
     <table class="table table-striped">
         <tr>
             <th>ID</th>
             <th>Nome</th>
+            <th>Posição</th>
+            <th>BaseId</th>
+            <th>Rating</th>
             <th class="text-right">
                 <a class="btn btn-success" 
                     [routerLink]="['/players/cadastrar']">
@@ -14,7 +17,12 @@
         </tr>
         <tr *ngFor="let player of players">
             <td>{{ player.id }}</td>
-            <td>{{ player.name }}</td>
+            <td>{{ player.nome }}</td>
+            <td>{{ player.position }}</td>
+            <td>{{ player.baseId }}</td>
+            <td>{{ player.rating }}</td>
+            
+            
             <td class="text-right">
 				<a class="btn btn-warning" 
                     [routerLink]="['/players/visualizar/'+player.id]">

@@ -1,10 +1,12 @@
-<h1>Listagem de Leagues</h1>
+<h1>Listagem de Ligas</h1>
 
 <div>
     <table class="table table-striped">
         <tr>
             <th>ID</th>
             <th>Nome</th>
+            <th>Imagem URL</th>
+            <th>Abreviatura Nome</th>            
             <th class="text-right">
                 <a class="btn btn-success" 
                     [routerLink]="['/leagues/cadastrar']">
@@ -14,7 +16,9 @@
         </tr>
         <tr *ngFor="let league of leagues">
             <td>{{ league.id }}</td>
-            <td>{{ league.nome }}</td>
+            <td>{{ league.name }}</td>
+            <td>{{ league.imgUrl }}</td>
+            <td>{{ league.abbrName }}</td>            
             <td class="text-right">
 				<a class="btn btn-warning" 
                     [routerLink]="['/leagues/visualizar/'+league.id]">
