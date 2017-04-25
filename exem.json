@@ -1,0 +1,685 @@
+{
+  "page": 1,
+  "totalPages": 1,
+  "totalResults": 4,
+  "type": "FUTPlayerItemList",
+  "count": 4,
+  "items": [
+    {
+      "commonName": "David Luiz",
+      "firstName": "David Luiz",
+      "headshotImgUrl": "https://fifa17.content.easports.com/fifa/fltOnlineAssets/CC8267B6-0817-4842-BB6A-A20F88B05418/2017/fut/items/images/players/html5/120x120/179944.png",
+      "lastName": "Moreira Marinho",
+      "league": {
+        "abbrName": "ENG 1",
+        "id": 13,
+        "imgUrl": null,
+        "name": "Premier League"
+      },
+      "nation": {
+        "imageUrls": {
+          "small": "https://fifa17.content.easports.com/fifa/fltOnlineAssets/CC8267B6-0817-4842-BB6A-A20F88B05418/2017/fut/items/images/flags/html5/24x14/54.png",
+          "medium": "https://fifa17.content.easports.com/fifa/fltOnlineAssets/CC8267B6-0817-4842-BB6A-A20F88B05418/2017/fut/items/images/flags/html5/35x22/54.png",
+          "large": "https://fifa17.content.easports.com/fifa/fltOnlineAssets/CC8267B6-0817-4842-BB6A-A20F88B05418/2017/fut/items/images/flags/html5/45x28/54.png"
+        },
+        "abbrName": "Brazil",
+        "id": 54,
+        "imgUrl": null,
+        "name": "Brazil"
+      },
+      "club": {
+        "imageUrls": {
+          "dark": {
+            "small": "https://fifa17.content.easports.com/fifa/fltOnlineAssets/CC8267B6-0817-4842-BB6A-A20F88B05418/2017/fut/items/images/clubbadges/html5/dark/24x24/l5.png",
+            "medium": "https://fifa17.content.easports.com/fifa/fltOnlineAssets/CC8267B6-0817-4842-BB6A-A20F88B05418/2017/fut/items/images/clubbadges/html5/dark/35x35/l5.png",
+            "large": "https://fifa17.content.easports.com/fifa/fltOnlineAssets/CC8267B6-0817-4842-BB6A-A20F88B05418/2017/fut/items/images/clubbadges/html5/dark/45x45/l5.png"
+          },
+          "normal": {
+            "small": "https://fifa17.content.easports.com/fifa/fltOnlineAssets/CC8267B6-0817-4842-BB6A-A20F88B05418/2017/fut/items/images/clubbadges/html5/normal/24x24/l5.png",
+            "medium": "https://fifa17.content.easports.com/fifa/fltOnlineAssets/CC8267B6-0817-4842-BB6A-A20F88B05418/2017/fut/items/images/clubbadges/html5/normal/35x35/l5.png",
+            "large": "https://fifa17.content.easports.com/fifa/fltOnlineAssets/CC8267B6-0817-4842-BB6A-A20F88B05418/2017/fut/items/images/clubbadges/html5/normal/45x45/l5.png"
+          }
+        },
+        "abbrName": "Chelsea",
+        "id": 5,
+        "imgUrl": null,
+        "name": "Chelsea"
+      },
+      "headshot": {
+        "largeImgUrl": "https://fifa17.content.easports.com/fifa/fltOnlineAssets/CC8267B6-0817-4842-BB6A-A20F88B05418/2017/fut/items/images/players/html5/120x120/179944.png",
+        "medImgUrl": "https://fifa17.content.easports.com/fifa/fltOnlineAssets/CC8267B6-0817-4842-BB6A-A20F88B05418/2017/fut/items/images/players/html5/92x92/179944.png",
+        "smallImgUrl": "https://fifa17.content.easports.com/fifa/fltOnlineAssets/CC8267B6-0817-4842-BB6A-A20F88B05418/2017/fut/items/images/players/html5/40x40/179944.png"
+      },
+      "specialImages": {
+        "largeTOTWImgUrl": null,
+        "medTOTWImgUrl": null
+      },
+      "position": "CDM",
+      "playStyle": "Basic",
+      "playStyleId": null,
+      "height": 189,
+      "weight": 84,
+      "birthdate": "1987-04-22",
+      "age": 30,
+      "acceleration": 81,
+      "aggression": 94,
+      "agility": 88,
+      "balance": 67,
+      "ballcontrol": 94,
+      "foot": "Right",
+      "skillMoves": 3,
+      "crossing": 80,
+      "curve": 82,
+      "dribbling": 79,
+      "finishing": 70,
+      "freekickaccuracy": 89,
+      "gkdiving": 11,
+      "gkhandling": 12,
+      "gkkicking": 10,
+      "gkpositioning": 7,
+      "gkreflexes": 14,
+      "headingaccuracy": 92,
+      "interceptions": 88,
+      "jumping": 92,
+      "longpassing": 89,
+      "longshots": 88,
+      "marking": 89,
+      "penalties": 93,
+      "positioning": 67,
+      "potential": 84,
+      "reactions": 94,
+      "shortpassing": 91,
+      "shotpower": 92,
+      "slidingtackle": 93,
+      "sprintspeed": 83,
+      "standingtackle": 94,
+      "stamina": 86,
+      "strength": 86,
+      "vision": 80,
+      "volleys": 83,
+      "weakFoot": 3,
+      "traits": [
+        "Long Throw",
+        "Takes Powerful Driven Free Kicks",
+        "Passing - Long Passer",
+        "Shooting - Long Shot Taker"
+      ],
+      "specialities": [
+        "Aerial Threat",
+        "Distance Shooter",
+        "FK Specialist",
+        "Tackler",
+        "Tactician",
+        "Acrobat",
+        "Strength",
+        "Complete Defender"
+      ],
+      "atkWorkRate": "High",
+      "defWorkRate": "Medium",
+      "playerType": "standard",
+      "attributes": [
+        {
+          "name": "fut.attribute.PAC",
+          "value": 83,
+          "chemistryBonus": [
+            0
+          ]
+        },
+        {
+          "name": "fut.attribute.SHO",
+          "value": 80,
+          "chemistryBonus": [
+            0
+          ]
+        },
+        {
+          "name": "fut.attribute.PAS",
+          "value": 86,
+          "chemistryBonus": [
+            0
+          ]
+        },
+        {
+          "name": "fut.attribute.DRI",
+          "value": 85,
+          "chemistryBonus": [
+            0
+          ]
+        },
+        {
+          "name": "fut.attribute.DEF",
+          "value": 91,
+          "chemistryBonus": [
+            0
+          ]
+        },
+        {
+          "name": "fut.attribute.PHY",
+          "value": 89,
+          "chemistryBonus": [
+            0
+          ]
+        }
+      ],
+      "name": "David Luiz",
+      "quality": "gold",
+      "color": "",
+      "isGK": false,
+      "positionFull": "Centre Defensive Midfielder",
+      "isSpecialType": false,
+      "contracts": null,
+      "fitness": null,
+      "rawAttributeChemistryBonus": null,
+      "isLoan": null,
+      "squadPosition": null,
+      "itemType": "player",
+      "discardValue": null,
+      "id": "100843240",
+      "modelName": "FUTPlayerItem",
+      "baseId": 179944,
+      "rating": 90
+    },
+    {
+      "commonName": "David Luiz",
+      "firstName": "David Luiz",
+      "headshotImgUrl": "https://fifa17.content.easports.com/fifa/fltOnlineAssets/CC8267B6-0817-4842-BB6A-A20F88B05418/2017/fut/items/images/players/html5/120x120/179944.png",
+      "lastName": "Moreira Marinho",
+      "league": {
+        "abbrName": "ENG 1",
+        "id": 13,
+        "imgUrl": null,
+        "name": "Premier League"
+      },
+      "nation": {
+        "imageUrls": {
+          "small": "https://fifa17.content.easports.com/fifa/fltOnlineAssets/CC8267B6-0817-4842-BB6A-A20F88B05418/2017/fut/items/images/flags/html5/24x14/54.png",
+          "medium": "https://fifa17.content.easports.com/fifa/fltOnlineAssets/CC8267B6-0817-4842-BB6A-A20F88B05418/2017/fut/items/images/flags/html5/35x22/54.png",
+          "large": "https://fifa17.content.easports.com/fifa/fltOnlineAssets/CC8267B6-0817-4842-BB6A-A20F88B05418/2017/fut/items/images/flags/html5/45x28/54.png"
+        },
+        "abbrName": "Brazil",
+        "id": 54,
+        "imgUrl": null,
+        "name": "Brazil"
+      },
+      "club": {
+        "imageUrls": {
+          "dark": {
+            "small": "https://fifa17.content.easports.com/fifa/fltOnlineAssets/CC8267B6-0817-4842-BB6A-A20F88B05418/2017/fut/items/images/clubbadges/html5/dark/24x24/l5.png",
+            "medium": "https://fifa17.content.easports.com/fifa/fltOnlineAssets/CC8267B6-0817-4842-BB6A-A20F88B05418/2017/fut/items/images/clubbadges/html5/dark/35x35/l5.png",
+            "large": "https://fifa17.content.easports.com/fifa/fltOnlineAssets/CC8267B6-0817-4842-BB6A-A20F88B05418/2017/fut/items/images/clubbadges/html5/dark/45x45/l5.png"
+          },
+          "normal": {
+            "small": "https://fifa17.content.easports.com/fifa/fltOnlineAssets/CC8267B6-0817-4842-BB6A-A20F88B05418/2017/fut/items/images/clubbadges/html5/normal/24x24/l5.png",
+            "medium": "https://fifa17.content.easports.com/fifa/fltOnlineAssets/CC8267B6-0817-4842-BB6A-A20F88B05418/2017/fut/items/images/clubbadges/html5/normal/35x35/l5.png",
+            "large": "https://fifa17.content.easports.com/fifa/fltOnlineAssets/CC8267B6-0817-4842-BB6A-A20F88B05418/2017/fut/items/images/clubbadges/html5/normal/45x45/l5.png"
+          }
+        },
+        "abbrName": "Chelsea",
+        "id": 5,
+        "imgUrl": null,
+        "name": "Chelsea"
+      },
+      "headshot": {
+        "largeImgUrl": "https://fifa17.content.easports.com/fifa/fltOnlineAssets/CC8267B6-0817-4842-BB6A-A20F88B05418/2017/fut/items/images/players/html5/120x120/179944.png",
+        "medImgUrl": "https://fifa17.content.easports.com/fifa/fltOnlineAssets/CC8267B6-0817-4842-BB6A-A20F88B05418/2017/fut/items/images/players/html5/92x92/179944.png",
+        "smallImgUrl": "https://fifa17.content.easports.com/fifa/fltOnlineAssets/CC8267B6-0817-4842-BB6A-A20F88B05418/2017/fut/items/images/players/html5/40x40/179944.png"
+      },
+      "specialImages": {
+        "largeTOTWImgUrl": "https://fifa17.content.easports.com/fifa/fltOnlineAssets/CC8267B6-0817-4842-BB6A-A20F88B05418/2017/fut/playerheads/html5/single/120x120/p84066024.png",
+        "medTOTWImgUrl": "https://fifa17.content.easports.com/fifa/fltOnlineAssets/CC8267B6-0817-4842-BB6A-A20F88B05418/2017/fut/playerheads/html5/single/92x92/p84066024.png"
+      },
+      "position": "CB",
+      "playStyle": "Basic",
+      "playStyleId": null,
+      "height": 189,
+      "weight": 84,
+      "birthdate": "1987-04-22",
+      "age": 30,
+      "acceleration": 78,
+      "aggression": 91,
+      "agility": 83,
+      "balance": 63,
+      "ballcontrol": 89,
+      "foot": "Right",
+      "skillMoves": 3,
+      "crossing": 75,
+      "curve": 77,
+      "dribbling": 74,
+      "finishing": 63,
+      "freekickaccuracy": 84,
+      "gkdiving": 11,
+      "gkhandling": 12,
+      "gkkicking": 10,
+      "gkpositioning": 7,
+      "gkreflexes": 14,
+      "headingaccuracy": 90,
+      "interceptions": 86,
+      "jumping": 89,
+      "longpassing": 84,
+      "longshots": 80,
+      "marking": 87,
+      "penalties": 85,
+      "positioning": 61,
+      "potential": 84,
+      "reactions": 89,
+      "shortpassing": 86,
+      "shotpower": 84,
+      "slidingtackle": 91,
+      "sprintspeed": 80,
+      "standingtackle": 92,
+      "stamina": 83,
+      "strength": 83,
+      "vision": 75,
+      "volleys": 76,
+      "weakFoot": 3,
+      "traits": [
+        "Long Throw",
+        "Takes Powerful Driven Free Kicks",
+        "Passing - Long Passer",
+        "Shooting - Long Shot Taker"
+      ],
+      "specialities": [
+        "Aerial Threat",
+        "Tackler",
+        "Tactician",
+        "Complete Defender"
+      ],
+      "atkWorkRate": "High",
+      "defWorkRate": "Medium",
+      "playerType": "special edition",
+      "attributes": [
+        {
+          "name": "fut.attribute.PAC",
+          "value": 80,
+          "chemistryBonus": [
+            0
+          ]
+        },
+        {
+          "name": "fut.attribute.SHO",
+          "value": 73,
+          "chemistryBonus": [
+            0
+          ]
+        },
+        {
+          "name": "fut.attribute.PAS",
+          "value": 81,
+          "chemistryBonus": [
+            0
+          ]
+        },
+        {
+          "name": "fut.attribute.DRI",
+          "value": 80,
+          "chemistryBonus": [
+            0
+          ]
+        },
+        {
+          "name": "fut.attribute.DEF",
+          "value": 89,
+          "chemistryBonus": [
+            0
+          ]
+        },
+        {
+          "name": "fut.attribute.PHY",
+          "value": 86,
+          "chemistryBonus": [
+            0
+          ]
+        }
+      ],
+      "name": "David Luiz",
+      "quality": "gold",
+      "color": "fut_birthday",
+      "isGK": false,
+      "positionFull": "Centre Back",
+      "isSpecialType": true,
+      "contracts": null,
+      "fitness": null,
+      "rawAttributeChemistryBonus": null,
+      "isLoan": null,
+      "squadPosition": null,
+      "itemType": "player",
+      "discardValue": null,
+      "id": "84066024",
+      "modelName": "FUTPlayerItem",
+      "baseId": 179944,
+      "rating": 87
+    },
+    {
+      "commonName": "David Luiz",
+      "firstName": "David Luiz",
+      "headshotImgUrl": "https://fifa17.content.easports.com/fifa/fltOnlineAssets/CC8267B6-0817-4842-BB6A-A20F88B05418/2017/fut/items/images/players/html5/120x120/179944.png",
+      "lastName": "Moreira Marinho",
+      "league": {
+        "abbrName": "ENG 1",
+        "id": 13,
+        "imgUrl": null,
+        "name": "Premier League"
+      },
+      "nation": {
+        "imageUrls": {
+          "small": "https://fifa17.content.easports.com/fifa/fltOnlineAssets/CC8267B6-0817-4842-BB6A-A20F88B05418/2017/fut/items/images/flags/html5/24x14/54.png",
+          "medium": "https://fifa17.content.easports.com/fifa/fltOnlineAssets/CC8267B6-0817-4842-BB6A-A20F88B05418/2017/fut/items/images/flags/html5/35x22/54.png",
+          "large": "https://fifa17.content.easports.com/fifa/fltOnlineAssets/CC8267B6-0817-4842-BB6A-A20F88B05418/2017/fut/items/images/flags/html5/45x28/54.png"
+        },
+        "abbrName": "Brazil",
+        "id": 54,
+        "imgUrl": null,
+        "name": "Brazil"
+      },
+      "club": {
+        "imageUrls": {
+          "dark": {
+            "small": "https://fifa17.content.easports.com/fifa/fltOnlineAssets/CC8267B6-0817-4842-BB6A-A20F88B05418/2017/fut/items/images/clubbadges/html5/dark/24x24/l5.png",
+            "medium": "https://fifa17.content.easports.com/fifa/fltOnlineAssets/CC8267B6-0817-4842-BB6A-A20F88B05418/2017/fut/items/images/clubbadges/html5/dark/35x35/l5.png",
+            "large": "https://fifa17.content.easports.com/fifa/fltOnlineAssets/CC8267B6-0817-4842-BB6A-A20F88B05418/2017/fut/items/images/clubbadges/html5/dark/45x45/l5.png"
+          },
+          "normal": {
+            "small": "https://fifa17.content.easports.com/fifa/fltOnlineAssets/CC8267B6-0817-4842-BB6A-A20F88B05418/2017/fut/items/images/clubbadges/html5/normal/24x24/l5.png",
+            "medium": "https://fifa17.content.easports.com/fifa/fltOnlineAssets/CC8267B6-0817-4842-BB6A-A20F88B05418/2017/fut/items/images/clubbadges/html5/normal/35x35/l5.png",
+            "large": "https://fifa17.content.easports.com/fifa/fltOnlineAssets/CC8267B6-0817-4842-BB6A-A20F88B05418/2017/fut/items/images/clubbadges/html5/normal/45x45/l5.png"
+          }
+        },
+        "abbrName": "Chelsea",
+        "id": 5,
+        "imgUrl": null,
+        "name": "Chelsea"
+      },
+      "headshot": {
+        "largeImgUrl": "https://fifa17.content.easports.com/fifa/fltOnlineAssets/CC8267B6-0817-4842-BB6A-A20F88B05418/2017/fut/items/images/players/html5/120x120/179944.png",
+        "medImgUrl": "https://fifa17.content.easports.com/fifa/fltOnlineAssets/CC8267B6-0817-4842-BB6A-A20F88B05418/2017/fut/items/images/players/html5/92x92/179944.png",
+        "smallImgUrl": "https://fifa17.content.easports.com/fifa/fltOnlineAssets/CC8267B6-0817-4842-BB6A-A20F88B05418/2017/fut/items/images/players/html5/40x40/179944.png"
+      },
+      "specialImages": {
+        "largeTOTWImgUrl": "https://fifa17.content.easports.com/fifa/fltOnlineAssets/CC8267B6-0817-4842-BB6A-A20F88B05418/2017/fut/playerheads/html5/single/120x120/p50511592.png",
+        "medTOTWImgUrl": "https://fifa17.content.easports.com/fifa/fltOnlineAssets/CC8267B6-0817-4842-BB6A-A20F88B05418/2017/fut/playerheads/html5/single/92x92/p50511592.png"
+      },
+      "position": "CB",
+      "playStyle": "Basic",
+      "playStyleId": null,
+      "height": 189,
+      "weight": 84,
+      "birthdate": "1987-04-22",
+      "age": 30,
+      "acceleration": 73,
+      "aggression": 89,
+      "agility": 79,
+      "balance": 59,
+      "ballcontrol": 84,
+      "foot": "Right",
+      "skillMoves": 3,
+      "crossing": 72,
+      "curve": 74,
+      "dribbling": 70,
+      "finishing": 59,
+      "freekickaccuracy": 81,
+      "gkdiving": 11,
+      "gkhandling": 12,
+      "gkkicking": 10,
+      "gkpositioning": 7,
+      "gkreflexes": 14,
+      "headingaccuracy": 87,
+      "interceptions": 83,
+      "jumping": 87,
+      "longpassing": 81,
+      "longshots": 75,
+      "marking": 84,
+      "penalties": 79,
+      "positioning": 57,
+      "potential": 84,
+      "reactions": 84,
+      "shortpassing": 83,
+      "shotpower": 78,
+      "slidingtackle": 88,
+      "sprintspeed": 75,
+      "standingtackle": 89,
+      "stamina": 81,
+      "strength": 81,
+      "vision": 72,
+      "volleys": 71,
+      "weakFoot": 3,
+      "traits": [
+        "Long Throw",
+        "Takes Powerful Driven Free Kicks",
+        "Passing - Long Passer",
+        "Shooting - Long Shot Taker"
+      ],
+      "specialities": [
+        "Tackler"
+      ],
+      "atkWorkRate": "High",
+      "defWorkRate": "Medium",
+      "playerType": "Team of the Week",
+      "attributes": [
+        {
+          "name": "fut.attribute.PAC",
+          "value": 75,
+          "chemistryBonus": [
+            0
+          ]
+        },
+        {
+          "name": "fut.attribute.SHO",
+          "value": 68,
+          "chemistryBonus": [
+            0
+          ]
+        },
+        {
+          "name": "fut.attribute.PAS",
+          "value": 78,
+          "chemistryBonus": [
+            0
+          ]
+        },
+        {
+          "name": "fut.attribute.DRI",
+          "value": 76,
+          "chemistryBonus": [
+            0
+          ]
+        },
+        {
+          "name": "fut.attribute.DEF",
+          "value": 86,
+          "chemistryBonus": [
+            0
+          ]
+        },
+        {
+          "name": "fut.attribute.PHY",
+          "value": 84,
+          "chemistryBonus": [
+            0
+          ]
+        }
+      ],
+      "name": "David Luiz",
+      "quality": "gold",
+      "color": "totw_gold",
+      "isGK": false,
+      "positionFull": "Centre Back",
+      "isSpecialType": false,
+      "contracts": null,
+      "fitness": null,
+      "rawAttributeChemistryBonus": null,
+      "isLoan": null,
+      "squadPosition": null,
+      "itemType": "player",
+      "discardValue": null,
+      "id": "50511592",
+      "modelName": "FUTPlayerItem",
+      "baseId": 179944,
+      "rating": 86
+    },
+    {
+      "commonName": "David Luiz",
+      "firstName": "David Luiz",
+      "headshotImgUrl": "https://fifa17.content.easports.com/fifa/fltOnlineAssets/CC8267B6-0817-4842-BB6A-A20F88B05418/2017/fut/items/images/players/html5/120x120/179944.png",
+      "lastName": "Moreira Marinho",
+      "league": {
+        "abbrName": "ENG 1",
+        "id": 13,
+        "imgUrl": null,
+        "name": "Premier League"
+      },
+      "nation": {
+        "imageUrls": {
+          "small": "https://fifa17.content.easports.com/fifa/fltOnlineAssets/CC8267B6-0817-4842-BB6A-A20F88B05418/2017/fut/items/images/flags/html5/24x14/54.png",
+          "medium": "https://fifa17.content.easports.com/fifa/fltOnlineAssets/CC8267B6-0817-4842-BB6A-A20F88B05418/2017/fut/items/images/flags/html5/35x22/54.png",
+          "large": "https://fifa17.content.easports.com/fifa/fltOnlineAssets/CC8267B6-0817-4842-BB6A-A20F88B05418/2017/fut/items/images/flags/html5/45x28/54.png"
+        },
+        "abbrName": "Brazil",
+        "id": 54,
+        "imgUrl": null,
+        "name": "Brazil"
+      },
+      "club": {
+        "imageUrls": {
+          "dark": {
+            "small": "https://fifa17.content.easports.com/fifa/fltOnlineAssets/CC8267B6-0817-4842-BB6A-A20F88B05418/2017/fut/items/images/clubbadges/html5/dark/24x24/l5.png",
+            "medium": "https://fifa17.content.easports.com/fifa/fltOnlineAssets/CC8267B6-0817-4842-BB6A-A20F88B05418/2017/fut/items/images/clubbadges/html5/dark/35x35/l5.png",
+            "large": "https://fifa17.content.easports.com/fifa/fltOnlineAssets/CC8267B6-0817-4842-BB6A-A20F88B05418/2017/fut/items/images/clubbadges/html5/dark/45x45/l5.png"
+          },
+          "normal": {
+            "small": "https://fifa17.content.easports.com/fifa/fltOnlineAssets/CC8267B6-0817-4842-BB6A-A20F88B05418/2017/fut/items/images/clubbadges/html5/normal/24x24/l5.png",
+            "medium": "https://fifa17.content.easports.com/fifa/fltOnlineAssets/CC8267B6-0817-4842-BB6A-A20F88B05418/2017/fut/items/images/clubbadges/html5/normal/35x35/l5.png",
+            "large": "https://fifa17.content.easports.com/fifa/fltOnlineAssets/CC8267B6-0817-4842-BB6A-A20F88B05418/2017/fut/items/images/clubbadges/html5/normal/45x45/l5.png"
+          }
+        },
+        "abbrName": "Chelsea",
+        "id": 5,
+        "imgUrl": null,
+        "name": "Chelsea"
+      },
+      "headshot": {
+        "largeImgUrl": "https://fifa17.content.easports.com/fifa/fltOnlineAssets/CC8267B6-0817-4842-BB6A-A20F88B05418/2017/fut/items/images/players/html5/120x120/179944.png",
+        "medImgUrl": "https://fifa17.content.easports.com/fifa/fltOnlineAssets/CC8267B6-0817-4842-BB6A-A20F88B05418/2017/fut/items/images/players/html5/92x92/179944.png",
+        "smallImgUrl": "https://fifa17.content.easports.com/fifa/fltOnlineAssets/CC8267B6-0817-4842-BB6A-A20F88B05418/2017/fut/items/images/players/html5/40x40/179944.png"
+      },
+      "specialImages": {
+        "largeTOTWImgUrl": null,
+        "medTOTWImgUrl": null
+      },
+      "position": "CB",
+      "playStyle": "Basic",
+      "playStyleId": null,
+      "height": 189,
+      "weight": 84,
+      "birthdate": "1987-04-22",
+      "age": 30,
+      "acceleration": 72,
+      "aggression": 84,
+      "agility": 74,
+      "balance": 56,
+      "ballcontrol": 79,
+      "foot": "Right",
+      "skillMoves": 3,
+      "crossing": 68,
+      "curve": 70,
+      "dribbling": 66,
+      "finishing": 56,
+      "freekickaccuracy": 76,
+      "gkdiving": 11,
+      "gkhandling": 12,
+      "gkkicking": 10,
+      "gkpositioning": 7,
+      "gkreflexes": 14,
+      "headingaccuracy": 83,
+      "interceptions": 80,
+      "jumping": 82,
+      "longpassing": 76,
+      "longshots": 71,
+      "marking": 81,
+      "penalties": 75,
+      "positioning": 54,
+      "potential": 84,
+      "reactions": 79,
+      "shortpassing": 78,
+      "shotpower": 74,
+      "slidingtackle": 84,
+      "sprintspeed": 73,
+      "standingtackle": 85,
+      "stamina": 77,
+      "strength": 77,
+      "vision": 68,
+      "volleys": 67,
+      "weakFoot": 3,
+      "traits": [
+        "Long Throw",
+        "Takes Powerful Driven Free Kicks",
+        "Passing - Long Passer",
+        "Shooting - Long Shot Taker"
+      ],
+      "specialities": null,
+      "atkWorkRate": "High",
+      "defWorkRate": "Medium",
+      "playerType": "rare",
+      "attributes": [
+        {
+          "name": "fut.attribute.PAC",
+          "value": 73,
+          "chemistryBonus": [
+            0
+          ]
+        },
+        {
+          "name": "fut.attribute.SHO",
+          "value": 64,
+          "chemistryBonus": [
+            0
+          ]
+        },
+        {
+          "name": "fut.attribute.PAS",
+          "value": 73,
+          "chemistryBonus": [
+            0
+          ]
+        },
+        {
+          "name": "fut.attribute.DRI",
+          "value": 71,
+          "chemistryBonus": [
+            0
+          ]
+        },
+        {
+          "name": "fut.attribute.DEF",
+          "value": 82,
+          "chemistryBonus": [
+            0
+          ]
+        },
+        {
+          "name": "fut.attribute.PHY",
+          "value": 79,
+          "chemistryBonus": [
+            0
+          ]
+        }
+      ],
+      "name": "David Luiz",
+      "quality": "gold",
+      "color": "rare_gold",
+      "isGK": false,
+      "positionFull": "Centre Back",
+      "isSpecialType": false,
+      "contracts": null,
+      "fitness": null,
+      "rawAttributeChemistryBonus": null,
+      "isLoan": null,
+      "squadPosition": null,
+      "itemType": "player",
+      "discardValue": null,
+      "id": "179944",
+      "modelName": "FUTPlayerItem",
+      "baseId": 179944,
+      "rating": 84
+    }
+  ]
+}
