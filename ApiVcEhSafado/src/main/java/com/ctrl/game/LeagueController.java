@@ -9,12 +9,14 @@ import com.model.league.LeagueEntity;
 
 public class LeagueController {
 
-	public void ShowLeagues() {
+	public ArrayList<League> ShowLeagues() {
 		
 //		LeagueDAO ldao = new LeagueDAO();		
 //		ArrayList<League> list = ldao.getItems();
 		
-		//TODO jogar para rest no futuro		
+		//TODO jogar para rest no futuro
+		
+		return new ArrayList<League>();
 	}
 	
 	public LeagueEntity converteLeagueJsonToLeagueDB(League league) {		
