@@ -54,8 +54,7 @@ public class PlayerController {
 	    
 	    LeagueDao leagueDao = new LeagueDao();
 	    LeagueEntity league;
-	    
-	    ArrayList<Integer> listaIdLeague = new ArrayList<Integer>();
+
 	    
 	    while (pg.getTotalPages() != pg.getPage()) {
 	    
@@ -68,13 +67,7 @@ public class PlayerController {
 	    		
 	    			player = cp.FullToDB(pl);
 	    			pdao.Save(player);
-	    			
-	    			if (!ContainInList(listaIdLeague, pl.getLeague().getId())) {
-	    				league = cl.FullToDB(pl.getLeague());
-	    				leagueDao.Save(league);
-	    				
-	    				listaIdLeague.add(league.getOriginalId());
-	    			}
+
 						
 	    		}	    		
 	    		
