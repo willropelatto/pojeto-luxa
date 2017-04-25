@@ -1,48 +1,47 @@
-package com.model.player;
+package com.model.league;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import com.model.player.PlayerEntity;
+import com.model.league.LeagueEntity;
 
-
-public class PlayerDao {
+public class LeagueDAO {
 	
 	private final EntityManagerFactory entityManagerFactory;
 	
 	private final EntityManager entityManager;
 	
-	public PlayerDao() {
+	public LeagueDAO() {
 		
 		this.entityManagerFactory  = Persistence.createEntityManagerFactory("persistence_unit_db_banco");
 		this.entityManager = this.entityManagerFactory.createEntityManager();
 		
 	}
 	
-	
-	public void Save(PlayerEntity playerEntity) {
+	public void Save(LeagueEntity leagueEntity) {
 		this.entityManager.getTransaction().begin();
-		this.entityManager.persist(playerEntity);
+		this.entityManager.persist(leagueEntity);
 		this.entityManager.getTransaction().commit();
 	}
 	
-	public void Update(PlayerEntity playerEntity) {
+	public void Update(LeagueEntity leagueEntity) {
 		this.entityManager.getTransaction().begin();
-		this.entityManager.merge(playerEntity);
+		this.entityManager.merge(leagueEntity);
 		this.entityManager.getTransaction().commit();
 	}
 	
-	public PlayerEntity getPlayer(Integer id) {
-		return this.entityManager.find(PlayerEntity.class, id);
-	
+	public LeagueEntity getPlayer(Integer id) {
+		return this.entityManager.find(LeagueEntity.class, id);	
 	}
 	
     public void Delete(Integer id) {
-    	PlayerEntity playerEntity = this.getPlayer(id);
+    	LeagueEntity leagueEntity = this.getPlayer(id);
     	
     	this.entityManager.getTransaction().begin();
-    	this.entityManager.remove(playerEntity);
+    	this.entityManager.remove(leagueEntity);
     	this.entityManager.getTransaction().commit();
     }
+
+
 
 }

@@ -8,58 +8,35 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 
 import com.google.gson.Gson;
-import com.model.league.LeagueDao;
+import com.model.league.LeagueDAO;
 import com.model.league.LeagueEntity;
 import com.model.player.FullPlayer;
 import com.model.player.League;
-import com.model.player.LeagueDAO;
 import com.model.player.Page;
 import com.model.player.PlayerEntity;
-import com.model.player.PlayerDao;
+import com.model.player.PlayerDAO;
 
 import java.util.ArrayList;
 
 public class PlayerController {
 	
-	public Boolean ContainInList(ArrayList<Integer> lista, int id) {
-		
-		Boolean encontrou = false;
-		
-		if (lista.size() > 0) {
-			for (int i = 0; i < lista.size(); i++) {
-				if (lista.get(i) == id) {
-					encontrou = true;
-				}
-			}
-		} 
-		
-		return encontrou;					
-		
-	}
-
 	public void UpdateStoredPlayers() {
 		
 	
 		 Client client = ClientBuilder.newClient();
-		 WebTarget target = client.target("https://www.easports.com/fifa/ultimate-team/api/fut/item?page=1");
-						
-	    String json = target.request(MediaType.APPLICATION_JSON).get().readEntity(String.class);
-	    
-	    Gson gson = new Gson();
-	    
+		 WebTarget target = client.target("https://www.easports.com/fifa/ultimate-team/api/fut/item?page=1");						
+	    String json = target.request(MediaType.APPLICATION_JSON).get().readEntity(String.class);	    
+	    Gson gson = new Gson();	    
 	    Page pg = gson.fromJson(json, Page.class);	   
 	    
-	    ConverterPlayer cp = new ConverterPlayer();
-	    ConverterLeague cl = new ConverterLeague();
-	    PlayerDao pdao = new PlayerDao();
+	    ConverterPlayer conversorPlayer = new ConverterPlayer();
+	    ConverterLeague conversorLeague = new ConverterLeague();
+	    PlayerDAO playerDao = new PlayerDAO();
 	    
 	    PlayerEntity player;
 	    FullPlayer fullPlay;	  
 	    
 	    ArrayList<League> leagues = new ArrayList<League>();	    
-
-      LeagueDao leagueDao = new LeagueDao();
-	    LeagueEntity league;
 
 	    while (pg.getTotalPages() >= pg.getPage()) {
     
@@ -75,11 +52,12 @@ public class PlayerController {
 	    				leagues.add(league);
 	    				
 	    				LeagueDAO leagueDao = new LeagueDAO();
-	    				leagueDao.Save(league);	
+	    				LeagueEntity leagueEn = conversorLeague.FullToDB(league);
+	    				leagueDao.Save(leagueEn);	
 	    			}
 	    			
-	    			player = conversor.FullToDB(fullPlay);
-	    			pdao.Save(player);
+	    			player = conversorPlayer.FullToDB(fullPlay);
+	    			playerDao.Save(player);
 
 						
 	    		}	    		
@@ -90,13 +68,10 @@ public class PlayerController {
 	    	
 			if (pg.getPage() < pg.getTotalPages()) {	    	
 				target = client.target("https://www.easports.com/fifa/ultimate-team/api/fut/item?page="+pageToGo);
-//				target = client.target("http://smartwaysolucoes.com/item"+pageToGo+".json");
 				json = target.request(MediaType.APPLICATION_JSON).get().readEntity(String.class);
 				gson = new Gson();
 				pg = gson.fromJson(json, Page.class);	
-			}
-
-	    	
+			}	    	
 	    	
 	    }	    
 	    
@@ -109,7 +84,7 @@ public class PlayerController {
 	    Gson gson = new Gson();
 	    Page pg = gson.fromJson(json, Page.class);	   
 	    ConverterPlayer cp = new ConverterPlayer();
-	    PlayerDao pdao = new PlayerDao();
+	    PlayerDAO pdao = new PlayerDAO();
 	    PlayerEntity player;
 	    FullPlayer pl;	    
 	    for (int i = 0; i < pg.getItems().length; i++) {
