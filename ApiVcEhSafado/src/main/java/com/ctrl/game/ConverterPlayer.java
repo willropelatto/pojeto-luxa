@@ -22,13 +22,15 @@ public class ConverterPlayer {
 	public PlayerEntity FullToDB(FullPlayer pl) {
 		
 		PlayerEntity player = new PlayerEntity();
-		
-		String name = pl.getFirstName()+ " " + pl.getLastName();
-		player.setName(name);
+		Integer originalId = Integer.parseInt(pl.getId());
+		Integer idLeague = new Integer(pl.getLeague().getId());
+						
+		player.setName(pl.getName());
 		player.setPosition(pl.getPosition());
 		player.setBaseId(pl.getBaseId());
 		player.setRating(pl.getRating());
-		player.setIdLeague(0); 
+		player.setIdLeague(idLeague); 
+		player.setOriginalId(originalId);
 		return player;
 	
 	}
