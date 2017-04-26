@@ -1,25 +1,38 @@
 package com.ctrl.game;
 
+import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+
 import com.model.player.BidInfo;
 import com.model.player.BidInfoDAO;
 import com.model.player.BidInfoFactory;
 import com.model.team.Team;
 import com.model.team.TeamDAO;
 
+@Path("/market")
 public class MarketContoller {
 
+	private final TeamDAO teamAcc = new TeamDAO();	
+	private final BidInfoDAO bidDao = new BidInfoDAO();
+	
+	@POST	
+	@Consumes("application/json; charset=UTF-8")
+	@Produces("application/json; charset=UTF-8")
+	@Path("/placeBid")	
 	public BidInfo placeBid(BidInfo bid) {	
-		TeamDAO tdao = new TeamDAO(); 
-		Team team = tdao.getItem(bid.getTeamID());
 		
-		BidInfoDAO bidDao = new BidInfoDAO();
+		Team team = teamAcc.getItem(bid.getTeamID());
+		
+		
 		BidInfo bidBase = bidDao.getItem(bid.getPlayerID());
 		BidInfo bidReturn;
 		
 		if (bid.getBidValue() > bidBase.getBidValue()) {
 			if (haveMoney(bid.getBidValue(), team)) {
-				tdao.decreaseBudget(bid);				
-				tdao.increaseBudget(bidBase);				
+				teamAcc.decreaseBudget(bid);				
+				teamAcc.increaseBudget(bidBase);				
 				bidDao.Insert(bid);
 				bidReturn = BidInfoFactory.newProtectedBid(bid.getPlayerID(), bid.getBidValue());
 				bidReturn.setBidAproved(true);
@@ -36,11 +49,14 @@ public class MarketContoller {
 
 	}
 
+	@POST	
+	@Consumes("application/json; charset=UTF-8")
+	@Produces("application/json; charset=UTF-8")
+	@Path("/initialBid")		
 	public BidInfo initialBid(BidInfo bid) {
-		TeamDAO tdao = new TeamDAO(); 
-		Team team = tdao.getItem(bid.getTeamID());
-
-		BidInfoDAO bidDao = new BidInfoDAO();
+		 
+		Team team = teamAcc.getItem(bid.getTeamID());
+		
 		BidInfo bidBase = bidDao.getItem(bid.getPlayerID());		
 		BidInfo bidReturn;
 		
@@ -49,7 +65,7 @@ public class MarketContoller {
 			bidReturn.setBidAproved(false);
 		} else {
 			if (haveMoney(bid.getBidValue(), team)) {
-				tdao.decreaseBudget(bid);			
+				teamAcc.decreaseBudget(bid);			
 				bidDao.Insert(bid);
 				bidReturn = BidInfoFactory.newProtectedBid(bid.getPlayerID(), bid.getBidValue());
 				bidReturn.setBidAproved(true);
