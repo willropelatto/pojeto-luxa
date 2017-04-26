@@ -2,6 +2,7 @@ package com.ctrl.game;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -18,7 +19,7 @@ import com.model.player.ResumedPlayer;
 
 public class PlayerController {
 
-	public ArrayList<ResumedPlayer> convertListEntityToResumed(ArrayList<PlayerEntity> players) {
+	public ArrayList<ResumedPlayer> convertListEntityToResumed(List<PlayerEntity> players) {
 		
 		Iterator<PlayerEntity> itPlayer = players.iterator();
 		ArrayList<ResumedPlayer> rsPlayers = new ArrayList<ResumedPlayer>();

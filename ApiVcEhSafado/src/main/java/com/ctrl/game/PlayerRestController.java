@@ -1,7 +1,5 @@
 package com.ctrl.game;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.ws.rs.GET;
@@ -30,7 +28,7 @@ public class PlayerRestController {
 	public List<ResumedPlayer> getPlayerFromLeague(@PathParam("league") Integer league){
  
 		PlayerDAO pdao = new PlayerDAO();
-		ArrayList<PlayerEntity> enPlayers = pdao.getPlayerFromLeague(league);				
+		List<PlayerEntity> enPlayers = pdao.getPlayerFromLeague(league);				
 		return ctrl.convertListEntityToResumed(enPlayers);
 		
 	}
