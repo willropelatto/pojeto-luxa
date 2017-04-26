@@ -48,8 +48,9 @@ public class PlayerDAO {
     	this.entityManager.getTransaction().commit();
     }
 
-    public ArrayList<PlayerEntity> getPlayerFromLeague(int idLeague) {
-    	//TODO moacir implmetar para trazer todos os jogadores de uma liga.
-    	return null;    	
+    @SuppressWarnings("unchecked")
+	public List<PlayerEntity> getPlayerFromLeague(int idLeague) {
+    	return this.entityManager.createQuery("SELECT p FROM PlayerEntity p WHERE p.idLeague = :idLeague ORDER BY u.id")
+    			.setParameter("idLeague", idLeague).getResultList();
     }
 }
