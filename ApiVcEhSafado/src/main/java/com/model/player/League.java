@@ -31,6 +31,15 @@ public class League {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+	    if (!(obj instanceof League)) {
+	        return false;
+	    }
+	    final League other = (League) obj;
+	    return this.getId() == other.getId();
+	}
 
     
 }
