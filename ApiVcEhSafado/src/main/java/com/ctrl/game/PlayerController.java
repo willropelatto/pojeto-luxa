@@ -1,6 +1,7 @@
 package com.ctrl.game;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -17,7 +18,20 @@ import com.model.player.ResumedPlayer;
 
 public class PlayerController {
 
-
+	public ArrayList<ResumedPlayer> convertListEntityToResumed(ArrayList<PlayerEntity> players) {
+		
+		Iterator<PlayerEntity> itPlayer = players.iterator();
+		ArrayList<ResumedPlayer> rsPlayers = new ArrayList<ResumedPlayer>();
+		
+		while (itPlayer.hasNext()) {
+			PlayerEntity enPlayer = itPlayer.next();						
+			ResumedPlayer rsPlayer = convertPlayerEntityToResumed(enPlayer);
+			rsPlayers.add(rsPlayer);
+		}
+		
+		return rsPlayers;
+	}
+	
 	public ResumedPlayer convertPlayerFullToResumed(FullPlayer full) {
 
 		ResumedPlayer resumed = new ResumedPlayer();
@@ -30,11 +44,23 @@ public class PlayerController {
 
 		return resumed;
 	}
+	
+	public ResumedPlayer convertPlayerEntityToResumed(PlayerEntity entity) {
+
+		ResumedPlayer resumed = new ResumedPlayer();
+
+		resumed.setBaseId(entity.getBaseId());
+		resumed.setId(entity.getOriginalId());
+		resumed.setName(entity.getName());
+		resumed.setPosition(entity.getPosition());
+		resumed.setRating(entity.getRating());	
+
+		return resumed;
+	}
 
 	public PlayerEntity convertPlayerFullToDB(FullPlayer fullpl) {
 
 		PlayerEntity player = new PlayerEntity();
-		Integer originalId = Integer.parseInt(fullpl.getId());
 		Integer idLeague = new Integer(fullpl.getLeague().getId());
 
 		player.setName(fullpl.getName());
@@ -42,7 +68,7 @@ public class PlayerController {
 		player.setBaseId(fullpl.getBaseId());
 		player.setRating(fullpl.getRating());
 		player.setIdLeague(idLeague); 
-		player.setOriginalId(originalId);
+		player.setOriginalId(fullpl.getId());
 		return player;
 
 	}		

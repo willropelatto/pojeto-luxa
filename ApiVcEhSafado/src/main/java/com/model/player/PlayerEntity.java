@@ -25,7 +25,7 @@ public class PlayerEntity {
 	@Column(name="idLeague")
 	private Integer idLeague;
 	@Column(name="originalId")
-	private Integer originalId;
+	private String originalId;
 	
 	
 	public Integer getId() {
@@ -66,10 +66,10 @@ public class PlayerEntity {
 		this.idLeague = idLeague;
 	}
 	
-	public Integer getOriginalId() {
+	public String getOriginalId() {
 		return originalId;
 	}
-	public void setOriginalId(Integer originalId) {
+	public void setOriginalId(String originalId) {
 		this.originalId = originalId;
 	}
 	

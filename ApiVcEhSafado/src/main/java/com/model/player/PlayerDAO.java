@@ -1,5 +1,8 @@
 package com.model.player;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -45,4 +48,8 @@ public class PlayerDAO {
     	this.entityManager.getTransaction().commit();
     }
 
+    public ArrayList<PlayerEntity> getPlayerFromLeague(int idLeague) {
+    	//TODO moacir implmetar para trazer todos os jogadores de uma liga.
+    	return null;    	
+    }
 }
