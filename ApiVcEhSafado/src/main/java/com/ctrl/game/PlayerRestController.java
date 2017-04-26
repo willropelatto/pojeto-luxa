@@ -7,8 +7,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
-import com.model.league.LeagueEntity;
-import com.model.player.League;
 import com.model.player.PlayerDAO;
 import com.model.player.PlayerEntity;
 import com.model.player.ResumedPlayer;
