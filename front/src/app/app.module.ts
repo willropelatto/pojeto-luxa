@@ -16,6 +16,9 @@ import { TeamModule } from './team';
 
 import { BidinfoModule } from './bidinfo';
 
+import { HttpModule } from '@angular/http';
+import { HttpUtilService } from './util';
+
 
 
 
@@ -26,10 +29,14 @@ import { BidinfoModule } from './bidinfo';
     PlayerModule,
     LeagueModule,
     TeamModule,
-    BidinfoModule
+    BidinfoModule,
+    HttpModule    
   ],
   declarations: [ 
     AppComponent
+  ],
+  providers: [
+		HttpUtilService
   ],
   bootstrap:    [ AppComponent ]
 })
