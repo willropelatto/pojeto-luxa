@@ -19,6 +19,6 @@ public class TeamEntity {
 	@Column(name="nome")
 	private String nome;
 	
-	@OneToMany(mappedBy = "teamEntity", cascade = CascadeType.ALL)
-	private Set<TeamPlayer> teamPlayer;	
+//	@OneToMany(mappedBy = "teamEntity", cascade = CascadeType.ALL)
+//	private Set<TeamPlayer> teamPlayer;	
 }
