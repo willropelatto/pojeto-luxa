@@ -30,8 +30,18 @@ public class PlayerRestController {
 		return ctrl.convertListEntityToResumed(enPlayers);
 		
 	}
+	
+	
 
-
+	@GET
+	@Produces("application/json; charset=UTF-8")
+	@Path("/getAllPlayers")
+	public List<ResumedPlayer> getAllPlayers(){
+ 		PlayerDAO pdao = new PlayerDAO();
+		List<PlayerEntity> enPlayers = pdao.getAllPlayers();				
+		return ctrl.convertListEntityToResumed(enPlayers);
+		
+	}
 
 
 }

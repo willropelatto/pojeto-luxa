@@ -50,7 +50,12 @@ public class PlayerDAO {
 
     @SuppressWarnings("unchecked")
 	public List<PlayerEntity> getPlayerFromLeague(int idLeague) {
-    	return this.entityManager.createQuery("SELECT p FROM PlayerEntity p WHERE p.idLeague = :idLeague ORDER BY u.id")
+    	return this.entityManager.createQuery("SELECT p FROM PlayerEntity p WHERE p.idLeague = :idLeague ORDER BY p.id")
     			.setParameter("idLeague", idLeague).getResultList();
+    }
+    		
+    @SuppressWarnings("unchecked")
+    public List<PlayerEntity> getAllPlayers() {
+    	return this.entityManager.createQuery("SELECT p FROM PlayerEntity p ORDER BY p.id").getResultList();
     }
 }

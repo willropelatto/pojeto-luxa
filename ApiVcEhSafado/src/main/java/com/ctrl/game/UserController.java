@@ -1,4 +1,4 @@
-package com.ctrl.user;
+package com.ctrl.game;
 
 import java.util.ArrayList;
 import java.util.List;

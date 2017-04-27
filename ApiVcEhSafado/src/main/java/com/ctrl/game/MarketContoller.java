@@ -1,5 +1,8 @@
 package com.ctrl.game;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -8,8 +11,11 @@ import javax.ws.rs.Produces;
 import com.model.player.BidInfo;
 import com.model.player.BidInfoDAO;
 import com.model.player.BidInfoFactory;
+import com.model.player.PlayerDAO;
+import com.model.player.PlayerEntity;
 import com.model.team.Team;
 import com.model.team.TeamDAO;
+import com.model.team.TeamPlayerEntity;
 
 @Path("/market")
 public class MarketContoller {
@@ -77,6 +83,35 @@ public class MarketContoller {
 		}	
 
 		return bidReturn;
+	}
+	
+	@POST	
+	@Consumes("application/json; charset=UTF-8")
+	@Produces("application/json; charset=UTF-8")
+	@Path("/close")	
+	public void closeMarket() {		
+		
+		BidInfo bid;
+		Team team;		
+		PlayerDAO playDao = new PlayerDAO();
+		TeamPlayerEntity boobs;
+		ArrayList<TeamPlayerEntity> players = new ArrayList<TeamPlayerEntity>();
+		
+		ArrayList<BidInfo> bids = bidDao.getList();		
+		Iterator<BidInfo> itBid = bids.iterator();		
+				
+		while (itBid.hasNext()) {			
+			bid = itBid.next();						
+			boobs = new TeamPlayerEntity();
+			boobs.setIdPlayerEntity(bid.getPlayerID());
+			boobs.setIdTeam(bid.getTeamID());
+			players.add(boobs);			
+		}
+		
+		
+		ArrayList<Team> teams = teamAcc.getList();
+		//TODO add para os times os jogadores
+		
 	}
 
 	public boolean haveMoney(double value, Team team) {

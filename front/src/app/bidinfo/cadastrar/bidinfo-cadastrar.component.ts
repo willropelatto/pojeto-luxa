@@ -23,8 +23,6 @@ import { Team, TeamService } from '../../team';
 export class BidinfoCadastrarComponent implements OnInit {
 
 	private bidinfo: Bidinfo;
-	private players: Player[];
-	private teams: Team[];
 
 	/**
 	 * Construtor.
@@ -34,17 +32,16 @@ export class BidinfoCadastrarComponent implements OnInit {
 	 */
 	constructor(
 		private router: Router, 
-		private bidinfoService: BidinfoService,
-		private playerService: PlayerService,
-		private teamService: TeamService) {
+		private bidinfoService: BidinfoService
+	) {
 	}
 
 	/**
 	 * Método executado logo após a criação do componente.
 	 */
 	ngOnInit() {
-		this.players = this.playerService.listarTodos();
-		this.teams = this.teamService.listarTodos();
+		//this.players = this.playerService.listarTodos();
+		//this.teams = this.teamService.listarTodos();
 		this.bidinfo = new Bidinfo();
 
 	}

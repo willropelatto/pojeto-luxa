@@ -6,7 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import com.model.user.EncryptPass;
 
 @Entity
 @Table(name="tb_user")
@@ -61,9 +60,7 @@ public class UserEntity {
 		return senha;
 	}
 	public void setSenha(String senha) {
-		EncryptPass EP = new EncryptPass();
-				
-		this.senha =  new String(EP.stringToMD5(senha));
+		this.senha = senha;
 	}
 
 	

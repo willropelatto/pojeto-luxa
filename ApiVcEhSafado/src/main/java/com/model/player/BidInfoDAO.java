@@ -1,5 +1,7 @@
 package com.model.player;
 
+import java.util.ArrayList;
+
 public class BidInfoDAO {
 	
 	public BidInfo getItem(int id) {
@@ -15,6 +17,11 @@ public class BidInfoDAO {
 		
 		
 		
+	}
+
+	public ArrayList<BidInfo> getList() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

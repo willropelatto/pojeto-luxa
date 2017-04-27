@@ -1,5 +1,7 @@
 package com.model.team;
 
+import java.util.ArrayList;
+
 import com.model.player.BidInfo;
 
 public class TeamDAO {
@@ -29,6 +31,12 @@ public class TeamDAO {
 	public void increaseBudget(BidInfo bidBase) {
 		// TODO Auto-generated method stub
 		
-	}	
+	}
+
+	public ArrayList<Team> getList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

@@ -9,8 +9,22 @@ import { Injectable } from '@angular/core';
 
 import { Bidinfo } from './bidinfo.model';
 
+import { Http, Response } from '@angular/http';
+
+import { Observable } from 'rxjs/Observable';
+
+import { HttpUtilService } from '../../util';
+
+
 @Injectable()
 export class BidinfoService {
+
+	private path = 'bidinfo';
+	private msgErro:string;
+	private bidinfos: Bidinfo[];
+
+	constructor(private http: Http, private httpUtil: HttpUtilService) {
+	}
 
 	/**
 	 * Retorna listagem de todos os bidinfos.
@@ -32,6 +46,21 @@ export class BidinfoService {
 		bidinfos.push(bidinfo);
 		sessionStorage['bidinfos'] = JSON.stringify(bidinfos);
 	}
+
+	/**
+	 * Cadastra um novo bidinfo.
+	 *
+	 * @param Bidinfo bidinfo
+	 */
+	cadastrarHttp(bidinfo: Bidinfo): Observable<Bidinfo>{
+		let params = JSON.stringify(bidinfo);
+
+		return this.http.post(this.httpUtil.url(this.path), params,
+							this.httpUtil.headers())
+						.map(this.httpUtil.extrairDados)
+						.catch(this.httpUtil.processarErros);
+	}
+
 
 	/**
 	 * Retorna os dados de um bidinfo por id.
