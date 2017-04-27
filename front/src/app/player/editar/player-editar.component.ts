@@ -20,6 +20,7 @@ export class PlayerEditarComponent implements OnInit {
 
 	private id: number;
 	private player: Player;
+	private msgErro: string;
 
 	/**
 	 * Construtor.
@@ -39,7 +40,9 @@ export class PlayerEditarComponent implements OnInit {
 	 */
 	ngOnInit() {
 		this.id = +this.route.snapshot.params['id'];
-		this.player = this.playerService.buscarPorId(this.id);
+		this.playerService.buscarPorId(this.id);
+		//		.subscribe(player => this.player = player,
+		//		error => this.msgErro = error);
 	}
 
 	/**

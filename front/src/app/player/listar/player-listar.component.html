@@ -3,10 +3,8 @@
 <div>
     <table class="table table-striped">
         <tr>
-            <th>ID</th>
             <th>Nome</th>
             <th>Posição</th>
-            <th>BaseId</th>
             <th>Rating</th>
             <th>Lance<th>
             <th>Valor Inicial</th>
@@ -18,10 +16,8 @@
             </th>
         </tr>
         <tr *ngFor="let player of players">
-            <td>{{ player.id }}</td>
-            <td>{{ player.nome }}</td>
+            <td>{{ player.name }}</td>
             <td>{{ player.position }}</td>
-            <td>{{ player.baseId }}</td>
             <td>{{ player.rating }}</td>  
             <td><input readonly value="100" class="btn btn-default" ngDefaultControl [(ngModel)]="bidinfo.bidValue"/></td>     
             <td><input readonly value="50" class="btn btn-default" ngDefaultControl [(ngModel)]="bidinfo.originalValue"/></td>     
@@ -50,13 +46,6 @@
             </td>
         </tr>
     </table>
-    <kz-paginacao *ngIf="players.length>0"
-        [totalRegistros]="totalRegistros"
-        (onPaginate)="paginar($event)">
-    </kz-paginacao>
-    <p *ngIf="players.length==0" class="text-center">
-        <i>Nenhum registro encontrado.</i>
-    </p>
     <kz-modal-util 
         [id]="'modalExcluir'" 
         [titulo]="'Excluir Player'"

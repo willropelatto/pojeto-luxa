@@ -26,9 +26,9 @@ export class PlayerListarComponent implements OnInit {
 
 	private players: Player[];
 	private idExcluir: number;
-	private pagina: number;
-	private totalRegistros: number;
 	private bidinfo: Bidinfo;
+	private msgErro:string;
+	
 
 	/**
 	 * Construtor.
@@ -45,11 +45,12 @@ export class PlayerListarComponent implements OnInit {
 	 * Método executado logo após a criação do componente.
 	 */
 	ngOnInit() {
-		this.totalRegistros = this.playerService.totalRegistros();
-		this.bidinfo = new Bidinfo();
-		this.pagina = +this.route.snapshot.queryParams['pagina'] || KzPaginacaoComponent.PAG_PADRAO;
-		this.players = this.playerService.listarParcial(
-			--this.pagina, KzPaginacaoComponent.TOTAL_PAGS_PADRAO);
+		this.playerService.listarTodos();
+		/*this.playerService.listarTodos()
+			.subscribe(players => this.players = players,
+						error => this.msgErro = error);
+		this.bidinfo = new Bidinfo();*/
+			
 	}
 
 	/**
@@ -75,12 +76,12 @@ export class PlayerListarComponent implements OnInit {
  	 *
  	 * @param any $event Número da página atual.
  	 */
- 	paginar($event: any) {
+ 	/*paginar($event: any) {
 		this.pagina = $event - 1;
 		this.totalRegistros = this.playerService.totalRegistros();
 		this.players = this.playerService.listarParcial(
 			this.pagina, KzPaginacaoComponent.TOTAL_PAGS_PADRAO);
-	}
+	}*/
 
 	bid(bidinfo: Bidinfo, player: Player){		
 		var bid : Bidinfo = bidinfo;
