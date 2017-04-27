@@ -11,5 +11,6 @@ export class Bidinfo {
 		public bidValue?: number,
 		public teamId?: number,
 		public originalValue?: number,
+		public playerId?: number,
 		public bidAproved?: boolean){}
 }
