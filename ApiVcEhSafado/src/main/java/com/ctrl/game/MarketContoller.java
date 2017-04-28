@@ -103,7 +103,7 @@ public class MarketContoller {
 		while (itBid.hasNext()) {			
 			bid = itBid.next();						
 			boobs = new TeamPlayerEntity();
-			boobs.setIdPlayerEntity(bid.getPlayerID());
+			boobs.setIdPlayer(bid.getPlayerID());
 			boobs.setIdTeam(bid.getTeamID());
 			players.add(boobs);			
 		}
