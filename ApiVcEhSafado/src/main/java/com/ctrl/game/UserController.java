@@ -1,5 +1,7 @@
 package com.ctrl.game;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
  
@@ -15,6 +17,7 @@ import javax.ws.rs.Produces;
 import com.model.user.UserDAO;
 import com.model.user.UserEntity;
 import com.view.user.User;
+import com.model.user.TokenAuth;
 
 
 @Path("/user")
@@ -153,6 +156,42 @@ public class UserController {
 			return "Erro ao excluir o registro! " + e.getMessage();
 		}
  
+	}	
+	
+	
+	@PUT
+	@Produces("application/json; charset=UTF-8")
+	@Consumes("application/json; charset=UTF-8")	
+	@Path("/login")
+	public String login(User user) { 
+		UserEntity entity = userDAO.getUserByLogin(user.getLogin());
+		
+		if (entity != null) {
+			if (entity.getSenha().equals(user.getSenha())) {
+				String keyAuth;
+				try {
+					keyAuth = TokenAuth.GerarToken(user.getLogin());
+				} catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
+					
+					return "Não foi possivel gerar o token: "+e.getMessage();
+				}
+				try {
+					entity.setKeyAuth(keyAuth);	
+					userDAO.Update(entity);
+				} catch (Exception e) {
+		 
+					return "Não foi possivel gravar Token de autenticação: " + e.getMessage();
+		 		}					
+				return keyAuth;
+	 
+			} else {
+				return "Senha inválida.";
+			}
+			
+		} else {
+			return ""; 
+		}
+		
 	}	
 	
 }
