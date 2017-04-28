@@ -19,6 +19,9 @@ import { BidinfoModule } from './bidinfo';
 import { HttpModule } from '@angular/http';
 import { HttpUtilService } from './util';
 
+//import { PaginationModule } from 'ngx-bootstrap/ng2-bootstrap';
+//import { TabsModule } from 'ngx-bootstrap/ng2-bootstrap';
+
 
 
 
@@ -30,7 +33,9 @@ import { HttpUtilService } from './util';
     LeagueModule,
     TeamModule,
     BidinfoModule,
-    HttpModule    
+    HttpModule,
+//    PaginationModule,
+//		TabsModule  
   ],
   declarations: [ 
     AppComponent
