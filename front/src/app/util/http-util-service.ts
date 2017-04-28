@@ -5,7 +5,10 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class HttpUtilService {
 
-	private API_URL: string = 'http://localhost:3000/api/';
+	private API_URL: string = 'http://nbbnu008771:3030/ApiVcEhSafado/rest/';
+	
+
+	//http://localhost:3030/ApiVcEhSafado/rest/player/getAllPlayers 
 
 	url(path: string) {
 		return this.API_URL + path;
@@ -13,10 +16,13 @@ export class HttpUtilService {
 
 	headers() {
 		let headersParams = { 'Content-Type': 'application/json' };
-		if (localStorage['token']) {
-			headersParams['Authorization'] = localStorage['token'];
-		}
+	//	if (localStorage['token']) {
+	//		headersParams['Authorization'] = localStorage['token'];
+	//	}
+		
 		let headers = new Headers(headersParams);
+		headers.append('Access-Control-Allow-Origin','*');
+		headers.append("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     	let options = new RequestOptions({ headers: headers });
     	return options;
 	}
