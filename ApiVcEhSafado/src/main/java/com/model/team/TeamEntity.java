@@ -5,20 +5,45 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import com.model.team.TeamPlayerEntity;
 
 @Entity
 @Table(name="tb_team")
 public class TeamEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="teamid")
+	@Column(name="id")
 	private Integer id;
 	@Column(name="nome")
 	private String nome;
+	@Column(name="idtournament")
+	private Integer idTournament;
+	@Column(name="nometecnico")
+	private String nomeTecnico;
 	
-//	@OneToMany(mappedBy = "teamEntity", cascade = CascadeType.ALL)
-//	private Set<TeamPlayer> teamPlayer;	
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	public Integer getIdTournament() {
+		return idTournament;
+	}
+	public void setIdTournament(Integer idTournament) {
+		this.idTournament = idTournament;
+	}
+	public String getNomeTecnico() {
+		return nomeTecnico;
+	}
+	public void setNomeTecnico(String nomeTecnico) {
+		this.nomeTecnico = nomeTecnico;
+	}
+	
 }
