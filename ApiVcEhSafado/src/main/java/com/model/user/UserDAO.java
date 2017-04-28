@@ -41,6 +41,15 @@ public class UserDAO {
     	this.entityManager.getTransaction().commit();
     }	
     
+    public UserEntity getUserByLogin(String login) {
+    	Object result = this.entityManager.createQuery("SELECT u FROM UserEntity u where u.login = :login ORDER BY u.id")
+    			.setParameter("login", login).getSingleResult();
+
+    	if (result == null) return null;
+        
+    	return (UserEntity) result;
+    }
+    
     @SuppressWarnings("unchecked")
 	public List<UserEntity> TodosUsuarios(){
  
