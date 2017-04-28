@@ -1,4 +1,4 @@
-package com.ctrl.game;
+package com.view.game;
 
 import java.util.List;
 
@@ -6,10 +6,11 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
+import com.ctrl.game.LeagueController;
 import com.model.player.League;
 
 @Path("/league")
-public class LeagueRestController {
+public class LeagueRest {
 
 	private final LeagueController ctrl = new LeagueController(); 
 

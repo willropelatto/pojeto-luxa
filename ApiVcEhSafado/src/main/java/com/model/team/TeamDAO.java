@@ -37,6 +37,14 @@ public class TeamDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public TeamEntity getTeam(int teamId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
+	
 
 
 }

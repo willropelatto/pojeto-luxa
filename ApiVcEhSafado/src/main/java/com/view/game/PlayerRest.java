@@ -1,4 +1,4 @@
-package com.ctrl.game;
+package com.view.game;
 
 import java.util.List;
 
@@ -7,13 +7,14 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
+import com.ctrl.game.PlayerController;
 import com.model.player.PlayerDAO;
 import com.model.player.PlayerEntity;
 import com.model.player.ResumedPlayer;
 
 
 @Path("/player")
-public class PlayerRestController {	 
+public class PlayerRest {	 
 
 	private final PlayerController ctrl = new PlayerController(); 
 
