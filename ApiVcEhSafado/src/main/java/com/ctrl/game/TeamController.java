@@ -2,14 +2,14 @@ package com.ctrl.game;
 
 import java.util.ArrayList;
 
-import com.model.player.PlayerDAO;
-import com.model.player.PlayerEntity;
-import com.model.player.ResumedPlayer;
-import com.model.team.Team;
-import com.model.team.TeamDAO;
-import com.model.team.TeamEntity;
-import com.model.team.TeamPlayerDAO;
-import com.model.team.TeamPlayerEntity;
+import com.model.dao.PlayerDAO;
+import com.model.dao.TeamDAO;
+import com.model.dao.TeamPlayerDAO;
+import com.model.entity.PlayerEntity;
+import com.model.entity.TeamEntity;
+import com.model.entity.TeamPlayerEntity;
+import com.model.in.Team;
+import com.model.out.ResumedPlayer;
 
 public class TeamController {
 

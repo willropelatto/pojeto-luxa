@@ -3,13 +3,12 @@ package com.ctrl.game;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import com.model.player.BidInfo;
-import com.model.player.BidInfoDAO;
-import com.model.player.BidInfoFactory;
-import com.model.team.Team;
-import com.model.team.TeamDAO;
-import com.model.team.TeamPlayerDAO;
-import com.model.team.TeamPlayerEntity;
+import com.model.dao.BidInfoDAO;
+import com.model.dao.TeamDAO;
+import com.model.dao.TeamPlayerDAO;
+import com.model.entity.TeamPlayerEntity;
+import com.model.in.Team;
+import com.model.out.BidInfo;
 
 public class MarketContoller {
 

@@ -8,7 +8,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import com.ctrl.game.PlayerController;
-import com.model.player.ResumedPlayer;
+import com.model.out.ResumedPlayer;
 
 
 @Path("/player")

@@ -10,12 +10,12 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 
 import com.google.gson.Gson;
-import com.model.player.FullPlayer;
-import com.model.player.League;
-import com.model.player.Page;
-import com.model.player.PlayerDAO;
-import com.model.player.PlayerEntity;
-import com.model.player.ResumedPlayer;
+import com.model.dao.PlayerDAO;
+import com.model.entity.PlayerEntity;
+import com.model.in.FullPlayer;
+import com.model.in.League;
+import com.model.in.Page;
+import com.model.out.ResumedPlayer;
 
 public class PlayerController {
 

@@ -7,10 +7,9 @@ import java.util.List;
 
 import javax.ws.rs.PathParam;
 
-import com.model.user.TokenAuth;
-import com.model.user.User;
-import com.model.user.UserDAO;
-import com.model.user.UserEntity;
+import com.model.dao.UserDAO;
+import com.model.entity.UserEntity;
+import com.model.out.User;
  
 public class UserController {
 

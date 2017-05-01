@@ -12,7 +12,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
  
 import com.ctrl.game.UserController;
-import com.model.user.User;
+import com.model.out.User;
 
 
 @Path("/user")

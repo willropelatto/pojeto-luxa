@@ -3,9 +3,9 @@ package com.ctrl.game;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import com.model.player.League;
-import com.model.league.LeagueDAO;
-import com.model.league.LeagueEntity;
+import com.model.dao.LeagueDAO;
+import com.model.entity.LeagueEntity;
+import com.model.in.League;
 
 public class LeagueController {
 
