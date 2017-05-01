@@ -1,12 +1,14 @@
 package com.model.team;
 
+import java.util.ArrayList;
+
 import com.model.player.ResumedPlayer;
 
 public class Team {
 
 	private int id;
 	private String name;
-	private ResumedPlayer[] players;
+	private ArrayList<ResumedPlayer> players = new ArrayList<ResumedPlayer>();
 	private String luxa;
 	private double Budget;
 	
@@ -16,12 +18,7 @@ public class Team {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public ResumedPlayer[] getPlayers() {
-		return players;
-	}
-	public void setPlayers(ResumedPlayer[] players) {
-		this.players = players;
-	}
+
 	public String getLuxa() {
 		return luxa;
 	}
@@ -39,5 +36,11 @@ public class Team {
 	}
 	public void setBudget(double budget) {
 		Budget = budget;
+	}
+	public ArrayList<ResumedPlayer> getPlayers() {
+		return players;
+	}
+	public void setPlayers(ArrayList<ResumedPlayer> players) {
+		this.players = players;
 	}	
 }

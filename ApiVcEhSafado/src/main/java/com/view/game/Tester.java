@@ -1,4 +1,4 @@
-package com.view.player;
+package com.view.game;
 
 import com.ctrl.game.PlayerController;
 //import org.glassfish.jersey.client.*;

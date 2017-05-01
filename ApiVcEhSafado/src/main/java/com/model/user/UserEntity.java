@@ -25,7 +25,10 @@ public class UserEntity {
 	private String login;
 	@Column(name="senha")
 	private String senha;
+	@Column(name="keyauth")
+	private String keyAuth;
 	
+
 	public Integer getId() {
 		return id;
 	}
@@ -63,6 +66,12 @@ public class UserEntity {
 		this.senha = senha;
 	}
 
+	public String getKeyAuth() {
+		return keyAuth;
+	}
+	public void setKeyAuth(String keyAuth) {
+		this.keyAuth = keyAuth;
+	}
 	
 	
 }

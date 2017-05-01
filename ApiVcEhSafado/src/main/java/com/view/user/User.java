@@ -11,8 +11,8 @@ public class User {
 	private String email;
 	private String login;
 	private String senha;
-	
-	
+	private String keyAuth;	
+
 	public User() {
 		
 	}
@@ -84,7 +84,12 @@ public class User {
 		this.senha = senha;
 	}
 	
-	
-	
+	public String getKeyAuth() {
+		return keyAuth;
+	}
+
+	public void setKeyAuth(String keyAuth) {
+		this.keyAuth = keyAuth;
+	}	
 	
 }
