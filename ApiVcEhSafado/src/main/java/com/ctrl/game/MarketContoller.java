@@ -3,16 +3,9 @@ package com.ctrl.game;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-
 import com.model.player.BidInfo;
 import com.model.player.BidInfoDAO;
 import com.model.player.BidInfoFactory;
-import com.model.player.PlayerDAO;
-import com.model.player.PlayerEntity;
 import com.model.team.Team;
 import com.model.team.TeamDAO;
 import com.model.team.TeamPlayerDAO;

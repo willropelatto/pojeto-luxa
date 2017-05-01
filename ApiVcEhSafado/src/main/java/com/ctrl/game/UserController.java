@@ -4,40 +4,19 @@ import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
- 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
 
+import javax.ws.rs.PathParam;
+
+import com.model.user.TokenAuth;
+import com.model.user.User;
 import com.model.user.UserDAO;
 import com.model.user.UserEntity;
-import com.view.user.User;
-import com.model.user.TokenAuth;
-
-
-@Path("/user")
+ 
 public class UserController {
 
 	
 	private final UserDAO userDAO = new UserDAO();
 	
-	
-	/**
-	 * @Consumes - determina o formato dos dados que vamos postar
-	 * @Produces - determina o formato dos dados que vamos retornar
-	 * 
-	 * Esse método cadastra um novo usuário
-	 * */
-	
-	@POST	
-	@Consumes("application/json; charset=UTF-8")
-	@Produces("application/json; charset=UTF-8")
-	@Path("/cadastrar")
 	public String Cadastrar(User user){
  
 		UserEntity entity = new UserEntity();
@@ -61,13 +40,6 @@ public class UserController {
  
 	}	
 	
-	/**
-	 * Essse método altera um usuario já cadastrado
-	 * **/
-	@PUT
-	@Produces("application/json; charset=UTF-8")
-	@Consumes("application/json; charset=UTF-8")	
-	@Path("/alterar")
 	public String Alterar(User user){
  
 		UserEntity entity = new UserEntity();
@@ -90,13 +62,7 @@ public class UserController {
 		}
  
 	}
-	
-	/**
-	 * Esse método lista todos usuarios cadastrados na base
-	 * */
-	@GET
-	@Produces("application/json; charset=UTF-8")
-	@Path("/todosUsuarios")
+
 	public List<User> TodosUsuarios(){
  
 		List<User> users =  new ArrayList<User>();
@@ -116,12 +82,6 @@ public class UserController {
 		return users;
 	}
 	
-	/**
-	 * Esse método busca um usuario cadastrado pelo código
-	 * */
-	@GET
-	@Produces("application/json; charset=UTF-8")
-	@Path("/getUsuario/{codigo}")
 	public User GetUser(@PathParam("codigo") Integer codigo){
  
 		UserEntity entity = userDAO.getUser(codigo);
@@ -137,12 +97,6 @@ public class UserController {
 		return null;
 	}
  
-	/**
-	 * Excluindo um usuario pelo código
-	 * */
-	@DELETE
-	@Produces("application/json; charset=UTF-8")
-	@Path("/excluir/{codigo}")	
 	public String Excluir(@PathParam("codigo") Integer codigo){
  
 		try {
@@ -158,11 +112,6 @@ public class UserController {
  
 	}	
 	
-	
-	@PUT
-	@Produces("application/json; charset=UTF-8")
-	@Consumes("application/json; charset=UTF-8")	
-	@Path("/login")
 	public String login(User user) { 
 		UserEntity entity = userDAO.getUserByLogin(user.getLogin());
 		

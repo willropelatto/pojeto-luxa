@@ -1,21 +1,19 @@
 package com.model.player;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import com.model.player.PlayerEntity;
 
 
 public class PlayerDAO {
 	
 	private final EntityManagerFactory entityManagerFactory;
 	
-	private final EntityManager entityManager;
+	private final EntityManager entityManager; 
 	
-	public PlayerDAO() {
+	public PlayerDAO() { 
 		
 		this.entityManagerFactory  = Persistence.createEntityManagerFactory("persistence_unit_db_banco");
 		this.entityManager = this.entityManagerFactory.createEntityManager();

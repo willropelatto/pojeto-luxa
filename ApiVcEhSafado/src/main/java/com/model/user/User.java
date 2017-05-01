@@ -1,4 +1,4 @@
-package com.view.user;
+package com.model.user;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
