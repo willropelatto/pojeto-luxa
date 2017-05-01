@@ -19,6 +19,8 @@ import com.model.player.ResumedPlayer;
 
 public class PlayerController {
 
+	private final PlayerDAO playerDao = new PlayerDAO();
+	
 	public ArrayList<ResumedPlayer> convertListEntityToResumed(List<PlayerEntity> players) {
 		
 		Iterator<PlayerEntity> itPlayer = players.iterator();
@@ -81,9 +83,7 @@ public class PlayerController {
 		WebTarget target = client.target("https://www.easports.com/fifa/ultimate-team/api/fut/item?page=1");						
 		String json = target.request(MediaType.APPLICATION_JSON).get().readEntity(String.class);	    
 		Gson gson = new Gson();	    
-		Page pg = gson.fromJson(json, Page.class);	    
-
-		PlayerDAO playerDao = new PlayerDAO();
+		Page pg = gson.fromJson(json, Page.class);		
 
 		PlayerEntity player;
 		FullPlayer fullPlay;	  
@@ -125,4 +125,18 @@ public class PlayerController {
 		lgCtrl.saveLeagues(leagues);
 
 	}	
+	
+	public List<ResumedPlayer> getLeaguePlayers(int leagueId) {		 
+		
+		List<PlayerEntity> enPlayers = playerDao.getPlayerFromLeague(leagueId);				
+		return convertListEntityToResumed(enPlayers);
+		
+	}	
+	
+	public List<ResumedPlayer> getAllPlayers() {
+		
+		List<PlayerEntity> enPlayers = playerDao.getAllPlayers();				
+		return convertListEntityToResumed(enPlayers);
+		
+	}
 }

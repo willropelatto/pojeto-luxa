@@ -8,8 +8,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import com.ctrl.game.PlayerController;
-import com.model.player.PlayerDAO;
-import com.model.player.PlayerEntity;
 import com.model.player.ResumedPlayer;
 
 
@@ -18,30 +16,21 @@ public class PlayerRest {
 
 	private final PlayerController ctrl = new PlayerController(); 
 
-	/**
-	 * Esse método busca uma pessoa cadastrada pelo código
-	 * */
 	@GET
 	@Produces("application/json; charset=UTF-8")
-	@Path("/getPlayerFromLeague/{league}")
-	public List<ResumedPlayer> getPlayerFromLeague(@PathParam("league") Integer league){
- 
-		PlayerDAO pdao = new PlayerDAO();
-		List<PlayerEntity> enPlayers = pdao.getPlayerFromLeague(league);				
-		return ctrl.convertListEntityToResumed(enPlayers);
-		
-	}
-	
+	@Path("/listPlayer/{league}")
+	public List<ResumedPlayer> getLeaguePlayers(@PathParam("league") Integer league){
+ 			
+		return ctrl.getLeaguePlayers(league);		
+	}	
 	
 
 	@GET
 	@Produces("application/json; charset=UTF-8")
-	@Path("/getAllPlayers")
+	@Path("/list")
 	public List<ResumedPlayer> getAllPlayers(){
- 		PlayerDAO pdao = new PlayerDAO();
-		List<PlayerEntity> enPlayers = pdao.getAllPlayers();				
-		return ctrl.convertListEntityToResumed(enPlayers);
-		
+			
+		return ctrl.getAllPlayers();
 	}
 
 
