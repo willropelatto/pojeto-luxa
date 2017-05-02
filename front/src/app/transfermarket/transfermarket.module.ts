@@ -1,12 +1,16 @@
 /**
  * Arquivo de configuração do módulo.
  *
- * @author Márcio Casale de Souza <contato@kazale.com>
- * @since 0.0.3
+ * @author Pojeto
+ * @since 0.0.1
  */
 
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+
+import { PlayerModule, PlayerService, Player } from '../player';
+
+import { BidinfoService, BidinfoModule } from '../bidinfo';
 
 import { 
 	TransfermarketCadastrarComponent,
@@ -21,7 +25,9 @@ import { SharedModule } from '../shared';
 @NgModule({
 	imports: [ 
 		RouterModule,
-		SharedModule
+		SharedModule,
+		PlayerModule,
+		BidinfoModule
 	],
 	declarations: [
 		TransfermarketCadastrarComponent,
@@ -30,7 +36,7 @@ import { SharedModule } from '../shared';
 		TransfermarketVisualizarComponent
 	],
 	providers: [
-		TransfermarketService
+		TransfermarketService, PlayerService, BidinfoService
 	]
 })
 export class TransfermarketModule {}

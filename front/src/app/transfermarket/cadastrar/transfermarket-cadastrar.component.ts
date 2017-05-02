@@ -42,7 +42,7 @@ export class TransfermarketCadastrarComponent implements OnInit {
 	 * Método responsável por cadastrar um novo transfermarket.
 	 */
 	cadastrar() {
-		this.transfermarket.id = new Date().getTime();
+		//this.transfermarket.id = new Date().getTime();
 		this.transfermarketService.cadastrar(this.transfermarket);
 		this.router.navigate(['/transfermarkets']);
 	}

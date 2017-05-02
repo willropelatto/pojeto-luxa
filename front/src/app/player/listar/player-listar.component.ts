@@ -26,8 +26,10 @@ export class PlayerListarComponent implements OnInit {
 
 	private players: Player[];
 	private idExcluir: number;
-	private bidinfo: Bidinfo;
+//	private bidinfo: Bidinfo;
 	private msgErro:string;
+	private pagina: number;
+	private totalRegistros: number;
 	
 
 	/**
@@ -36,8 +38,8 @@ export class PlayerListarComponent implements OnInit {
 	 * @param PlayerService playerService
 	 */
 	constructor(private playerService: PlayerService,
-		private bidinfoService: BidinfoService,
-		private teamService: TeamService,
+		//private bidinfoService: BidinfoService,
+	//	private teamService: TeamService,
 		private route: ActivatedRoute) {
 	}
 
@@ -45,11 +47,15 @@ export class PlayerListarComponent implements OnInit {
 	 * Método executado logo após a criação do componente.
 	 */
 	ngOnInit() {
-		this.playerService.listarTodos();
+		//this.playerService.listarTodos();
 		/*this.playerService.listarTodos()
 			.subscribe(players => this.players = players,
 						error => this.msgErro = error);
 		this.bidinfo = new Bidinfo();*/
+		this.totalRegistros = this.playerService.totalRegistros();
+		this.pagina = +this.route.snapshot.queryParams['pagina'] || KzPaginacaoComponent.PAG_PADRAO;
+		this.players = this.playerService.listarParcial(
+			--this.pagina, KzPaginacaoComponent.TOTAL_PAGS_PADRAO);
 			
 	}
 
@@ -84,10 +90,10 @@ export class PlayerListarComponent implements OnInit {
 	}*/
 
 	bid(bidinfo: Bidinfo, player: Player){		
-		var bid : Bidinfo = bidinfo;
-		bid.id = new Date().getTime();
-		bid.teamId = 1;
-		bid.playerId = player.id;	
-		this.bidinfoService.cadastrar(bid);
+	//	var bid : Bidinfo = bidinfo;
+	//	bid.id = new Date().getTime();
+	//	bid.teamId = 1;
+	//	bid.playerId = player.id;	
+//		this.bidinfoService.cadastrar(bid);
 	}
 }

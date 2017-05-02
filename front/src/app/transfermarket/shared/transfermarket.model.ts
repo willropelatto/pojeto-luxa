@@ -7,6 +7,14 @@
 
 export class Transfermarket {
 	constructor(
-		public id?: number,
-		public name?: string){}
+		public idPlayer?: number,
+		public name?: string,
+		public position?: string,
+		public rating?: number,
+		public idBid?: number,
+		public bidValue?: number,
+		public teamId?: number,
+		public originalValue?: number,
+		public playerId?: number,
+		public bidAproved?: boolean){}	
 }
