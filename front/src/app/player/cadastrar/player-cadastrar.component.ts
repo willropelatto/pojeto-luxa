@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 import { Player, PlayerService } from '../shared';
 
 @Component({
-	selector: 'kz-player-cadastrar',
+	selector: 'pojeto-player-cadastrar',
 	templateUrl: './player-cadastrar.component.html',
 	styleUrls: ['./player-cadastrar.component.css']
 })

@@ -1,25 +1,25 @@
 /**
- * Arquivo de teste do componente TransfermarketCadastrarComponent.
+ * Arquivo de teste do componente #MODULO_CAP#EditarComponent.
  *
  * @author Márcio Casale de Souza <contato@kazale.com>
  * @since 0.0.3
  */
 
-import { TestBed, ComponentFixture } from '@angular/core/testing';
+/*#import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { TransfermarketCadastrarComponent } from './';
-import { TransfermarketService } from '../';
+import { #MODULO_CAP#EditarComponent } from './';
+import { #MODULO_CAP#Service } from '../';
 import { 
 	RouterLinkStubDirective,
 	ActivatedRouteStub,
 	RouterStubService
 } from '../../';
 
-describe('TransfermarketCadastrar', () => {
+describe('#MODULO_CAP#Editar', () => {
 
-  let fixture: ComponentFixture<TransfermarketCadastrarComponent>;
+  let fixture: ComponentFixture<#MODULO_CAP#EditarComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({ 
@@ -27,11 +27,11 @@ describe('TransfermarketCadastrar', () => {
     		FormsModule
     	],
     	declarations: [ 
-    		TransfermarketCadastrarComponent,
+    		#MODULO_CAP#EditarComponent,
     		RouterLinkStubDirective
     	],
     	providers:    [
-    	  TransfermarketService,
+    	  #MODULO_CAP#Service,
     	  { 
     	  	provide: ActivatedRoute, 
     	  	useValue: new ActivatedRouteStub() 
@@ -43,7 +43,7 @@ describe('TransfermarketCadastrar', () => {
     	]
     });
 
-    fixture = TestBed.createComponent(TransfermarketCadastrarComponent);
+    fixture = TestBed.createComponent(#MODULO_CAP#EditarComponent);
   });
 
   it('deve garantir que o componente tenha sido criado', () => {
@@ -51,3 +51,4 @@ describe('TransfermarketCadastrar', () => {
   });
   
 });
+#*/

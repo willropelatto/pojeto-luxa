@@ -31,6 +31,10 @@ import { SharedModule } from '../shared';
 	],
 	providers: [
 		PlayerService
+	],
+	exports: [
+		PlayerCadastrarComponent
 	]
+
 })
 export class PlayerModule {}

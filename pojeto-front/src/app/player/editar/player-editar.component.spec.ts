@@ -1,5 +1,5 @@
 /**
- * Arquivo de teste do componente TransfermarketEditarComponent.
+ * Arquivo de teste do componente PlayerEditarComponent.
  *
  * @author Márcio Casale de Souza <contato@kazale.com>
  * @since 0.0.3
@@ -9,17 +9,17 @@ import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { TransfermarketEditarComponent } from './';
-import { TransfermarketService } from '../';
+import { PlayerEditarComponent } from './';
+import { PlayerService } from '../';
 import { 
 	RouterLinkStubDirective,
 	ActivatedRouteStub,
 	RouterStubService
 } from '../../';
 
-describe('TransfermarketEditar', () => {
+describe('PlayerEditar', () => {
 
-  let fixture: ComponentFixture<TransfermarketEditarComponent>;
+  let fixture: ComponentFixture<PlayerEditarComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({ 
@@ -27,11 +27,11 @@ describe('TransfermarketEditar', () => {
     		FormsModule
     	],
     	declarations: [ 
-    		TransfermarketEditarComponent,
+    		PlayerEditarComponent,
     		RouterLinkStubDirective
     	],
     	providers:    [
-    	  TransfermarketService,
+    	  PlayerService,
     	  { 
     	  	provide: ActivatedRoute, 
     	  	useValue: new ActivatedRouteStub() 
@@ -43,7 +43,7 @@ describe('TransfermarketEditar', () => {
     	]
     });
 
-    fixture = TestBed.createComponent(TransfermarketEditarComponent);
+    fixture = TestBed.createComponent(PlayerEditarComponent);
   });
 
   it('deve garantir que o componente tenha sido criado', () => {

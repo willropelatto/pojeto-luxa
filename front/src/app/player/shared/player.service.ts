@@ -13,6 +13,10 @@ import { Player } from './player.model';
 @Injectable()
 export class PlayerService {
 
+	constructor(){
+		console.log('chamada');
+	}
+
 	/**
 	 * Retorna listagem de todos os players.
 	 *

@@ -1,36 +1,32 @@
 /**
- * Arquivo de teste do componente TransfermarketListarComponent.
+ * Arquivo de teste do componente #MODULO_CAP#VisualizarComponent.
  *
  * @author Márcio Casale de Souza <contato@kazale.com>
  * @since 0.0.3
  */
 
-import { TestBed, ComponentFixture } from '@angular/core/testing';
+/*#import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 
-import { TransfermarketListarComponent } from './';
-import { TransfermarketService } from '../';
+import { #MODULO_CAP#VisualizarComponent } from './';
+import { #MODULO_CAP#Service } from '../';
 import { 
-	ModalUtilComponent, 
-	KzPaginacaoComponent,
 	RouterLinkStubDirective,
 	ActivatedRouteStub
 } from '../../';
 
-describe('TransfermarketListar', () => {
+describe('#MODULO_CAP#Visualizar', () => {
 
-  let fixture: ComponentFixture<TransfermarketListarComponent>;
+  let fixture: ComponentFixture<#MODULO_CAP#VisualizarComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({ 
     	declarations: [ 
-    		TransfermarketListarComponent,
-    		ModalUtilComponent,
-    		KzPaginacaoComponent,
+    		#MODULO_CAP#VisualizarComponent,
     		RouterLinkStubDirective
     	],
     	providers:    [
-    	  TransfermarketService,
+    	  #MODULO_CAP#Service,
     	  { 
     	  	provide: ActivatedRoute, 
     	  	useValue: new ActivatedRouteStub() 
@@ -38,7 +34,7 @@ describe('TransfermarketListar', () => {
     	]
     });
 
-    fixture = TestBed.createComponent(TransfermarketListarComponent);
+    fixture = TestBed.createComponent(#MODULO_CAP#VisualizarComponent);
   });
 
   it('deve garantir que o componente tenha sido criado', () => {
@@ -46,3 +42,4 @@ describe('TransfermarketListar', () => {
   });
   
 });
+#*/

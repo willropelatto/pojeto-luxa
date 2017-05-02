@@ -79,6 +79,17 @@ export class BidinfoService {
 		return new Bidinfo();
 	}
 
+	buscarPorIdPlayer(id: number):Bidinfo {
+		var bidinfos:Bidinfo[] = this.listarTodos();
+		for (let bidinfo of bidinfos) {
+			if (bidinfo.playerId == id) {
+				return bidinfo;
+			}
+		}
+
+		return null;
+	}
+
 	/**
 	 * Atualiza os dados de um bidinfo.
 	 *

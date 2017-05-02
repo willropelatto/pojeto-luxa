@@ -17,7 +17,7 @@ import { HttpUtilService } from '../../util';
 
 
 @Injectable()
-export class PlayerService {
+export class PlayerServicess {
 
 	private path = 'player/getPlayerFromLeague/13';
 	private msgErro:string;

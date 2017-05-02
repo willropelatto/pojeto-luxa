@@ -5,30 +5,43 @@
  * @since 0.0.3
  */
 
-import { Component, OnInit, OnDestroy } from '@angular/core';
+
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { Transfermarket, TransfermarketService } from '../shared';
 import { KzPaginacaoComponent } from '../../shared';
 
-import { Player } from '../../player';
+import { Player, PlayerService } from '../../player';
 
-import { Subscription } from 'rxjs/Subscription';
+import { Bidinfo, BidinfoService } from '../../bidinfo';
+
+import { Inject } from '@angular/core';
+
+import {Observable} from 'rxjs/Rx';
+
 
 @Component({
 	selector: 'kz-transfermarket-listar',
 	templateUrl: './transfermarket-listar.component.html',
 	styleUrls: ['./transfermarket-listar.component.css']
 })
+
+
 export class TransfermarketListarComponent implements OnInit {
 
-	private players: Player[];
-	private subscription: Subscription;
 
+	ticks =20;
 	private transfermarkets: Transfermarket[];
 	private idExcluir: number;
 	private pagina: number;
 	private totalRegistros: number;
+	private players: Player[];
+	private playerService : PlayerService;
+	private bidinfoService : BidinfoService;
+	private playerId: number;
+	private bid : Bidinfo;
+	
 
 	/**
 	 * Construtor.
@@ -36,33 +49,31 @@ export class TransfermarketListarComponent implements OnInit {
 	 * @param TransfermarketService transfermarketService
 	 */
 	constructor(private transfermarketService: TransfermarketService,
-		private route: ActivatedRoute) {
+				_playerService: PlayerService,
+				_bidinfoService: BidinfoService,
+				private route: ActivatedRoute) {
+		this.playerService = _playerService;
+		this.bidinfoService = _bidinfoService;
+
+					
+	}
+
+	getPlayers(): Player[]{
+		return [];
 	}
 
 	/**
 	 * Método executado logo após a criação do componente.
 	 */
 	ngOnInit() {
-		this.players = this.transfermarketService.getPlayers();
-		this.subscription = this.transfermarketService.playersChanged
-			.subscribe(
-				(players: Player[]) => {
-					this.players = players;
-				}
-			);
+//		this.totalRegistros = this.transfermarketService.totalRegistros();
+//		this.pagina = +this.route.snapshot.queryParams['pagina'] || KzPaginacaoComponent.PAG_PADRAO;
+		this.players = this.playerService.listarTodos();
+		this.bid = new Bidinfo();
+		this.transfermarkets = this.transfermarketService.listarTodos();
+		let timer = Observable.timer(1000,2000);
+    	timer.subscribe(t=>this.ticks = t);
 	}
-
-	onEditItem(index: number){
-		this.transfermarketService.startedEditing.next(index);
-	}
-	ngOnDestroy(){
-		this.subscription.unsubscribe();
-	}
-		//this.totalRegistros = this.transfermarketService.totalRegistros();
-		//this.pagina = +this.route.snapshot.queryParams['pagina'] || KzPaginacaoComponent.PAG_PADRAO;
-		//this.transfermarkets = this.transfermarketService.listarParcial(
-		//	--this.pagina, KzPaginacaoComponent.TOTAL_PAGS_PADRAO);
-	//}
 
 	/**
 	 * Método responsável por armazenar o id do transfermarket a 
@@ -74,9 +85,27 @@ export class TransfermarketListarComponent implements OnInit {
  		this.idExcluir = id;
  	}
 
- 	/**
-	 * Método responsável por remover um transfermarket.
-	 */
+	onBid(transferMarket: Transfermarket){
+		console.log(transferMarket);
+		let bidInfo = new Bidinfo();
+
+		
+
+		bidInfo.id = new Date().getTime();
+		bidInfo.bidValue = transferMarket.bidValue;
+		bidInfo.originalValue = transferMarket.originalValue;
+		bidInfo.teamId = transferMarket.teamId;
+		bidInfo.playerId = transferMarket.idPlayer;
+
+		if (transferMarket.idBid == 0) { 
+			this.bidinfoService.cadastrar(bidInfo)
+		}else {
+			bidInfo.id = transferMarket.idBid;
+			this.bidinfoService.atualizar(bidInfo.id,bidInfo);
+		}
+	}
+
+
  	onExcluir() {
  		this.transfermarketService.excluir(this.idExcluir);
  		location.reload();
@@ -87,10 +116,10 @@ export class TransfermarketListarComponent implements OnInit {
  	 *
  	 * @param any $event Número da página atual.
  	 */
- 	paginar($event: any) {
+ 	/*paginar($event: any) {
 		this.pagina = $event - 1;
 		this.totalRegistros = this.transfermarketService.totalRegistros();
 		this.transfermarkets = this.transfermarketService.listarParcial(
 			this.pagina, KzPaginacaoComponent.TOTAL_PAGS_PADRAO);
-	}
+	}*/
 }
