@@ -1,8 +1,8 @@
 /**
  * Arquivo de configuração de rotas.
  *
- * @author Márcio Casale de Souza <contato@kazale.com>
- * @since 0.0.3
+ * @author Pojeto
+ * @since 0.0.0
  */
 
 /*#import { Routes } from '@angular/router'; 

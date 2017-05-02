@@ -17,13 +17,15 @@ import { BidinfoRoutes } from './bidinfo';
 
 import { TransfermarketRoutes } from './transfermarket';
 
+import { UserRoutes } from './user';
 
 export const routes: Routes = [
   ...PlayerRoutes,
   ...LeagueRoutes,
   ...TeamRoutes,
   ...BidinfoRoutes,
-  ...TransfermarketRoutes
+  ...TransfermarketRoutes,
+  ...UserRoutes
 ];
 
 @NgModule({

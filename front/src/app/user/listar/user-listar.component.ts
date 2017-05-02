@@ -1,52 +1,57 @@
 /**
- * Componente de listagem de teams.
+ * Componente de listagem de users.
  *
- * @author Márcio Casale de Souza <contato@kazale.com>
- * @since 0.0.3
+ * @author Pojeto
+ * @since 0.0.0
  */
 
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { Team, TeamService } from '../shared';
-import { KzPaginacaoComponent } from '../../shared';
+import { User, UserService } from '../shared';
 
 @Component({
-	selector: 'kz-team-listar',
-	templateUrl: './team-listar.component.html',
-	styleUrls: ['./team-listar.component.css']
+	selector: 'pojeto-user-listar',
+	templateUrl: './user-listar.component.html',
+	styleUrls: ['./user-listar.component.css']
 })
-export class TeamListarComponent implements OnInit {
+export class UserListarComponent implements OnInit {
 
 	public page: number = 1;
 	public itemsPerPage: number = 10;
 	public maxSize: number = 5;
 	public numPages: number = 10;
 	public length: number = 0;
+	private data: Array<any>;
 
-	constructor(private teamService: TeamService,
+	private users: User[];
+	private idExcluir: number;
+	private pagina: number;
+	private totalRegistros: number;
+
+	/**
+	 * Construtor.
+	 *
+	 * @param UserService userService
+	 */
+	constructor(private userService: UserService,
 		private route: ActivatedRoute) {
-	//	this.length = this.data.length;
 	}
+
 
 	public rows: Array<any> = [];
 	public columns: Array<any> = [
-
-		           /* <td>{{ team.id }}</td>
-            <td>{{ team.name }}</td>
-            <td>{{ team.luxa }}</td>   */
 		{
 			title: 'Nome',
 			name: 'name',
 			filtering: { filterString: '', placeholder: 'Filtrar por nome' }
 		},
 		{
-			title: 'Técnico',
-			name: 'luxa',
+			title: 'Id',
+			name: 'id',
 			sort: false,
-			filtering: { filterString: '', placeholder: 'Filtrar por Técnico' }
-		}
-		
+			filtering: { filterString: '', placeholder: 'Filtrar id' }
+		}		
 	];
 
 
@@ -57,35 +62,11 @@ export class TeamListarComponent implements OnInit {
 		className: ['table-striped', 'table-bordered']
 	}
 
-	private teams: Team[];
-	private idExcluir: number;
-	private pagina: number;
-	private totalRegistros: number;
-
-	/**
-	 * Construtor.
-	 *
-	 * @param TeamService teamService
-	 */
-
-
-	private data: Array<any>;
-
-
-
-
-
 	/**
 	 * Método executado logo após a criação do componente.
 	 */
 	ngOnInit(): void {
 		this.onChangeTable(this.config);
-
-
-		//this.totalRegistros = this.teamService.totalRegistros();
-		//this.pagina = +this.route.snapshot.queryParams['pagina'] || KzPaginacaoComponent.PAG_PADRAO;
-		//this.teams = this.teamService.listarParcial(
-		//	--this.pagina, KzPaginacaoComponent.TOTAL_PAGS_PADRAO);
 	}
 
 	public changePage(page: any, data: Array<any> = this.data): Array<any> {
@@ -162,6 +143,7 @@ export class TeamListarComponent implements OnInit {
 		return filteredData;
 	}
 
+
 	public onChangeTable(config: any, page: any = { page: this.page, itemsPerPage: this.itemsPerPage }): any {
 		if (config.filtering) {
 			Object.assign(this.config.filtering, config.filtering);
@@ -171,46 +153,35 @@ export class TeamListarComponent implements OnInit {
 			Object.assign(this.config.sorting, config.sorting);
 		}
 
-		this.data = this.teamService.listarTodos();
-		//this.length = this.data.length;
+		this.data = this.userService.listarTodos();
+		this.length = this.data.length;
 		let filteredData = this.changeFilter(this.data, this.config);
 		let sortedData = this.changeSort(filteredData, this.config);
 		this.rows = page && config.paging ? this.changePage(page, sortedData) : sortedData;
-		//this.length = sortedData.length;
+		this.length = sortedData.length;
 	}
 
 	public onCellClick(data: any): any {
 		console.log(data);
 	}
 
-
 	/**
-	 * Método responsável por armazenar o id do team a 
+	 * Método responsável por armazenar o id do user a 
 	 * removido.
 	 *
 	 * @param number id
 	 */
-	//excluir(id: number) {
-	//	this.idExcluir = id;
-//	}
+	excluir(id: number) {
+ 		this.idExcluir = id;
+ 	}
 
-	/**
-   * Método responsável por remover um team.
-   */
-//	onExcluir() {
-//		this.teamService.excluir(this.idExcluir);
-//		location.reload();
-//	}
-
-	/**
-	 * Método responsável pela paginação.
-	 *
-	 * @param any $event Número da página atual.
+ 	/**
+	 * Método responsável por remover um user.
 	 */
-//	paginar($event: any) {
-//		this.pagina = $event - 1;
-//		this.totalRegistros = this.teamService.totalRegistros();
-//		this.teams = this.teamService.listarParcial(
-//			this.pagina, KzPaginacaoComponent.TOTAL_PAGS_PADRAO);
-//	}
+ 	onExcluir() {
+ 		this.userService.excluir(this.idExcluir);
+ 		location.reload();
+ 	}
+
+ 	
 }

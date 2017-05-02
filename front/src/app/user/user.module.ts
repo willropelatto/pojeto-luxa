@@ -1,8 +1,8 @@
 /**
  * Arquivo de configuração do módulo.
  *
- * @author Márcio Casale de Souza <contato@kazale.com>
- * @since 0.0.3
+ * @author Pojeto
+ * @since 0.0.0
  */
 
 import { NgModule } from '@angular/core';
@@ -19,13 +19,12 @@ import { Ng2TableModule } from 'ng2-table/ng2-table';
 
 import { Ng2BootstrapModule} from 'ngx-bootstrap';
 
-
 import { 
-	LeagueCadastrarComponent,
-	LeagueEditarComponent,
-	LeagueListarComponent,
-	LeagueVisualizarComponent,
-	LeagueService
+	UserCadastrarComponent,
+	UserEditarComponent,
+	UserListarComponent,
+	UserVisualizarComponent,
+	UserService
 } from './';
 
 import { SharedModule } from '../shared';
@@ -41,13 +40,13 @@ import { SharedModule } from '../shared';
 		Ng2BootstrapModule
 	],
 	declarations: [
-		LeagueCadastrarComponent,
-		LeagueEditarComponent,
-		LeagueListarComponent,
-		LeagueVisualizarComponent
+		UserCadastrarComponent,
+		UserEditarComponent,
+		UserListarComponent,
+		UserVisualizarComponent
 	],
 	providers: [
-		LeagueService
+		UserService
 	]
 })
-export class LeagueModule {}
+export class UserModule {}

@@ -1,5 +1,5 @@
 /**
- * Arquivo de teste do componente TeamListarComponent.
+ * Arquivo de teste do componente UserVisualizarComponent.
  *
  * @author Márcio Casale de Souza <contato@kazale.com>
  * @since 0.0.3
@@ -8,29 +8,25 @@
 import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 
-import { TeamListarComponent } from './';
-import { TeamService } from '../';
+import { UserVisualizarComponent } from './';
+import { UserService } from '../';
 import { 
-	ModalUtilComponent, 
-	KzPaginacaoComponent,
 	RouterLinkStubDirective,
 	ActivatedRouteStub
 } from '../../';
 
-describe('TeamListar', () => {
+describe('UserVisualizar', () => {
 
-  let fixture: ComponentFixture<TeamListarComponent>;
+  let fixture: ComponentFixture<UserVisualizarComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({ 
     	declarations: [ 
-    		TeamListarComponent,
-    		ModalUtilComponent,
-    		KzPaginacaoComponent,
+    		UserVisualizarComponent,
     		RouterLinkStubDirective
     	],
     	providers:    [
-    	  TeamService,
+    	  UserService,
     	  { 
     	  	provide: ActivatedRoute, 
     	  	useValue: new ActivatedRouteStub() 
@@ -38,7 +34,7 @@ describe('TeamListar', () => {
     	]
     });
 
-    fixture = TestBed.createComponent(TeamListarComponent);
+    fixture = TestBed.createComponent(UserVisualizarComponent);
   });
 
   it('deve garantir que o componente tenha sido criado', () => {

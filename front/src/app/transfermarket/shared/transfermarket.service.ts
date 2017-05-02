@@ -30,22 +30,32 @@ export class TransfermarketService {
 	 * @return Transfermarket[] transfermarkets
 	 */
 
+	bidValue(rating: number): number{
+		let bidvalue : number;
+		if (rating >= 90){
+			bidvalue = 5000;			
+		} else if (rating >= 86){
+			bidvalue = 2500;
+		} else if (rating >= 81 ){
+			bidvalue = 1500;
+		} else if (rating >= 76 ){
+			bidvalue = 600;
+		} else if(rating >= 71){
+			bidvalue = 500;
+		} else if (rating >= 61){
+			bidvalue = 300;
+		} else {
+			bidvalue = 200;
+		}
+
+		return bidvalue;
+	}
+
 
 	listarTodos(): Transfermarket[] {
 
 		let players : Player[] = this.playerService.listarTodos(); 
 		let shops : Transfermarket[] = [];
-
-
-		/*public idPlayer?: number,
-		public name?: string,
-		public position?: string,
-		public rating?: number,
-		public idBid?: number,
-		public bidValue?: number,
-		public teamId?: number,
-		public originalValue?: number,
-		public bidAproved?: boolean){}	*/
 
 		for (let player of players) {
 			let bidInfo: Bidinfo = new Bidinfo();
@@ -60,14 +70,13 @@ export class TransfermarketService {
 			if (bidInfo){
 				//console.log(bidInfo);
 				shop.idBid = bidInfo.id;
-				shop.bidValue = bidInfo.bidValue * 1.5;
 				shop.originalValue = bidInfo.originalValue;
 				shop.bidAproved = bidInfo.bidAproved;
 				shop.teamId = bidInfo.teamId;
 			}else{
 				shop.idBid = 0;
-				shop.bidValue = player.rating * 2;
-				shop.originalValue = player.rating;
+				shop.bidValue =  this.bidValue(player.rating);
+				shop.originalValue = this.bidValue(player.rating);
 				shop.bidAproved = true;
 				shop.teamId = 1;
 			}

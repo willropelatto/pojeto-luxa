@@ -1,8 +1,8 @@
 /**
  * Componente de cadastro de #MODULO_PLURAL#.
  *
- * @author Márcio Casale de Souza <contato@kazale.com>
- * @since 0.0.3
+ * @author Pojeto
+ * @since 0.0.0
  */
 
 /*#import { Component } from '@angular/core';

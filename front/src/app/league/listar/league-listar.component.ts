@@ -24,9 +24,13 @@ export class LeagueListarComponent implements OnInit {
 	public numPages: number = 10;
 	public length: number = 0;
 
+	private leagues: League[];
+	private idExcluir: number;
+	private pagina: number;
+	private totalRegistros: number;
+
 	constructor(private leagueService: LeagueService,
 		private route: ActivatedRoute) {
-	//	this.length = this.data.length;
 	}
 
 	public rows: Array<any> = [];
@@ -58,16 +62,19 @@ export class LeagueListarComponent implements OnInit {
 		className: ['table-striped', 'table-bordered']
 	}
 
-	private leagues: League[];
-	private idExcluir: number;
-	private pagina: number;
-	private totalRegistros: number;
+
 
 	/**
 	 * Construtor.
 	 *
 	 * @param LeagueService leagueService
 	 */
+	/**
+	 * Método executado logo após a criação do componente.
+	 */
+	ngOnInit(): void {
+		this.onChangeTable(this.config);
+	}
 
 
 	private data: Array<any>;
@@ -76,18 +83,7 @@ export class LeagueListarComponent implements OnInit {
 
 
 
-	/**
-	 * Método executado logo após a criação do componente.
-	 */
-	ngOnInit(): void {
-		this.onChangeTable(this.config);
 
-
-		//this.totalRegistros = this.leagueService.totalRegistros();
-		//this.pagina = +this.route.snapshot.queryParams['pagina'] || KzPaginacaoComponent.PAG_PADRAO;
-		//this.leagues = this.leagueService.listarParcial(
-		//	--this.pagina, KzPaginacaoComponent.TOTAL_PAGS_PADRAO);
-	}
 
 	public changePage(page: any, data: Array<any> = this.data): Array<any> {
 		let start = (page.page - 1) * page.itemsPerPage;
