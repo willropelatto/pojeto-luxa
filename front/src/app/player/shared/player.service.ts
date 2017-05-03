@@ -1,7 +1,7 @@
 /**
  * Serviço de gerenciamento de players.
  *
- * @author Márcio Casale de Souza <contato@kazale.com>
+ * @author Pojeto
  * @since 0.0.3
  */
  
@@ -9,12 +9,21 @@ import { Injectable } from '@angular/core';
 
 import { Player } from './player.model';
 
+import { Http, Response } from '@angular/http';
+
+import { Observable } from 'rxjs/Observable';
+
+import { HttpUtilService } from '../../util';
+
 
 @Injectable()
 export class PlayerService {
 
-	constructor(){
-		console.log('chamada');
+	private path = 'player/listPlayer/53';
+	private msgErro:string;
+	private players: Player[];
+
+	constructor(private http: Http, private httpUtil: HttpUtilService) {
 	}
 
 	/**
@@ -22,9 +31,11 @@ export class PlayerService {
 	 *
 	 * @return Player[] players
 	 */
-	listarTodos(): Player[] {
-		var players:string = sessionStorage['players'];
-		return players ? JSON.parse(players) : [];
+	listarTodos(): Observable<Player[]> {
+
+		return this.http.get(this.httpUtil.url(this.path), this.httpUtil.headers())
+	                .map(this.httpUtil.extrairDados)
+	                .catch(this.httpUtil.processarErros);
 	}
 
 	/**
@@ -32,11 +43,15 @@ export class PlayerService {
 	 *
 	 * @param Player player
 	 */
-	cadastrar(player: Player): void {
-		var players:Player[] = this.listarTodos();
-		players.push(player);
-		sessionStorage['players'] = JSON.stringify(players);
+	cadastrar(player: Player): Observable<Player> {
+		let params = JSON.stringify(player);
+
+    	return this.http.post(this.httpUtil.url(this.path), params,
+    					this.httpUtil.headers())
+      				.map(this.httpUtil.extrairDados)
+	                .catch(this.httpUtil.processarErros);
 	}
+
 
 	/**
 	 * Retorna os dados de um player por id.
@@ -44,15 +59,11 @@ export class PlayerService {
 	 * @param number id
 	 * @return Usuario player
 	 */
-	buscarPorId(id: number):Player {
-		var players:Player[] = this.listarTodos();
-		for (let player of players) {
-			if (player.id == id) {
-				return player;
-			}
-		}
-
-		return new Player();
+	buscarPorId(id: number): Observable<Player> {
+		return this.http.get(this.httpUtil.url(this.path + '/' + id),
+						this.httpUtil.headers())
+	                .map(this.httpUtil.extrairDados)
+	                .catch(this.httpUtil.processarErros);
 	}
 
 	/**
@@ -61,33 +72,26 @@ export class PlayerService {
 	 * @param number id
 	 * @param Player player
 	 */
-	atualizar(id: number, player: Player): void {
-		var players:Player[] = this.listarTodos();
-		for (var i=0; i<players.length; i++) {
-			if (players[i].id == id) {
-				players[i] = player;
-			}
-		}
 
-		sessionStorage['players'] = JSON.stringify(players);
+	atualizar(player: Player) {
+		let params = JSON.stringify(player);
+
+    	return this.http.put(this.httpUtil.url(this.path), params,
+    					this.httpUtil.headers())
+      				.map(this.httpUtil.extrairDados)
+	                .catch(this.httpUtil.processarErros);
 	}
-
 	/**
 	 * Remove um player.
 	 *
 	 * @param number id
 	 */
-	excluir(id: number): void {
-		var players:Player[] = this.listarTodos();
-		var playersFinal:Player[] = [];
+	excluir(id: number) {
 
-		for (let player of players) {
-			if (player.id != id) {
-				playersFinal.push(player);
-			}
-		}
-
-		sessionStorage['players'] = JSON.stringify(playersFinal);
+		return this.http.delete(this.httpUtil.url(this.path + '/' + id),
+						this.httpUtil.headers())
+	                .map(this.httpUtil.extrairDados)
+	                .catch(this.httpUtil.processarErros);
 	}
 
 	/**
@@ -98,16 +102,19 @@ export class PlayerService {
 	 * @return Player[] players
 	 */
 	listarParcial(pagina: number, qtdPorPagina: number): Player[] {
-		let storage: string = sessionStorage['players'];
-		let players: Player[] = storage ? JSON.parse(storage) : [];
+		
+		this.listarTodos()
+					.subscribe(players => this.players = players,
+                				error  => this.msgErro = error);
+			
 
 		let playersParcial: Player[] = [];
-		for (let i = ( pagina * qtdPorPagina ); i < (pagina * qtdPorPagina + qtdPorPagina); i++) {
-			if (i >= players.length) {
+	/*	for (let i = ( pagina * qtdPorPagina ); i < (pagina * qtdPorPagina + qtdPorPagina); i++) {
+			if (i >= this.players.length) {
 				break;
 			}
-			playersParcial.push(players[i]);
-		}
+			playersParcial.push(this.players[i]);
+		}*/
 
 		return playersParcial;
 	}
@@ -118,6 +125,9 @@ export class PlayerService {
 	 * @return number total de registros
 	 */
 	totalRegistros(): number {
-		return this.listarTodos().length;
+		this.listarTodos()
+					.subscribe(players => this.players = players,
+                				error  => this.msgErro = error);
+		return 100;
 	}
 }

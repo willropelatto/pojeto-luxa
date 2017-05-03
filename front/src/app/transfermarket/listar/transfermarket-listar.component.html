@@ -1,18 +1,27 @@
-<div class="row">
-  <div *ngFor="let transfermarket of transfermarkets" class="col-sm-3 col-md-3">
-    <div class="thumbnail">
-      <div class="caption text-center">
-        <h2>{{transfermarket.name}} <span class="badge">{{transfermarket.position}}</span></h2>
-          <ul class="list-group">
-            <li class="list-group-item">Rating <span class="badge">{{transfermarket.rating}}</span></li>
-            <li class="list-group-item">Preço Lance <span class="badge">{{transfermarket.bidValue}}</span></li>
-            <li class="list-group-item">Preço Inicial <span class="badge">{{transfermarket.originalValue}}</span></li>
-            <li class="list-group-item"><button class="btn btn-success" (click)="onBid(transfermarket)" >Dar Lance</button></li>
-            <li class="list-group-item">{{ticks}}</li>
 
-        </ul>
-      </div>
-    </div>
-  </div>
+<h1>Listagem de Jogadores</h1>
+
+<div>
+    <table class="table table-striped">
+        <tr>
+            <th>Nome</th>
+            <th>Posição</th>
+            <th>Rating</th>
+            <th>Preço Lance</th>
+            <th>Preço Inicial</th>
+            <th>Tempo</th>  
+            <th>Lance</th>       
+
+        </tr>
+        <tr *ngFor="let transfermarket of transfermarkets">
+            <td>{{transfermarket.name}}</td>
+            <td>{{transfermarket.position}}</td>
+             <td>{{transfermarket.rating}}</td>
+            <td>{{transfermarket.bidValue}}</td>  
+            <td>{{transfermarket.originalValue}}</td>  
+            <td>{{ticks}}</td>  
+            <td><button class="btn btn-success" (click)="onBid(transfermarket)" >Dar Lance</button></td>  
+        </tr>
+    </table>
+
 </div>
-
