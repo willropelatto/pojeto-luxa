@@ -14,6 +14,8 @@ import { PlayerModule} from './player';
 import { LeagueModule} from './league';
 import { TeamModule } from './team';
 
+import { UserModule } from './user';
+
 import { TransfermarketModule } from './transfermarket';
 
 import { BidinfoModule } from './bidinfo';
@@ -25,8 +27,6 @@ import { HttpUtilService } from './util';
 import { PaginationModule } from 'ngx-bootstrap';
 import { TabsModule } from 'ngx-bootstrap';
 
-import { Ng2SmartTableModule, LocalDataSource } from 'ng2-smart-table';
-
 @NgModule({
   imports:      [
     BrowserModule,
@@ -36,10 +36,10 @@ import { Ng2SmartTableModule, LocalDataSource } from 'ng2-smart-table';
     TeamModule,
     TransfermarketModule,
     BidinfoModule,
+    UserModule,
     HttpModule,
-    PaginationModule,
-		TabsModule,
-    Ng2SmartTableModule  
+    PaginationModule.forRoot(),
+		TabsModule.forRoot()    
   ],
   declarations: [ 
     AppComponent
