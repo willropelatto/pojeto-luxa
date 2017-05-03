@@ -13,6 +13,9 @@ import { Component } from '@angular/core';
           <li><a routerLink="/">Inicial</a></li>
           <li><a routerLink="/players">Jogadores</a></li>
           <li><a routerLink="/leagues">Ligas</a></li>
+          <li><a routerLink="/teams">Times</a></li>
+          <li><a routerLink="/transfermarkets">Mercado</a></li>
+          <li><a routerLink="/bidinfos">Lances</a></li>          
         </ul>
       </div>
     </div>

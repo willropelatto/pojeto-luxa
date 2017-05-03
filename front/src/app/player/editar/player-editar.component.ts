@@ -49,7 +49,7 @@ export class PlayerEditarComponent implements OnInit {
 	 * Método responsável por atualizar os dados de um player.
 	 */
 	atualizar() {
-		this.playerService.atualizar(this.id, this.player);
+	//	this.playerService.atualizar(this.id, this.player);
 		this.router.navigate(['/players']);
 	}
 }

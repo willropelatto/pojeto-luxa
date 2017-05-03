@@ -6,8 +6,6 @@
             <th>Nome</th>
             <th>Posição</th>
             <th>Rating</th>
-            <th>Lance<th>
-            <th>Valor Inicial</th>
             <th class="text-right">
                 <a class="btn btn-success" 
                     [routerLink]="['/players/cadastrar']">
@@ -16,7 +14,7 @@
             </th>
         </tr>
         <tr *ngFor="let player of players">
-            <td>{{ player.nome }}</td>
+            <td>{{ player.name }}</td>
             <td>{{ player.position }}</td>
             <td>{{ player.rating }}</td>  
      <!--       <td><input readonly value="100" class="btn btn-default" ngDefaultControl [(ngModel)]="bidinfo.bidValue"/></td>     

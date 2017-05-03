@@ -36,7 +36,7 @@ export class TransfermarketListarComponent implements OnInit {
 	private idExcluir: number;
 	private pagina: number;
 	private totalRegistros: number;
-	private players: Player[];
+//	private players: Player[];
 	private playerService : PlayerService;
 	private bidinfoService : BidinfoService;
 	private playerId: number;
@@ -52,7 +52,7 @@ export class TransfermarketListarComponent implements OnInit {
 				_playerService: PlayerService,
 				_bidinfoService: BidinfoService,
 				private route: ActivatedRoute) {
-		this.playerService = _playerService;
+	//	this.playerService = _playerService;
 		this.bidinfoService = _bidinfoService;
 
 					
@@ -68,7 +68,7 @@ export class TransfermarketListarComponent implements OnInit {
 	ngOnInit() {
 //		this.totalRegistros = this.transfermarketService.totalRegistros();
 //		this.pagina = +this.route.snapshot.queryParams['pagina'] || KzPaginacaoComponent.PAG_PADRAO;
-		this.players = this.playerService.listarTodos();
+	//	this.players = this.playerService.listarTodos();
 		this.bid = new Bidinfo();
 		this.transfermarkets = this.transfermarketService.listarTodos();
 		let timer = Observable.timer(1000,2000);

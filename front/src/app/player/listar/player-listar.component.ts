@@ -48,14 +48,10 @@ export class PlayerListarComponent implements OnInit {
 	 */
 	ngOnInit() {
 		//this.playerService.listarTodos();
-		/*this.playerService.listarTodos()
+		console.log('entrou');
+		this.playerService.listarTodos()
 			.subscribe(players => this.players = players,
 						error => this.msgErro = error);
-		this.bidinfo = new Bidinfo();*/
-		this.totalRegistros = this.playerService.totalRegistros();
-		this.pagina = +this.route.snapshot.queryParams['pagina'] || KzPaginacaoComponent.PAG_PADRAO;
-		this.players = this.playerService.listarParcial(
-			--this.pagina, KzPaginacaoComponent.TOTAL_PAGS_PADRAO);
 			
 	}
 

@@ -16,12 +16,18 @@ import { Bidinfo, BidinfoService} from '../../bidinfo';
 @Injectable()
 export class TransfermarketService {
 
+
+	private players: Player[];
+	private msgErro:string;
 	private bidinfoService : BidinfoService;
 	private playerService : PlayerService;
 	constructor(_bidinfoService : BidinfoService,
 				_playerService: PlayerService){
 	  this.bidinfoService = _bidinfoService;
 	  this.playerService = _playerService;
+	  this.playerService.listarTodos()
+			.subscribe(players => this.players = players,
+						error => this.msgErro = error);
 	}
 
 	/**
@@ -30,24 +36,36 @@ export class TransfermarketService {
 	 * @return Transfermarket[] transfermarkets
 	 */
 
+	bid(rating: number): number{
+
+		let bidvalue = 0;
+
+		if (rating >= 90){
+			bidvalue = 5000;
+		}else if (rating >= 86){
+			bidvalue = 2500;
+		}else if (rating >= 81){
+			bidvalue = 1500;
+		}else if (rating >= 76){
+			bidvalue = 600;
+		}else if (rating >= 71){
+			bidvalue = 500;
+		}else if (rating >= 61){
+			bidvalue = 300;
+		}else {
+			bidvalue = 200;
+		}
+
+		return bidvalue;
+	}
+
 
 	listarTodos(): Transfermarket[] {
 
-		let players : Player[] = this.playerService.listarTodos(); 
+		let playerList : Player[] = this.players;
 		let shops : Transfermarket[] = [];
 
-
-		/*public idPlayer?: number,
-		public name?: string,
-		public position?: string,
-		public rating?: number,
-		public idBid?: number,
-		public bidValue?: number,
-		public teamId?: number,
-		public originalValue?: number,
-		public bidAproved?: boolean){}	*/
-
-		for (let player of players) {
+		for (let player of playerList) {
 			let bidInfo: Bidinfo = new Bidinfo();
 			let shop = new Transfermarket();
 			shop.name = player.name;
@@ -58,16 +76,15 @@ export class TransfermarketService {
 			bidInfo = this.bidinfoService.buscarPorIdPlayer(player.id);
 			console.log(bidInfo);
 			if (bidInfo){
-				//console.log(bidInfo);
 				shop.idBid = bidInfo.id;
-				shop.bidValue = bidInfo.bidValue * 1.5;
-				shop.originalValue = bidInfo.originalValue;
+				shop.bidValue = bidInfo.bidValue * 1.05;
+				shop.originalValue = this.bid(player.rating);
 				shop.bidAproved = bidInfo.bidAproved;
 				shop.teamId = bidInfo.teamId;
 			}else{
 				shop.idBid = 0;
-				shop.bidValue = player.rating * 2;
-				shop.originalValue = player.rating;
+				shop.bidValue =  this.bid(player.rating);
+				shop.originalValue = this.bid(player.rating);
 				shop.bidAproved = true;
 				shop.teamId = 1;
 			}

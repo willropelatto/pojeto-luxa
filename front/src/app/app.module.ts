@@ -25,7 +25,6 @@ import { HttpUtilService } from './util';
 import { PaginationModule } from 'ngx-bootstrap';
 import { TabsModule } from 'ngx-bootstrap';
 
-import { Ng2SmartTableModule, LocalDataSource } from 'ng2-smart-table';
 
 @NgModule({
   imports:      [
@@ -39,7 +38,6 @@ import { Ng2SmartTableModule, LocalDataSource } from 'ng2-smart-table';
     HttpModule,
     PaginationModule,
 		TabsModule,
-    Ng2SmartTableModule  
   ],
   declarations: [ 
     AppComponent

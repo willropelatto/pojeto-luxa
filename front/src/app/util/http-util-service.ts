@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class HttpUtilService {
 
-	private API_URL: string = 'http://nbbnu008771:3030/ApiVcEhSafado/rest/';
+	private API_URL: string = 'http://localhost:8585/pofexo/rest/';
 	
 
 	//http://localhost:3030/ApiVcEhSafado/rest/player/getAllPlayers 
