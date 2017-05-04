@@ -1,7 +1,7 @@
 /**
  * Serviço de gerenciamento de leagues.
  *
- * @author Márcio Casale de Souza <contato@kazale.com>
+ * @author Pojeto
  * @since 0.0.3
  */
  
@@ -9,17 +9,33 @@ import { Injectable } from '@angular/core';
 
 import { League } from './league.model';
 
+import { Http, Response } from '@angular/http';
+
+import { Observable } from 'rxjs/Observable';
+
+import { HttpUtilService } from '../../util';
+
+
 @Injectable()
 export class LeagueService {
+
+	private path = 'league/list/';
+	private msgErro:string;
+	private leagues: League[];
+
+	constructor(private http: Http, private httpUtil: HttpUtilService) {
+	}
 
 	/**
 	 * Retorna listagem de todos os leagues.
 	 *
 	 * @return League[] leagues
 	 */
-	listarTodos(): League[] {
-		var leagues:string = sessionStorage['leagues'];
-		return leagues ? JSON.parse(leagues) : [];
+	listarTodos(): Observable<League[]> {
+
+		return this.http.get(this.httpUtil.url(this.path), this.httpUtil.headers())
+	                .map(this.httpUtil.extrairDados)
+	                .catch(this.httpUtil.processarErros);
 	}
 
 	/**
@@ -27,11 +43,15 @@ export class LeagueService {
 	 *
 	 * @param League league
 	 */
-	cadastrar(league: League): void {
-		var leagues:League[] = this.listarTodos();
-		leagues.push(league);
-		sessionStorage['leagues'] = JSON.stringify(leagues);
+	cadastrar(league: League): Observable<League> {
+		let params = JSON.stringify(league);
+
+    	return this.http.post(this.httpUtil.url(this.path), params,
+    					this.httpUtil.headers())
+      				.map(this.httpUtil.extrairDados)
+	                .catch(this.httpUtil.processarErros);
 	}
+
 
 	/**
 	 * Retorna os dados de um league por id.
@@ -39,15 +59,11 @@ export class LeagueService {
 	 * @param number id
 	 * @return Usuario league
 	 */
-	buscarPorId(id: number):League {
-		var leagues:League[] = this.listarTodos();
-		for (let league of leagues) {
-			if (league.id == id) {
-				return league;
-			}
-		}
-
-		return new League();
+	buscarPorId(id: number): Observable<League> {
+		return this.http.get(this.httpUtil.url(this.path + '/' + id),
+						this.httpUtil.headers())
+	                .map(this.httpUtil.extrairDados)
+	                .catch(this.httpUtil.processarErros);
 	}
 
 	/**
@@ -56,33 +72,26 @@ export class LeagueService {
 	 * @param number id
 	 * @param League league
 	 */
-	atualizar(id: number, league: League): void {
-		var leagues:League[] = this.listarTodos();
-		for (var i=0; i<leagues.length; i++) {
-			if (leagues[i].id == id) {
-				leagues[i] = league;
-			}
-		}
 
-		sessionStorage['leagues'] = JSON.stringify(leagues);
+	atualizar(league: League) {
+		let params = JSON.stringify(league);
+
+    	return this.http.put(this.httpUtil.url(this.path), params,
+    					this.httpUtil.headers())
+      				.map(this.httpUtil.extrairDados)
+	                .catch(this.httpUtil.processarErros);
 	}
-
 	/**
 	 * Remove um league.
 	 *
 	 * @param number id
 	 */
-	excluir(id: number): void {
-		var leagues:League[] = this.listarTodos();
-		var leaguesFinal:League[] = [];
+	excluir(id: number) {
 
-		for (let league of leagues) {
-			if (league.id != id) {
-				leaguesFinal.push(league);
-			}
-		}
-
-		sessionStorage['leagues'] = JSON.stringify(leaguesFinal);
+		return this.http.delete(this.httpUtil.url(this.path + '/' + id),
+						this.httpUtil.headers())
+	                .map(this.httpUtil.extrairDados)
+	                .catch(this.httpUtil.processarErros);
 	}
 
 	/**
@@ -93,16 +102,19 @@ export class LeagueService {
 	 * @return League[] leagues
 	 */
 	listarParcial(pagina: number, qtdPorPagina: number): League[] {
-		let storage: string = sessionStorage['leagues'];
-		let leagues: League[] = storage ? JSON.parse(storage) : [];
+		
+		this.listarTodos()
+					.subscribe(leagues => this.leagues = leagues,
+                				error  => this.msgErro = error);
+			
 
 		let leaguesParcial: League[] = [];
-		for (let i = ( pagina * qtdPorPagina ); i < (pagina * qtdPorPagina + qtdPorPagina); i++) {
-			if (i >= leagues.length) {
+	/*	for (let i = ( pagina * qtdPorPagina ); i < (pagina * qtdPorPagina + qtdPorPagina); i++) {
+			if (i >= this.leagues.length) {
 				break;
 			}
-			leaguesParcial.push(leagues[i]);
-		}
+			leaguesParcial.push(this.leagues[i]);
+		}*/
 
 		return leaguesParcial;
 	}
@@ -113,6 +125,9 @@ export class LeagueService {
 	 * @return number total de registros
 	 */
 	totalRegistros(): number {
-		return this.listarTodos().length;
+		this.listarTodos()
+					.subscribe(leagues => this.leagues = leagues,
+                				error  => this.msgErro = error);
+		return 100;
 	}
 }

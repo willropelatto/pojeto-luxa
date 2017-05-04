@@ -1,0 +1,35 @@
+<div class="col-md-6 col-md-offset-3">
+    <h2>Registrar</h2>
+    <form name="form" (ngSubmit)="f.form.valid && register()" #f="ngForm" novalidate>
+        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !nome.valid }">
+            <label for="nome">Nome</label>
+            <input type="text" class="form-control" name="nome" [(ngModel)]="model.nome" #nome="ngModel" required />
+            <div *ngIf="f.submitted && !nome.valid" class="help-block">É obrigatório informar o nome</div>
+        </div>
+        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !nome.valid }">
+            <label for="sobrenome">Sobrenome</label>
+            <input type="text" class="form-control" name="sobrenome" [(ngModel)]="model.sobrenome" #sobrenome="ngModel" required />
+            <div *ngIf="f.submitted && !sobrenome.valid" class="help-block">É obrigatório informar o sobrenome</div>
+        </div>
+        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !nome.valid }">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" name="email" [(ngModel)]="model.email" #email="ngModel" required />
+            <div *ngIf="f.submitted && !email.valid" class="help-block">É obrigatório informar o email</div>
+        </div>
+        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !login.valid }">
+            <label for="login">Login</label>
+            <input type="text" class="form-control" name="login" [(ngModel)]="model.login" #login="ngModel" required />
+            <div *ngIf="f.submitted && !login.valid" class="help-block">É obrigatório informar um login</div>
+        </div>
+        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !senha.valid }">
+            <label for="senha">Senha</label>
+            <input type="password" class="form-control" name="senha" [(ngModel)]="model.senha" #senha="ngModel" required />
+            <div *ngIf="f.submitted && !senha.valid" class="help-block">É obrigatório informar uma senha</div>
+        </div>
+        <div class="form-group">
+            <button [disabled]="loading" class="btn btn-primary">Registrar</button>
+            <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+            <a [routerLink]="['/login']" class="btn btn-link">Cancelar</a>
+        </div>
+    </form>
+</div>

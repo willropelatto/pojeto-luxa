@@ -1,3 +1,5 @@
+import { RegisterComponent } from './user/cadastrar/user-cadastrar.component';
+import { LoginComponent } from './user/login/login.component';
 /**
  * Arquivo principal de rotas e navegação da aplicação.
  *
@@ -23,7 +25,9 @@ export const routes: Routes = [
   ...LeagueRoutes,
   ...TeamRoutes,
   ...BidinfoRoutes,
-  ...TransfermarketRoutes
+  ...TransfermarketRoutes,
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
 ];
 
 @NgModule({

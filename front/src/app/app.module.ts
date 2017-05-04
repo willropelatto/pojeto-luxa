@@ -1,3 +1,9 @@
+
+
+
+
+
+
 /**
  * Arquivo de módulo principal da aplicação.
  *
@@ -26,6 +32,16 @@ import { PaginationModule } from 'ngx-bootstrap';
 import { TabsModule } from 'ngx-bootstrap';
 
 
+import { AlertService } from './util/alert.service';
+import { AlertComponent } from './directives/alert.component';
+import { AuthenticationService } from './user/shared/authentication.service';
+import { AuthGuard } from './guards/auth.guard';
+import { LoginComponent } from './user/login/login.component';
+import { RegisterComponent } from './user/cadastrar/user-cadastrar.component';
+import { UserService } from './user/shared/user.service';
+import { FormsModule }   from '@angular/forms';
+
+
 @NgModule({
   imports:      [
     BrowserModule,
@@ -38,12 +54,20 @@ import { TabsModule } from 'ngx-bootstrap';
     HttpModule,
     PaginationModule,
 		TabsModule,
-  ],
+    FormsModule
+  ], 
   declarations: [ 
-    AppComponent
+    AppComponent,
+    AlertComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   providers: [
-		HttpUtilService    
+		HttpUtilService,
+    AuthGuard,
+    AuthenticationService,
+    UserService,
+    AlertService    
   ],
   bootstrap:    [ AppComponent ]
 })

@@ -23,6 +23,7 @@ export class LeagueListarComponent implements OnInit {
 	public maxSize: number = 5;
 	public numPages: number = 10;
 	public length: number = 0;
+	private msgErro:string;
 
 	constructor(private leagueService: LeagueService,
 		private route: ActivatedRoute) {
@@ -45,7 +46,7 @@ export class LeagueListarComponent implements OnInit {
 		{
 			title: 'Nome Abragente',
 			name: 'abbrName',
-			filtering: { filterString: '', placeholder: 'Filtrar por Nome Abragente' }
+			filtering: { filterString: '', placeholder: 'Filtrar por Nome Abreviado' }
 
 		}
 	];
@@ -72,21 +73,12 @@ export class LeagueListarComponent implements OnInit {
 
 	private data: Array<any>;
 
-
-
-
-
 	/**
 	 * Método executado logo após a criação do componente.
 	 */
 	ngOnInit(): void {
 		this.onChangeTable(this.config);
 
-
-		//this.totalRegistros = this.leagueService.totalRegistros();
-		//this.pagina = +this.route.snapshot.queryParams['pagina'] || KzPaginacaoComponent.PAG_PADRAO;
-		//this.leagues = this.leagueService.listarParcial(
-		//	--this.pagina, KzPaginacaoComponent.TOTAL_PAGS_PADRAO);
 	}
 
 	public changePage(page: any, data: Array<any> = this.data): Array<any> {
@@ -172,7 +164,11 @@ export class LeagueListarComponent implements OnInit {
 			Object.assign(this.config.sorting, config.sorting);
 		}
 
-		this.data = this.leagueService.listarTodos();
+		this.leagueService.listarTodos()
+			.subscribe(leagues => this.data = leagues,
+						error => this.msgErro = error);		
+
+		//this.data = this.leagueService.listarTodos();
 		//this.length = this.data.length;
 		let filteredData = this.changeFilter(this.data, this.config);
 		let sortedData = this.changeSort(filteredData, this.config);
