@@ -1,8 +1,8 @@
 package com.ctrl.game;
 
-import com.model.dao.ResumedPlayerDAO;
+import com.model.dao.PlayerDAO;
+import com.model.entity.PlayerEntity;
 import com.model.out.BidInfo;
-import com.model.out.ResumedPlayer;
 
 public class BidInfoFactory {
 
@@ -33,8 +33,8 @@ public class BidInfoFactory {
 
 	public static BidInfo newBid(int playerId) {
 
-		ResumedPlayerDAO pidao = new ResumedPlayerDAO();		
-		ResumedPlayer pl = pidao.getItem(playerId);
+		PlayerDAO plDao = new PlayerDAO();		
+		PlayerEntity pl = plDao.getPlayer(playerId);
 
 		BidInfo bi = new BidInfo();
 		bi.setPlayerID(playerId);		
