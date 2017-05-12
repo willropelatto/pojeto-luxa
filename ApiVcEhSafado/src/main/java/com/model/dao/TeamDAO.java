@@ -47,9 +47,8 @@ public class TeamDAO {
 		
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<TeamEntity> getList() {
-		return this.entityManager.createQuery("SELECT p FROM TeamEntity p ORDER BY p.id").getResultList();
+		return this.entityManager.createQuery("SELECT p FROM TeamEntity p ORDER BY p.id", TeamEntity.class).getResultList();
 	}
 	
 	

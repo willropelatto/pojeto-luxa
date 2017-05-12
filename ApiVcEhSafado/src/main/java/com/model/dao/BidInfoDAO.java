@@ -36,9 +36,8 @@ public class BidInfoDAO {
     	this.entityManager.getTransaction().commit();
     }	
 
-	@SuppressWarnings("unchecked")
 	public List<BidInfo> getList() {
-		return this.entityManager.createQuery("SELECT p FROM BidEntity p ORDER BY p.id").getResultList();
+		return this.entityManager.createQuery("SELECT p FROM BidEntity p ORDER BY p.id", BidInfo.class).getResultList();
 	}
 
 }

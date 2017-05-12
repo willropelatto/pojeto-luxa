@@ -50,9 +50,8 @@ public class UserDAO {
     	return (UserEntity) result;
     }
     
-    @SuppressWarnings("unchecked")
 	public List<UserEntity> TodosUsuarios(){
  
-		return this.entityManager.createQuery("SELECT u FROM UserEntity u ORDER BY u.id").getResultList();
+		return this.entityManager.createQuery("SELECT u FROM UserEntity u ORDER BY u.id", UserEntity.class).getResultList();
 	}    
 }

@@ -44,9 +44,8 @@ public class LeagueDAO {
     	this.entityManager.getTransaction().commit();
     }
     
-    @SuppressWarnings("unchecked")
     public List<LeagueEntity> getLeagues() {
-    	return this.entityManager.createQuery("SELECT p FROM LeagueEntity p ORDER BY p.id").getResultList();
+    	return this.entityManager.createQuery("SELECT p FROM LeagueEntity p ORDER BY p.id", LeagueEntity.class).getResultList();
     }
 
 
