@@ -14,15 +14,12 @@ public class LeagueRest {
 
 	private final LeagueController ctrl = new LeagueController(); 
 
-	/**
-	 * 
-	 * */
 	@GET
 	@Produces("application/json; charset=UTF-8")
 	@Path("/list")
 	public List<League> getLeagues(){
 
-		List<League> leagues = ctrl.ShowLeagues();
+		List<League> leagues = ctrl.showLeagues();
 		return leagues;
 	}
 	

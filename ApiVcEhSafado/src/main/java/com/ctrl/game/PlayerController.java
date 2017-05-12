@@ -11,7 +11,9 @@ import javax.ws.rs.core.MediaType;
 
 import com.google.gson.Gson;
 import com.model.dao.PlayerDAO;
+import com.model.dao.TeamPlayerDAO;
 import com.model.entity.PlayerEntity;
+import com.model.entity.TeamPlayerEntity;
 import com.model.in.FullPlayer;
 import com.model.in.League;
 import com.model.in.Page;
@@ -138,5 +140,22 @@ public class PlayerController {
 		List<PlayerEntity> enPlayers = playerDao.getAllPlayers();				
 		return convertListEntityToResumed(enPlayers);
 		
+	}
+		
+	public ArrayList<ResumedPlayer> loadTeamPlayers(int teamId) {
+		
+		TeamPlayerDAO tpDao = new TeamPlayerDAO();	
+		List<TeamPlayerEntity> players = tpDao.getPlayers(teamId);
+		ArrayList<ResumedPlayer> ret = new ArrayList<ResumedPlayer>();
+		
+		for (TeamPlayerEntity teamPlayerEntity : players) {
+		
+			PlayerEntity playerEnt = playerDao.getPlayer(teamPlayerEntity.getIdPlayer());			
+			ResumedPlayer playerRes = this.convertPlayerEntityToResumed(playerEnt);
+			ret.add(playerRes);	
+			
+		}
+	
+		return ret;		
 	}
 }

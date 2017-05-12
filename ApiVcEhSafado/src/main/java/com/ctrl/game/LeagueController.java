@@ -2,6 +2,7 @@ package com.ctrl.game;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import com.model.dao.LeagueDAO;
 import com.model.entity.LeagueEntity;
@@ -9,14 +10,17 @@ import com.model.in.League;
 
 public class LeagueController {
 
-	public ArrayList<League> ShowLeagues() {
+	public ArrayList<League> showLeagues() {
 		
-//		LeagueDAO ldao = new LeagueDAO();		
-//		ArrayList<League> list = ldao.getItems();
+		LeagueDAO ldao = new LeagueDAO();		
+		ArrayList<League> ret = new ArrayList<League>();
+		List<LeagueEntity> list = ldao.getLeagues();		
 		
-		//TODO jogar para rest no futuro
+		for (LeagueEntity lgEntity : list) {
+			ret.add(convertEntityToLeague(lgEntity));
+		}
 		
-		return new ArrayList<League>();
+		return ret;
 	}
 	
 	public LeagueEntity converteLeagueJsonToLeagueDB(League league) {		
@@ -28,6 +32,16 @@ public class LeagueController {
 		
 		return entity;	
 	}	
+	
+	public League convertEntityToLeague(LeagueEntity entity) {		
+		League league = new League();				
+		league.setAbbrName(entity.getAbbrName());
+		league.setImgUrl(entity.getImgUrl());
+		league.setName(entity.getName());
+		league.setId(entity.getOriginalId());
+		
+		return league;	
+	}
 	
 	
 	public void saveLeagues(ArrayList<League> leagues) {		    

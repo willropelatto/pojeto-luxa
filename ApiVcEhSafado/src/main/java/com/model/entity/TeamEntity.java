@@ -14,36 +14,42 @@ public class TeamEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
 	private Integer id;
-	@Column(name="nome")
-	private String nome;
-	@Column(name="idtournament")
-	private Integer idTournament;
-	@Column(name="nometecnico")
-	private String nomeTecnico;
-	
+	@Column(name="name")
+	private String name;
+	@Column(name="idcup")
+	private Integer idcup;
+	@Column(name="manager")
+	private String manager;
+	@Column(name="budget")
+	private double budget;
 	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getNome() {
-		return nome;
+	public String getName() {
+		return name;
 	}
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setName(String name) {
+		this.name = name;
 	}
-	public Integer getIdTournament() {
-		return idTournament;
+	public Integer getIdcup() {
+		return idcup;
 	}
-	public void setIdTournament(Integer idTournament) {
-		this.idTournament = idTournament;
+	public void setIdcup(Integer idcup) {
+		this.idcup = idcup;
 	}
-	public String getNomeTecnico() {
-		return nomeTecnico;
+	public String getManager() {
+		return manager;
 	}
-	public void setNomeTecnico(String nomeTecnico) {
-		this.nomeTecnico = nomeTecnico;
+	public void setManager(String manager) {
+		this.manager = manager;
 	}
-	
+	public double getBudget() {
+		return budget;
+	}
+	public void setBudget(double budget) {
+		this.budget = budget;
+	}	
 }

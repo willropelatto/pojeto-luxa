@@ -9,8 +9,8 @@ public class Team {
 	private int id;
 	private String name;
 	private ArrayList<ResumedPlayer> players = new ArrayList<ResumedPlayer>();
-	private String luxa;
-	private double Budget;
+	private String manager;
+	private double budget;
 	
 	public String getName() {
 		return name;
@@ -18,12 +18,11 @@ public class Team {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public String getLuxa() {
-		return luxa;
+	public String getManager() {
+		return manager;
 	}
-	public void setLuxa(String luxa) {
-		this.luxa = luxa;
+	public void setManager(String luxa) {
+		this.manager = luxa;
 	}
 	public int getId() {
 		return id;
@@ -32,10 +31,10 @@ public class Team {
 		this.id = id;
 	}
 	public double getBudget() {
-		return Budget;
+		return budget;
 	}
 	public void setBudget(double budget) {
-		Budget = budget;
+		this.budget = budget;
 	}
 	public ArrayList<ResumedPlayer> getPlayers() {
 		return players;

@@ -1,48 +1,55 @@
 package com.model.dao;
 
-import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 import com.model.entity.TeamEntity;
-import com.model.in.Team;
-import com.model.out.BidInfo;
 
 public class TeamDAO {
 	
-	public int Insert(Team t) {
-		return 0;
-	}
+	private final EntityManagerFactory entityManagerFactory;	
+	private final EntityManager entityManager; 
 	
-	public int Update(Team t) {
-		return 0;
+	public TeamDAO() { 		
+		this.entityManagerFactory  = Persistence.createEntityManagerFactory("persistence_unit_db_banco");
+		this.entityManager = this.entityManagerFactory.createEntityManager();		
 	}	
 	
-	public int Delete(int id) {
-		return 0;
-	}
-
-	public Team getItem(int teamId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public void decreaseBudget(BidInfo bid) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void increaseBudget(BidInfo bidBase) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public ArrayList<Team> getList() {
-		// TODO Auto-generated method stub
-		return null;
+	public void save(TeamEntity t) {
+		this.entityManager.getTransaction().begin();
+		this.entityManager.persist(t);
+		this.entityManager.getTransaction().commit();
 	}
 	
-	public TeamEntity getTeam(int teamId) {
-		// TODO Auto-generated method stub
-		return null;
+	public void update(TeamEntity t) {
+		this.entityManager.getTransaction().begin();
+		this.entityManager.merge(t);
+		this.entityManager.getTransaction().commit();
+	}	
+	
+	public TeamEntity getTeam(int id) {
+		return this.entityManager.find(TeamEntity.class, id);
+	}
+
+	public void decreaseBudget(int teamID, double bidValue) {
+		TeamEntity ent = this.getTeam(teamID);
+		ent.setBudget(ent.getBudget() - bidValue);
+		this.update(ent);		
+	}
+
+	public void increaseBudget(int teamID, double bidValue) {
+		TeamEntity ent = this.getTeam(teamID);
+		ent.setBudget(ent.getBudget() + bidValue);
+		this.update(ent);
+		
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<TeamEntity> getList() {
+		return this.entityManager.createQuery("SELECT p FROM TeamEntity p ORDER BY p.id").getResultList();
 	}
 	
 	
