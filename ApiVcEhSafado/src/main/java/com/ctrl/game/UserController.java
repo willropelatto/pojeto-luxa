@@ -111,7 +111,7 @@ public class UserController {
  
 	}	
 	
-	public String login(User user) { 
+	public User login(User user) { 
 		UserEntity entity = userDAO.getUserByLogin(user.getLogin());
 		
 		if (entity != null) {
@@ -121,23 +121,30 @@ public class UserController {
 					keyAuth = TokenAuth.GerarToken(user.getLogin());
 				} catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
 					
-					return "Não foi possivel gerar o token: "+e.getMessage();
+					return null; //return "Não foi possivel gerar o token: "+e.getMessage();
 				}
 				try {
 					entity.setKeyAuth(keyAuth);	
 					userDAO.Update(entity);
 				} catch (Exception e) {
 		 
-					return "Não foi possivel gravar Token de autenticação: " + e.getMessage();
-		 		}					
-				return keyAuth;
+					return null; //return "Não foi possivel gravar Token de autenticação: " + e.getMessage();
+		 		}		
+				user.setId(entity.getId());
+				user.setKeyAuth(keyAuth);
+				user.setNome(entity.getNome());
+				user.setSobrenome(entity.getSobrenome());
+				user.setEmail(entity.getEmail());
+				user.setSenha("");
+				return user;
+				//return keyAuth;
 	 
 			} else {
-				return "Senha inválida.";
+				return null; //return "Senha inválida.";
 			}
 			
 		} else {
-			return ""; 
+			return null; 
 		}
 		
 	}	
