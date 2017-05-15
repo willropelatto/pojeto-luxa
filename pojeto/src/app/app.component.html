@@ -1,0 +1,51 @@
+<nav class="navbar navbar-invert">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Pojeto</a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a routerLink="/players">Jogadores</a></li>
+                <li><a routerLink="/leagues">Ligas</a></li>
+                <li><a routerLink="/transfermarkets">Mercado</a></li>
+                <li><a routerLink="/bidinfos">Lista de Lances</a></li>
+                <li><a routerLink="/teams">Times</a></li>               
+            </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="material-icons">notifications</i>
+                        <span class="notification">3</span>
+                        <p class="hidden-lg hidden-md">Notificações</p>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Seu Lance foi superado</a></li>
+                        <li><a href="#">Você possui 11 jogadores</a></li>
+                        <li><a href="#">O tempo para o leilão do jogador Messi está acabando </a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="material-icons">person</i>                       
+                        <p class="hidden-lg hidden-md">Perfil</p>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">{{currentUser.nome}}</a></li>
+                        <li><a href="#">Editar Perfil</a></li>
+                        <li><a href="#">Sair</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div> 
+</nav>
+
+<alert></alert>
+<router-outlet></router-outlet> 

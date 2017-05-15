@@ -1,0 +1,23 @@
+		<h1>Login</h1>
+		<div class="well">
+			<div class="alert alert-danger" role="alert" *ngIf="msgErro">
+				{{ msgErro }}
+			</div>
+		    <form role="form">
+		        <div class="form-group">
+		            <label class="control-label" for="usuario">Usuário</label>
+		            <input type="text" class="form-control" name="usuario" 
+		                id="usuario" [(ngModel)]="usuario">
+		        </div>
+		        <div class="form-group">
+		            <label class="control-label" for="senha">Senha</label>
+		            <input type="password" class="form-control" name="senha" 
+		                id="senha" [(ngModel)]="senha">
+		        </div>
+		        <div class="form-group text-center">
+		            <button class="btn btn-success" (click)="login()">
+		                Entrar
+		            </button>
+		        </div>
+		    </form>
+		</div>`
