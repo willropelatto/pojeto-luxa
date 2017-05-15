@@ -26,9 +26,9 @@ public class TeamController {
 		
 		TeamEntity team = new TeamEntity();
 		team.setBudget(ent.getBudget()); 
-		team.setId(ent.getId());
 		team.setManager(ent.getManager());
 		team.setName(ent.getName());	
+		team.setIdUser(ent.getIdUser());
 		
 		return team;
 	}	
@@ -40,6 +40,13 @@ public class TeamController {
 	
 	public void updateTeam(Team team) {		
 		teamDao.update(this.convertTeamToEntity(team));
+	}
+	
+	public Team getTeamFromUser(int idUser){
+		TeamEntity teamEntity =teamDao.getTeamFromUser(idUser);
+		Team team = this.convertEntityToTeam(teamEntity);
+		
+		return team;
 	}
 	
 	public List<Team> getTeams() {		

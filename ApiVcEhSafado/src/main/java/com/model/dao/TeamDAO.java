@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import com.model.entity.PlayerEntity;
 import com.model.entity.TeamEntity;
 
 public class TeamDAO {
@@ -50,6 +51,11 @@ public class TeamDAO {
 	public List<TeamEntity> getList() {
 		return this.entityManager.createQuery("SELECT p FROM TeamEntity p ORDER BY p.id", TeamEntity.class).getResultList();
 	}
+	
+	public TeamEntity getTeamFromUser(int idUser) {
+    	return (TeamEntity) this.entityManager.createQuery("SELECT p FROM TeamEntity p WHERE p.idUser = :idUser ORDER BY p.id", TeamEntity.class)
+    			.setParameter("idUser", idUser).getResultList();
+    }
 	
 	
 	

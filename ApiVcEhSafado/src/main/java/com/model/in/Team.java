@@ -11,6 +11,7 @@ public class Team {
 	private ArrayList<ResumedPlayer> players = new ArrayList<ResumedPlayer>();
 	private String manager;
 	private double budget;
+	private int idUser;
 	
 	public String getName() {
 		return name;
@@ -41,5 +42,12 @@ public class Team {
 	}
 	public void setPlayers(ArrayList<ResumedPlayer> players) {
 		this.players = players;
+	}
+	public int getIdUser() {
+		return idUser;
+	}
+	public void setIdUser(int idUser) {
+		this.idUser = idUser;
 	}	
+	
 }

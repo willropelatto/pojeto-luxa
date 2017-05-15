@@ -33,9 +33,11 @@ public class UserRest {
 	@Consumes("application/json; charset=UTF-8")
 	@Produces("application/json; charset=UTF-8")
 	@Path("/cadastrar")
-	public String Cadastrar(User user) {
+	public User Cadastrar(User user) {
 
-		return ctrl.Cadastrar(user);
+		String retorno = ctrl.Cadastrar(user);
+		
+		return user;
 	}	
 
 	/**
@@ -88,9 +90,14 @@ public class UserRest {
 	@Produces("application/json; charset=UTF-8")
 	@Consumes("application/json; charset=UTF-8")	
 	@Path("/login")
-	public String login(User user) { 
+	public User login(User user) {
 		
+		
+		//user.setId(1);
 		return ctrl.login(user);
+		
+		
+		//return user;
 	}	
 
 }

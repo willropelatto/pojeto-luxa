@@ -22,6 +22,9 @@ public class TeamEntity {
 	private String manager;
 	@Column(name="budget")
 	private double budget;
+	@Column(name="idUser")
+	private Integer idUser;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -51,5 +54,12 @@ public class TeamEntity {
 	}
 	public void setBudget(double budget) {
 		this.budget = budget;
+	}
+	public Integer getIdUser() {
+		return idUser;
+	}
+	public void setIdUser(Integer idUser) {
+		this.idUser = idUser;
 	}	
+	
 }

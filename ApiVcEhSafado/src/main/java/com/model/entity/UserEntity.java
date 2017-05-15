@@ -27,7 +27,6 @@ public class UserEntity {
 	private String senha;
 	@Column(name="keyauth")
 	private String keyAuth;
-	
 
 	public Integer getId() {
 		return id;
@@ -72,6 +71,7 @@ public class UserEntity {
 	public void setKeyAuth(String keyAuth) {
 		this.keyAuth = keyAuth;
 	}
+
 	
 	
 }
