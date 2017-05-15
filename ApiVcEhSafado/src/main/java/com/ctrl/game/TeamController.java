@@ -43,7 +43,7 @@ public class TeamController {
 	}
 	
 	public Team getTeamFromUser(int idUser){
-		TeamEntity teamEntity =teamDao.getTeamFromUser(idUser);
+		TeamEntity teamEntity = teamDao.getTeamFromUser(idUser);
 		Team team = this.convertEntityToTeam(teamEntity);
 		
 		return team;

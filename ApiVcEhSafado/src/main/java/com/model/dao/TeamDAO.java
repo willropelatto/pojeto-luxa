@@ -54,7 +54,7 @@ public class TeamDAO {
 	
 	public TeamEntity getTeamFromUser(int idUser) {
     	return (TeamEntity) this.entityManager.createQuery("SELECT p FROM TeamEntity p WHERE p.idUser = :idUser ORDER BY p.id", TeamEntity.class)
-    			.setParameter("idUser", idUser).getResultList();
+    			.setParameter("idUser", idUser).getSingleResult();
     }
 	
 	
