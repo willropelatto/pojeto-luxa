@@ -18,7 +18,7 @@ public class MarketContoller {
 	private final BidInfoDAO bidDao = new BidInfoDAO();
 	private final BidLogDAO logDao = new BidLogDAO();	
 
-	public final BidInfo convetEntityToInfo(BidEntity bid) {
+	public final BidInfo convertEntityToInfo(BidEntity bid) {
 
 		BidInfo bidRet = new BidInfo();
 		bidRet.setBidValue(bid.getBidValue());
@@ -29,8 +29,10 @@ public class MarketContoller {
 
 		return bidRet;
 	}
+	
+	
 
-	public final BidEntity convetInfoToEntity(BidInfo bid) {
+	public final BidEntity convertInfoToEntity(BidInfo bid) {
 
 		BidEntity bidRet = new BidEntity();
 		bidRet.setBidValue(bid.getBidValue());
@@ -41,7 +43,18 @@ public class MarketContoller {
 		return bidRet;
 	}
 
-	public final BidEntityLog convetEntityToLog(BidEntity bid) {
+	public final BidEntityLog convertEntityToLog(BidEntity bid) {
+
+		BidEntityLog bidRet = new BidEntityLog();
+		bidRet.setBidValue(bid.getBidValue());
+		bidRet.setOriginalValue(bid.getOriginalValue());
+		bidRet.setPlayerID(bid.getPlayerID());
+		bidRet.setTeamID(bid.getTeamID());
+
+		return bidRet;
+	}
+	
+	public final BidEntityLog convertInfoToLog(BidInfo bid) {
 
 		BidEntityLog bidRet = new BidEntityLog();
 		bidRet.setBidValue(bid.getBidValue());
@@ -62,9 +75,9 @@ public class MarketContoller {
 			if (haveMoney(bid.getBidValue(), team)) {
 				teamAcc.decreaseBudget(bid.getTeamID(), bid.getBidValue());				
 				teamAcc.increaseBudget(bidBase.getTeamID(), bidBase.getBidValue());				
-				logDao.save(convetEntityToLog(bidBase));
+				logDao.save(convertEntityToLog(bidBase));
 				bidDao.delete(bidBase);
-				bidDao.save(convetInfoToEntity(bid));
+				bidDao.save(convertInfoToEntity(bid));
 				bidReturn = BidInfoFactory.newProtectedBid(bid.getPlayerID(), bid.getBidValue());
 				bidReturn.setBidAproved(true);
 			} else {
@@ -79,6 +92,25 @@ public class MarketContoller {
 		return bidReturn;
 
 	}
+	
+	public BidInfo getBidFromPlayerId(int playerId){
+		
+		BidInfo bidReturn = null;
+		try {
+			
+			BidEntity bidBase = bidDao.getItem(playerId);
+						
+			if (bidBase != null){
+				bidReturn = convertEntityToInfo(bidBase);
+				return bidReturn;
+			} 	
+		} catch (Exception e) {
+			bidReturn = new BidInfo();
+		}
+		return bidReturn;
+	}
+
+
 
 
 	public BidInfo initialBid(BidInfo bid) {
@@ -94,9 +126,8 @@ public class MarketContoller {
 		} else {
 			if (haveMoney(bid.getBidValue(), team)) {
 				teamAcc.decreaseBudget(bid.getTeamID(), bid.getBidValue());					
-				logDao.save(convetEntityToLog(bidBase));
-				bidDao.delete(bidBase);
-				bidDao.save(convetInfoToEntity(bid));				
+				logDao.save(convertInfoToLog(bid));
+				bidDao.save(convertInfoToEntity(bid));				
 				bidReturn = BidInfoFactory.newProtectedBid(bid.getPlayerID(), bid.getBidValue());
 				bidReturn.setBidAproved(true);
 			} else {				

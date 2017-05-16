@@ -4,7 +4,7 @@
  * @author Márcio Casale de Souza <contato@kazale.com>
  * @since 0.0.3
  */
- 
+
 import { Injectable } from '@angular/core';
 
 import { Bidinfo } from './bidinfo.model';
@@ -20,10 +20,52 @@ import { HttpUtilService } from '../../util';
 export class BidinfoService {
 
 	private path = 'bidinfo';
-	private msgErro:string;
+	private msgErro: string;
 	private bidinfos: Bidinfo[];
+	private pathApi = 'market';
 
 	constructor(private http: Http, private httpUtil: HttpUtilService) {
+	}
+
+
+	/**
+ * Retorna listagem de todos os teams.
+ *
+ * @return Bidinfo[] Bidinfo
+ */
+	listarTodosBids(): Observable<Bidinfo[]> {
+
+		return this.http.get(this.httpUtil.url(this.path + '/list'), this.httpUtil.headers())
+			.map(this.httpUtil.extrairDados)
+			.catch(this.httpUtil.processarErros);
+	}
+
+	initialBid(bidInfo: Bidinfo): Observable<Bidinfo> {
+		console.log(bidInfo);
+		let params = JSON.parse(JSON.stringify(bidInfo || null));
+
+		return this.http.post(this.httpUtil.url(this.pathApi + '/initialBid'), params,
+			this.httpUtil.headers())
+			.map(this.httpUtil.extrairDadosBidInfo)
+			.catch(this.httpUtil.processarErros);
+
+	}
+
+	placeBid(bidInfo: Bidinfo) {
+		let params = JSON.stringify(bidInfo);
+
+		return this.http.put(this.httpUtil.url(this.pathApi + '/placeBid'), params,
+			this.httpUtil.headers())
+			.map(this.httpUtil.extrairDadosBidInfo)
+			.catch(this.httpUtil.processarErros);
+	}
+
+	buscarPorIdPlayers(id: number): Observable<Bidinfo> {
+		let bidinfoPath = this.pathApi + '/getBidFromPlayerId';
+		return this.http.get(this.httpUtil.url(bidinfoPath + '/' + id),
+			this.httpUtil.headers())
+			.map(this.httpUtil.extrairDados)
+			.catch(this.httpUtil.processarErros);
 	}
 
 	/**
@@ -32,7 +74,7 @@ export class BidinfoService {
 	 * @return Bidinfo[] bidinfos
 	 */
 	listarTodos(): Bidinfo[] {
-		var bidinfos:string = sessionStorage['bidinfos'];
+		var bidinfos: string = sessionStorage['bidinfos'];
 		return bidinfos ? JSON.parse(bidinfos) : [];
 	}
 
@@ -42,7 +84,7 @@ export class BidinfoService {
 	 * @param Bidinfo bidinfo
 	 */
 	cadastrar(bidinfo: Bidinfo): void {
-		var bidinfos:Bidinfo[] = this.listarTodos();
+		var bidinfos: Bidinfo[] = this.listarTodos();
 		bidinfos.push(bidinfo);
 		sessionStorage['bidinfos'] = JSON.stringify(bidinfos);
 	}
@@ -52,13 +94,13 @@ export class BidinfoService {
 	 *
 	 * @param Bidinfo bidinfo
 	 */
-	cadastrarHttp(bidinfo: Bidinfo): Observable<Bidinfo>{
+	cadastrarHttp(bidinfo: Bidinfo): Observable<Bidinfo> {
 		let params = JSON.stringify(bidinfo);
 
 		return this.http.post(this.httpUtil.url(this.path), params,
-							this.httpUtil.headers())
-						.map(this.httpUtil.extrairDados)
-						.catch(this.httpUtil.processarErros);
+			this.httpUtil.headers())
+			.map(this.httpUtil.extrairDados)
+			.catch(this.httpUtil.processarErros);
 	}
 
 
@@ -68,8 +110,8 @@ export class BidinfoService {
 	 * @param number id
 	 * @return Usuario bidinfo
 	 */
-	buscarPorId(id: number):Bidinfo {
-		var bidinfos:Bidinfo[] = this.listarTodos();
+	buscarPorId(id: number): Bidinfo {
+		var bidinfos: Bidinfo[] = this.listarTodos();
 		for (let bidinfo of bidinfos) {
 			if (bidinfo.id == id) {
 				return bidinfo;
@@ -79,10 +121,10 @@ export class BidinfoService {
 		return new Bidinfo();
 	}
 
-	buscarPorIdPlayer(id: number):Bidinfo {
-		var bidinfos:Bidinfo[] = this.listarTodos();
+	buscarPorIdPlayer(id: number): Bidinfo {
+		var bidinfos: Bidinfo[] = this.listarTodos();
 		for (let bidinfo of bidinfos) {
-			if (bidinfo.playerId == id) {
+			if (bidinfo.playerID == id) {
 				return bidinfo;
 			}
 		}
@@ -97,8 +139,8 @@ export class BidinfoService {
 	 * @param Bidinfo bidinfo
 	 */
 	atualizar(id: number, bidinfo: Bidinfo): void {
-		var bidinfos:Bidinfo[] = this.listarTodos();
-		for (var i=0; i<bidinfos.length; i++) {
+		var bidinfos: Bidinfo[] = this.listarTodos();
+		for (var i = 0; i < bidinfos.length; i++) {
 			if (bidinfos[i].id == id) {
 				bidinfos[i] = bidinfo;
 			}
@@ -113,8 +155,8 @@ export class BidinfoService {
 	 * @param number id
 	 */
 	excluir(id: number): void {
-		var bidinfos:Bidinfo[] = this.listarTodos();
-		var bidinfosFinal:Bidinfo[] = [];
+		var bidinfos: Bidinfo[] = this.listarTodos();
+		var bidinfosFinal: Bidinfo[] = [];
 
 		for (let bidinfo of bidinfos) {
 			if (bidinfo.id != id) {
@@ -137,7 +179,7 @@ export class BidinfoService {
 		let bidinfos: Bidinfo[] = storage ? JSON.parse(storage) : [];
 
 		let bidinfosParcial: Bidinfo[] = [];
-		for (let i = ( pagina * qtdPorPagina ); i < (pagina * qtdPorPagina + qtdPorPagina); i++) {
+		for (let i = (pagina * qtdPorPagina); i < (pagina * qtdPorPagina + qtdPorPagina); i++) {
 			if (i >= bidinfos.length) {
 				break;
 			}

@@ -1,3 +1,4 @@
+import { AlertService } from './../util/alert.service';
 import { TeamModule } from './../team/team.module';
 import { TeamService } from './../team/shared/team.service';
 /**
@@ -39,7 +40,7 @@ import { SharedModule } from '../shared';
 		TransfermarketVisualizarComponent
 	],
 	providers: [
-		TransfermarketService, PlayerService, BidinfoService, TeamService
+		TransfermarketService, PlayerService, BidinfoService, TeamService, AlertService
 	]
 })
 export class TransfermarketModule {}
