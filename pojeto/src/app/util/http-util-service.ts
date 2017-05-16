@@ -50,6 +50,17 @@ export class HttpUtilService {
 		}
 	}
 
+	extrairDadosBidInfo(response : Response){
+		let bidInfo = response.json();
+		if(bidInfo){
+			if (bidInfo.bidAproved == false){
+				throw new Error('Seu Lance já foi superado! Tente Novamente!');
+			}else{
+				return bidInfo || {};
+			} 
+		}
+	}
+
   	processarErros(erro: any) {
 	    return Observable.throw(erro);
 	}

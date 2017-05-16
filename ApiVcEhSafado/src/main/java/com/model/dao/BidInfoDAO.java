@@ -4,9 +4,11 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 
 import com.model.entity.BidEntity;
+import com.model.entity.TeamEntity;
 import com.model.out.BidInfo;
 
 public class BidInfoDAO {	
@@ -21,7 +23,15 @@ public class BidInfoDAO {
 
 
 	public BidEntity getItem(int playerId) {
-		return (BidEntity) this.entityManager.createQuery("SELECT p FROM BidEntity p ORDER BY p.id").getSingleResult();		
+		
+		try {
+			return (BidEntity) this.entityManager.createQuery("SELECT p FROM BidEntity p WHERE p.playerID = :playerID ORDER BY p.id", BidEntity.class)
+	    			.setParameter("playerID", playerId).getSingleResult();
+		} catch (NoResultException e) {
+		    System.out.println(e.getMessage());
+		}
+		return null;		
+			
 	}
 
 	public void save(BidEntity bid) {

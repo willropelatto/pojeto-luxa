@@ -1,11 +1,14 @@
 package com.view.game;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import com.ctrl.game.MarketContoller;
+import com.model.in.Team;
 import com.model.out.BidInfo;
 
 @Path("/market")
@@ -41,4 +44,14 @@ public class MarketRest {
 
 		mkControl.closeMarket();
 	}
+	
+	
+	@GET
+	@Produces("application/json; charset=UTF-8")
+	@Path("/getBidFromPlayerId/{idPlayer}")
+	public BidInfo getBidFromPlayerId(@PathParam("idPlayer") Integer idPlayer){
+		
+		return mkControl.getBidFromPlayerId(idPlayer);
+	
+	}	
 }

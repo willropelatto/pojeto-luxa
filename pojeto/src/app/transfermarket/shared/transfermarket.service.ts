@@ -30,6 +30,7 @@ export class TransfermarketService {
 	private teamService : TeamService;
 	private user : User;
 	private team: Team;
+	private bidInfo : Bidinfo;
 
 	
 	constructor(_bidinfoService : BidinfoService,
@@ -91,25 +92,34 @@ export class TransfermarketService {
 
 		for (let player of playerList) {
 
-			let bidInfo: Bidinfo = new Bidinfo();
+			
 			let shop = new Transfermarket();
 			shop.name = player.name;
 			shop.position = player.position;
 			shop.rating = player.rating;
 			shop.idPlayer = player.id;
 
-			bidInfo = this.bidinfoService.buscarPorIdPlayer(player.id);
-			if (bidInfo){
-				shop.idBid = bidInfo.id;
-				shop.originalValue = bidInfo.originalValue;
-				shop.bidValue = bidInfo.bidValue + (bidInfo.originalValue * 0.05);
-				shop.bidAproved = bidInfo.bidAproved;
-				shop.teamId = bidInfo.teamId;
+			this.bidinfoService.buscarPorIdPlayers(player.id)
+				.subscribe(bidInfo => this.bidInfo = bidInfo,
+						error => this.msgErro = error);
+
+			
+			let bidInfos: Bidinfo = this.bidInfo;
+			console.log(this.bidInfo);
+			console.log('^^');
+			//bidInfo = this.bidinfoService.buscarPorIdPlayer(player.id);
+			if (bidInfos){
+				shop.idBid = bidInfos.id;
+				shop.originalValue = bidInfos.originalValue;
+				shop.bidValue = bidInfos.bidValue + (bidInfos.originalValue * 0.05);
+				//shop.bidAproved = bidInfo.bidAproved;
+				shop.teamId = bidInfos.teamID;
+				console.log(bidInfos);
 			}else{
 				shop.idBid = 0;
 				shop.bidValue =  this.bid(player.rating);
 				shop.originalValue = this.bid(player.rating);
-				shop.bidAproved = true;
+			//	shop.bidAproved = true;
 				shop.teamId = this.team.id;
 			}
 			shops.push(shop);

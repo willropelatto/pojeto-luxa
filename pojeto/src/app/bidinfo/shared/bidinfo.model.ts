@@ -9,8 +9,8 @@ export class Bidinfo {
 	constructor(
 		public id?: number,
 		public bidValue?: number,
-		public teamId?: number,
+		public teamID?: number,
 		public originalValue?: number,
-		public playerId?: number,
+		public playerID?: number,
 		public bidAproved?: boolean){}
 }

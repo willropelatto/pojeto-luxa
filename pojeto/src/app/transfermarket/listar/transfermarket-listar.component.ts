@@ -1,3 +1,4 @@
+import { AlertService } from './../../util/alert.service';
 /**
  * Componente de listagem de transfermarkets.
  *
@@ -18,7 +19,7 @@ import { Bidinfo, BidinfoService } from '../../bidinfo';
 
 import { Inject } from '@angular/core';
 
-import {Observable} from 'rxjs/Rx';
+import { Observable } from 'rxjs/Rx';
 
 
 @Component({
@@ -31,17 +32,17 @@ import {Observable} from 'rxjs/Rx';
 export class TransfermarketListarComponent implements OnInit {
 
 
-	ticks =20;
+	ticks = 20;
 	private transfermarkets: Transfermarket[];
 	private idExcluir: number;
 	private pagina: number;
 	private totalRegistros: number;
-//	private players: Player[];
-	private playerService : PlayerService;
-	private bidinfoService : BidinfoService;
+	//	private players: Player[];
+	private playerService: PlayerService;
+	private bidinfoService: BidinfoService;
 	private playerId: number;
-	private bid : Bidinfo;
-	
+	private bid: Bidinfo;
+
 
 	/**
 	 * Construtor.
@@ -49,16 +50,17 @@ export class TransfermarketListarComponent implements OnInit {
 	 * @param TransfermarketService transfermarketService
 	 */
 	constructor(private transfermarketService: TransfermarketService,
-				_playerService: PlayerService,
-				_bidinfoService: BidinfoService,
-				private route: ActivatedRoute) {
-	//	this.playerService = _playerService;
+		private alertService: AlertService,
+		_playerService: PlayerService,
+		_bidinfoService: BidinfoService,
+		private route: ActivatedRoute) {
+		//	this.playerService = _playerService;
 		this.bidinfoService = _bidinfoService;
 
-					
+
 	}
 
-	getPlayers(): Player[]{
+	getPlayers(): Player[] {
 		return [];
 	}
 
@@ -68,8 +70,8 @@ export class TransfermarketListarComponent implements OnInit {
 	ngOnInit() {
 		this.bid = new Bidinfo();
 		this.transfermarkets = this.transfermarketService.listarTodos();
-		let timer = Observable.timer(1000,2000);
-    	timer.subscribe(t=>this.ticks = t);
+		let timer = Observable.timer(1000, 2000);
+		timer.subscribe(t => this.ticks = t);
 	}
 
 	/**
@@ -79,33 +81,45 @@ export class TransfermarketListarComponent implements OnInit {
 	 * @param number id
 	 */
 	excluir(id: number) {
- 		this.idExcluir = id;
- 	}
+		this.idExcluir = id;
+	}
 
-	onBid(transferMarket: Transfermarket){
-		console.log(transferMarket);
+	onBid(transferMarket: Transfermarket) {
 		let bidInfo = new Bidinfo();
 
-		
 
-		bidInfo.id = new Date().getTime();
 		bidInfo.bidValue = transferMarket.bidValue;
 		bidInfo.originalValue = transferMarket.originalValue;
-		bidInfo.teamId = transferMarket.teamId;
-		bidInfo.playerId = transferMarket.idPlayer;
-
-		if (transferMarket.idBid == 0) { 
-			this.bidinfoService.cadastrar(bidInfo)
-		}else {
-			bidInfo.id = transferMarket.idBid;
-			this.bidinfoService.atualizar(bidInfo.id,bidInfo);
+		bidInfo.teamID = transferMarket.teamId;
+		bidInfo.playerID = transferMarket.idPlayer;
+		console.log(transferMarket.idBid);
+		if (transferMarket.bidValue  != this.transfermarketService.bid(transferMarket.rating)) {
+			this.bidinfoService.initialBid(bidInfo)
+				.subscribe(
+				(res) => {
+					this.alertService.success('Lance efetuado com sucesso!', true);
+				},
+				(err) => {
+					this.alertService.error(err);
+				});
+		} else {
+			this.bidinfoService.placeBid(bidInfo)
+				.subscribe(
+				(res) => {
+					this.alertService.success('Lance efetuado com sucesso!', true);
+				},
+				(err) => {
+					this.alertService.error(err);
+			});
+//			bidInfo.id = transferMarket.idBid;
+//			this.bidinfoService.atualizar(bidInfo.id, bidInfo);
 		}
 	}
 
 
- 	onExcluir() {
- 		this.transfermarketService.excluir(this.idExcluir);
- 		location.reload();
- 	}
+	onExcluir() {
+		this.transfermarketService.excluir(this.idExcluir);
+		location.reload();
+	}
 
 }
