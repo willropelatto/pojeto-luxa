@@ -81,8 +81,8 @@ export class TransfermarketService {
 
 
 	listarTodos(): Transfermarket[] {
-
-		let playerList : Player[] = this.players;
+		let playerList : Player[]  = [];
+		playerList = this.players;
 		let shops : Transfermarket[] = [];
 		
 
@@ -98,28 +98,26 @@ export class TransfermarketService {
 			shop.position = player.position;
 			shop.rating = player.rating;
 			shop.idPlayer = player.id;
-
+			console.log(player.id);
 			this.bidinfoService.buscarPorIdPlayers(player.id)
 				.subscribe(bidInfo => this.bidInfo = bidInfo,
 						error => this.msgErro = error);
 
 			
 			let bidInfos: Bidinfo = this.bidInfo;
-			console.log(this.bidInfo);
+			console.log(bidInfos);
 			console.log('^^');
 			//bidInfo = this.bidinfoService.buscarPorIdPlayer(player.id);
 			if (bidInfos){
 				shop.idBid = bidInfos.id;
 				shop.originalValue = bidInfos.originalValue;
 				shop.bidValue = bidInfos.bidValue + (bidInfos.originalValue * 0.05);
-				//shop.bidAproved = bidInfo.bidAproved;
 				shop.teamId = bidInfos.teamID;
 				console.log(bidInfos);
 			}else{
 				shop.idBid = 0;
 				shop.bidValue =  this.bid(player.rating);
 				shop.originalValue = this.bid(player.rating);
-			//	shop.bidAproved = true;
 				shop.teamId = this.team.id;
 			}
 			shops.push(shop);

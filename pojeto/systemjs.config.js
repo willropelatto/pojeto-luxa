@@ -9,7 +9,7 @@
       'npm:': 'node_modules/'
     },
     // map tells the System loader where to look for things
-    map: {
+    map: { 
       // our app is within the app folder
       app: 'app',
       // angular bundles

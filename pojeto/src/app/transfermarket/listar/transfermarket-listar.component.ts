@@ -92,12 +92,14 @@ export class TransfermarketListarComponent implements OnInit {
 		bidInfo.originalValue = transferMarket.originalValue;
 		bidInfo.teamID = transferMarket.teamId;
 		bidInfo.playerID = transferMarket.idPlayer;
-		console.log(transferMarket.idBid);
-		if (transferMarket.bidValue  != this.transfermarketService.bid(transferMarket.rating)) {
+		console.log(transferMarket.bidValue);
+		console.log(this.transfermarketService.bid(transferMarket.rating));
+		if (transferMarket.bidValue  === this.transfermarketService.bid(transferMarket.rating)) {
 			this.bidinfoService.initialBid(bidInfo)
 				.subscribe(
 				(res) => {
 					this.alertService.success('Lance efetuado com sucesso!', true);
+					location.reload();
 				},
 				(err) => {
 					this.alertService.error(err);
@@ -107,6 +109,7 @@ export class TransfermarketListarComponent implements OnInit {
 				.subscribe(
 				(res) => {
 					this.alertService.success('Lance efetuado com sucesso!', true);
+					location.reload();
 				},
 				(err) => {
 					this.alertService.error(err);

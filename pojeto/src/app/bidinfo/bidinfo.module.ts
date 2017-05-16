@@ -15,7 +15,7 @@ import {
 	BidinfoVisualizarComponent,
 	BidinfoService
 } from './';
-
+  
 import { SharedModule } from '../shared';
 
 @NgModule({

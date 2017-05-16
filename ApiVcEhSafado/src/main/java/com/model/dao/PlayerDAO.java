@@ -40,6 +40,12 @@ public class PlayerDAO {
 	
 	}
 	
+	public PlayerEntity getPlayerOriginalId(int p2) {
+		return this.entityManager.createQuery("SELECT p FROM PlayerEntity p WHERE p.originalId = :p1 ORDER BY p.id", PlayerEntity.class)
+    			.setParameter("p1", p2).getSingleResult();
+	
+	}	
+	
     public void Delete(Integer id) {
     	PlayerEntity playerEntity = this.getPlayer(id);
     	
