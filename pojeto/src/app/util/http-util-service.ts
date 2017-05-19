@@ -33,8 +33,7 @@ export class HttpUtilService {
 
 	extrairDados(response: Response) {
     	let data = response.json();
-		console.log(data);
-    	return data || {};
+    	return data;
   	}
 	  
 

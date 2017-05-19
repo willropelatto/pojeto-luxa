@@ -99,7 +99,6 @@ export class TransfermarketListarComponent implements OnInit {
 				.subscribe(
 				(res) => {
 					this.alertService.success('Lance efetuado com sucesso!', true);
-					location.reload();
 				},
 				(err) => {
 					this.alertService.error(err);
@@ -109,7 +108,6 @@ export class TransfermarketListarComponent implements OnInit {
 				.subscribe(
 				(res) => {
 					this.alertService.success('Lance efetuado com sucesso!', true);
-					location.reload();
 				},
 				(err) => {
 					this.alertService.error(err);

@@ -22,6 +22,7 @@ export class BidinfoListarComponent implements OnInit {
 	private idExcluir: number;
 	private pagina: number;
 	private totalRegistros: number;
+	private msgErro:string;
 
 	/**
 	 * Construtor.
@@ -36,6 +37,14 @@ export class BidinfoListarComponent implements OnInit {
 	 * Método executado logo após a criação do componente.
 	 */
 	ngOnInit() {
+		this.bidinfoService.listarTodosBids()
+			.subscribe(bidinfo => this.bidinfos = bidinfo,
+						error => this.msgErro = error);
+
+/*
+				this.bidinfoService.buscarPorIdPlayerFlapMap(player.id)
+				.subscribe(bidInfo => this.bidInfo = bidInfo,
+						error => this.msgErro = error);*/
 		this.totalRegistros = this.bidinfoService.totalRegistros();
 		this.pagina = +this.route.snapshot.queryParams['pagina'] || KzPaginacaoComponent.PAG_PADRAO;
 		this.bidinfos = this.bidinfoService.listarParcial(

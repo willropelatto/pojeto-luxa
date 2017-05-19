@@ -1,5 +1,7 @@
 package com.view.game;
 
+import java.util.List;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -54,4 +56,13 @@ public class MarketRest {
 		return mkControl.getBidFromPlayerId(idPlayer);
 	
 	}	
+	
+	@GET
+	@Produces("application/json; charset=UTF-8")
+	@Path("/list")
+	public List<BidInfo> getTeams(){
+
+		List<BidInfo> list = mkControl.getAllBids();
+		return list;
+	} 
 }

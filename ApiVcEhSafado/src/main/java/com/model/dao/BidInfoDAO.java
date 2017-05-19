@@ -46,8 +46,8 @@ public class BidInfoDAO {
     	this.entityManager.getTransaction().commit();
     }	
 
-	public List<BidInfo> getList() {
-		return this.entityManager.createQuery("SELECT p FROM BidEntity p ORDER BY p.id", BidInfo.class).getResultList();
+	public List<BidEntity> getList() {
+		return this.entityManager.createQuery("SELECT p FROM BidEntity p ORDER BY p.id", BidEntity.class).getResultList();
 	}
 
 }

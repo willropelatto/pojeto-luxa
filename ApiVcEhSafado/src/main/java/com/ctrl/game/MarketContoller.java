@@ -1,5 +1,6 @@
 package com.ctrl.game;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.model.dao.BidInfoDAO;
@@ -109,6 +110,20 @@ public class MarketContoller {
 		}
 		return bidReturn;
 	}
+	
+	public List<BidInfo> getAllBids(){		
+		List<BidEntity> bids = bidDao.getList();
+		List<BidInfo> listBids = new ArrayList<BidInfo>();
+		
+		for (BidEntity bid : bids) {
+			listBids.add(convertEntityToInfo(bid));			
+		}
+		
+		return listBids;
+		
+		//return bids;
+		
+	}
 
 
 
@@ -145,14 +160,14 @@ public class MarketContoller {
 
 		TeamPlayerEntity tpEntity;		
 		TeamPlayerDAO tpDao = new TeamPlayerDAO(); 
-		List<BidInfo> bids = bidDao.getList();		
+	/*	List<BidInfo> bids = bidDao.getList();		
 
 		for (BidInfo bid : bids) {
 			tpEntity = new TeamPlayerEntity();
 			tpEntity.setIdPlayer(bid.getPlayerID());
 			tpEntity.setIdTeam(bid.getTeamID());
 			tpDao.save(tpEntity);	
-		}
+		}*/
 
 	}
 

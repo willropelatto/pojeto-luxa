@@ -23,7 +23,7 @@ import { TeamService } from './../../team/shared/team.service';
 export class TransfermarketService {
 
 
-	private players: Player[];
+	private players: Array<Player>;
 	private msgErro:string;
 	private bidinfoService : BidinfoService;
 	private playerService : PlayerService;
@@ -40,9 +40,7 @@ export class TransfermarketService {
 	  this.playerService = _playerService;
 	  this.teamService = _teamService;
 	  this.user = JSON.parse(localStorage.getItem('currentUser'));
-	  this.playerService.listarTodos()
-			.subscribe(players => this.players = players,
-						error => this.msgErro = error);
+
 						
 						
 	}
@@ -82,15 +80,19 @@ export class TransfermarketService {
 
 	listarTodos(): Transfermarket[] {
 		let playerList : Player[]  = [];
-		playerList = this.players;
 		let shops : Transfermarket[] = [];
 		
 
+		this.playerService.listarTodos()
+			.subscribe(players => this.players = players,
+						error => this.msgErro = error);
+
+		
 		this.teamService.buscarPorIdUser(this.user.id)
 	  		.subscribe(team => this.team = team,
 			  		   error => this.msgErro = error);
 
-		for (let player of playerList) {
+		for (let player of this.players) {
 
 			
 			let shop = new Transfermarket();
@@ -106,8 +108,6 @@ export class TransfermarketService {
 			
 			let bidInfos: Bidinfo = this.bidInfo;
 			console.log(bidInfos);
-			console.log('^^');
-			//bidInfo = this.bidinfoService.buscarPorIdPlayer(player.id);
 			if (bidInfos){
 				shop.idBid = bidInfos.id;
 				shop.originalValue = bidInfos.originalValue;

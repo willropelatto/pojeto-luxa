@@ -31,7 +31,7 @@ import { SharedModule } from '../shared';
 		SharedModule,
 		PlayerModule,
 		BidinfoModule,
-		TeamModule
+		TeamModule		
 	],
 	declarations: [
 		TransfermarketCadastrarComponent,
@@ -40,7 +40,7 @@ import { SharedModule } from '../shared';
 		TransfermarketVisualizarComponent
 	],
 	providers: [
-		TransfermarketService, PlayerService, BidinfoService, TeamService, AlertService
+		TransfermarketService, TeamService, BidinfoService, PlayerService, AlertService
 	]
 })
 export class TransfermarketModule {}

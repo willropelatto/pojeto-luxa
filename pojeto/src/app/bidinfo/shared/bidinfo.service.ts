@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs/Rx';
 /**
  * Serviço de gerenciamento de bidinfos.
  *
@@ -10,8 +11,6 @@ import { Injectable } from '@angular/core';
 import { Bidinfo } from './bidinfo.model';
 
 import { Http, Response } from '@angular/http';
-
-import { Observable } from 'rxjs/Observable';
 
 import { HttpUtilService } from '../../util';
 
@@ -52,9 +51,9 @@ export class BidinfoService {
 	}
 
 	placeBid(bidInfo: Bidinfo) {
-		let params = JSON.stringify(bidInfo);
+		let params = JSON.stringify(bidInfo || null);
 
-		return this.http.put(this.httpUtil.url(this.pathApi + '/placeBid'), params,
+		return this.http.post(this.httpUtil.url(this.pathApi + '/placeBid'), params,
 			this.httpUtil.headers())
 			.map(this.httpUtil.extrairDadosBidInfo)
 			.catch(this.httpUtil.processarErros);
@@ -66,6 +65,21 @@ export class BidinfoService {
 			this.httpUtil.headers())
 			.map(this.httpUtil.extrairDados)
 			.catch(this.httpUtil.processarErros);
+	}
+
+	buscarPorIdPlayerFlapMap(id: number): Observable<Bidinfo> {
+		let bidinfoPath = this.pathApi + '/getBidFromPlayerId';
+		let myRequest =  this.http.get(this.httpUtil.url(bidinfoPath + '/' + id),this.httpUtil.headers());
+		return myRequest
+			.expand(() => Observable.timer(50000).flatMap(() => myRequest)
+												.catch(this.httpUtil.processarErros));
+
+									
+
+	/*	return this.http.get(this.httpUtil.url(bidinfoPath + '/' + id),
+			this.httpUtil.headers())
+			.flatMap(this.httpUtil.extrairDados)
+			.catch(this.httpUtil.processarErros);*/
 	}
 
 	/**
