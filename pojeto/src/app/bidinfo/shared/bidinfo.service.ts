@@ -22,6 +22,7 @@ export class BidinfoService {
 	private msgErro: string;
 	private bidinfos: Bidinfo[];
 	private pathApi = 'market';
+	public obBidInfo: Bidinfo;
 
 	constructor(private http: Http, private httpUtil: HttpUtilService) {
 	}
@@ -66,6 +67,24 @@ export class BidinfoService {
 			.map(this.httpUtil.extrairDados)
 			.catch(this.httpUtil.processarErros);
 	}
+
+
+	buscarPorPlayerId(id: number): Observable<Bidinfo> {
+		let bidinfoPath = this.pathApi + '/getBidFromPlayerId';
+		return Observable.create(observer => {
+			this.http.get(this.httpUtil.url(bidinfoPath + '/' + id),
+			this.httpUtil.headers())
+			.map(this.httpUtil.extrairDados)
+			.catch(this.httpUtil.processarErros)
+			.subscribe((data) => {
+				this.obBidInfo = data
+				observer.next(this.obBidInfo);
+				observer.complete();
+			});
+		});
+	}
+
+
 
 	buscarPorIdPlayerFlapMap(id: number): Observable<Bidinfo> {
 		let bidinfoPath = this.pathApi + '/getBidFromPlayerId';

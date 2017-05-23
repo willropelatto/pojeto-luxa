@@ -15,10 +15,10 @@
                 <li><a routerLink="/leagues">Ligas</a></li>
                 <li><a routerLink="/transfermarkets">Mercado</a></li>
                 <li><a routerLink="/bidinfos">Lista de Lances</a></li>
-                <li><a routerLink="/teams">Times</a></li>               
+                <li><a routerLink="/teams">Times</a></li>
             </ul>
 
-                <ul class="nav navbar-nav navbar-right">
+            <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="material-icons">notifications</i>
@@ -33,7 +33,7 @@
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="material-icons">person</i>                       
+                        <i class="material-icons">person</i>
                         <p class="hidden-lg hidden-md">Perfil</p>
                     </a>
                     <ul class="dropdown-menu">
@@ -42,10 +42,20 @@
                         <li><a href="#">Sair</a></li>
                     </ul>
                 </li>
+                
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle btn btn-warning" data-toggle="dropdown">     
+                      <i class="material-icons">euro_symbol</i>  {{team.budget}},00
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">{{team.name}}</a></li>
+                        <li><a href="#">{{team.manager}}</a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
-    </div> 
+    </div>
 </nav>
 
 <alert></alert>
-<router-outlet></router-outlet> 
+<router-outlet></router-outlet>
