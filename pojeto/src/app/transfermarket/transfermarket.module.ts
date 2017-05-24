@@ -15,6 +15,8 @@ import { PlayerModule, PlayerService, Player } from '../player';
 
 import { BidinfoService, BidinfoModule } from '../bidinfo';
 
+import {SelectModule} from 'ng2-select';
+
 import { 
 	TransfermarketCadastrarComponent,
 	TransfermarketEditarComponent,
@@ -31,14 +33,15 @@ import { SharedModule } from '../shared';
 		SharedModule,
 		PlayerModule,
 		BidinfoModule,
-		TeamModule		
+		TeamModule,
+		SelectModule	
 	],
 	declarations: [
 		TransfermarketCadastrarComponent,
 		TransfermarketEditarComponent,
 		TransfermarketListarComponent,
 		TransfermarketVisualizarComponent
-	],
+	],	
 	providers: [
 		TransfermarketService, TeamService, BidinfoService, PlayerService, AlertService
 	]

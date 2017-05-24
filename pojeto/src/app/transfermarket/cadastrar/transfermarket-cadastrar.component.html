@@ -1,19 +1,64 @@
-<h1>Cadastrar Transfermarket</h1>
-
-<div class="well">
-    <form role="form">
-        <div class="form-group">
-            <label class="control-label" for="nome">Nome</label>
-            <input type="text" class="form-control" name="name" 
-                id="name" [(ngModel)]="transfermarket.name">
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header" data-background-color="blue">
+                        <h4 class="title">Filtrar Jogador</h4>
+                    </div>
+                    <div class="card-content">
+                        <form name="form">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="card">
+                                        <div class="card-content">
+                                            <ng-select #select [allowClear]="false"
+                                                        [items]="players"
+                                                        [disabled]="disabled"
+                                                        (data)="refreshValue($event)"
+                                                        (selected)="selected($event)"
+                                                        (removed)="removed($event)"
+                                                        (typed)="typed($event)"
+                                                        placeholder="Selecione um jogador">
+                                            </ng-select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card">
+                                        <div class="card-content">
+                                            <div class="form-group form-black label-floating is-empty">
+                                                <label class="control-label">Posição</label>
+                                                <input type="text" class="form-control" name="position" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card">
+                                        <div class="card-content">
+                                            <div class="form-group form-black label-floating is-empty">
+                                                <label class="control-label">Preço Inicial</label>
+                                                <input type="number" class="form-control" name="originalBidValue" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card">
+                                        <div class="card-content">
+                                            <div class="form-group form-black label-floating is-empty">
+                                                <label class="control-label">Liga</label>
+                                                <input type="number" class="form-control" name="ligue" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="form-group text-center">
-            <button class="btn btn-success" (click)="cadastrar()">
-                Cadastrar
-            </button>
-			<a class="btn btn-default" [routerLink]="['/transfermarkets']">
-                Voltar
-            </a>
-        </div>
-    </form>
+    </div>
 </div>
