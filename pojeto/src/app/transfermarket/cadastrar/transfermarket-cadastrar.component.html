@@ -9,18 +9,18 @@
                     <div class="card-content">
                         <form name="form">
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="card">
                                         <div class="card-content">
-                                            <ng-select #select [allowClear]="false"
-                                                        [items]="players"
-                                                        [disabled]="disabled"
-                                                        (data)="refreshValue($event)"
-                                                        (selected)="selected($event)"
-                                                        (removed)="removed($event)"
-                                                        (typed)="typed($event)"
-                                                        placeholder="Selecione um jogador">
-                                            </ng-select>
+                                            <div>
+                                                <div class="form-group form-black label-floating is-empty">
+                                                    <md-select placeholder="Filtar por Nome" [(ngModel)]="selectedValue" name="player">
+                                                        <md-option *ngFor="let player of players" [value]="player.id">
+                                                            {{player.name}}
+                                                        </md-option>
+                                                    </md-select>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

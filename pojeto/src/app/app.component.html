@@ -37,14 +37,14 @@
                         <i class="material-icons">person</i>
                         <p class="hidden-lg hidden-md">Perfil</p>
                     </a>
-                    <ul class="dropdown-menu">
+                    <ul *ngIf="currentUser" class="dropdown-menu">
                         <li><a href="#">{{currentUser.nome}}</a></li>
                         <li><a href="#">Editar Perfil</a></li>
                         <li><a href="#">Sair</a></li>
                     </ul>
                 </li>
                 
-                <li class="dropdown">
+                <li *ngIf="team" class="dropdown">
                     <a href="#" class="dropdown-toggle btn btn-warning" data-toggle="dropdown">     
                       <i class="material-icons">euro_symbol</i>  {{team.budget}},00
                     </a>

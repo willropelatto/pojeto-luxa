@@ -19,7 +19,7 @@ import { HttpUtilService } from '../../util';
 @Injectable()
 export class PlayerService {
 
-	private path = 'player/listPlayer/7';
+	private path = 'player/listPlayer/53';
 	private msgErro:string;
 	private players: Player[];
 

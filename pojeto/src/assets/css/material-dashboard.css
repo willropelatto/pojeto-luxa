@@ -44,6 +44,10 @@
   box-sizing: border-box;
 }
 
+.mat-select-trigger { 
+  min-width: 250px !important; 
+}
+
 .noUi-stacking .noUi-handle {
   z-index: 10;
 }
@@ -750,39 +754,8 @@ h2.title {
 .navbar .navbar-nav > li > a.btn::-moz-focus-inner {
   border: 0;
 }
-.btn, .btn.btn-default,
-.navbar .navbar-nav > li > a.btn,
-.navbar .navbar-nav > li > a.btn.btn-default {
-  box-shadow: 0 2px 2px 0 rgba(153, 153, 153, 0.14), 0 3px 1px -2px rgba(153, 153, 153, 0.2), 0 1px 5px 0 rgba(153, 153, 153, 0.12);
-}
-.btn, .btn:hover, .btn:focus, .btn:active, .btn.active, .btn:active:focus, .btn:active:hover, .btn.active:focus, .btn.active:hover, .open > .btn.dropdown-toggle, .open > .btn.dropdown-toggle:focus, .open > .btn.dropdown-toggle:hover, .btn.btn-default, .btn.btn-default:hover, .btn.btn-default:focus, .btn.btn-default:active, .btn.btn-default.active, .btn.btn-default:active:focus, .btn.btn-default:active:hover, .btn.btn-default.active:focus, .btn.btn-default.active:hover, .open > .btn.btn-default.dropdown-toggle, .open > .btn.btn-default.dropdown-toggle:focus, .open > .btn.btn-default.dropdown-toggle:hover,
-.navbar .navbar-nav > li > a.btn,
-.navbar .navbar-nav > li > a.btn:hover,
-.navbar .navbar-nav > li > a.btn:focus,
-.navbar .navbar-nav > li > a.btn:active,
-.navbar .navbar-nav > li > a.btn.active,
-.navbar .navbar-nav > li > a.btn:active:focus,
-.navbar .navbar-nav > li > a.btn:active:hover,
-.navbar .navbar-nav > li > a.btn.active:focus,
-.navbar .navbar-nav > li > a.btn.active:hover, .open >
-.navbar .navbar-nav > li > a.btn.dropdown-toggle, .open >
-.navbar .navbar-nav > li > a.btn.dropdown-toggle:focus, .open >
-.navbar .navbar-nav > li > a.btn.dropdown-toggle:hover,
-.navbar .navbar-nav > li > a.btn.btn-default,
-.navbar .navbar-nav > li > a.btn.btn-default:hover,
-.navbar .navbar-nav > li > a.btn.btn-default:focus,
-.navbar .navbar-nav > li > a.btn.btn-default:active,
-.navbar .navbar-nav > li > a.btn.btn-default.active,
-.navbar .navbar-nav > li > a.btn.btn-default:active:focus,
-.navbar .navbar-nav > li > a.btn.btn-default:active:hover,
-.navbar .navbar-nav > li > a.btn.btn-default.active:focus,
-.navbar .navbar-nav > li > a.btn.btn-default.active:hover, .open >
-.navbar .navbar-nav > li > a.btn.btn-default.dropdown-toggle, .open >
-.navbar .navbar-nav > li > a.btn.btn-default.dropdown-toggle:focus, .open >
-.navbar .navbar-nav > li > a.btn.btn-default.dropdown-toggle:hover {
-  background-color: #999999;
-  color: #FFFFFF;
-}
+
+
 .btn:focus, .btn:active, .btn:hover, .btn.btn-default:focus, .btn.btn-default:active, .btn.btn-default:hover,
 .navbar .navbar-nav > li > a.btn:focus,
 .navbar .navbar-nav > li > a.btn:active,
@@ -847,7 +820,7 @@ h2.title {
 .navbar .navbar-nav > li > a.btn.btn-simple,
 .navbar .navbar-nav > li > a.btn.btn-default.btn-simple {
   background-color: transparent;
-  color: #999999;
+    color: #999999;
   box-shadow: none;
 }
 .btn.btn-simple:hover, .btn.btn-simple:focus, .btn.btn-simple:active, .btn.btn-default.btn-simple:hover, .btn.btn-default.btn-simple:focus, .btn.btn-default.btn-simple:active,
@@ -858,7 +831,7 @@ h2.title {
 .navbar .navbar-nav > li > a.btn.btn-default.btn-simple:focus,
 .navbar .navbar-nav > li > a.btn.btn-default.btn-simple:active {
   background-color: transparent;
-  color: #999999;
+ /* color: #999999;*/
 }
 .btn.btn-primary,
 .navbar .navbar-nav > li > a.btn.btn-primary {
@@ -1128,7 +1101,6 @@ h2.title {
 .navbar .navbar-nav > li > a.btn.btn-danger {
   box-shadow: 0 2px 2px 0 rgba(244, 67, 54, 0.14), 0 3px 1px -2px rgba(244, 67, 54, 0.2), 0 1px 5px 0 rgba(244, 67, 54, 0.12);
 }
-.btn.btn-danger, .btn.btn-danger:hover, .btn.btn-danger:focus, .btn.btn-danger:active, .btn.btn-danger.active, .btn.btn-danger:active:focus, .btn.btn-danger:active:hover, .btn.btn-danger.active:focus, .btn.btn-danger.active:hover, .open > .btn.btn-danger.dropdown-toggle, .open > .btn.btn-danger.dropdown-toggle:focus, .open > .btn.btn-danger.dropdown-toggle:hover,
 .navbar .navbar-nav > li > a.btn.btn-danger,
 .navbar .navbar-nav > li > a.btn.btn-danger:hover,
 .navbar .navbar-nav > li > a.btn.btn-danger:focus,

@@ -23,8 +23,15 @@ import { Transfermarket, TransfermarketService } from '../shared';
 export class TransfermarketCadastrarComponent implements OnInit {
 
 	private transfermarket: Transfermarket;
-	public players:Array<string> = [];
+	public players:Array<Player> = [];
 	private value:any = {};
+	selectedValue: string;
+
+	foods = [
+    {value: 'steak-0', viewValue: 'Steak'},
+    {value: 'pizza-1', viewValue: 'Pizza'},
+    {value: 'tacos-2', viewValue: 'Tacos'}
+  ];
 
 
 	/**
@@ -45,15 +52,12 @@ export class TransfermarketCadastrarComponent implements OnInit {
 	ngOnInit() {
 		this.transfermarket = new Transfermarket();
 		this.playerService.listarTodos()
-			.subscribe((players) => {	
-				let listPlayers: Array<string> = [];
-				for (let list of players){
-					listPlayers.push(list.name);
-					
-				}
-				this.players = listPlayers;											
+			.subscribe((players) => {				
+				this.players = players;											
 			});
 	}
+
+	//https://plnkr.co/edit/?p=preview
 
 	/**
 	 * Método responsável por cadastrar um novo transfermarket.
@@ -64,21 +68,6 @@ export class TransfermarketCadastrarComponent implements OnInit {
 		this.router.navigate(['/transfermarkets']);
 	}
 
-	public selected(value: any): void {
-		console.log('Selected value is: ', value);
-	}
-
-	public removed(value: any): void {
-		console.log('Removed value is: ', value);
-	}
-
-	public typed(value: any): void {
-		console.log('New search input: ', value);
-	}
-
-	public refreshValue(value: any): void {
-		this.value = value;
-	}
 
 	
 }

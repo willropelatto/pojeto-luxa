@@ -1,3 +1,4 @@
+import { MdOptionModule, MdSelectModule } from '@angular/material';
 import { AlertService } from './../util/alert.service';
 import { TeamModule } from './../team/team.module';
 import { TeamService } from './../team/shared/team.service';
@@ -17,6 +18,8 @@ import { BidinfoService, BidinfoModule } from '../bidinfo';
 
 import {SelectModule} from 'ng2-select';
 
+
+
 import { 
 	TransfermarketCadastrarComponent,
 	TransfermarketEditarComponent,
@@ -34,7 +37,9 @@ import { SharedModule } from '../shared';
 		PlayerModule,
 		BidinfoModule,
 		TeamModule,
-		SelectModule	
+		SelectModule,
+		MdOptionModule,
+		MdSelectModule	
 	],
 	declarations: [
 		TransfermarketCadastrarComponent,
