@@ -1,12 +1,19 @@
 package com.model.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
+
+import org.apache.commons.lang3.StringUtils;
+import org.hibernate.Query;
+import org.hibernate.persister.entity.Queryable;
 
 import com.model.entity.PlayerEntity;
+import com.model.in.PlayerFilter;
 
 
 public class PlayerDAO {
@@ -20,6 +27,42 @@ public class PlayerDAO {
 		this.entityManagerFactory  = Persistence.createEntityManagerFactory("persistence_unit_db_banco");
 		this.entityManager = this.entityManagerFactory.createEntityManager();
 		
+	}
+	
+	public List<PlayerEntity> getPlayers(PlayerFilter filter) {
+		
+		StringBuilder sql = new StringBuilder();
+		sql.append("SELECT p FROM PlayerEntity p WHERE 0=0");		
+		
+		if (!StringUtils.isBlank(filter.getPosition())) {
+			sql.append(" AND position = :pos ");			
+		}
+		
+		if (filter.getRating() > 0) {
+			sql.append(" AND rating = :rat ");
+		}
+		
+		if (filter.getLeague() > 0 ) {
+			sql.append(" AND idLeague = :lig ");
+		}
+
+		sql.append("ORDER BY p.id");
+		
+		TypedQuery<PlayerEntity> qr = this.entityManager.createQuery(sql.toString(), PlayerEntity.class);
+
+		if (qr.getParameter("pos") != null) {
+			qr.setParameter("pos", filter.getPosition());
+		}
+		
+		if (qr.getParameter("rat") != null) {
+			qr.setParameter("rat", filter.getRating());
+		}
+		
+		if (qr.getParameter("lig") != null) {
+			qr.setParameter("lig", filter.getLeague());
+		}		
+		
+		return qr.getResultList();
 	}
 	
 	
