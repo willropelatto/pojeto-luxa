@@ -1,3 +1,4 @@
+import { PlayerFilter } from './../shared/playerFilter.model';
 import { LeagueService } from './../../league/shared/league.service';
 import { League } from './../../league/league.model';
 import { FormControl } from '@angular/forms';
@@ -28,8 +29,11 @@ export class TransfermarketCadastrarComponent implements OnInit {
     private transfermarket: Transfermarket;
     public players: Array<Player> = [];
     public leagues: Array<League> = [];
+    public playerFilter: PlayerFilter = new PlayerFilter();
     private value: any = {};
     selectedValue: string;
+
+
 
 	public startPrice : number = 0;
 	public endPrice : number = 0;
@@ -108,16 +112,30 @@ export class TransfermarketCadastrarComponent implements OnInit {
     }
 
     onInputStartPrice(event: any) {
-		this.startPrice = event.value;
+        this.playerFilter.startValue = event.value;
     }
 
     onInputEndPrice(event: any) {
-		this.endPrice = event.value;
+        this.playerFilter.endValue = event.value;
     }
 
     onInputRating(event: any) {
-		this.rating = event.value;
+        this.playerFilter.rating = event.value;
+		
     }
+    
+    register() {
+		console.log(this.playerFilter);
+	/*	this.teamService.register(this.team)
+			.subscribe(
+			(res) => {				
+				this.alertService.success('Registro Efetuado com sucesso', true);
+				this.router.navigate(['/teams']);
+			},
+			(err) => {
+				this.alertService.error(err);
+	*/	//	});
+	}
 
 
 

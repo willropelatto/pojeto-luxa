@@ -1,3 +1,4 @@
+import { TransfermarketFilterComponent } from './filtro/transfermarket-filter.component';
 import { MdOptionModule, MdSelectModule } from '@angular/material';
 import { AlertService } from './../util/alert.service';
 import { TeamModule } from './../team/team.module';
@@ -49,7 +50,8 @@ import { SharedModule } from '../shared';
 		TransfermarketCadastrarComponent,
 		TransfermarketEditarComponent,
 		TransfermarketListarComponent,
-		TransfermarketVisualizarComponent
+		TransfermarketVisualizarComponent,
+		TransfermarketFilterComponent
 	],	
 	providers: [
 		TransfermarketService, TeamService, BidinfoService, PlayerService, AlertService

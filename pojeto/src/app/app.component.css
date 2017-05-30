@@ -1,6 +1,4 @@
-.mat-select-trigger { 
-  min-width: 150px !important; 
-}
+
 /* Style when highlighting a search. */
 .ui-select-highlight {
   font-weight: bold;

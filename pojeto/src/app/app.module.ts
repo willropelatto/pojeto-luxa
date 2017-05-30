@@ -1,5 +1,3 @@
-import { PlayerSelectComponent } from './player-list/player-select.component';
-import { PlayerSelectModule } from './player-list/player-select.module';
 /**
  * Arquivo de módulo principal da aplicação.
  *

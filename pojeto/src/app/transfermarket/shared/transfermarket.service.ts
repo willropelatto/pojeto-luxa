@@ -1,3 +1,4 @@
+import { PlayerFilter } from './playerFilter.model';
 import { Observable } from 'rxjs';
 import { HttpUtilService } from './../../util/http-util-service';
 import { Http } from '@angular/http';
@@ -124,12 +125,63 @@ export class TransfermarketService {
 
 							shops.push(shop);
 						});
-				}				
+				}
 			},
 
 			error => this.msgErro = error);
 
-			return shops;
+		return shops;
+
+	}
+
+
+	listarFilter(playerFilter : PlayerFilter): Transfermarket[] {
+		let playerList: Player[] = [];
+		let shops: Transfermarket[] = [];
+
+
+		this.playerService.listarFiltro(playerFilter)
+			.subscribe((players) => {
+				this.players = players
+
+				this.teamService.buscarPorIdUser(this.user.id)
+					.subscribe(team => this.team = team,
+					error => this.msgErro = error);
+
+				for (let player of this.players) {
+
+					let shop = new Transfermarket();
+					shop.name = player.name;
+					shop.position = player.position;
+					shop.rating = player.rating;
+					shop.idPlayer = player.id;
+					console.log(player.id);
+
+					this.bidinfoService.buscarPorIdPlayers(player.id)
+						.subscribe((bidInfo) => {
+							this.bidInfo = bidInfo;
+							let bid: Bidinfo = this.bidInfo;
+							console.log(this.bidInfo);
+							if (this.bidInfo) {
+								shop.idBid = bid.id;
+								shop.originalValue = bid.originalValue;
+								shop.bidValue = bid.bidValue + (bid.originalValue * 0.05);
+								shop.teamId = bid.teamID;
+							} else {
+								shop.idBid = 0;
+								shop.bidValue = this.bid(player.rating);
+								shop.originalValue = this.bid(player.rating);
+								shop.teamId = this.team.id;
+							}
+
+							shops.push(shop);
+						});
+				}
+			},
+
+			error => this.msgErro = error);
+
+		return shops;
 
 	}
 

@@ -1,0 +1,25 @@
+
+<div>
+    <table class="table table-striped">
+        <tr>
+            <th>Nome</th>
+            <th>Posição</th>
+            <th>Rating</th>
+            <th>Preço Lance</th>
+            <th>Preço Inicial</th>
+            <th>Tempo</th>  
+            <th>Lance</th>       
+
+        </tr>
+        <tr *ngFor="let transfermarket of transfermarkets">
+            <td>{{transfermarket.name}}</td>
+            <td>{{transfermarket.position}}</td>
+             <td>{{transfermarket.rating}}</td>
+            <td>{{transfermarket.bidValue}}</td>  
+            <td>{{transfermarket.originalValue}}</td>  
+            <td>{{ticks}}</td>  
+            <td><button class="btn btn-success" (click)="onBid(transfermarket)" >Dar Lance</button></td>  
+        </tr>
+    </table>
+
+</div>
