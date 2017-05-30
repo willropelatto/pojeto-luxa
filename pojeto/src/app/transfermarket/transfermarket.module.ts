@@ -18,7 +18,8 @@ import { BidinfoService, BidinfoModule } from '../bidinfo';
 
 import {SelectModule} from 'ng2-select';
 
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MaterialModule, MdNativeDateModule } from '@angular/material';
 
 import { 
 	TransfermarketCadastrarComponent,
@@ -39,7 +40,10 @@ import { SharedModule } from '../shared';
 		TeamModule,
 		SelectModule,
 		MdOptionModule,
-		MdSelectModule	
+		MdSelectModule,
+		MaterialModule,
+        MdNativeDateModule,
+        ReactiveFormsModule,
 	],
 	declarations: [
 		TransfermarketCadastrarComponent,

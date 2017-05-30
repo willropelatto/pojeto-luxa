@@ -9,50 +9,93 @@
                     <div class="card-content">
                         <form name="form">
                             <div class="row">
-                                <div class="col-md-3">
-                                    <div class="card">
-                                        <div class="card-content">
-                                            <div>
-                                                <div class="form-group form-black label-floating is-empty">
-                                                    <md-select placeholder="Filtar por Nome" [(ngModel)]="selectedValue" name="player">
-                                                        <md-option *ngFor="let player of players" [value]="player.id">
-                                                            {{player.name}}
-                                                        </md-option>
-                                                    </md-select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="col-md-4">
+                                    <md-card class="result">
+                                        <md-card-content>
+                                            <h2 class="example-h2">Jogador</h2>
+                                            <md-input-container>
+                                                <input mdInput placeholder="Filtar por Nome" [mdAutocomplete]="auto" [formControl]="playerCtrl">
+                                            </md-input-container>
+
+                                            <md-autocomplete #auto="mdAutocomplete">
+                                                <md-option *ngFor="let player of filteredPlayers | async" [value]="player.name">
+                                                    {{player.name}}
+                                                </md-option>
+                                            </md-autocomplete>
+                                        </md-card-content>
+                                    </md-card>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <md-card class="result">
+                                        <md-card-content>
+                                            <h2 class="example-h2">Posição</h2>
+                                            <md-input-container>
+                                                <input mdInput placeholder="Filtar por posição" [mdAutocomplete]="position" [formControl]="positionsCtrl">
+                                            </md-input-container>
+
+                                            <md-autocomplete #position="mdAutocomplete">
+                                                <md-option *ngFor="let position of filteredPositions | async" [value]="position">
+                                                    {{position}}
+                                                </md-option>
+                                            </md-autocomplete>
+                                        </md-card-content>
+                                    </md-card>
                                 </div>
                                 <div class="col-md-4">
-                                    <div class="card">
-                                        <div class="card-content">
-                                            <div class="form-group form-black label-floating is-empty">
-                                                <label class="control-label">Posição</label>
-                                                <input type="text" class="form-control" name="position" />
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <md-card class="result">
+                                        <md-card-content>
+                                            <h2 class="example-h2">Liga</h2>
+                                            <md-input-container>
+                                                <input mdInput placeholder="Filtar por Liga" [mdAutocomplete]="leagues" [formControl]="leaguesCtrl">
+                                            </md-input-container>
+                                            <md-autocomplete #leagues="mdAutocomplete">
+                                                <md-option *ngFor="let leagues of filteredLeagues | async" [value]="leagues.name">
+                                                    {{leagues.name}}
+                                                </md-option>
+                                            </md-autocomplete>
+                                        </md-card-content>
+                                    </md-card>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <md-card class="result">
+                                        <md-card-content>
+                                            <h2 class="example-h2">Preço Inicial</h2>
+                                            <md-slider (input)="onInputStartPrice($event)" class="example-margin" [max]="max" [min]="min" [step]="step" [thumb-label]="thumbLabel"
+                                                [value]="defaultValue">
+                                            </md-slider>
+                                            {{startPrice}}
+                                        </md-card-content>
+                                    </md-card>
                                 </div>
                                 <div class="col-md-4">
-                                    <div class="card">
-                                        <div class="card-content">
-                                            <div class="form-group form-black label-floating is-empty">
-                                                <label class="control-label">Preço Inicial</label>
-                                                <input type="number" class="form-control" name="originalBidValue" />
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <md-card class="result">
+                                        <md-card-content>
+                                            <h2 class="example-h2">Rating</h2>
+                                            <md-slider (input)="onInputRating($event)" class="example-margin" [max]="99" [min]="0" [step]="1" [thumb-label]="thumbLabel"
+                                                [value]="defaultValue">
+                                            </md-slider>
+                                            {{rating}}
+                                        </md-card-content>
+                                    </md-card>
                                 </div>
                                 <div class="col-md-4">
-                                    <div class="card">
-                                        <div class="card-content">
-                                            <div class="form-group form-black label-floating is-empty">
-                                                <label class="control-label">Liga</label>
-                                                <input type="number" class="form-control" name="ligue" />
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <md-card class="result">
+                                        <md-card-content>
+                                            <h2 class="example-h2">Preço Final</h2>
+                                            <md-slider (input)="onInputEndPrice($event)" class="example-margin" [max]="max" [min]="min" [step]="step" [thumb-label]="thumbLabel"
+                                                [value]="defaultValue">
+                                            </md-slider>
+                                            {{endPrice}}
+                                        </md-card-content>
+                                    </md-card>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <button md-raised-button>Filtrar</button>
                                 </div>
                             </div>
                         </form>

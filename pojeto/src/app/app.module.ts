@@ -1,3 +1,5 @@
+import { PlayerSelectComponent } from './player-list/player-select.component';
+import { PlayerSelectModule } from './player-list/player-select.module';
 /**
  * Arquivo de módulo principal da aplicação.
  *
@@ -53,13 +55,14 @@ import { MdSelectModule, MdOptionModule, MdAutocompleteModule} from '@angular/ma
     PaginationModule.forRoot(),
 		TabsModule.forRoot(),
     FormsModule,
+  
   ],
 
   declarations: [ 
     AppComponent,
     AlertComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent   
   ],
   providers: [
 		HttpUtilService,
