@@ -17,11 +17,21 @@ import com.model.entity.TeamPlayerEntity;
 import com.model.in.FullPlayer;
 import com.model.in.League;
 import com.model.in.Page;
+import com.model.in.PlayerFilter;
+import com.model.out.PlayerList;
 import com.model.out.ResumedPlayer;
 
 public class PlayerController {
 
 	private final PlayerDAO playerDao = new PlayerDAO();
+	
+
+	public PlayerList getPlayerFilter(PlayerFilter filter) {
+		
+		List<PlayerEntity> list = playerDao.getPlayers(filter);
+		//TODO terminar a lista
+		return null;
+	}
 	
 	public ArrayList<ResumedPlayer> convertListEntityToResumed(List<PlayerEntity> players) {
 		
