@@ -52,6 +52,10 @@ export class TransfermarketFilterComponent implements OnInit {
 		private route: ActivatedRoute) {
 		this.bidinfoService = _bidinfoService;
 
+		this.route.queryParams.subscribe(params => {
+			this.playerFilter = params["playerFilter"];
+			console.log(this.playerFilter);
+		});
 
 	}
 
@@ -62,8 +66,6 @@ export class TransfermarketFilterComponent implements OnInit {
 
 	ngOnInit() {
 		this.bid = new Bidinfo();
-		this.playerFilter = +this.route.snapshot.params['playerFilter'];
-		console.log(this.playerFilter);
 		this.transfermarkets = this.transfermarketService.listarFilter(this.playerFilter);
 		let timer = Observable.timer(1000, 2000);
 		timer.subscribe(t => this.ticks = t);

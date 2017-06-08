@@ -3,13 +3,13 @@ package com.view.game;
 import java.util.List;
 
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import com.ctrl.game.PlayerController;
 import com.model.in.PlayerFilter;
-import com.model.in.Team;
 import com.model.out.PlayerList;
 import com.model.out.ResumedPlayer;
 
@@ -36,12 +36,11 @@ public class PlayerRest {
 		return ctrl.getAllPlayers();
 	}
 	
-	@GET
+	@POST
 	@Produces("application/json; charset=UTF-8")
-	@Path("/getPlayer/{filter}")
-	public PlayerList getLeaguePlayers(@PathParam("filter") PlayerFilter filter){
- 			
-		return null;
+	@Path("/getPlayer")
+	public List<ResumedPlayer> getLeaguePlayers(PlayerFilter filter){ 			
+		return ctrl.getPlayerFilter(filter);		
 	}		
 
 

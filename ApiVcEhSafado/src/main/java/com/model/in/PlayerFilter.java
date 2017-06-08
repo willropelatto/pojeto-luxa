@@ -7,7 +7,7 @@ public class PlayerFilter {
 	private int rating;
 	private double endValue;
 	private double startValue;
-	private	int league;
+	private	String league;
 	
 	public String getName() {
 		return name;
@@ -39,10 +39,10 @@ public class PlayerFilter {
 	public void setStartValue(double startValue) {
 		this.startValue = startValue;
 	}
-	public int getLeague() {
+	public String getLeague() {
 		return league;
 	}
-	public void setLeague(int league) {
+	public void setLeague(String league) {
 		this.league = league;
 	}	
 	

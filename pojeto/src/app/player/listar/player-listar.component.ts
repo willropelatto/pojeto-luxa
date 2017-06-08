@@ -173,23 +173,6 @@ export class PlayerListarComponent implements OnInit {
 				this.rows = page && config.paging ? this.changePage(page, sortedData) : sortedData;
 				this.length = sortedData.length;
 			}, error => this.msgErro = <any>error);
-
-
-		//} this.data = players,
-		//			error => this.msgErro = error);	
-
-
-
-
-		//  this._languageService.getLanguages()
-
-
-		//this.data = this.playerService.listarTodos();
-		//this.length = this.data.length;
-		/*	let filteredData = this.changeFilter(this.data, this.config);
-			let sortedData = this.changeSort(filteredData, this.config);
-			this.rows = page && config.paging ? this.changePage(page, sortedData) : sortedData;*/
-		//this.length = sortedData.length;
 	}
 
 	public onCellClick(data: any): any {
@@ -197,33 +180,4 @@ export class PlayerListarComponent implements OnInit {
 	}
 
 
-	/**
-	 * Método responsável por armazenar o id do player a 
-	 * removido.
-	 *
-	 * @param number id
-	 */
-	//excluir(id: number) {
-	//	this.idExcluir = id;
-	//	}
-
-	/**
-   * Método responsável por remover um player.
-   */
-	//	onExcluir() {
-	//		this.playerService.excluir(this.idExcluir);
-	//		location.reload();
-	//	}
-
-	/**
-	 * Método responsável pela paginação.
-	 *
-	 * @param any $event Número da página atual.
-	 */
-	//	paginar($event: any) {
-	//		this.pagina = $event - 1;
-	//		this.totalRegistros = this.playerService.totalRegistros();
-	//		this.players = this.playerService.listarParcial(
-	//			this.pagina, KzPaginacaoComponent.TOTAL_PAGS_PADRAO);
-	//	}
 }

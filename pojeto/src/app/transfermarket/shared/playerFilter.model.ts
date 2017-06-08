@@ -5,5 +5,5 @@ export class PlayerFilter {
 		public rating?: number,
 		public endValue?: number,
 		public startValue?: number,
-		public league?: number){}	
+		public league?: string){}	
 }

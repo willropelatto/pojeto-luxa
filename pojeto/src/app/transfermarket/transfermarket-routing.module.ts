@@ -23,5 +23,5 @@ export const TransfermarketRoutes: Routes = [
 	{ path: 'transfermarkets/cadastrar', component: TransfermarketCadastrarComponent, canActivate: [AuthGuard] }, 
 	{ path: 'transfermarkets/editar/:id', component: TransfermarketEditarComponent, canActivate: [AuthGuard] },
 	{ path: 'transfermarkets/visualizar/:id', component: TransfermarketVisualizarComponent, canActivate: [AuthGuard] },
-	{ path: 'transfermarkets/filtrar/:filterPlayer', component: TransfermarketFilterComponent, canActivate: [AuthGuard] },
+	{ path: 'transfermarkets/filtrar', component: TransfermarketFilterComponent, canActivate: [AuthGuard] },
 ];

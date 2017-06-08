@@ -9,7 +9,7 @@
                     <div class="card-content">
                         <form name="form" (ngSubmit)="register()" #f="ngForm" novalidate>
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <md-card class="result">
                                         <md-card-content>
                                             <h2 class="example-h2">Jogador</h2>
@@ -25,7 +25,7 @@
                                     </md-card>
                                 </div>
 
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <md-card class="result">
                                         <md-card-content>
                                             <h2 class="example-h2">Posição</h2>
@@ -41,7 +41,20 @@
                                         </md-card-content>
                                     </md-card>
                                 </div>
-                                <div class="col-md-4">
+                            </div>
+                            <div class="row">
+                                <!--      <div class="col-md-4">
+                                    <md-card class="result">
+                                        <md-card-content>
+                                            <h2 class="example-h2">Preço Inicial</h2>
+                                            <md-slider (input)="onInputStartPrice($event)" class="example-margin" [max]="max" [min]="min" [step]="step" [thumb-label]="thumbLabel"
+                                                [value]="defaultValue">
+                                                </md-slider>
+                                                {{playerFilter.startValue}}
+                                        </md-card-content>
+                                    </md-card>
+                                </div>-->
+                                <div class="col-md-6">
                                     <md-card class="result">
                                         <md-card-content>
                                             <h2 class="example-h2">Liga</h2>
@@ -56,20 +69,7 @@
                                         </md-card-content>
                                     </md-card>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <md-card class="result">
-                                        <md-card-content>
-                                            <h2 class="example-h2">Preço Inicial</h2>
-                                            <md-slider (input)="onInputStartPrice($event)" class="example-margin" [max]="max" [min]="min" [step]="step" [thumb-label]="thumbLabel"
-                                                [value]="defaultValue">
-                                                </md-slider>
-                                                {{playerFilter.startValue}}
-                                        </md-card-content>
-                                    </md-card>
-                                </div>
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <md-card class="result">
                                         <md-card-content>
                                             <h2 class="example-h2">Rating</h2>
@@ -80,6 +80,7 @@
                                         </md-card-content>
                                     </md-card>
                                 </div>
+                                <!--
                                 <div class="col-md-4">
                                     <md-card class="result">
                                         <md-card-content>
@@ -90,12 +91,11 @@
                                                 {{playerFilter.endValue}}
                                         </md-card-content>
                                     </md-card>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <button md-raised-button [routerLink]="['/transfermarkets/filtrar/'+playerFilter]"
-                                    >Filtrar</button> 
+                                    <button md-raised-button (click)="onFilter(playerFilter)">Filtrar</button>
                                 </div>
                             </div>
                         </form>

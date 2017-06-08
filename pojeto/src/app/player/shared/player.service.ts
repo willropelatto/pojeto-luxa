@@ -20,7 +20,8 @@ import { HttpUtilService } from '../../util';
 @Injectable()
 export class PlayerService {
 
-	private path = 'player/listPlayer/7';
+	private path = 'player/listPlayer/53';
+	
 	private msgErro: string;
 	private players: Player[];
 
@@ -40,9 +41,12 @@ export class PlayerService {
 
 
 	listarFiltro(playerFilter : PlayerFilter): Observable<Player[]> {
-		let params = JSON.stringify(playerFilter);
 
-		return this.http.get(this.httpUtil.url(this.path + '/' + params),   
+		let params = JSON.parse(JSON.stringify(playerFilter || null));
+
+		console.log(params);
+
+		return this.http.post(this.httpUtil.url('player/getPlayer'),params,   
 			this.httpUtil.headers())
 			.map(this.httpUtil.extrairDados)
 			.catch(this.httpUtil.processarErros);

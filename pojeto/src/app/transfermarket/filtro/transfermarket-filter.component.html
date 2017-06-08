@@ -1,5 +1,6 @@
 
 <div>
+
     <table class="table table-striped">
         <tr>
             <th>Nome</th>
@@ -8,7 +9,14 @@
             <th>Preço Lance</th>
             <th>Preço Inicial</th>
             <th>Tempo</th>  
-            <th>Lance</th>       
+            <th>Lance</th>   
+            <th class="text-right">
+                <a class="btn btn-primary" 
+                    [routerLink]="['/transfermarkets/cadastrar']">
+                    Voltar
+                </a>
+            </th>
+
 
         </tr>
         <tr *ngFor="let transfermarket of transfermarkets">

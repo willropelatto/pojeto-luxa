@@ -13,7 +13,7 @@ import { Player } from './../../player/shared/player.model';
 
 import { Component, ViewChild } from '@angular/core';
 import { OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras} from '@angular/router';
 
 import { SelectComponent } from 'ng2-select';
 
@@ -47,8 +47,9 @@ export class TransfermarketCadastrarComponent implements OnInit {
 
     leaguesCtrl: FormControl;
     filteredLeagues: any;
+    positions = ['CAM','CB','CDM','CF','CM','GK','LB','LM','LW','LWB','RB','RM','RW','RWB','ST'];
 
-    positions = ['GOL', 'LB', 'ADD', 'LD', 'ZAG', 'LE', 'ADE', 'VOL', 'MD', 'MC', 'ME', 'MEI', 'SA', 'PD', 'ATA', 'PE'];
+    
 
 	/**
 	 * Construtor.
@@ -93,6 +94,12 @@ export class TransfermarketCadastrarComponent implements OnInit {
             .subscribe((leagues) => {
                 this.leagues = leagues;
             });
+        this.playerFilter.name = '';
+        this.playerFilter.position = '';
+        this.playerFilter.endValue = 0;
+        this.playerFilter.startValue = 0;
+        this.playerFilter.rating = 0;
+        this.playerFilter.league = '';
 
     }
 
@@ -120,21 +127,12 @@ export class TransfermarketCadastrarComponent implements OnInit {
     }
 
     onInputRating(event: any) {
-        this.playerFilter.rating = event.value;
-		
+        this.playerFilter.rating = event.value;		
     }
+
     
     register() {
-		console.log(this.playerFilter);
-	/*	this.teamService.register(this.team)
-			.subscribe(
-			(res) => {				
-				this.alertService.success('Registro Efetuado com sucesso', true);
-				this.router.navigate(['/teams']);
-			},
-			(err) => {
-				this.alertService.error(err);
-	*/	//	});
+
 	}
 
 
@@ -169,6 +167,23 @@ export class TransfermarketCadastrarComponent implements OnInit {
         this._tickInterval = Number(v);
     }
     private _tickInterval = 1;
+
+
+    filter(filterPlayer : PlayerFilter): NavigationExtras {
+        let navextras :NavigationExtras={ 
+            queryParams:{"playerFilter":JSON.stringify(filterPlayer)}
+        };
+        return navextras;
+    }
+
+    onFilter(filterPlayer: PlayerFilter){    
+      /*  if (filterPlayer.name = ''){
+
+        }*/    
+        this.router.navigate(['/transfermarkets/filtrar'], this.filter(filterPlayer));
+    }
+
+    
 
 
 

@@ -26,13 +26,7 @@ public class PlayerController {
 	private final PlayerDAO playerDao = new PlayerDAO();
 	
 
-	public PlayerList getPlayerFilter(PlayerFilter filter) {
-		
-		List<PlayerEntity> list = playerDao.getPlayers(filter);
-		//TODO terminar a lista
-		return null;
-	}
-	
+
 	public ArrayList<ResumedPlayer> convertListEntityToResumed(List<PlayerEntity> players) {
 		
 		Iterator<PlayerEntity> itPlayer = players.iterator();
@@ -151,6 +145,13 @@ public class PlayerController {
 		return convertListEntityToResumed(enPlayers);
 		
 	}
+	
+	public List<ResumedPlayer> getPlayerFilter(PlayerFilter filter) {
+		
+		List<PlayerEntity> enPlayers = playerDao.getPlayers(filter);				
+		return convertListEntityToResumed(enPlayers);
+	}
+	
 		
 	public ArrayList<ResumedPlayer> loadTeamPlayers(int teamId) {
 		

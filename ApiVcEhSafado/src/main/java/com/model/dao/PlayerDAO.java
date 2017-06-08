@@ -39,28 +39,36 @@ public class PlayerDAO {
 		}
 		
 		if (filter.getRating() > 0) {
-			sql.append(" AND rating = :rat ");
+			sql.append(" AND rating >= :rat ");
 		}
 		
-		if (filter.getLeague() > 0 ) {
-			sql.append(" AND idLeague = :lig ");
+		if (!StringUtils.isBlank(filter.getName())) {
+			sql.append(" AND name = :name ");			
 		}
+		
+	/*	if (filter.getLeague() > 0 ) {
+			sql.append(" AND idLeague = :lig ");
+		}*/
 
-		sql.append("ORDER BY p.id");
+		sql.append("ORDER BY p.rating desc");
 		
 		TypedQuery<PlayerEntity> qr = this.entityManager.createQuery(sql.toString(), PlayerEntity.class);
 
-		if (qr.getParameter("pos") != null) {
+		if (!StringUtils.isBlank(filter.getPosition())) {
 			qr.setParameter("pos", filter.getPosition());
 		}
 		
-		if (qr.getParameter("rat") != null) {
+		if (!StringUtils.isBlank(filter.getName())) {
+			qr.setParameter("name", filter.getName());
+		}
+		
+		if (filter.getRating() > 0) {
 			qr.setParameter("rat", filter.getRating());
 		}
 		
-		if (qr.getParameter("lig") != null) {
+	/*	if (qr.getParameter("lig") != null) {
 			qr.setParameter("lig", filter.getLeague());
-		}		
+		}*/		
 		
 		return qr.getResultList();
 	}

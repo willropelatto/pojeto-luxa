@@ -54,7 +54,6 @@ export class TransfermarketListarComponent implements OnInit {
 		_playerService: PlayerService,
 		_bidinfoService: BidinfoService,
 		private route: ActivatedRoute) {
-		//	this.playerService = _playerService;
 		this.bidinfoService = _bidinfoService;
 
 
@@ -86,14 +85,10 @@ export class TransfermarketListarComponent implements OnInit {
 
 	onBid(transferMarket: Transfermarket) {
 		let bidInfo = new Bidinfo();
-
-
 		bidInfo.bidValue = transferMarket.bidValue;
 		bidInfo.originalValue = transferMarket.originalValue;
 		bidInfo.teamID = transferMarket.teamId;
 		bidInfo.playerID = transferMarket.idPlayer;
-		console.log(transferMarket.bidValue);
-		console.log(this.transfermarketService.bid(transferMarket.rating));
 		if (transferMarket.bidValue  === this.transfermarketService.bid(transferMarket.rating)) {
 			this.bidinfoService.initialBid(bidInfo)
 				.subscribe(
@@ -112,8 +107,6 @@ export class TransfermarketListarComponent implements OnInit {
 				(err) => {
 					this.alertService.error(err);
 			});
-//			bidInfo.id = transferMarket.idBid;
-//			this.bidinfoService.atualizar(bidInfo.id, bidInfo);
 		}
 	}
 
