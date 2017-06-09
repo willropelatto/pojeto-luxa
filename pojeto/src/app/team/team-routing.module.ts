@@ -16,9 +16,9 @@ import {
 } from './';
 
 export const TeamRoutes: Routes = [
-	{ path: 'teams', redirectTo: 'teams/listar', canActivate: [AuthGuard] },
 	{ path: 'teams/listar', component: TeamListarComponent, canActivate: [AuthGuard] }, 
 	{ path: 'teams/cadastrar', component: TeamCadastrarComponent, canActivate: [AuthGuard] }, 
 	{ path: 'teams/editar/:id', component: TeamEditarComponent, canActivate: [AuthGuard]  },
-	{ path: 'teams/visualizar/:id', component: TeamVisualizarComponent, canActivate: [AuthGuard] }
+	{ path: 'teams/visualizar/:id', component: TeamVisualizarComponent, canActivate: [AuthGuard] },
+	{ path: 'teams/visualizar', component: TeamVisualizarComponent, canActivate: [AuthGuard] }
 ];

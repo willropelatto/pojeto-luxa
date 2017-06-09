@@ -42,9 +42,9 @@ public class MarketRest {
 	@Consumes("application/json; charset=UTF-8")
 	@Produces("application/json; charset=UTF-8")
 	@Path("/close")	
-	public void closeMarket() {		
-
+	public BidInfo closeMarket() {		
 		mkControl.closeMarket();
+		return new BidInfo();
 	}
 	
 	
@@ -56,6 +56,17 @@ public class MarketRest {
 		return mkControl.getBidFromPlayerId(idPlayer);
 	
 	}	
+	
+	
+	@GET
+	@Produces("application/json; charset=UTF-8")
+	@Path("/getBidFromTeamId/{idTeam}")
+	public  List<BidInfo> getBidFromTeamId(@PathParam("idTeam") Integer idTeam){
+		
+		return mkControl.getBidsFromTeam(idTeam);
+	
+	}	
+	
 	
 	@GET
 	@Produces("application/json; charset=UTF-8")

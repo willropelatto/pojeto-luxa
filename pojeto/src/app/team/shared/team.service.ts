@@ -38,7 +38,7 @@ export class TeamService {
 			this.httpUtil.headers())
 			.map(this.httpUtil.extrairDadosCadastro)
 			.catch(this.httpUtil.processarErros);
-		
+
 	}
 
 
@@ -52,18 +52,17 @@ export class TeamService {
 	}
 
 
-		/**
-	 * Retorna os dados de um player por id.
-	 *
-	 * @param number id
-	 * @return Usuario player
-	 */
+	/**
+ * Retorna os dados de um player por id.
+ *
+ * @param number id
+ * @return Usuario player
+ */
 	buscarPorIdUser(id: number): Observable<Team> {
 		let teamPath = this.path + '/listTeam';
-		return this.http.get(this.httpUtil.url(teamPath + '/' + id),
-						this.httpUtil.headers())
-	                .map(this.httpUtil.extrairDados)
-	                .catch(this.httpUtil.processarErros);
+		return this.http.get(this.httpUtil.url(teamPath + '/' + id), this.httpUtil.headers())
+			.map(this.httpUtil.extrairDados)
+			.catch(this.httpUtil.processarErros);
 	}
 
 
@@ -73,16 +72,16 @@ export class TeamService {
 	 * @param number id
 	 * @return Usuario team
 	 */
-/*	buscarPorId(id: number): Team {
-		var teams: Team[] = this.listarTodos();
-		for (let team of teams) {
-			if (team.id == id) {
-				return team;
+	/*	buscarPorId(id: number): Team {
+			var teams: Team[] = this.listarTodos();
+			for (let team of teams) {
+				if (team.id == id) {
+					return team;
+				}
 			}
-		}
-
-		return new Team();
-	}*/
+	
+			return new Team();
+		}*/
 
 	/**
 	 * Atualiza os dados de um team.
@@ -90,35 +89,35 @@ export class TeamService {
 	 * @param number id
 	 * @param Team team
 	 */
-/*	atualizar(id: number, team: Team): void {
-		var teams: Team[] = this.listarTodos();
-		for (var i = 0; i < teams.length; i++) {
-			if (teams[i].id == id) {
-				teams[i] = team;
+	/*	atualizar(id: number, team: Team): void {
+			var teams: Team[] = this.listarTodos();
+			for (var i = 0; i < teams.length; i++) {
+				if (teams[i].id == id) {
+					teams[i] = team;
+				}
 			}
-		}
-
-		sessionStorage['teams'] = JSON.stringify(teams);
-	}*/
+	
+			sessionStorage['teams'] = JSON.stringify(teams);
+		}*/
 
 	/**
 	 * Remove um team.
 	 *
 	 * @param number id
 	 */
-/*	excluir(id: number): void {
-		var teams: Team[] = this.listarTodos();
-		var teamsFinal: Team[] = [];
-
-		for (let team of teams) {
-			if (team.id != id) {
-				teamsFinal.push(team);
+	/*	excluir(id: number): void {
+			var teams: Team[] = this.listarTodos();
+			var teamsFinal: Team[] = [];
+	
+			for (let team of teams) {
+				if (team.id != id) {
+					teamsFinal.push(team);
+				}
 			}
+	
+			sessionStorage['teams'] = JSON.stringify(teamsFinal);
 		}
-
-		sessionStorage['teams'] = JSON.stringify(teamsFinal);
-	}
-*/
+	*/
 	/**
 	 * Retorna listagem parcial de teams.
 	 *

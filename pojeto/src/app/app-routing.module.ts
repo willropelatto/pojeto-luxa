@@ -1,3 +1,4 @@
+import { TeamVisualizarComponent } from './team/visualizar/team-visualizar.component';
 import { RegisterComponent } from './user/cadastrar/user-cadastrar.component';
 import { LoginComponent } from './user/login/login.component';
 /**
@@ -22,11 +23,12 @@ import { TransfermarketRoutes } from './transfermarket';
 import { UserRoutes } from './user';
 
 export const routes: Routes = [
+  ...TeamRoutes,
   ...PlayerRoutes,
   ...LeagueRoutes,
-  ...TeamRoutes,
   ...BidinfoRoutes,
   ...TransfermarketRoutes,
+  { path: '', component: TeamVisualizarComponent},
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
 ];

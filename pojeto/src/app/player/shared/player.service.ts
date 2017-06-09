@@ -74,7 +74,7 @@ export class PlayerService {
 	 * @return Usuario player
 	 */
 	buscarPorId(id: number): Observable<Player> {
-		return this.http.get(this.httpUtil.url(this.path + '/' + id),
+		return this.http.get(this.httpUtil.url('player/getPlayer/'+ id),
 			this.httpUtil.headers())
 			.map(this.httpUtil.extrairDados)
 			.catch(this.httpUtil.processarErros);

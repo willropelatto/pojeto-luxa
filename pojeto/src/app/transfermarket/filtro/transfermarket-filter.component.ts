@@ -104,5 +104,16 @@ export class TransfermarketFilterComponent implements OnInit {
 		}
 	}
 
+	closeMarket(){
+		this.bidinfoService.closeMarket()
+		.subscribe(
+				(res) => {
+					this.alertService.success('Mercado fechado com sucesso!', true);
+				},
+				(err) => {
+					this.alertService.error(err);
+				});
+	}
+
 
 }

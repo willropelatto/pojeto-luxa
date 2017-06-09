@@ -18,7 +18,6 @@ import com.model.in.FullPlayer;
 import com.model.in.League;
 import com.model.in.Page;
 import com.model.in.PlayerFilter;
-import com.model.out.PlayerList;
 import com.model.out.ResumedPlayer;
 
 public class PlayerController {
@@ -138,6 +137,12 @@ public class PlayerController {
 		return convertListEntityToResumed(enPlayers);
 		
 	}	
+	
+	public ResumedPlayer getPlayer(int playerId){
+		PlayerEntity enPlayer = playerDao.getPlayer(playerId);
+		
+		return convertPlayerEntityToResumed(enPlayer);
+	}
 	
 	public List<ResumedPlayer> getAllPlayers() {
 		

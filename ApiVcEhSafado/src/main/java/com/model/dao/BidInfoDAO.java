@@ -49,5 +49,10 @@ public class BidInfoDAO {
 	public List<BidEntity> getList() {
 		return this.entityManager.createQuery("SELECT p FROM BidEntity p ORDER BY p.id", BidEntity.class).getResultList();
 	}
+	
+	public List<BidEntity> getListTeam(Integer teamID) {
+		return this.entityManager.createQuery("SELECT p FROM BidEntity p WHERE p.teamID = :teamID ORDER BY p.id", BidEntity.class)
+				.setParameter("teamID", teamID).getResultList();
+	}
 
 }

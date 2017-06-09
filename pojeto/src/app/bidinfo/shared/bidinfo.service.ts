@@ -35,7 +35,7 @@ export class BidinfoService {
  */
 	listarTodosBids(): Observable<Bidinfo[]> {
 
-		return this.http.get(this.httpUtil.url(this.path + '/list'), this.httpUtil.headers())
+		return this.http.get(this.httpUtil.url(this.pathApi + '/list'), this.httpUtil.headers())
 			.map(this.httpUtil.extrairDados)
 			.catch(this.httpUtil.processarErros);
 	}
@@ -68,38 +68,26 @@ export class BidinfoService {
 			.catch(this.httpUtil.processarErros);
 	}
 
-
-	buscarPorPlayerId(id: number): Observable<Bidinfo> {
-		let bidinfoPath = this.pathApi + '/getBidFromPlayerId';
-		return Observable.create(observer => {
-			this.http.get(this.httpUtil.url(bidinfoPath + '/' + id),
+	closeMarket(): Observable<Bidinfo> {
+		console.log('close');
+		let bidinfoPath = this.pathApi + '/close';
+		return this.http.post(this.httpUtil.url(bidinfoPath),
 			this.httpUtil.headers())
 			.map(this.httpUtil.extrairDados)
-			.catch(this.httpUtil.processarErros)
-			.subscribe((data) => {
-				this.obBidInfo = data
-				observer.next(this.obBidInfo);
-				observer.complete();
-			});
-		});
+			.catch(this.httpUtil.processarErros);
 	}
 
-
-
-	buscarPorIdPlayerFlapMap(id: number): Observable<Bidinfo> {
-		let bidinfoPath = this.pathApi + '/getBidFromPlayerId';
-		let myRequest =  this.http.get(this.httpUtil.url(bidinfoPath + '/' + id),this.httpUtil.headers());
-		return myRequest
-			.expand(() => Observable.timer(50000).flatMap(() => myRequest)
-												.catch(this.httpUtil.processarErros));
-
-									
-
-	/*	return this.http.get(this.httpUtil.url(bidinfoPath + '/' + id),
+	buscarPorTeam(id: number): Observable<Bidinfo[]> {
+		let bidinfoPath = this.pathApi + '/getBidFromTeamId';
+		return this.http.get(this.httpUtil.url(bidinfoPath + '/' + id),
 			this.httpUtil.headers())
-			.flatMap(this.httpUtil.extrairDados)
-			.catch(this.httpUtil.processarErros);*/
+			.map(this.httpUtil.extrairDados)
+			.catch(this.httpUtil.processarErros);
 	}
+
+
+
+
 
 	/**
 	 * Retorna listagem de todos os bidinfos.

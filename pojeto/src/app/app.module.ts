@@ -67,7 +67,7 @@ import { MdSelectModule, MdOptionModule, MdAutocompleteModule} from '@angular/ma
     AuthGuard,
     AuthenticationService,
     UserService,
-    AlertService    
+    AlertService,   
   ],
   bootstrap:    [ AppComponent ]
 })

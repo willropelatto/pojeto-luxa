@@ -13,11 +13,14 @@ public class TeamController {
 	
 	public Team convertEntityToTeam(TeamEntity ent) {
 		
+		
+		PlayerController plCtrl = new PlayerController();	
 		Team team = new Team();
 		team.setBudget(ent.getBudget()); 
 		team.setId(ent.getId());
 		team.setManager(ent.getManager());
 		team.setName(ent.getName());	
+		team.setPlayers(plCtrl.loadTeamPlayers(team.getId()));
 		
 		return team;
 	}	

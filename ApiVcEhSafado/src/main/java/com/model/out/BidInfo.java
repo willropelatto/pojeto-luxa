@@ -7,7 +7,14 @@ public class BidInfo {
 	private int teamID;
 	private double originalValue;
 	private boolean bidAproved;
+	private String playerName;
 	
+	public String getPlayerName() {
+		return playerName;
+	}
+	public void setPlayerName(String playerName) {
+		this.playerName = playerName;
+	}
 	public int getPlayerID() {
 		return playerID;
 	}

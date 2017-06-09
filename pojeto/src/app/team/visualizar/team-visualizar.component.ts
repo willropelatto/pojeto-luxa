@@ -1,3 +1,4 @@
+import { User } from './../../user/shared/user.model';
 /**
  * Componente de visualização de team.
  *
@@ -14,18 +15,18 @@ import { Team, TeamService } from '../shared';
 import { Player } from '../../player';
 
 @Component({
-	selector: 'kz-team-visualizar',
+	selector: 'pojeto-team-visualizar',
 	templateUrl: './team-visualizar.component.html',
 	styleUrls: ['./team-visualizar.component.css']
 })
 export class TeamVisualizarComponent implements OnInit {
 
 	private id: number;
+	private teamResult: Team;
 	private team: Team;
-	private players : Player[] = [
-		new Player(1,'Messi','PD',1,94),
-		new Player(2,'Cristiano Ronaldo','PE',2,93)
-	]
+	private user: User;
+	private msgErro: string;
+	private players: Player[];
 
 	/**
 	 * Construtor.
@@ -34,8 +35,11 @@ export class TeamVisualizarComponent implements OnInit {
 	 * @param TeamService teamService
 	 */
 	constructor(
-		private route: ActivatedRoute, 
+		private route: ActivatedRoute,
 		private teamService: TeamService) {
+		this.user = JSON.parse(localStorage.getItem('currentUser'));
+
+
 	}
 
 	/**
@@ -43,7 +47,20 @@ export class TeamVisualizarComponent implements OnInit {
 	 */
 	ngOnInit() {
 		this.id = +this.route.snapshot.params['id'];
-		//this.team = this.teamService.buscarPorId(this.id);
-		this.team.players = this.players;
+		let idUser = 0;
+		if (this.id === 0) {
+			idUser = this.id;
+		} else {
+			idUser = this.user.id;
+		}
+
+		this.teamService.buscarPorIdUser(this.user.id)
+					.subscribe((team) => { 
+						this.team = team;
+					},
+					error => this.msgErro = error);
+		
+
+
 	}
 }

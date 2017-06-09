@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.model.dao.BidInfoDAO;
 import com.model.dao.BidLogDAO;
+import com.model.dao.PlayerDAO;
 import com.model.dao.TeamDAO;
 import com.model.dao.TeamPlayerDAO;
 import com.model.entity.BidEntity;
@@ -12,6 +13,7 @@ import com.model.entity.BidEntityLog;
 import com.model.entity.TeamEntity;
 import com.model.entity.TeamPlayerEntity;
 import com.model.out.BidInfo;
+import com.model.out.ResumedPlayer;
 
 public class MarketContoller {
 
@@ -19,12 +21,29 @@ public class MarketContoller {
 	private final BidInfoDAO bidDao = new BidInfoDAO();
 	private final BidLogDAO logDao = new BidLogDAO();	
 
-	public final BidInfo convertEntityToInfo(BidEntity bid) {
-
+	public final BidInfo convertEntityToInfo(BidEntity bid) {		
+		
 		BidInfo bidRet = new BidInfo();
 		bidRet.setBidValue(bid.getBidValue());
 		bidRet.setOriginalValue(bid.getOriginalValue());
 		bidRet.setPlayerID(bid.getPlayerID());
+		bidRet.setTeamID(bid.getTeamID());
+		bidRet.setBidAproved(false);
+
+		return bidRet;
+	}
+	
+	public final BidInfo convertEntityToInfoBid(BidEntity bid) {
+		
+		PlayerDAO playerDao = new PlayerDAO();	
+		PlayerController pl = new PlayerController();
+		
+		BidInfo bidRet = new BidInfo();
+		bidRet.setBidValue(bid.getBidValue());
+		bidRet.setOriginalValue(bid.getOriginalValue());
+		bidRet.setPlayerID(bid.getPlayerID());
+		ResumedPlayer rs = pl.convertPlayerEntityToResumed(playerDao.getPlayer(bid.getPlayerID()));
+		bidRet.setPlayerName(rs.getName());
 		bidRet.setTeamID(bid.getTeamID());
 		bidRet.setBidAproved(false);
 
@@ -111,6 +130,8 @@ public class MarketContoller {
 		return bidReturn;
 	}
 	
+
+	
 	public List<BidInfo> getAllBids(){		
 		List<BidEntity> bids = bidDao.getList();
 		List<BidInfo> listBids = new ArrayList<BidInfo>();
@@ -124,6 +145,21 @@ public class MarketContoller {
 		//return bids;
 		
 	}
+	
+	public List<BidInfo> getBidsFromTeam(Integer idTeam){		
+		List<BidEntity> bids = bidDao.getListTeam(idTeam);
+		List<BidInfo> listBids = new ArrayList<BidInfo>();
+		
+		for (BidEntity bid : bids) {
+			listBids.add(convertEntityToInfoBid(bid));			
+		}
+		
+		return listBids;
+		
+		//return bids;
+		
+	}
+
 
 
 
@@ -160,14 +196,14 @@ public class MarketContoller {
 
 		TeamPlayerEntity tpEntity;		
 		TeamPlayerDAO tpDao = new TeamPlayerDAO(); 
-	/*	List<BidInfo> bids = bidDao.getList();		
+		List<BidEntity> bids = bidDao.getList();		
 
-		for (BidInfo bid : bids) {
+		for (BidEntity bid : bids) {
 			tpEntity = new TeamPlayerEntity();
 			tpEntity.setIdPlayer(bid.getPlayerID());
 			tpEntity.setIdTeam(bid.getTeamID());
 			tpDao.save(tpEntity);	
-		}*/
+		}
 
 	}
 

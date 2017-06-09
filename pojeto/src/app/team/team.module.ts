@@ -1,3 +1,6 @@
+import { UserService } from './../user/shared/user.service';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MdOptionModule, MdSelectModule, MaterialModule, MdNativeDateModule } from '@angular/material';
 /**
  * Arquivo de configuração do módulo.
  *
@@ -21,7 +24,12 @@ import { SharedModule } from '../shared';
 @NgModule({
 	imports: [ 
 		RouterModule,
-		SharedModule
+		SharedModule,
+		MdOptionModule,
+		MdSelectModule,
+		MaterialModule,
+        MdNativeDateModule,
+        ReactiveFormsModule
 	],
 	declarations: [
 		TeamCadastrarComponent,
@@ -30,7 +38,7 @@ import { SharedModule } from '../shared';
 		TeamVisualizarComponent
 	],
 	providers: [
-		TeamService
+		TeamService, UserService
 	]
 })
 export class TeamModule {}

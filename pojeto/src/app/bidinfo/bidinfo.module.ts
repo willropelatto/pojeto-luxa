@@ -1,3 +1,4 @@
+import { MaterialModule } from '@angular/material';
 /**
  * Arquivo de configuração do módulo.
  *
@@ -21,7 +22,8 @@ import { SharedModule } from '../shared';
 @NgModule({
 	imports: [ 
 		RouterModule,
-		SharedModule
+		SharedModule,
+		MaterialModule
 	],
 	declarations: [
 		BidinfoCadastrarComponent,

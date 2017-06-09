@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
 
     processarLogin(user: User) {
         this.alertService.success('Usuário Logado com Sucesso');
-        this.router.navigate(['/players/listar']);
+        this.router.navigate(['/teams/cadastrar']);
     }
 
 }

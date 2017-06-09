@@ -10,7 +10,6 @@ import javax.ws.rs.Produces;
 
 import com.ctrl.game.PlayerController;
 import com.model.in.PlayerFilter;
-import com.model.out.PlayerList;
 import com.model.out.ResumedPlayer;
 
 
@@ -25,6 +24,15 @@ public class PlayerRest {
 	public List<ResumedPlayer> getLeaguePlayers(@PathParam("league") Integer league){
  			
 		return ctrl.getLeaguePlayers(league);		
+	}	
+	
+	
+	@GET
+	@Produces("application/json; charset=UTF-8")
+	@Path("/getPlayer/{playerId}")
+	public ResumedPlayer getPlayerFromId(@PathParam("playerId") Integer playerId){
+ 			
+		return ctrl.getPlayer(playerId);		
 	}	
 	
 
