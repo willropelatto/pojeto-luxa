@@ -1,3 +1,4 @@
+import { Team } from './../../team/shared/team.model';
 import { PlayerFilter } from './../shared/playerFilter.model';
 import { AlertService } from './../../util/alert.service';
 /**
@@ -42,7 +43,8 @@ export class TransfermarketFilterComponent implements OnInit {
 	private bidinfoService: BidinfoService;
 	private playerId: number;
 	private bid: Bidinfo;
-	private playerFilter : PlayerFilter;
+	private playerFilter: PlayerFilter;
+	private team: Team;
 
 
 	constructor(private transfermarketService: TransfermarketService,
@@ -67,13 +69,14 @@ export class TransfermarketFilterComponent implements OnInit {
 	ngOnInit() {
 		this.bid = new Bidinfo();
 		this.transfermarkets = this.transfermarketService.listarFilter(this.playerFilter);
+		this.team = this.transfermarketService.getTeam();
 		let timer = Observable.timer(1000, 2000);
 		timer.subscribe(t => this.ticks = t);
 
-		
+
 	}
 
-	
+
 
 	onBid(transferMarket: Transfermarket) {
 		let bidInfo = new Bidinfo();
@@ -83,36 +86,41 @@ export class TransfermarketFilterComponent implements OnInit {
 		bidInfo.originalValue = transferMarket.originalValue;
 		bidInfo.teamID = transferMarket.teamId;
 		bidInfo.playerID = transferMarket.idPlayer;
-		if (transferMarket.bidValue  === this.transfermarketService.bid(transferMarket.rating)) {
-			this.bidinfoService.initialBid(bidInfo)
-				.subscribe(
-				(res) => {
-					this.alertService.success('Lance efetuado com sucesso!', true);
-				},
-				(err) => {
-					this.alertService.error(err);
-				});
+		if (transferMarket.bidValue > transferMarket.team.budget) {
+			this.alertService.error('Você não possuí dinheiro suficiente. Lance: R$ '+transferMarket.bidValue + ',00'+
+			'. Em conta: R$'+ transferMarket.team.budget+',00');	
 		} else {
-			this.bidinfoService.placeBid(bidInfo)
-				.subscribe(
-				(res) => {
-					this.alertService.success('Lance efetuado com sucesso!', true);
-				},
-				(err) => {
-					this.alertService.error(err);
-			});
+			if (transferMarket.bidValue === this.transfermarketService.bid(transferMarket.rating)) {
+				this.bidinfoService.initialBid(bidInfo)
+					.subscribe(
+					(res) => {
+						this.alertService.success('Lance efetuado com sucesso!', true);
+					},
+					(err) => {
+						this.alertService.error(err);
+					});
+			} else {
+				this.bidinfoService.placeBid(bidInfo)
+					.subscribe(
+					(res) => {
+						this.alertService.success('Lance efetuado com sucesso!', true);
+					},
+					(err) => {
+						this.alertService.error(err);
+					});
+			}
 		}
 	}
 
-	closeMarket(){
+	closeMarket() {
 		this.bidinfoService.closeMarket()
-		.subscribe(
-				(res) => {
-					this.alertService.success('Mercado fechado com sucesso!', true);
-				},
-				(err) => {
-					this.alertService.error(err);
-				});
+			.subscribe(
+			(res) => {
+				this.alertService.success('Mercado fechado com sucesso!', true);
+			},
+			(err) => {
+				this.alertService.error(err);
+			});
 	}
 
 

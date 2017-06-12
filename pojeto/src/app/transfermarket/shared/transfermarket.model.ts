@@ -1,3 +1,4 @@
+import { Team } from './../../team/shared/team.model';
 export class Transfermarket {
 	constructor(
 		public idPlayer?: number,
@@ -9,5 +10,7 @@ export class Transfermarket {
 		public teamId?: number,
 		public originalValue?: number,
 		public playerId?: number,
-		public bidAproved?: boolean){}	
+		public bidAproved?: boolean,
+		public hasBid?: boolean,
+		public team?: Team){}	
 }

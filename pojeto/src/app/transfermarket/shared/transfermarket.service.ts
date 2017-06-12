@@ -135,7 +135,7 @@ export class TransfermarketService {
 	}
 
 
-	listarFilter(playerFilter : PlayerFilter): Transfermarket[] {
+	listarFilter(playerFilter: PlayerFilter): Transfermarket[] {
 		let playerList: Player[] = [];
 		let shops: Transfermarket[] = [];
 
@@ -145,44 +145,58 @@ export class TransfermarketService {
 				this.players = players
 
 				this.teamService.buscarPorIdUser(this.user.id)
-					.subscribe(team => this.team = team,
-					error => this.msgErro = error);
+					.subscribe((team) => {
+						this.team = team		
+										
 
-				for (let player of this.players) {
+						for (let player of this.players) {
 
-					let shop = new Transfermarket();
-					shop.name = player.name;
-					shop.position = player.position;
-					shop.rating = player.rating;
-					shop.idPlayer = player.id;
-					console.log(player.id);
+							let shop = new Transfermarket();
+							shop.name = player.name;
+							shop.position = player.position;
+							shop.rating = player.rating;
+							shop.idPlayer = player.id;
+							console.log(player.id);
+							shop.team = this.team;
+							
 
-					this.bidinfoService.buscarPorIdPlayers(player.id)
-						.subscribe((bidInfo) => {
-							this.bidInfo = bidInfo;
-							let bid: Bidinfo = this.bidInfo;
-							console.log(this.bidInfo);
-							if (this.bidInfo) {
-								shop.idBid = bid.id;
-								shop.originalValue = bid.originalValue;
-								shop.bidValue = bid.bidValue + (bid.originalValue * 0.05);
-								shop.teamId = bid.teamID;
-							} else {
-								shop.idBid = 0;
-								shop.bidValue = this.bid(player.rating);
-								shop.originalValue = this.bid(player.rating);
-								shop.teamId = this.team.id;
-							}
+							this.bidinfoService.buscarPorIdPlayers(player.id)
+								.subscribe((bidInfo) => {
+									this.bidInfo = bidInfo;
+									let bid: Bidinfo = this.bidInfo;
+									console.log(this.bidInfo);
+									if (this.bidInfo) {
+										shop.idBid = bid.id;
+										shop.originalValue = bid.originalValue;
+										shop.bidValue = bid.bidValue + (bid.originalValue * 0.05);
+										shop.teamId = bid.teamID;
+										shop.hasBid = true;
+										shop.bidAproved = (bid.teamID === this.team.id);
+									} else {
+										shop.idBid = 0;
+										shop.bidValue = this.bid(player.rating);
+										shop.originalValue = this.bid(player.rating);
+										shop.teamId = this.team.id;
+										shop.hasBid = false;
+										shop.bidAproved = false;
+									}
 
-							shops.push(shop);
-						});
-				}
+									shops.push(shop);
+								});
+						}
+					}, error => this.msgErro = error);
+
+
 			},
 
 			error => this.msgErro = error);
 
 		return shops;
 
+	}
+
+	getTeam(){
+		return this.team;
 	}
 
 

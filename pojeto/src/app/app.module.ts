@@ -34,6 +34,7 @@ import { RegisterComponent } from './user/cadastrar/user-cadastrar.component';
 import { UserService } from './user/shared/user.service';
 import { FormsModule }   from '@angular/forms';
 import { MdSelectModule, MdOptionModule, MdAutocompleteModule} from '@angular/material';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   imports:      [
@@ -53,6 +54,7 @@ import { MdSelectModule, MdOptionModule, MdAutocompleteModule} from '@angular/ma
     PaginationModule.forRoot(),
 		TabsModule.forRoot(),
     FormsModule,
+    ToastrModule.forRoot(),
   
   ],
 

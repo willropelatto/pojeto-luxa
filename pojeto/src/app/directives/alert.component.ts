@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
  
 import { AlertService } from './../util/alert.service';
 
+import { ToastrService } from 'ngx-toastr';
+
  
 @Component({
     selector: 'alert',
@@ -11,9 +13,18 @@ import { AlertService } from './../util/alert.service';
 export class AlertComponent {
     message: any;
  
-    constructor(private alertService: AlertService) { }
+    constructor(private alertService: AlertService,
+                private toastrService: ToastrService) { }
  
     ngOnInit() {
-        this.alertService.getMessage().subscribe(message => { this.message = message; });
+
+    }
+
+    onSucess(message: string){
+        this.toastrService.success(message);
+    }
+
+    onError(message: string){
+        this.toastrService.error(message);
     }
 }

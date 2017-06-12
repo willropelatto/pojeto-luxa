@@ -1,34 +1,65 @@
-
-<div>
-    <button class="btn btn-danger" (click)="closeMarket()" >Fechar Mercado</button>
-
-    <table class="table table-striped">
-        <tr>
-            <th>Nome</th>
-            <th>Posição</th>
-            <th>Rating</th>
-            <th>Preço Lance</th>
-            <th>Preço Inicial</th>
-            <th>Tempo</th>  
-            <th>Lance</th>   
-            <th class="text-right">
-                <a class="btn btn-primary" 
-                    [routerLink]="['/transfermarkets/cadastrar']">
-                    Voltar
-                </a>
-            </th>
-
-
-        </tr>
-        <tr *ngFor="let transfermarket of transfermarkets">
-            <td>{{transfermarket.name}}</td>
-            <td>{{transfermarket.position}}</td>
-             <td>{{transfermarket.rating}}</td>
-            <td>{{transfermarket.bidValue}}</td>  
-            <td>{{transfermarket.originalValue}}</td>  
-            <td>{{ticks}}</td>  
-            <td><button class="btn btn-success" (click)="onBid(transfermarket)" >Dar Lance</button></td>  
-        </tr>
-    </table>
-
-</div>
+<md-card class="result">
+    <div class="row">
+        <div class="col-md-6">
+            <md-card-title>Jogadores: {{transfermarkets?.length}}</md-card-title>
+        </div>
+        <div class="col-md-6">
+            <md-card-title routerLink="/transfermarkets/cadastrar" class="text-right"><span class="btn btn-primary">Voltar</span></md-card-title>
+        </div>
+    </div>
+    <div>
+        <md-card-content>
+            <div *ngIf="transfermarkets?.length > 0" class="row">
+                <md-card-content>
+                    <!--<button class="btn btn-danger" (click)="closeMarket()">Fechar Mercado</button>-->
+                    <div class="table-responsive">
+                        <table class="table table-condensed">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">
+                                        <md-card-title>Jogador</md-card-title>
+                                    </th>
+                                    <th class="text-center">
+                                        <md-card-title>Posição</md-card-title>
+                                    </th>
+                                    <th class="text-center">
+                                        <md-card-title>Rating</md-card-title>
+                                    </th>
+                                    <th class="text-center">
+                                        <md-card-title>Lance</md-card-title>
+                                    </th>
+                                    <th class="text-center">
+                                        <md-card-title>Preço Inicial</md-card-title>
+                                    </th>
+                                    <th class="text-center">
+                                        <md-card-title>Possui Lance</md-card-title>
+                                    </th>
+                                    <th class="text-center">
+                                        <md-card-title>Vencendo</md-card-title>
+                                    </th>
+                                    <th class="text-center">
+                                        <md-card-title>Lance</md-card-title>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let transfermarket of transfermarkets">
+                                    <td class="text-center">{{transfermarket.name}}</td>
+                                    <td class="text-center">{{transfermarket.position}}</td>
+                                    <td class="text-center">{{transfermarket.rating}}</td>
+                                    <td class="text-center">R$ {{transfermarket.bidValue}},00</td>
+                                    <td class="text-center">R$ {{transfermarket.originalValue}},00</td>
+                                    <td *ngIf="transfermarket.hasBid" class="text-center">Sim</td>
+                                    <td *ngIf="!transfermarket.hasBid" class="text-center">Não</td>
+                                    <td *ngIf="transfermarket.bidAproved" class="text-center">Sim</td>
+                                    <td *ngIf="!transfermarket.bidAproved" class="text-center">Não</td>
+                                    <td class="text-center"><button class="btn btn-success" (click)="onBid(transfermarket)">Dar Lance</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </md-card-content>
+            </div>
+        </md-card-content>
+    </div>
+</md-card>
