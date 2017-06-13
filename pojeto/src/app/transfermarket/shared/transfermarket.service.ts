@@ -169,7 +169,7 @@ export class TransfermarketService {
 										shop.idBid = bid.id;
 										shop.originalValue = bid.originalValue;
 										shop.bidValue = bid.bidValue + (bid.originalValue * 0.05);
-										shop.teamId = bid.teamID;
+										shop.teamId = this.team.id;
 										shop.hasBid = true;
 										shop.bidAproved = (bid.teamID === this.team.id);
 									} else {

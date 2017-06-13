@@ -1,3 +1,4 @@
+
 <md-card class="result">
     <div class="row">
         <div class="col-md-6">
@@ -8,10 +9,11 @@
         </div>
     </div>
     <div>
+    <md-spinner *ngIf="!transfermarkets"></md-spinner>
         <md-card-content>
             <div *ngIf="transfermarkets?.length > 0" class="row">
                 <md-card-content>
-                    <!--<button class="btn btn-danger" (click)="closeMarket()">Fechar Mercado</button>-->
+                    <button class="btn btn-danger" (click)="closeMarket()">Fechar Mercado</button>
                     <div class="table-responsive">
                         <table class="table table-condensed">
                             <thead>
@@ -63,3 +65,4 @@
         </md-card-content>
     </div>
 </md-card>
+       

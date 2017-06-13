@@ -50,9 +50,10 @@ export class TeamCadastrarComponent implements OnInit {
 		console.log(this.team);
 		this.teamService.register(this.team)
 			.subscribe(
-			(res) => {				
+			(res) => {
+				this.router.navigate(['/']);					
 				this.alertService.success('Registro Efetuado com sucesso', true);
-				this.router.navigate(['/teams']);
+				
 			},
 			(err) => {
 				this.alertService.error(err);

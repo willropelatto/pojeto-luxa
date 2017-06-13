@@ -89,6 +89,7 @@ export class TransfermarketListarComponent implements OnInit {
 		bidInfo.originalValue = transferMarket.originalValue;
 		bidInfo.teamID = transferMarket.teamId;
 		bidInfo.playerID = transferMarket.idPlayer;
+		console.log(bidInfo);
 		if (transferMarket.bidValue  === this.transfermarketService.bid(transferMarket.rating)) {
 			this.bidinfoService.initialBid(bidInfo)
 				.subscribe(

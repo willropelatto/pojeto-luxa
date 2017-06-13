@@ -57,7 +57,7 @@ public class PlayerController {
 
 		ResumedPlayer resumed = new ResumedPlayer();
 
-		resumed.setBaseId(entity.getBaseId());
+	//	resumed.setBaseId(entity.getBaseId());
 		resumed.setId(entity.getId().toString());
 		resumed.setName(entity.getName());
 		resumed.setPosition(entity.getPosition());

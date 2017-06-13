@@ -43,7 +43,8 @@ export class HttpUtilService {
 	}
 
 	extrairDadosUser(response : Response){
-		let user = response.json();		
+		let user = response.json();	
+		console.log(user);	
 		if (user && user.keyAuth){
 			localStorage.setItem('currentUser', JSON.stringify(user));
 		}

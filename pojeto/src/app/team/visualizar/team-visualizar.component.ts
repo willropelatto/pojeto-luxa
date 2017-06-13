@@ -46,6 +46,8 @@ export class TeamVisualizarComponent implements OnInit {
 	 * Método executado logo após a criação do componente.
 	 */
 	ngOnInit() {
+		console.log(this.user);
+		this.user = JSON.parse(localStorage.getItem('currentUser'));
 		this.id = +this.route.snapshot.params['id'];
 		let idUser = 0;
 		if (this.id === 0) {
