@@ -112,40 +112,47 @@ public class UserController {
 	}	
 	
 	public User login(User user) { 
-		UserEntity entity = userDAO.getUserByLogin(user.getLogin());
-		
-		if (entity != null) {
-			if (entity.getSenha().equals(user.getSenha())) {
-				String keyAuth;
-				try {
-					keyAuth = TokenAuth.GerarToken(user.getLogin());
-				} catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
-					
-					return null; //return "Não foi possivel gerar o token: "+e.getMessage();
-				}
-				try {
-					entity.setKeyAuth(keyAuth);	
-					userDAO.Update(entity);
-				} catch (Exception e) {
-		 
-					return null; //return "Não foi possivel gravar Token de autenticação: " + e.getMessage();
-		 		}		
-				user.setId(entity.getId());
-				user.setKeyAuth(keyAuth);
-				user.setNome(entity.getNome());
-				user.setSobrenome(entity.getSobrenome());
-				user.setEmail(entity.getEmail());
-				user.setSenha("");
-				return user;
-				//return keyAuth;
-	 
-			} else {
-				return null; //return "Senha inválida.";
-			}
+		try{
+			UserEntity entity = userDAO.getUserByLogin(user.getLogin());
 			
-		} else {
-			return null; 
+			if (entity != null) {
+				if (entity.getSenha().equals(user.getSenha())) {
+					String keyAuth;
+					try {
+						keyAuth = TokenAuth.GerarToken(user.getLogin());
+					} catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
+						
+						return null; //return "Não foi possivel gerar o token: "+e.getMessage();
+					}
+					try {
+						entity.setKeyAuth(keyAuth);	
+						userDAO.Update(entity);
+					} catch (Exception e) {
+			 
+						return null; //return "Não foi possivel gravar Token de autenticação: " + e.getMessage();
+			 		}		
+					user.setId(entity.getId());
+					user.setKeyAuth(keyAuth);
+					user.setNome(entity.getNome());
+					user.setSobrenome(entity.getSobrenome());
+					user.setEmail(entity.getEmail());
+					user.setSenha("");
+					return user;
+					//return keyAuth;
+		 
+				} else {
+					return null; //return "Senha inválida.";
+				}
+				
+			} else {
+				return null; 
+			}
 		}
+		catch (Exception e) {
+			return null;
+		}
+		
+			
 		
 	}	
 	

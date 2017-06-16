@@ -1,3 +1,4 @@
+import { AuthGuard } from './guards/auth.guard';
 import { TeamVisualizarComponent } from './team/visualizar/team-visualizar.component';
 import { RegisterComponent } from './user/cadastrar/user-cadastrar.component';
 import { LoginComponent } from './user/login/login.component';
@@ -28,7 +29,7 @@ export const routes: Routes = [
   ...LeagueRoutes,
   ...BidinfoRoutes,
   ...TransfermarketRoutes,
-  { path: '', component: TeamVisualizarComponent},
+  { path: '', component: TeamVisualizarComponent, canActivate: [AuthGuard]},
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
 ];

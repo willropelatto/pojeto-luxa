@@ -48,6 +48,7 @@ export class HttpUtilService {
 		if (user && user.keyAuth){
 			localStorage.setItem('currentUser', JSON.stringify(user));
 		}
+		return user;
 	}
 
 	extrairDadosBidInfo(response : Response){

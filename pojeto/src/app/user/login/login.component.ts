@@ -37,15 +37,31 @@ export class LoginComponent implements OnInit {
         user.senha = this.senha;
 
         this.authenticationService.login(user)
-            .subscribe(
-            user => this.processarLogin(user),
+            .subscribe((user) => {
+                let userLogged = user;
+                 console.log(userLogged);
+                if (userLogged && userLogged.keyAuth) {
+                    this.alertService.success('Usuário Logado com Sucesso');
+                    this.router.navigate(['/']);
+                } else {
+                    this.alertService.error('Usuário inválido ou senha incorreta.');
+                    this.router.navigate(['/login']);
+                }
+
+            },
             error => this.alertService.error(error));
     }
 
 
     processarLogin(user: User) {
-        this.alertService.success('Usuário Logado com Sucesso');
-        this.router.navigate(['/']);
+        console.log(user);
+        if (user && user.keyAuth) {
+            this.alertService.success('Usuário Logado com Sucesso');
+            this.router.navigate(['/']);
+        } else {
+            this.alertService.error('Usuário inválido ou senha incorreta.');
+            this.router.navigate(['/login']);
+        }
     }
 
 }

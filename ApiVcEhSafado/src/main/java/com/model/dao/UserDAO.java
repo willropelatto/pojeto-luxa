@@ -42,12 +42,19 @@ public class UserDAO {
     }	
     
     public UserEntity getUserByLogin(String login) {
-    	Object result = this.entityManager.createQuery("SELECT u FROM UserEntity u where u.login = :login ORDER BY u.id")
-    			.setParameter("login", login).getSingleResult();
+    	try {
+	    	Object result = this.entityManager.createQuery("SELECT u FROM UserEntity u where u.login = :login ORDER BY u.id")
+	    			.setParameter("login", login).getSingleResult();
+	    	
+	    	if (result == null) return null;
+	        
+	    	return (UserEntity) result;
+	    	
+    	} catch (Exception e) {
+    		return null;// TODO: handle exception
+		}     	
 
-    	if (result == null) return null;
-        
-    	return (UserEntity) result;
+
     }
     
 	public List<UserEntity> TodosUsuarios(){
