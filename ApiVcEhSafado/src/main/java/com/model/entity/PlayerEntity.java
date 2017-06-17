@@ -26,7 +26,8 @@ public class PlayerEntity {
 	private Integer idLeague;
 	@Column(name="originalId")
 	private String originalId;
-	
+	@Column(name = "hasBid", columnDefinition = "boolean default false", nullable = false)
+	private boolean hasBid;
 	
 	public Integer getId() {
 		return id;
@@ -72,6 +73,13 @@ public class PlayerEntity {
 	public void setOriginalId(String originalId) {
 		this.originalId = originalId;
 	}
+	public boolean isHasBid() {
+		return hasBid;
+	}
+	public void setHasBid(boolean hasBid) {
+		this.hasBid = hasBid;
+	}
+	
 	
 	
 	

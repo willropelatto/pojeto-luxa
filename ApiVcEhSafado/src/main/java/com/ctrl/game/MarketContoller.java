@@ -10,6 +10,7 @@ import com.model.dao.TeamDAO;
 import com.model.dao.TeamPlayerDAO;
 import com.model.entity.BidEntity;
 import com.model.entity.BidEntityLog;
+import com.model.entity.PlayerEntity;
 import com.model.entity.TeamEntity;
 import com.model.entity.TeamPlayerEntity;
 import com.model.out.BidInfo;
@@ -20,6 +21,7 @@ public class MarketContoller {
 	private final TeamDAO teamAcc = new TeamDAO();	
 	private final BidInfoDAO bidDao = new BidInfoDAO();
 	private final BidLogDAO logDao = new BidLogDAO();	
+	private final PlayerDAO plDao = new PlayerDAO();
 
 	public final BidInfo convertEntityToInfo(BidEntity bid) {		
 		
@@ -89,12 +91,15 @@ public class MarketContoller {
 
 		TeamEntity team = teamAcc.getTeam(bid.getTeamID());
 		BidEntity bidBase = bidDao.getItem(bid.getPlayerID());
+		PlayerEntity plBase = plDao.getPlayer(bid.getPlayerID());
 		BidInfo bidReturn;
 
 		if (bid.getBidValue() > bidBase.getBidValue()) {
 			if (haveMoney(bid.getBidValue(), team)) {
 				teamAcc.decreaseBudget(bid.getTeamID(), bid.getBidValue());				
-				teamAcc.increaseBudget(bidBase.getTeamID(), bidBase.getBidValue());				
+				teamAcc.increaseBudget(bidBase.getTeamID(), bidBase.getBidValue());
+				plBase.setHasBid(true);
+				plDao.update(plBase);				
 				logDao.save(convertEntityToLog(bidBase));
 				bidDao.delete(bidBase);
 				bidDao.save(convertInfoToEntity(bid));
@@ -168,7 +173,8 @@ public class MarketContoller {
 
 		TeamEntity team = teamAcc.getTeam(bid.getTeamID());
 
-		BidEntity bidBase = bidDao.getItem(bid.getPlayerID());		
+		BidEntity bidBase = bidDao.getItem(bid.getPlayerID());	
+		PlayerEntity plBase = plDao.getPlayer(bid.getPlayerID());		
 		BidInfo bidReturn;
 
 		if (bidBase != null) {
@@ -176,7 +182,9 @@ public class MarketContoller {
 			bidReturn.setBidAproved(false);
 		} else {
 			if (haveMoney(bid.getBidValue(), team)) {
-				teamAcc.decreaseBudget(bid.getTeamID(), bid.getBidValue());					
+				teamAcc.decreaseBudget(bid.getTeamID(), bid.getBidValue());	
+				plBase.setHasBid(true);
+				plDao.update(plBase);
 				logDao.save(convertInfoToLog(bid));
 				bidDao.save(convertInfoToEntity(bid));				
 				bidReturn = BidInfoFactory.newProtectedBid(bid.getPlayerID(), bid.getBidValue());

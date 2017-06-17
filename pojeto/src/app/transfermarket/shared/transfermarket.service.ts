@@ -1,5 +1,6 @@
+import { Observable } from 'rxjs/Observable';
 import { PlayerFilter } from './playerFilter.model';
-import { Observable } from 'rxjs';
+
 import { HttpUtilService } from './../../util/http-util-service';
 import { Http } from '@angular/http';
 
@@ -133,6 +134,9 @@ export class TransfermarketService {
 		return shops;
 
 	}
+	listarFilterObservable(playerFilter: PlayerFilter): Observable<Transfermarket[]> {
+		return Observable.of(this.listarFilter(playerFilter));
+	}
 
 
 	listarFilter(playerFilter: PlayerFilter): Transfermarket[] {
@@ -143,11 +147,11 @@ export class TransfermarketService {
 		this.playerService.listarFiltro(playerFilter)
 			.subscribe((players) => {
 				this.players = players
-
+			
 				this.teamService.buscarPorIdUser(this.user.id)
 					.subscribe((team) => {
-						this.team = team		
-										
+						this.team = team
+
 
 						for (let player of this.players) {
 
@@ -156,33 +160,42 @@ export class TransfermarketService {
 							shop.position = player.position;
 							shop.rating = player.rating;
 							shop.idPlayer = player.id;
-							console.log(player.id);
 							shop.team = this.team;
-							
 
-							this.bidinfoService.buscarPorIdPlayers(player.id)
-								.subscribe((bidInfo) => {
-									this.bidInfo = bidInfo;
-									let bid: Bidinfo = this.bidInfo;
-									console.log(this.bidInfo);
-									if (this.bidInfo) {
-										shop.idBid = bid.id;
-										shop.originalValue = bid.originalValue;
-										shop.bidValue = bid.bidValue + (bid.originalValue * 0.05);
-										shop.teamId = this.team.id;
-										shop.hasBid = true;
-										shop.bidAproved = (bid.teamID === this.team.id);
-									} else {
-										shop.idBid = 0;
-										shop.bidValue = this.bid(player.rating);
-										shop.originalValue = this.bid(player.rating);
-										shop.teamId = this.team.id;
-										shop.hasBid = false;
-										shop.bidAproved = false;
-									}
+							if (!player.hasBid) {
+								shop.idBid = 0;
+								shop.bidValue = this.bid(player.rating);
+								shop.originalValue = this.bid(player.rating);
+								shop.teamId = this.team.id;
+								shop.hasBid = false;
+								shop.bidAproved = false;
+								shops.push(shop);
+							} else {
 
-									shops.push(shop);
-								});
+								this.bidinfoService.buscarPorIdPlayers(player.id)
+									.subscribe((bidInfo) => {
+										this.bidInfo = bidInfo;
+										let bid: Bidinfo = this.bidInfo;
+										console.log(this.bidInfo);
+										if (this.bidInfo) {
+											shop.idBid = bid.id;
+											shop.originalValue = bid.originalValue;
+											shop.bidValue = bid.bidValue + (bid.originalValue * 0.05);
+											shop.teamId = this.team.id;
+											shop.hasBid = player.hasBid;
+											shop.bidAproved = (bid.teamID === this.team.id);
+										} else {
+											shop.idBid = 0;
+											shop.bidValue = this.bid(player.rating);
+											shop.originalValue = this.bid(player.rating);
+											shop.teamId = this.team.id;
+											shop.hasBid = false;
+											shop.bidAproved = false;
+										}
+
+										shops.push(shop);
+									});
+							}
 						}
 					}, error => this.msgErro = error);
 
@@ -195,7 +208,7 @@ export class TransfermarketService {
 
 	}
 
-	getTeam(){
+	getTeam() {
 		return this.team;
 	}
 

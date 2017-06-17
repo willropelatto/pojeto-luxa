@@ -1,8 +1,10 @@
+import { TransfermarketNameFilter, TransfermarketPositionFilter } from './shared/transfermarket.pipe';
 import { TransfermarketFilterComponent } from './filtro/transfermarket-filter.component';
 import { MdOptionModule, MdSelectModule } from '@angular/material';
 import { AlertService } from './../util/alert.service';
 import { TeamModule } from './../team/team.module';
 import { TeamService } from './../team/shared/team.service';
+import {NgxPaginationModule} from 'ngx-pagination';
 /**
  * Arquivo de configuração do módulo.
  *
@@ -45,13 +47,16 @@ import { SharedModule } from '../shared';
 		MaterialModule,
         MdNativeDateModule,
         ReactiveFormsModule,
+		NgxPaginationModule
 	],
 	declarations: [
 		TransfermarketCadastrarComponent,
 		TransfermarketEditarComponent,
 		TransfermarketListarComponent,
 		TransfermarketVisualizarComponent,
-		TransfermarketFilterComponent
+		TransfermarketFilterComponent,
+		TransfermarketNameFilter,
+		TransfermarketPositionFilter
 	],	
 	providers: [
 		TransfermarketService, TeamService, BidinfoService, PlayerService, AlertService

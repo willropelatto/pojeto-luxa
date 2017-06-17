@@ -1,3 +1,4 @@
+import { AlertService } from './../../util/alert.service';
 import { PlayerFilter } from './../shared/playerFilter.model';
 import { LeagueService } from './../../league/shared/league.service';
 import { League } from './../../league/league.model';
@@ -13,7 +14,7 @@ import { Player } from './../../player/shared/player.model';
 
 import { Component, ViewChild } from '@angular/core';
 import { OnInit } from '@angular/core';
-import { Router, NavigationExtras} from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 
 import { SelectComponent } from 'ng2-select';
 
@@ -35,9 +36,9 @@ export class TransfermarketCadastrarComponent implements OnInit {
 
 
 
-	public startPrice : number = 0;
-	public endPrice : number = 0;
-	public rating : number = 0;
+    public startPrice: number = 0;
+    public endPrice: number = 0;
+    public rating: number = 0;
 
     playerCtrl: FormControl;
     filteredPlayers: any;
@@ -47,9 +48,9 @@ export class TransfermarketCadastrarComponent implements OnInit {
 
     leaguesCtrl: FormControl;
     filteredLeagues: any;
-    positions = ['CAM','CB','CDM','CF','CM','GK','LB','LM','LW','LWB','RB','RM','RW','RWB','ST'];
+    positions = ['CAM', 'CB', 'CDM', 'CF', 'CM', 'GK', 'LB', 'LM', 'LW', 'LWB', 'RB', 'RM', 'RW', 'RWB', 'ST'];
 
-    
+
 
 	/**
 	 * Construtor.
@@ -61,7 +62,8 @@ export class TransfermarketCadastrarComponent implements OnInit {
         private router: Router,
         private transfermarketService: TransfermarketService,
         private playerService: PlayerService,
-        private leagueService: LeagueService) {
+        private leagueService: LeagueService,
+        private alertService: AlertService) {
 
         this.playerCtrl = new FormControl();
         this.filteredPlayers = this.playerCtrl.valueChanges
@@ -127,14 +129,28 @@ export class TransfermarketCadastrarComponent implements OnInit {
     }
 
     onInputRating(event: any) {
-        this.playerFilter.rating = event.value;		
+        this.playerFilter.rating = event.value;
     }
 
-    
+
     register() {
 
-	}
+    }
 
+
+    check(filter: PlayerFilter): boolean {
+        console.log(filter.name);
+        console.log(filter.position);
+        console.log(filter.rating);
+
+        if ((filter.name.length === 0) &&
+            (filter.position.length === 0) &&
+            (filter.rating === 0)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 
 
     //https://plnkr.co/edit/?p=preview
@@ -169,21 +185,27 @@ export class TransfermarketCadastrarComponent implements OnInit {
     private _tickInterval = 1;
 
 
-    filter(filterPlayer : PlayerFilter): NavigationExtras {
-        let navextras :NavigationExtras={ 
-            queryParams:{"playerFilter":JSON.stringify(filterPlayer)}
+    filter(filterPlayer: PlayerFilter): NavigationExtras {
+        let navextras: NavigationExtras = {
+            queryParams: { "playerFilter": JSON.stringify(filterPlayer) }
         };
         return navextras;
+
     }
 
-    onFilter(filterPlayer: PlayerFilter){    
-      /*  if (filterPlayer.name = ''){
+    onFilter(filterPlayer: PlayerFilter) {
+        if (this.check(filterPlayer)) {
+            /*  if (filterPlayer.name = ''){
+      
+              }*/
+            this.router.navigate(['/transfermarkets/filtrar'], this.filter(filterPlayer));
+        } else {
+            this.alertService.error('Informe pelo menos um filtro!');
+        }
 
-        }*/    
-        this.router.navigate(['/transfermarkets/filtrar'], this.filter(filterPlayer));
     }
 
-    
+
 
 
 

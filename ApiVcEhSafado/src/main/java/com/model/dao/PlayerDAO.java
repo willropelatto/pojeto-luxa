@@ -13,6 +13,7 @@ import org.hibernate.Query;
 import org.hibernate.persister.entity.Queryable;
 
 import com.model.entity.PlayerEntity;
+import com.model.entity.TeamEntity;
 import com.model.in.PlayerFilter;
 
 
@@ -80,7 +81,7 @@ public class PlayerDAO {
 		this.entityManager.getTransaction().commit();
 	}
 	
-	public void Update(PlayerEntity playerEntity) {
+	public void update(PlayerEntity playerEntity) {
 		this.entityManager.getTransaction().begin();
 		this.entityManager.merge(playerEntity);
 		this.entityManager.getTransaction().commit();

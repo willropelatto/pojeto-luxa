@@ -11,5 +11,6 @@ export class Player {
 		public name?: string,
 		public position?: string,
 		public baseId?: number,
-		public rating?: number){}
+		public rating?: number,
+		public hasBid?:boolean){}
 }

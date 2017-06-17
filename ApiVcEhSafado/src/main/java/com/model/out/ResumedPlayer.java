@@ -7,7 +7,9 @@ public class ResumedPlayer {
     private String name;
     private int baseId;
     private int rating;
+    private boolean hasBid;
     
+
 	public String getPosition() {
 		return position;
 	}
@@ -37,6 +39,13 @@ public class ResumedPlayer {
 	}
 	public void setId(String id) {
 		this.id = id;
-	}    
+	}  
+	
+	public boolean isHasBid() {
+		return hasBid;
+	}
+	public void setHasBid(boolean hasBid) {
+		this.hasBid = hasBid;
+	}
 
 }

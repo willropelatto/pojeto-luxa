@@ -13,7 +13,7 @@
                                     <md-card-content>
                                         <h2 class="example-h2">Jogador</h2>
                                         <md-input-container>
-                                            <input mdInput placeholder="Filtar por Nome" [mdAutocomplete]="auto" [formControl]="playerCtrl" [(ngModel)]="playerFilter.name">
+                                            <input mdInput placeholder="Filtar por Nome" [mdAutocomplete]="auto"  [formControl]="playerCtrl" [(ngModel)]="playerFilter.name">
                                         </md-input-container>
                                         <md-autocomplete #auto="mdAutocomplete">
                                             <md-option (input)="onInputPlayer(player.name)" *ngFor="let player of filteredPlayers | async" [value]="player.name">
@@ -94,7 +94,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <button md-raised-button (click)="onFilter(playerFilter)">Filtrar</button>
+                                <button md-raised-button [disabled]="" (click)="onFilter(playerFilter)">Filtrar</button>
                             </div>
                         </div>
                     </div>

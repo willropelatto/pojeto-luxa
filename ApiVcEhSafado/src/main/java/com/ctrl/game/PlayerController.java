@@ -49,6 +49,7 @@ public class PlayerController {
 		resumed.setName(full.getName());
 		resumed.setPosition(full.getPosition());
 		resumed.setRating(full.getRating());	
+		resumed.setHasBid(false);
 
 		return resumed;
 	}
@@ -62,6 +63,7 @@ public class PlayerController {
 		resumed.setName(entity.getName());
 		resumed.setPosition(entity.getPosition());
 		resumed.setRating(entity.getRating());	
+		resumed.setHasBid(entity.isHasBid());
 
 		return resumed;
 	}
@@ -77,6 +79,7 @@ public class PlayerController {
 		player.setRating(fullpl.getRating());
 		player.setIdLeague(idLeague); 
 		player.setOriginalId(fullpl.getId());
+		player.setHasBid(false);
 		return player;
 
 	}		
