@@ -10,11 +10,11 @@ import { HttpUtilService } from './../../util/http-util-service';
 @Injectable()
 export class TeamService {
 
-	private teams: Team[];
+	public teams: Team[];
 
-	private path = 'team';
+	public path = 'team';
 
-	constructor(private http: Http, private httpUtil: HttpUtilService) {
+	constructor(public http: Http, public httpUtil: HttpUtilService) {
 	}
 
 

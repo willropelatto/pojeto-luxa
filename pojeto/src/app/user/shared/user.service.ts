@@ -7,11 +7,11 @@ import { Http, Headers, RequestOptions, Response } from '@angular/http';
  
 @Injectable()
 export class UserService {
-    constructor(private http: Http, private httpUtil :HttpUtilService) { }
+    constructor(public http: Http, public httpUtil :HttpUtilService) { }
 
-	private API_URL: string = 'http://localhost:8585/pofexo/rest/user';
+	public API_URL: string = 'http://localhost:8585/pofexo/rest/user';
 
-    private path = 'user';
+    public path = 'user';
  
     getAll() {
         return this.http.get(this.API_URL + '/todosUsuarios', this.jwt()).map((response: Response) => response.json());
@@ -43,9 +43,9 @@ export class UserService {
         return this.http.delete(this.API_URL + '/excluir/' + id, this.jwt()).map((response: Response) => response.json());
     }
  
-    // private helper methods
+    // public helper methods
  
-    private jwt() {
+    public jwt() {
         // create authorization header with jwt token
         let currentUser = JSON.parse(localStorage.getItem('currentUser'));
         if (currentUser && currentUser.token) {

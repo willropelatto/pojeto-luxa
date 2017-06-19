@@ -18,13 +18,13 @@ import { HttpUtilService } from '../../util';
 @Injectable()
 export class BidinfoService {
 
-	private path = 'bidinfo';
-	private msgErro: string;
-	private bidinfos: Bidinfo[];
-	private pathApi = 'market';
+	public path = 'bidinfo';
+	public msgErro: string;
+	public bidinfos: Bidinfo[];
+	public pathApi = 'market';
 	public obBidInfo: Bidinfo;
 
-	constructor(private http: Http, private httpUtil: HttpUtilService) {
+	constructor(public http: Http, public httpUtil: HttpUtilService) {
 	}
 
 

@@ -18,7 +18,7 @@ import { Player, PlayerService } from '../shared';
 })
 export class PlayerCadastrarComponent implements OnInit {
 
-	private player: Player;
+	public player: Player;
 
 	/**
 	 * Construtor.
@@ -27,8 +27,8 @@ export class PlayerCadastrarComponent implements OnInit {
 	 * @param PlayerService playerService
 	 */
 	constructor(
-		private router: Router, 
-		private playerService: PlayerService) {
+		public router: Router, 
+		public playerService: PlayerService) {
 	}
 
 	/**

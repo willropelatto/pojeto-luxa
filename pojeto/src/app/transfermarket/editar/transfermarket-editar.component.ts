@@ -18,8 +18,8 @@ import { Transfermarket, TransfermarketService } from '../shared';
 })
 export class TransfermarketEditarComponent implements OnInit {
 
-	private id: number;
-	private transfermarket: Transfermarket;
+	public id: number;
+	public transfermarket: Transfermarket;
 
 	/**
 	 * Construtor.
@@ -29,9 +29,9 @@ export class TransfermarketEditarComponent implements OnInit {
 	 * @param TransfermarketService transfermarketService
 	 */
 	constructor(
-		private route: ActivatedRoute, 
-		private router: Router, 
-		private transfermarketService: TransfermarketService) {
+		public route: ActivatedRoute, 
+		public router: Router, 
+		public transfermarketService: TransfermarketService) {
 	}
 
 	/**

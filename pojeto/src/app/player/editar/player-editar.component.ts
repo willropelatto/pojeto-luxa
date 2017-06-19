@@ -18,9 +18,9 @@ import { Player, PlayerService } from '../shared';
 })
 export class PlayerEditarComponent implements OnInit {
 
-	private id: number;
-	private player: Player;
-	private msgErro: string;
+	public id: number;
+	public player: Player;
+	public msgErro: string;
 
 	/**
 	 * Construtor.
@@ -30,9 +30,9 @@ export class PlayerEditarComponent implements OnInit {
 	 * @param PlayerService playerService
 	 */
 	constructor(
-		private route: ActivatedRoute, 
-		private router: Router, 
-		private playerService: PlayerService) {
+		public route: ActivatedRoute, 
+		public router: Router, 
+		public playerService: PlayerService) {
 	}
 
 	/**

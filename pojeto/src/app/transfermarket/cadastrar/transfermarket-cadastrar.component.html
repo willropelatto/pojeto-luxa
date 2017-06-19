@@ -42,17 +42,6 @@
                             </div>
                         </div>
                         <div class="row">
-                            <!--      <div class="col-md-4">
-                                    <md-card class="result">
-                                        <md-card-content>
-                                            <h2 class="example-h2">Preço Inicial</h2>
-                                            <md-slider (input)="onInputStartPrice($event)" class="example-margin" [max]="max" [min]="min" [step]="step" [thumb-label]="thumbLabel"
-                                                [value]="defaultValue">
-                                                </md-slider>
-                                                {{playerFilter.startValue}}
-                                        </md-card-content>
-                                    </md-card>
-                                </div>-->
                             <div class="col-md-6">
                                 <md-card class="result">
                                     <md-card-content>
@@ -73,24 +62,12 @@
                                     <md-card-content>
                                         <h2 class="example-h2">Rating</h2>
                                         <md-slider (input)="onInputRating($event)" class="example-margin" [max]="99" [min]="0" [step]="1" [thumb-label]="thumbLabel"
-                                            [value]="defaultValue">
+                                            [value]="defaultvalue">
                                         </md-slider>
                                         {{playerFilter.rating}}
                                     </md-card-content>
                                 </md-card>
                             </div>
-                            <!--
-                                <div class="col-md-4">
-                                    <md-card class="result">
-                                        <md-card-content>
-                                            <h2 class="example-h2">Preço Final</h2>
-                                            <md-slider (input)="onInputEndPrice($event)" class="example-margin" [max]="max" [min]="min" [step]="step" [thumb-label]="thumbLabel"
-                                                [value]="defaultValue">
-                                                </md-slider>
-                                                {{playerFilter.endValue}}
-                                        </md-card-content>
-                                    </md-card>
-                                </div> -->
                         </div>
                         <div class="row">
                             <div class="col-md-12">

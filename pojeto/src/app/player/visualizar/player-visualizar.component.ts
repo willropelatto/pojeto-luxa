@@ -18,8 +18,8 @@ import { Player, PlayerService } from '../shared';
 })
 export class PlayerVisualizarComponent implements OnInit {
 
-	private id: number;
-	private player: Player;
+	public id: number;
+	public player: Player;
 
 	/**
 	 * Construtor.
@@ -28,8 +28,8 @@ export class PlayerVisualizarComponent implements OnInit {
 	 * @param PlayerService playerService
 	 */
 	constructor(
-		private route: ActivatedRoute, 
-		private playerService: PlayerService) {
+		public route: ActivatedRoute, 
+		public playerService: PlayerService) {
 	}
 
 	/**

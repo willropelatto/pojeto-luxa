@@ -9,12 +9,12 @@ import 'rxjs/add/operator/map'
 @Injectable()
 export class AuthenticationService {
 
-	private path = 'http://localhost:8585/pofexo/rest/user/login';
+	public path = 'http://localhost:8585/pofexo/rest/user/login';
 
-    private loginUrl:string = 'user/login';
-	private logoutUrl:string = '';
+    public loginUrl:string = 'user/login';
+	public logoutUrl:string = '';
     
-	constructor(private http: Http, private httpUtil :HttpUtilService) { }
+	constructor(public http: Http, public httpUtil :HttpUtilService) { }
 
   
     login(user : User) {

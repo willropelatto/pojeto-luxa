@@ -18,8 +18,8 @@ import { League, LeagueService } from '../shared';
 })
 export class LeagueEditarComponent implements OnInit {
 
-	private id: number;
-	private league: League;
+	public id: number;
+	public league: League;
 
 	/**
 	 * Construtor.
@@ -29,9 +29,9 @@ export class LeagueEditarComponent implements OnInit {
 	 * @param LeagueService leagueService
 	 */
 	constructor(
-		private route: ActivatedRoute, 
-		private router: Router, 
-		private leagueService: LeagueService) {
+		public route: ActivatedRoute, 
+		public router: Router, 
+		public leagueService: LeagueService) {
 	}
 
 	/**

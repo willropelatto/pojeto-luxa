@@ -1,4 +1,5 @@
-import { MaterialModule } from '@angular/material';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MaterialModule, MdOptionModule, MdSelectModule, MdNativeDateModule } from '@angular/material';
 /**
  * Arquivo de configuração do módulo.
  *
@@ -19,7 +20,12 @@ import { SharedModule } from '../shared';
 	imports: [ 
 		RouterModule,
 		SharedModule,
-		MaterialModule
+		MaterialModule,
+		MdOptionModule,
+		MdSelectModule,
+		MaterialModule,
+        MdNativeDateModule,
+        ReactiveFormsModule,
 	],
 	declarations: [
 

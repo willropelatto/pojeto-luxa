@@ -18,7 +18,7 @@ import { League, LeagueService } from '../shared';
 })
 export class LeagueCadastrarComponent implements OnInit {
 
-	private league: League;
+	public league: League;
 
 	/**
 	 * Construtor.
@@ -27,8 +27,8 @@ export class LeagueCadastrarComponent implements OnInit {
 	 * @param LeagueService leagueService
 	 */
 	constructor(
-		private router: Router, 
-		private leagueService: LeagueService) {
+		public router: Router, 
+		public leagueService: LeagueService) {
 	}
 
 	/**

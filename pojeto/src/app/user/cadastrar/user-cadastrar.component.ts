@@ -12,9 +12,9 @@ export class RegisterComponent {
     loading = false;
  
     constructor(
-        private router: Router,
-        private userService: UserService,
-        private alertService: AlertService) { }
+        public router: Router,
+        public userService: UserService,
+        public alertService: AlertService) { }
  
     register() {
         this.loading = true;

@@ -15,10 +15,10 @@ import { Team, TeamService } from '../shared';
 })
 export class TeamCadastrarComponent implements OnInit {
 
-	private budgetValue: number = 15000.00;
+	public budgetValue: number = 15000.00;
 
-	private team: Team;
-	private currentUser: User;
+	public team: Team;
+	public currentUser: User;
 
 	/**
 	 * Construtor.
@@ -27,9 +27,9 @@ export class TeamCadastrarComponent implements OnInit {
 	 * @param TeamService teamService
 	 */
 	constructor(
-		private router: Router,
-		private teamService: TeamService,
-		private alertService: AlertService
+		public router: Router,
+		public teamService: TeamService,
+		public alertService: AlertService
 		) {
 	}
 

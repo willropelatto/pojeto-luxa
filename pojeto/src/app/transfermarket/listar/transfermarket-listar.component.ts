@@ -33,15 +33,15 @@ export class TransfermarketListarComponent implements OnInit {
 
 
 	ticks = 20;
-	private transfermarkets: Transfermarket[];
-	private idExcluir: number;
-	private pagina: number;
-	private totalRegistros: number;
-	//	private players: Player[];
-	private playerService: PlayerService;
-	private bidinfoService: BidinfoService;
-	private playerId: number;
-	private bid: Bidinfo;
+	public transfermarkets: Transfermarket[];
+	public idExcluir: number;
+	public pagina: number;
+	public totalRegistros: number;
+	//	public players: Player[];
+	public playerService: PlayerService;
+	public bidinfoService: BidinfoService;
+	public playerId: number;
+	public bid: Bidinfo;
 
 
 	/**
@@ -49,11 +49,11 @@ export class TransfermarketListarComponent implements OnInit {
 	 *
 	 * @param TransfermarketService transfermarketService
 	 */
-	constructor(private transfermarketService: TransfermarketService,
-		private alertService: AlertService,
+	constructor(public transfermarketService: TransfermarketService,
+		public alertService: AlertService,
 		_playerService: PlayerService,
 		_bidinfoService: BidinfoService,
-		private route: ActivatedRoute) {
+		public route: ActivatedRoute) {
 		this.bidinfoService = _bidinfoService;
 
 

@@ -18,8 +18,8 @@ import { Team, TeamService } from '../shared';
 })
 export class TeamEditarComponent implements OnInit {
 
-	private id: number;
-	private team: Team;
+	public id: number;
+	public team: Team;
 
 	/**
 	 * Construtor.
@@ -29,9 +29,9 @@ export class TeamEditarComponent implements OnInit {
 	 * @param TeamService teamService
 	 */
 	constructor(
-		private route: ActivatedRoute, 
-		private router: Router, 
-		private teamService: TeamService) {
+		public route: ActivatedRoute, 
+		public router: Router, 
+		public teamService: TeamService) {
 	}
 
 	/**

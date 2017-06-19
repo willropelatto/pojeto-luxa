@@ -14,9 +14,9 @@ export class AppComponent {
     currentUser: User;
     users: User[] = [];
     team : Team;
-    private msgErro : string;
+    public msgErro : string;
  
-    constructor(private userService: UserService, private teamService : TeamService) {
+    constructor(public userService: UserService, public teamService : TeamService) {
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     }
  

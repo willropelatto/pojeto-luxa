@@ -23,24 +23,24 @@ import { KzPaginacaoComponent } from '../../shared';
 })
 export class BidinfoListarComponent implements OnInit {
 
-	private bidinfos: Bidinfo[];
-	private idExcluir: number;
-	private pagina: number;
-	private totalRegistros: number;
-	private msgErro: string;
-	private team: Team;
-	private user: User;
-	private player: Player;
+	public bidinfos: Bidinfo[];
+	public idExcluir: number;
+	public pagina: number;
+	public totalRegistros: number;
+	public msgErro: string;
+	public team: Team;
+	public user: User;
+	public player: Player;
 
 	/**
 	 * Construtor.
 	 *
 	 * @param BidinfoService bidinfoService
 	 */
-	constructor(private bidinfoService: BidinfoService,
-		private teamService: TeamService,
-		private playerService: PlayerService,
-		private route: ActivatedRoute) {
+	constructor(public bidinfoService: BidinfoService,
+		public teamService: TeamService,
+		public playerService: PlayerService,
+		public route: ActivatedRoute) {
 		this.user = JSON.parse(localStorage.getItem('currentUser'));
 
 	}

@@ -22,7 +22,7 @@ import { Team, TeamService } from '../../team';
 })
 export class BidinfoCadastrarComponent implements OnInit {
 
-	private bidinfo: Bidinfo;
+	public bidinfo: Bidinfo;
 
 	/**
 	 * Construtor.
@@ -31,8 +31,8 @@ export class BidinfoCadastrarComponent implements OnInit {
 	 * @param BidinfoService bidinfoService
 	 */
 	constructor(
-		private router: Router, 
-		private bidinfoService: BidinfoService
+		public router: Router, 
+		public bidinfoService: BidinfoService
 	) {
 	}
 

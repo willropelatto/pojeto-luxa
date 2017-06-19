@@ -28,21 +28,21 @@ import { TeamService } from './../../team/shared/team.service';
 export class TransfermarketService {
 
 	let
-	private players: Array<Player>;
-	private msgErro: string;
-	private bidinfoService: BidinfoService;
-	private playerService: PlayerService;
-	private teamService: TeamService;
-	private user: User;
-	private team: Team;
-	private bidInfo: Bidinfo;
+	public players: Array<Player>;
+	public msgErro: string;
+	public bidinfoService: BidinfoService;
+	public playerService: PlayerService;
+	public teamService: TeamService;
+	public user: User;
+	public team: Team;
+	public bidInfo: Bidinfo;
 
 
 	constructor(_bidinfoService: BidinfoService,
 		_playerService: PlayerService,
 		_teamService: TeamService,
-		private http: Http,
-		private httpUtil: HttpUtilService) {
+		public http: Http,
+		public httpUtil: HttpUtilService) {
 		this.bidinfoService = _bidinfoService;
 		this.playerService = _playerService;
 		this.teamService = _teamService;

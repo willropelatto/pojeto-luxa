@@ -14,14 +14,14 @@ export class LoginComponent implements OnInit {
     loading = false;
     returnUrl: string;
 
-    private usuario: string;
-    private senha: string;
+    public usuario: string;
+    public senha: string;
 
     constructor(
-        private route: ActivatedRoute,
-        private router: Router,
-        private authenticationService: AuthenticationService,
-        private alertService: AlertService) { }
+        public route: ActivatedRoute,
+        public router: Router,
+        public authenticationService: AuthenticationService,
+        public alertService: AlertService) { }
 
     ngOnInit() {
         this.authenticationService.logout();

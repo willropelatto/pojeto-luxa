@@ -18,18 +18,18 @@ import { KzPaginacaoComponent } from '../../shared';
 })
 export class TeamListarComponent implements OnInit {
 
-	private teams: Team[];
-	private idExcluir: number;
-	private pagina: number;
-	private totalRegistros: number;
+	public teams: Team[];
+	public idExcluir: number;
+	public pagina: number;
+	public totalRegistros: number;
 
 	/**
 	 * Construtor.
 	 *
 	 * @param TeamService teamService
 	 */
-	constructor(private teamService: TeamService,
-		private route: ActivatedRoute) {
+	constructor(public teamService: TeamService,
+		public route: ActivatedRoute) {
 	}
 
 	/**

@@ -13,8 +13,8 @@ import { ToastrService } from 'ngx-toastr';
 export class AlertComponent {
     message: any;
  
-    constructor(private alertService: AlertService,
-                private toastrService: ToastrService) { }
+    constructor(public alertService: AlertService,
+                public toastrService: ToastrService) { }
  
     ngOnInit() {
 

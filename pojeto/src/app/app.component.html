@@ -9,7 +9,7 @@
             </button>
             <a class="navbar-brand" href="#">Pojeto</a>
         </div>
-        <div class="collapse navbar-collapse">
+        <div *ngIf="currentUser" class="collapse navbar-collapse">
             <ul *ngIf="team" class="nav navbar-nav">
                 <li><a routerLink="/transfermarkets/cadastrar">Mercado</a></li>
                 <li><a routerLink="/bidinfos">Lista de Lances</a></li>

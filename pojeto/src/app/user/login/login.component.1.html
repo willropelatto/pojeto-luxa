@@ -1,0 +1,39 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header" data-background-color="red">
+                        <h4 class="title">Login</h4>
+                    </div>
+                    <div class="card-content">
+                        <form name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group form-black label-floating is-empty" [ngClass]="{ 'has-error': f.submitted && !login.valid }">
+                                        <label class="control-label">Login</label>
+                                        <input type="text" class="form-control" name="login" [(ngModel)]="usuario" #login="ngModel" required />
+                                        <div *ngIf="f.submitted && !login.valid" class="help-block">É obrigatório informar um login</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group form-black label-floating is-empty" [ngClass]="{ 'has-error': f.submitted && !senha.valid }">
+                                        <label class="control-label">Senha</label>
+                                        <input type="password" class="form-control" name="senha" [(ngModel)]="senha" #senha="ngModel" required />
+                                        <div *ngIf="f.submitted && !senha.valid" class="help-block">É obrigatório informar uma senha</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button  type="submit" [disabled]="loading" class="btn btn-primary">Entrar</button>
+                                <md-spinner *ngIf="loading" ></md-spinner>                        
+                                <a [routerLink]="['/register']" class="btn btn-link pull-right">Registrar</a>
+                            </div>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -36,7 +36,7 @@ export class KzPaginacaoComponent implements OnInit {
 	exibirProximo: boolean;
 	qtdPaginas: number;
 
-	constructor(private route: ActivatedRoute) {
+	constructor(public route: ActivatedRoute) {
 	}
 
 	ngOnInit() {

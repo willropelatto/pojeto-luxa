@@ -21,12 +21,12 @@ import { Player } from '../../player';
 })
 export class TeamVisualizarComponent implements OnInit {
 
-	private id: number;
-	private teamResult: Team;
-	private team: Team;
-	private user: User;
-	private msgErro: string;
-	private players: Player[];
+	public id: number;
+	public teamResult: Team;
+	public team: Team;
+	public user: User;
+	public msgErro: string;
+	public players: Player[];
 
 	/**
 	 * Construtor.
@@ -35,8 +35,8 @@ export class TeamVisualizarComponent implements OnInit {
 	 * @param TeamService teamService
 	 */
 	constructor(
-		private route: ActivatedRoute,
-		private teamService: TeamService) {
+		public route: ActivatedRoute,
+		public teamService: TeamService) {
 		this.user = JSON.parse(localStorage.getItem('currentUser'));
 
 

@@ -27,11 +27,11 @@ import { Transfermarket, TransfermarketService } from '../shared';
 })
 export class TransfermarketCadastrarComponent implements OnInit {
 
-    private transfermarket: Transfermarket;
+    public transfermarket: Transfermarket;
     public players: Array<Player> = [];
     public leagues: Array<League> = [];
     public playerFilter: PlayerFilter = new PlayerFilter();
-    private value: any = {};
+    public value: any = {};
     selectedValue: string;
 
 
@@ -59,11 +59,11 @@ export class TransfermarketCadastrarComponent implements OnInit {
 	 * @param TransfermarketService transfermarketService
 	 */
     constructor(
-        private router: Router,
-        private transfermarketService: TransfermarketService,
-        private playerService: PlayerService,
-        private leagueService: LeagueService,
-        private alertService: AlertService) {
+        public router: Router,
+        public transfermarketService: TransfermarketService,
+        public playerService: PlayerService,
+        public leagueService: LeagueService,
+        public alertService: AlertService) {
 
         this.playerCtrl = new FormControl();
         this.filteredPlayers = this.playerCtrl.valueChanges
@@ -182,7 +182,7 @@ export class TransfermarketCadastrarComponent implements OnInit {
     set tickInterval(v) {
         this._tickInterval = Number(v);
     }
-    private _tickInterval = 1;
+    public _tickInterval = 1;
 
 
     filter(filterPlayer: PlayerFilter): NavigationExtras {

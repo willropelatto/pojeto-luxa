@@ -23,15 +23,15 @@ export class PlayerListarComponent implements OnInit {
 	public maxSize: number = 5;
 	public numPages: number = 10;
 	public length: number = 0;
-	private msgErro: string;
+	public msgErro: string;
 
-	private players: Player[];
-	private idExcluir: number;
-	private pagina: number;
-	private totalRegistros: number;
+	public players: Player[];
+	public idExcluir: number;
+	public pagina: number;
+	public totalRegistros: number;
 
-	constructor(private playerService: PlayerService,
-		private route: ActivatedRoute) {
+	constructor(public playerService: PlayerService,
+		public route: ActivatedRoute) {
 	}
 
 	public rows: Array<any> = [];
@@ -78,7 +78,7 @@ export class PlayerListarComponent implements OnInit {
 	}
 
 
-	private data: Array<any>;
+	public data: Array<any>;
 
 
 	public changePage(page: any, data: Array<any> = this.data): Array<any> {

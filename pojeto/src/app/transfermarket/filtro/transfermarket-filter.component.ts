@@ -41,28 +41,28 @@ import { PaginationInstance} from 'ngx-pagination';
 
 export class TransfermarketFilterComponent implements OnInit {
 
-	private timerSubscription: AnonymousSubscription;
-	private playersSubscription: AnonymousSubscription;
+	public timerSubscription: AnonymousSubscription;
+	public playersSubscription: AnonymousSubscription;
 
 
 	ticks = 20;
-	private transfermarkets: Transfermarket[];
-	private idExcluir: number;
-	private pagina: number;
-	private totalRegistros: number;
-	private playerService: PlayerService;
-	private bidinfoService: BidinfoService;
-	private playerId: number;
-	private bid: Bidinfo;
-	private playerFilter: PlayerFilter;
-	private team: Team;
+	public transfermarkets: Transfermarket[];
+	public idExcluir: number;
+	public pagina: number;
+	public totalRegistros: number;
+	public playerService: PlayerService;
+	public bidinfoService: BidinfoService;
+	public playerId: number;
+	public bid: Bidinfo;
+	public playerFilter: PlayerFilter;
+	public team: Team;
 
 
-	constructor(private transfermarketService: TransfermarketService,
-		private alertService: AlertService,
+	constructor(public transfermarketService: TransfermarketService,
+		public alertService: AlertService,
 		_playerService: PlayerService,
 		_bidinfoService: BidinfoService,
-		private route: ActivatedRoute) {
+		public route: ActivatedRoute) {
 		this.bidinfoService = _bidinfoService;
 
 		this.route.queryParams.subscribe(params => {
@@ -126,13 +126,13 @@ export class TransfermarketFilterComponent implements OnInit {
         this.config.currentPage = number;
     }
 
-	private subscribeToData(): void {
+	public subscribeToData(): void {
 
 		this.timerSubscription = Observable.timer(60000)
 			.subscribe(() => this.refreshData());
 	}
 
-	private refreshData(): void {
+	public refreshData(): void {
 		this.playersSubscription = this.transfermarketService.listarFilterObservable(this.playerFilter).
 			subscribe(
 				(data: Transfermarket[]) => {

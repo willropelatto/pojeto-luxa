@@ -18,8 +18,8 @@ import { Bidinfo, BidinfoService } from '../shared';
 })
 export class BidinfoVisualizarComponent implements OnInit {
 
-	private id: number;
-	private bidinfo: Bidinfo;
+	public id: number;
+	public bidinfo: Bidinfo;
 
 	/**
 	 * Construtor.
@@ -28,8 +28,8 @@ export class BidinfoVisualizarComponent implements OnInit {
 	 * @param BidinfoService bidinfoService
 	 */
 	constructor(
-		private route: ActivatedRoute, 
-		private bidinfoService: BidinfoService) {
+		public route: ActivatedRoute, 
+		public bidinfoService: BidinfoService) {
 	}
 
 	/**

@@ -19,11 +19,11 @@ import { HttpUtilService } from '../../util';
 @Injectable()
 export class LeagueService {
 
-	private path = 'league/list';
-	private msgErro:string;
-	private leagues: League[];
+	public path = 'league/list';
+	public msgErro:string;
+	public leagues: League[];
 
-	constructor(private http: Http, private httpUtil: HttpUtilService) {
+	constructor(public http: Http, public httpUtil: HttpUtilService) {
 	}
 
 	/**
