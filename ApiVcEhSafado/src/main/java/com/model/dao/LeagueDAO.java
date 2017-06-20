@@ -3,20 +3,16 @@ package com.model.dao;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
 import com.model.entity.LeagueEntity;
 
 public class LeagueDAO {
 	
-	private final EntityManagerFactory entityManagerFactory;
 	
 	private final EntityManager entityManager;
 	
 	public LeagueDAO() {
-		this.entityManagerFactory  = Persistence.createEntityManagerFactory("persistence_unit_db_banco");
-		this.entityManager = this.entityManagerFactory.createEntityManager();
+		this.entityManager = EntityManagerEnum.INSTANCE.getEntityManager();		
 		
 	}
 	

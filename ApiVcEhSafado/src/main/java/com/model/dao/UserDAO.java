@@ -1,20 +1,16 @@
 package com.model.dao;
 
 import java.util.List;
+
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
 import com.model.entity.UserEntity;
 
 public class UserDAO {
-	private final EntityManagerFactory entityManagerFactory;
 	private final EntityManager entityManager;
 	
 	public UserDAO() {
-		this.entityManagerFactory  = Persistence.createEntityManagerFactory("persistence_unit_db_banco");
-		this.entityManager = this.entityManagerFactory.createEntityManager();
-		
+		this.entityManager = EntityManagerEnum.INSTANCE.getEntityManager();				
 	}
 	
 	public void Save(UserEntity userEntity) {

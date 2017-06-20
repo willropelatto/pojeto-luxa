@@ -1,33 +1,22 @@
 package com.model.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
 import org.apache.commons.lang3.StringUtils;
-import org.hibernate.Query;
-import org.hibernate.persister.entity.Queryable;
 
 import com.model.entity.PlayerEntity;
-import com.model.entity.TeamEntity;
 import com.model.in.PlayerFilter;
 
 
 public class PlayerDAO {
 	
-	private final EntityManagerFactory entityManagerFactory;
-	
 	private final EntityManager entityManager; 
 	
-	public PlayerDAO() { 
-		
-		this.entityManagerFactory  = Persistence.createEntityManagerFactory("persistence_unit_db_banco");
-		this.entityManager = this.entityManagerFactory.createEntityManager();
-		
+	public PlayerDAO() { 		
+		this.entityManager = EntityManagerEnum.INSTANCE.getEntityManager();				
 	}
 	
 	public List<PlayerEntity> getPlayers(PlayerFilter filter) {
