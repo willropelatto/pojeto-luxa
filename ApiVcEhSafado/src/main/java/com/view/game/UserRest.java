@@ -35,7 +35,7 @@ public class UserRest {
 	@Path("/cadastrar")
 	public User Cadastrar(User user) {
 
-		String retorno = ctrl.Cadastrar(user);
+		ctrl.Cadastrar(user);
 		
 		return user;
 	}	
