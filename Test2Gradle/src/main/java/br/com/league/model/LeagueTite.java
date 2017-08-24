@@ -1,15 +1,13 @@
-package com.model.entity;
+package br.com.league.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
 @Entity
-@Table(name="tb_league")
-public class LeagueEntity {
+public class LeagueTite {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,6 +19,8 @@ public class LeagueEntity {
     private Integer originalId;
 	@Column(name="imgUrl")
     private String imgUrl;
+	@Column(name="name")
+    private String name;
 	
 	public Integer getId() {
 		return id;
@@ -52,7 +52,4 @@ public class LeagueEntity {
 	public void setName(String name) {
 		this.name = name;
 	}
-	@Column(name="name")
-    private String name;
-
 }

@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import com.model.entity.TeamEntity;
+import br.com.team.model.TeamTite;
 
 public class TeamDAO {
 	
@@ -14,41 +14,41 @@ public class TeamDAO {
 		this.entityManager = EntityManagerEnum.INSTANCE.getEntityManager();		
 	}	
 	
-	public void save(TeamEntity t) {
+	public void save(TeamTite t) {
 		this.entityManager.getTransaction().begin();
 		this.entityManager.persist(t);
 		this.entityManager.getTransaction().commit();
 	}
 	
-	public void update(TeamEntity t) {
+	public void update(TeamTite t) {
 		this.entityManager.getTransaction().begin();
 		this.entityManager.merge(t);
 		this.entityManager.getTransaction().commit();
 	}	
 	
-	public TeamEntity getTeam(int id) {
-		return this.entityManager.find(TeamEntity.class, id);
+	public TeamTite getTeam(int id) {
+		return this.entityManager.find(TeamTite.class, id);
 	}
 
 	public void decreaseBudget(int teamID, double bidValue) {
-		TeamEntity ent = this.getTeam(teamID);
+		TeamTite ent = this.getTeam(teamID);
 		ent.setBudget(ent.getBudget() - bidValue);
 		this.update(ent);		
 	}
 
 	public void increaseBudget(int teamID, double bidValue) {
-		TeamEntity ent = this.getTeam(teamID);
+		TeamTite ent = this.getTeam(teamID);
 		ent.setBudget(ent.getBudget() + bidValue);
 		this.update(ent);
 		
 	}
 
-	public List<TeamEntity> getList() {
-		return this.entityManager.createQuery("SELECT p FROM TeamEntity p ORDER BY p.id", TeamEntity.class).getResultList();
+	public List<TeamTite> getList() {
+		return this.entityManager.createQuery("SELECT p FROM TeamEntity p ORDER BY p.id", TeamTite.class).getResultList();
 	}
 	
-	public TeamEntity getTeamFromUser(int idUser) {
-    	return (TeamEntity) this.entityManager.createQuery("SELECT p FROM TeamEntity p WHERE p.idUser = :idUser ORDER BY p.id", TeamEntity.class)
+	public TeamTite getTeamFromUser(int idUser) {
+    	return (TeamTite) this.entityManager.createQuery("SELECT p FROM TeamEntity p WHERE p.idUser = :idUser ORDER BY p.id", TeamTite.class)
     			.setParameter("idUser", idUser).getSingleResult();
     }
 	

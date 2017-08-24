@@ -2,13 +2,13 @@ package com.model.in;
 
 import java.util.ArrayList;
 
-import com.model.out.ResumedPlayer;
+import br.com.player.model.PlayerTite;
 
 public class Team {
 
 	private int id;
 	private String name;
-	private ArrayList<ResumedPlayer> players = new ArrayList<ResumedPlayer>();
+	private ArrayList<PlayerTite> players = new ArrayList<PlayerTite>();
 	private String manager;
 	private double budget;
 	private int idUser;
@@ -37,10 +37,10 @@ public class Team {
 	public void setBudget(double budget) {
 		this.budget = budget;
 	}
-	public ArrayList<ResumedPlayer> getPlayers() {
+	public ArrayList<PlayerTite> getPlayers() {
 		return players;
 	}
-	public void setPlayers(ArrayList<ResumedPlayer> players) {
+	public void setPlayers(ArrayList<PlayerTite> players) {
 		this.players = players;
 	}
 	public int getIdUser() {

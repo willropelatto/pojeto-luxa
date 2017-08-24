@@ -10,7 +10,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import com.ctrl.game.MarketContoller;
-import com.model.in.Team;
 import com.model.out.BidInfo;
 
 @Path("/market")

@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import com.model.entity.LeagueEntity;
+import br.com.league.model.LeagueTite;
 
 public class LeagueDAO {
 	
@@ -16,32 +16,32 @@ public class LeagueDAO {
 		
 	}
 	
-	public void Save(LeagueEntity leagueEntity) {
+	public void Save(LeagueTite leagueEntity) {
 		this.entityManager.getTransaction().begin();
 		this.entityManager.persist(leagueEntity);
 		this.entityManager.getTransaction().commit();
 	}
 	
-	public void Update(LeagueEntity leagueEntity) {
+	public void Update(LeagueTite leagueEntity) {
 		this.entityManager.getTransaction().begin();
 		this.entityManager.merge(leagueEntity);
 		this.entityManager.getTransaction().commit();
 	}
 	
-	public LeagueEntity getLeague(Integer id) {
-		return this.entityManager.find(LeagueEntity.class, id);	
+	public LeagueTite getLeague(Integer id) {
+		return this.entityManager.find(LeagueTite.class, id);	
 	}
 	
     public void Delete(Integer id) {
-    	LeagueEntity leagueEntity = this.getLeague(id);
+    	LeagueTite leagueEntity = this.getLeague(id);
     	
     	this.entityManager.getTransaction().begin();
     	this.entityManager.remove(leagueEntity);
     	this.entityManager.getTransaction().commit();
     }
     
-    public List<LeagueEntity> getLeagues() {
-    	return this.entityManager.createQuery("SELECT p FROM LeagueEntity p ORDER BY p.id", LeagueEntity.class).getResultList();
+    public List<LeagueTite> getLeagues() {
+    	return this.entityManager.createQuery("SELECT p FROM LeagueEntity p ORDER BY p.id", LeagueTite.class).getResultList();
     }
 
 

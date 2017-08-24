@@ -2,7 +2,7 @@ package com.model.dao;
 
 import javax.persistence.EntityManager;
 
-import com.model.entity.BidEntityLog;
+import br.com.mkt.model.BidTiteLog;
 
 public class BidLogDAO {	
 
@@ -13,7 +13,7 @@ public class BidLogDAO {
 		this.entityManager = EntityManagerEnum.INSTANCE.getEntityManager();		
 	}
 
-	public void save(BidEntityLog bid) {
+	public void save(BidTiteLog bid) {
 		this.entityManager.getTransaction().begin();
 		this.entityManager.persist(bid);
 		this.entityManager.getTransaction().commit();

@@ -7,7 +7,7 @@ import javax.persistence.TypedQuery;
 
 import org.apache.commons.lang3.StringUtils;
 
-import br.com.player.model.Player;
+import br.com.player.model.PlayerTite;
 import br.com.player.model.PlayerFilter;
 
 
@@ -19,7 +19,7 @@ public class PlayerDAO {
 		this.entityManager = EntityManagerEnum.INSTANCE.getEntityManager();				
 	}
 	
-	public List<Player> getPlayers(PlayerFilter filter) {
+	public List<PlayerTite> getPlayers(PlayerFilter filter) {
 		
 		StringBuilder sql = new StringBuilder();
 		sql.append("SELECT p FROM PlayerEntity p WHERE 0=0");		
@@ -42,7 +42,7 @@ public class PlayerDAO {
 
 		sql.append("ORDER BY p.rating desc");
 		
-		TypedQuery<Player> qr = this.entityManager.createQuery(sql.toString(), Player.class);
+		TypedQuery<PlayerTite> qr = this.entityManager.createQuery(sql.toString(), PlayerTite.class);
 
 		if (!StringUtils.isBlank(filter.getPosition())) {
 			qr.setParameter("pos", filter.getPosition());
@@ -64,43 +64,43 @@ public class PlayerDAO {
 	}
 	
 	
-	public void Save(Player playerEntity) {
+	public void Save(PlayerTite playerEntity) {
 		this.entityManager.getTransaction().begin();
 		this.entityManager.persist(playerEntity);
 		this.entityManager.getTransaction().commit();
 	}
 	
-	public void update(Player playerEntity) {
+	public void update(PlayerTite playerEntity) {
 		this.entityManager.getTransaction().begin();
 		this.entityManager.merge(playerEntity);
 		this.entityManager.getTransaction().commit();
 	}
 	
-	public Player getPlayer(Integer id) {
-		return this.entityManager.find(Player.class, id);
+	public PlayerTite getPlayer(Integer id) {
+		return this.entityManager.find(PlayerTite.class, id);
 	
 	}
 	
-	public Player getPlayerOriginalId(int p2) {
-		return this.entityManager.createQuery("SELECT p FROM PlayerEntity p WHERE p.originalId = :p1 ORDER BY p.id", Player.class)
+	public PlayerTite getPlayerOriginalId(int p2) {
+		return this.entityManager.createQuery("SELECT p FROM PlayerEntity p WHERE p.originalId = :p1 ORDER BY p.id", PlayerTite.class)
     			.setParameter("p1", p2).getSingleResult();
 	
 	}	
 	
     public void Delete(Integer id) {
-    	Player playerEntity = this.getPlayer(id);
+    	PlayerTite playerEntity = this.getPlayer(id);
     	
     	this.entityManager.getTransaction().begin();
     	this.entityManager.remove(playerEntity);
     	this.entityManager.getTransaction().commit();
     }
 
-	public List<Player> getPlayerFromLeague(int idLeague) {
-    	return this.entityManager.createQuery("SELECT p FROM PlayerEntity p WHERE p.idLeague = :idLeague ORDER BY p.id", Player.class)
+	public List<PlayerTite> getPlayerFromLeague(int idLeague) {
+    	return this.entityManager.createQuery("SELECT p FROM PlayerEntity p WHERE p.idLeague = :idLeague ORDER BY p.id", PlayerTite.class)
     			.setParameter("idLeague", idLeague).getResultList();
     }
     		
-    public List<Player> getAllPlayers() {
-    	return this.entityManager.createQuery("SELECT p FROM PlayerEntity p ORDER BY p.id", Player.class).getResultList();
+    public List<PlayerTite> getAllPlayers() {
+    	return this.entityManager.createQuery("SELECT p FROM PlayerEntity p ORDER BY p.id", PlayerTite.class).getResultList();
     }
 }

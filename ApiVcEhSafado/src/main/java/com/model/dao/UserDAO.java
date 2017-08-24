@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import com.model.entity.UserEntity;
+import com.model.entity.UserDetail;
 
 public class UserDAO {
 	private final EntityManager entityManager;
@@ -13,38 +13,38 @@ public class UserDAO {
 		this.entityManager = EntityManagerEnum.INSTANCE.getEntityManager();				
 	}
 	
-	public void Save(UserEntity userEntity) {
+	public void Save(UserDetail userEntity) {
 		this.entityManager.getTransaction().begin();
 		this.entityManager.persist(userEntity);
 		this.entityManager.getTransaction().commit();
 	}
 	
-	public void Update(UserEntity userEntity) {
+	public void Update(UserDetail userEntity) {
 		this.entityManager.getTransaction().begin();
 		this.entityManager.merge(userEntity);
 		this.entityManager.getTransaction().commit();
 	}
 	
-	public UserEntity getUser(Integer id) {
-		return this.entityManager.find(UserEntity.class, id);	
+	public UserDetail getUser(Integer id) {
+		return this.entityManager.find(UserDetail.class, id);	
 	}
 	
     public void Delete(Integer id) {
-    	UserEntity userEntity = this.getUser(id);
+    	UserDetail userEntity = this.getUser(id);
     	
     	this.entityManager.getTransaction().begin();
     	this.entityManager.remove(userEntity);
     	this.entityManager.getTransaction().commit();
     }	
     
-    public UserEntity getUserByLogin(String login) {
+    public UserDetail getUserByLogin(String login) {
     	try {
 	    	Object result = this.entityManager.createQuery("SELECT u FROM UserEntity u where u.login = :login ORDER BY u.id")
 	    			.setParameter("login", login).getSingleResult();
 	    	
 	    	if (result == null) return null;
 	        
-	    	return (UserEntity) result;
+	    	return (UserDetail) result;
 	    	
     	} catch (Exception e) {
     		return null;// TODO: handle exception
@@ -53,8 +53,8 @@ public class UserDAO {
 
     }
     
-	public List<UserEntity> TodosUsuarios(){
+	public List<UserDetail> TodosUsuarios(){
  
-		return this.entityManager.createQuery("SELECT u FROM UserEntity u ORDER BY u.id", UserEntity.class).getResultList();
+		return this.entityManager.createQuery("SELECT u FROM UserEntity u ORDER BY u.id", UserDetail.class).getResultList();
 	}    
 }

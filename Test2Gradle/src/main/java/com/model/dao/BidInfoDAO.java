@@ -7,7 +7,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 
-import com.model.entity.BidEntity;
+import br.com.mkt.model.BidTite;
 
 public class BidInfoDAO {	
 
@@ -20,10 +20,10 @@ public class BidInfoDAO {
 	}
 
 
-	public BidEntity getItem(int playerId) {
+	public BidTite getItem(int playerId) {
 		
 		try {
-			return (BidEntity) this.entityManager.createQuery("SELECT p FROM BidEntity p WHERE p.playerID = :playerID ORDER BY p.id", BidEntity.class)
+			return (BidTite) this.entityManager.createQuery("SELECT p FROM BidEntity p WHERE p.playerID = :playerID ORDER BY p.id", BidTite.class)
 	    			.setParameter("playerID", playerId).getSingleResult();
 		} catch (NoResultException e) {
 		    System.out.println(e.getMessage());
@@ -32,24 +32,24 @@ public class BidInfoDAO {
 			
 	}
 
-	public void save(BidEntity bid) {
+	public void save(BidTite bid) {
 		this.entityManager.getTransaction().begin();
 		this.entityManager.persist(bid);
 		this.entityManager.getTransaction().commit();
 	}
 	
-    public void delete(BidEntity bid) {	    	
+    public void delete(BidTite bid) {	    	
     	this.entityManager.getTransaction().begin();
     	this.entityManager.remove(bid);
     	this.entityManager.getTransaction().commit();
     }	
 
-	public List<BidEntity> getList() {
-		return this.entityManager.createQuery("SELECT p FROM BidEntity p ORDER BY p.id", BidEntity.class).getResultList();
+	public List<BidTite> getList() {
+		return this.entityManager.createQuery("SELECT p FROM BidEntity p ORDER BY p.id", BidTite.class).getResultList();
 	}
 	
-	public List<BidEntity> getListTeam(Integer teamID) {
-		return this.entityManager.createQuery("SELECT p FROM BidEntity p WHERE p.teamID = :teamID ORDER BY p.id", BidEntity.class)
+	public List<BidTite> getListTeam(Integer teamID) {
+		return this.entityManager.createQuery("SELECT p FROM BidEntity p WHERE p.teamID = :teamID ORDER BY p.id", BidTite.class)
 				.setParameter("teamID", teamID).getResultList();
 	}
 

@@ -1,15 +1,19 @@
-package com.model.entity;
+package br.com.team.model;
+
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.ManyToMany;
+
+import br.com.player.model.PlayerTite;
 
 @Entity
-@Table(name="tb_team")
-public class TeamEntity {
+public class TeamTite {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
@@ -24,7 +28,11 @@ public class TeamEntity {
 	private double budget;
 	@Column(name="idUser")
 	private Integer idUser;
-	
+
+	@ManyToMany	  
+	private List<PlayerTite> players;	
+
+
 	public Integer getId() {
 		return id;
 	}
@@ -61,5 +69,5 @@ public class TeamEntity {
 	public void setIdUser(Integer idUser) {
 		this.idUser = idUser;
 	}	
-	
+
 }

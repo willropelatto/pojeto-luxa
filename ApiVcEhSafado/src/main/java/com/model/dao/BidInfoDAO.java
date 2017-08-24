@@ -8,8 +8,6 @@ import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 
 import com.model.entity.BidEntity;
-import com.model.entity.TeamEntity;
-import com.model.out.BidInfo;
 
 public class BidInfoDAO {	
 

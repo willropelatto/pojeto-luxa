@@ -8,7 +8,7 @@ import java.util.List;
 import javax.ws.rs.PathParam;
 
 import com.model.dao.UserDAO;
-import com.model.entity.UserEntity;
+import com.model.entity.UserDetail;
 import com.model.out.User;
  
 public class UserController {
@@ -18,7 +18,7 @@ public class UserController {
 	
 	public String Cadastrar(User user){
  
-		UserEntity entity = new UserEntity();
+		UserDetail entity = new UserDetail();
  
 		try {
  
@@ -41,7 +41,7 @@ public class UserController {
 	
 	public String Alterar(User user){
  
-		UserEntity entity = new UserEntity();
+		UserDetail entity = new UserDetail();
  
 		try {
 			entity.setNome(user.getNome());
@@ -66,9 +66,9 @@ public class UserController {
  
 		List<User> users =  new ArrayList<User>();
  
-		List<UserEntity> listaEntityUsers = userDAO.TodosUsuarios();
+		List<UserDetail> listaEntityUsers = userDAO.TodosUsuarios();
  
-		for (UserEntity entity : listaEntityUsers) {
+		for (UserDetail entity : listaEntityUsers) {
  
 			users.add(new User(entity.getId(), 
 					           entity.getNome(),
@@ -83,7 +83,7 @@ public class UserController {
 	
 	public User GetUser(@PathParam("codigo") Integer codigo){
  
-		UserEntity entity = userDAO.getUser(codigo);
+		UserDetail entity = userDAO.getUser(codigo);
  
 		if(entity != null)
 			return new User(entity.getId(), 
@@ -113,7 +113,7 @@ public class UserController {
 	
 	public User login(User user) { 
 		try{
-			UserEntity entity = userDAO.getUserByLogin(user.getLogin());
+			UserDetail entity = userDAO.getUserByLogin(user.getLogin());
 			
 			if (entity != null) {
 				if (entity.getSenha().equals(user.getSenha())) {

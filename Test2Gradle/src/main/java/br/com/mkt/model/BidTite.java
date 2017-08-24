@@ -1,26 +1,24 @@
-package com.model.entity;
+package br.com.mkt.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
 @Entity
-@Table(name="tb_bidLog")
-public class BidEntityLog {
+public class BidTite {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
 	private Integer id;	
-	@Column(name="playerID")
-	private int playerID;
+	@Column(name="playerId")
+	private int playerId;
 	@Column(name="bidValue")
 	private double bidValue;
-	@Column(name="teamID")
-	private int teamID;
+	@Column(name="teamId")
+	private int teamId;
 	@Column(name="originalValue")
 	private double originalValue;
 	
@@ -31,10 +29,10 @@ public class BidEntityLog {
 		this.id = id;
 	}
 	public int getPlayerID() {
-		return playerID;
+		return playerId;
 	}
 	public void setPlayerID(int playerID) {
-		this.playerID = playerID;
+		this.playerId = playerID;
 	}
 	public double getBidValue() {
 		return bidValue;
@@ -43,10 +41,10 @@ public class BidEntityLog {
 		this.bidValue = bidValue;
 	}
 	public int getTeamID() {
-		return teamID;
+		return teamId;
 	}
 	public void setTeamID(int teamID) {
-		this.teamID = teamID;
+		this.teamId = teamID;
 	}
 	public double getOriginalValue() {
 		return originalValue;

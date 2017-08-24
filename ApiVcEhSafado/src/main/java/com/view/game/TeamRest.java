@@ -11,7 +11,6 @@ import javax.ws.rs.Produces;
 
 import com.ctrl.game.TeamController;
 import com.model.in.Team;
-import com.model.out.ResumedPlayer;
 
 @Path("/team")
 public class TeamRest {
