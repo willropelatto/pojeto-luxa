@@ -8,6 +8,6 @@ public interface TeamTiteRepository extends PagingAndSortingRepository<TeamTite,
 
 	Page<TeamTite> findByidUser(Integer iduser, Pageable pageable);
 	
-	
+	TeamTite findOneByIdUser(Integer iduser);
 	
 }

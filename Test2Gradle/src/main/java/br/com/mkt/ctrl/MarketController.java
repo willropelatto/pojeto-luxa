@@ -1,20 +1,33 @@
 package br.com.mkt.ctrl;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import br.com.mkt.model.BidTite;
+import br.com.mkt.model.BidTiteRepository;
 
 @RestController
 public class MarketController {
 
-	/*@Autowired
-	private*/
+	@Autowired
+	private BidTiteRepository bidDao;
 	
 	
-/*	public BidInfo placeBid(BidInfo bid) {	
+	@CrossOrigin
+	@RequestMapping("/market/get")
+	public BidTite getbid() {
+		return bidDao.findOneByTeamId(1);
+	}
+	
+	/*
+	public BidTite placeBid(BidTite bid) {	
 
-		TeamEntity team = teamAcc.getTeam(bid.getTeamID());
-		BidEntity bidBase = bidDao.getItem(bid.getPlayerID());
-		PlayerEntity plBase = plDao.getPlayer(bid.getPlayerID());
-		BidInfo bidReturn;
+		//TeamEntity team = teamAcc.getTeam(bid.getTeamID());
+		BidTite bidBase = bidDao.findByPlayerId(getItem(bid.getPlayerID());
+		//PlayerEntity plBase = plDao.getPlayer(bid.getPlayerID());
+		BidTite bidReturn;
 
 		if (bid.getBidValue() > bidBase.getBidValue()) {
 			if (haveMoney(bid.getBidValue(), team)) {
@@ -38,6 +51,8 @@ public class MarketController {
 
 		return bidReturn;
 
-	}*/	
+	}
+	*/
+	
 	
 }

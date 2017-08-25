@@ -29,8 +29,8 @@ public class TeamController {
 	
 	@CrossOrigin		
 	@RequestMapping("/team/getByUser/{user}")
-	public Page<TeamTite> getByUser(@PathVariable("user") Integer user, @PageableDefault(value = 50) Pageable pageable) { 			
-		return ttDao.findByidUser(user, pageable);		
+	public TeamTite getByUser(@PathVariable("user") Integer user) {		
+		return ttDao.findOneByIdUser(user);				 
 	}	
 	
 	@CrossOrigin		
