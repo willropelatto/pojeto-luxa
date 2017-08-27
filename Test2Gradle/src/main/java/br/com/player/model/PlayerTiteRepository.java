@@ -21,6 +21,6 @@ public interface PlayerTiteRepository extends PagingAndSortingRepository<PlayerT
 	
 	Page<PlayerTite> findByOriginalId(int originalId, Pageable pageable);
 	
-	Page<PlayerTite> findByIdLeague(int idLeague, Pageable pageable);
+	Page<PlayerTite> findByIdLeague(Integer idLeague, Pageable pageable);
 
 }

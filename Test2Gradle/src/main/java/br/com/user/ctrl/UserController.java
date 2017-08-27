@@ -48,7 +48,7 @@ public class UserController {
 			if (pgentity != null) {
 				for (UserDetail entity : pgentity) {					
 					if (entity.getSenha().equals(user.getSenha())) {
-						String keyAuth = com.model.dao.TokenAuth.GerarToken(user.getLogin());
+						String keyAuth = UserAuthToken.GerarToken(user.getLogin());
 						entity.setKeyAuth(keyAuth);	
 						entity = userDao.save(entity);
 						entity.setSenha("");

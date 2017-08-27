@@ -11,5 +11,7 @@ public interface BidTiteRepository extends PagingAndSortingRepository<BidTite, I
 	Page<BidTite> findByTeamId(Integer teamid, Pageable pageable);
 	
 	BidTite findOneByTeamId(Integer teamid);
+	
+	BidTite findOneByPlayerId(Integer plid);	
 
 }

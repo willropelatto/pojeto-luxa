@@ -7,5 +7,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 public interface LeagueTiteRepository extends PagingAndSortingRepository<LeagueTite, Integer> {
 	
 	Page<LeagueTite> findByNameAllIgnoringCase(String name, Pageable pageable);
+	
+	LeagueTite findOneByOriginalId(int originalId);
 
 }

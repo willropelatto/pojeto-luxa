@@ -16,7 +16,7 @@ public class LeagueTite {
 	@Column(name="abbrName")
 	private String abbrName;
 	@Column(name="originalId")
-    private Integer originalId;
+    private int originalId;
 	@Column(name="imgUrl")
     private String imgUrl;
 	@Column(name="name")

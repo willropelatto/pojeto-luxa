@@ -21,7 +21,7 @@ public class PlayerTite {
 	@Column(name="rating")
     private Integer rating;
 	@Column(name="idLeague")
-	private Integer idLeague;
+	private int idLeague; //LeagueTite.getOriginalId
 	@Column(name="originalId")
 	private String originalId;
 	@Column(name = "hasBid", columnDefinition = "boolean default false", nullable = false)
@@ -63,8 +63,7 @@ public class PlayerTite {
 	}
 	public void setIdLeague(Integer idLeague) {
 		this.idLeague = idLeague;
-	}
-	
+	}	
 	public String getOriginalId() {
 		return originalId;
 	}
