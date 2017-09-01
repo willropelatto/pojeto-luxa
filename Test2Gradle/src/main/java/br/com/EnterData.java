@@ -29,8 +29,8 @@ public class EnterData {
 	private PlayerTiteRepository playerDao;	
 	@Autowired
 	private LeagueTiteRepository leagueDao;	
-	
-	
+
+
 	private PlayerTite convertPlayer(FullPlayer fullpl) {
 		PlayerTite player = new PlayerTite();
 		Integer idLeague = new Integer(fullpl.getLeague().getId());
@@ -42,7 +42,7 @@ public class EnterData {
 		player.setIdLeague(idLeague); 
 		player.setOriginalId(fullpl.getId());
 		player.setHasBid(false);
-		
+
 		return player;
 	}		
 
@@ -56,11 +56,10 @@ public class EnterData {
 		Gson gson = new Gson();	    
 		PageIn pg = gson.fromJson(json, PageIn.class);		
 		PlayerTite player;
+		PlayerTite plcomp;
 		FullPlayer fullPlay;	  
 		ArrayList<League> leagues = new ArrayList<League>();
-		ArrayList<Integer> list = new ArrayList<>();
-		int baseId = 0;
-	
+
 		while ((pg != null) && (pg.getTotalPages() >= pg.getPage())) {
 			for (int i = 0; i < pg.getItems().length; i++) {
 				fullPlay = pg.getItems()[i];    		
@@ -68,7 +67,7 @@ public class EnterData {
 				if ((fullPlay.getPlayerType().equals("rare") || fullPlay.getPlayerType().equals("standard")) &&
 						!fullPlay.getColor().isEmpty())	{
 					League league = fullPlay.getLeague();
-					
+
 					if (!leagues.contains(league)) {
 						if (leagueDao.findOneByOriginalId(league.getId()) == null) {
 							leagueDao.save(convertLeague(league));
@@ -76,13 +75,12 @@ public class EnterData {
 						leagues.add(league);
 					}
 
+					player = convertPlayer(fullPlay);		
+					plcomp = playerDao.findOneByBaseId(player.getBaseId());
 					
-					player = convertPlayer(fullPlay);
-					baseId = player.getBaseId();
-					if (!list.contains(baseId)){
-					  System.out.println(baseId);
-					  list.add(baseId);
-					  playerDao.save(player);		
+					if (savePlayer(player, plcomp)) {
+						System.out.println(player);						
+						playerDao.save(player);						
 					}
 				}	    		
 
@@ -103,10 +101,27 @@ public class EnterData {
 
 			}
 		}
-		
-//		return 1;
 	}			
-	
+
+	private boolean savePlayer(PlayerTite player, PlayerTite plbase) {
+		
+		if (plbase == null) {
+			return true;
+		}
+		
+		Integer ori, dst;
+		
+		ori = Integer.parseInt(player.getOriginalId());
+		dst = Integer.parseInt(plbase.getOriginalId());
+		
+		if (Integer.compare(ori, dst) > 0) {			
+			player.setId(plbase.getId());
+			return true;
+		}
+		 
+		return false;
+	}
+
 	private LeagueTite convertLeague(League league) {		
 		LeagueTite entity = new LeagueTite();				
 		entity.setId(0);
@@ -114,8 +129,8 @@ public class EnterData {
 		entity.setImgUrl(league.getImgUrl());
 		entity.setName(league.getName());
 		entity.setOriginalId(league.getId());
-		
+
 		return entity;	
 	}	
-	
+
 }

@@ -48,13 +48,13 @@ public class PlayerController {
 	
 	@CrossOrigin
 	@RequestMapping("/player/list")
-	public Page<PlayerTite> getAllPlayers(@PageableDefault(value = 50000) Pageable pageable) {			
+	public Page<PlayerTite> getAllPlayers(@PageableDefault(value = 50) Pageable pageable) {			
 		return plDao.findAll(pageable);
 	}
 	
 	@CrossOrigin	
 	@RequestMapping(value="/player/getPlayers")
-	public Page<PlayerTite> getPlayers(@RequestBody PlayerFilter filter, @PageableDefault(value = 5000000) Pageable pageable) {	
+	public Page<PlayerTite> getPlayers(@RequestBody PlayerFilter filter, @PageableDefault(value = 50) Pageable pageable) {	
 		if (filter.getName().trim().length() > 0) {
 			return plDao.findByNameIgnoreCase(filter.getName(), pageable);
 		} else if (filter.getLeague().trim().length() > 0){

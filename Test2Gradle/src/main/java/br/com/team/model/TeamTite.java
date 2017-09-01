@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 import br.com.player.model.PlayerTite;
 
@@ -29,7 +29,7 @@ public class TeamTite {
 	@Column(name="idUser")
 	private Integer idUser;
 
-	@ManyToMany	  
+	@OneToMany(mappedBy="team")	
 	private List<PlayerTite> players;	
 
 
@@ -68,6 +68,12 @@ public class TeamTite {
 	}
 	public void setIdUser(Integer idUser) {
 		this.idUser = idUser;
+	}
+	public List<PlayerTite> getPlayers() {
+		return players;
+	}
+	public void setPlayers(List<PlayerTite> players) {
+		this.players = players;
 	}	
 
 }
