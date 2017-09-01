@@ -1,6 +1,7 @@
 package br.com;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -13,12 +14,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
+import com.model.in.Attributes;
 import com.model.in.FullPlayer;
 import com.model.in.League;
 import com.model.in.PageIn;
 
 import br.com.league.model.LeagueTite;
 import br.com.league.model.LeagueTiteRepository;
+import br.com.player.model.PlayerAttributes;
+import br.com.player.model.PlayerAttributesRepository;
 import br.com.player.model.PlayerTite;
 import br.com.player.model.PlayerTiteRepository;
 
@@ -29,6 +33,8 @@ public class EnterData {
 	private PlayerTiteRepository playerDao;	
 	@Autowired
 	private LeagueTiteRepository leagueDao;	
+	@Autowired
+	private PlayerAttributesRepository attributesDao;
 
 
 	private PlayerTite convertPlayer(FullPlayer fullpl) {
@@ -57,7 +63,8 @@ public class EnterData {
 		PageIn pg = gson.fromJson(json, PageIn.class);		
 		PlayerTite player;
 		PlayerTite plcomp;
-		FullPlayer fullPlay;	  
+		FullPlayer fullPlay;	
+		ArrayList<PlayerAttributes> attributes;
 		ArrayList<League> leagues = new ArrayList<League>();
 
 		while ((pg != null) && (pg.getTotalPages() >= pg.getPage())) {
@@ -79,7 +86,9 @@ public class EnterData {
 					plcomp = playerDao.findOneByBaseId(player.getBaseId());
 					
 					if (savePlayer(player, plcomp)) {
-						System.out.println(player);						
+						System.out.println(player);
+						attributes = (convertAttributes(fullPlay.getAttributes()));
+						player.setAttributes((List<PlayerAttributes>) attributesDao.save(attributes));
 						playerDao.save(player);						
 					}
 				}	    		
@@ -132,5 +141,19 @@ public class EnterData {
 
 		return entity;	
 	}	
+	
+	private ArrayList<PlayerAttributes> convertAttributes(Attributes[] attributes){
+		ArrayList<PlayerAttributes> entity = new ArrayList<PlayerAttributes>();
+		for (Attributes attributes2 : attributes) {
+			PlayerAttributes plAtt = new PlayerAttributes();
+			plAtt.setId(0);
+			String name = attributes2.getName();
+			name.replaceAll("fut.attribute.", "");
+			plAtt.setName(name);
+			plAtt.setValue(attributes2.getValue());
+			entity.add(plAtt);			
+		}
+		return entity;
+	}
 
 }
