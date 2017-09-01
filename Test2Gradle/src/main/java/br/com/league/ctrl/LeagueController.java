@@ -21,6 +21,8 @@ public class LeagueController {
 	@RequestMapping("/league/list")
 	public Page<LeagueTite> getLeagues(@PageableDefault(value = 50) Pageable pageable) {		
 		return leagueDao.findAll(pageable);
-	}	
+	}
+	
+	
 
 }

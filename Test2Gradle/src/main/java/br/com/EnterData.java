@@ -51,14 +51,16 @@ public class EnterData {
 	@RequestMapping("/main/update")	
 	public void UpdateStoredPlayers() {
 		Client client = ClientBuilder.newClient();
-		WebTarget target = client.target("https://www.easports.com/fifa/ultimate-team/api/fut/item?page=604");						
+		WebTarget target = client.target("https://www.easports.com/fifa/ultimate-team/api/fut/item?page=0");						
 		String json = target.request(MediaType.APPLICATION_JSON).get().readEntity(String.class);	    
 		Gson gson = new Gson();	    
 		PageIn pg = gson.fromJson(json, PageIn.class);		
 		PlayerTite player;
 		FullPlayer fullPlay;	  
-		ArrayList<League> leagues = new ArrayList<League>();	    
-
+		ArrayList<League> leagues = new ArrayList<League>();
+		ArrayList<Integer> list = new ArrayList<>();
+		int baseId = 0;
+	
 		while ((pg != null) && (pg.getTotalPages() >= pg.getPage())) {
 			for (int i = 0; i < pg.getItems().length; i++) {
 				fullPlay = pg.getItems()[i];    		
@@ -74,8 +76,14 @@ public class EnterData {
 						leagues.add(league);
 					}
 
+					
 					player = convertPlayer(fullPlay);
-					playerDao.save(player);						
+					baseId = player.getBaseId();
+					if (!list.contains(baseId)){
+					  System.out.println(baseId);
+					  list.add(baseId);
+					  playerDao.save(player);		
+					}
 				}	    		
 
 			}

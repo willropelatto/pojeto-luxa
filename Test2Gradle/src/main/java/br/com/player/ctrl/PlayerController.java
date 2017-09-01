@@ -10,15 +10,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.league.model.LeagueTite;
+import br.com.league.model.LeagueTiteRepository;
 import br.com.player.model.PlayerFilter;
-import br.com.player.model.PlayerTiteRepository;
 import br.com.player.model.PlayerTite;
+import br.com.player.model.PlayerTiteRepository;
 
 @RestController
 public class PlayerController {
 	
 	@Autowired
-	private PlayerTiteRepository plDao;		
+	private PlayerTiteRepository plDao;	
+	@Autowired
+	private LeagueTiteRepository leagueDao;
 	
 
 	@CrossOrigin	
@@ -37,22 +41,38 @@ public class PlayerController {
 	
 	@CrossOrigin	
 	@RequestMapping("/player/getByName/{name}")
-	public Page<PlayerTite> getPlayerByName(@PathVariable("name") String name,  @PageableDefault(value = 50) Pageable pageable) {
-		return plDao.findByNameIgnoreCase(name, pageable);						
+	public Page<PlayerTite> getPlayerByName(@RequestBody PlayerFilter filter, @PageableDefault(value = 50) Pageable pageable) {	
+		return plDao.findByNameIgnoreCase(filter.getName(), pageable);						
 	}	
 	
 	
 	@CrossOrigin
 	@RequestMapping("/player/list")
-	public Page<PlayerTite> getAllPlayers(@PageableDefault(value = 50) Pageable pageable) {			
+	public Page<PlayerTite> getAllPlayers(@PageableDefault(value = 50000) Pageable pageable) {			
 		return plDao.findAll(pageable);
 	}
 	
 	@CrossOrigin	
 	@RequestMapping(value="/player/getPlayers")
-	public Page<PlayerTite> getPlayers(@RequestBody PlayerFilter filter, @PageableDefault(value = 50) Pageable pageable) {		
-		return plDao.findByPositionIgnoreCaseAndRatingGreaterThanEqual(filter.getPosition(), filter.getRating(), pageable);
+	public Page<PlayerTite> getPlayers(@RequestBody PlayerFilter filter, @PageableDefault(value = 5000000) Pageable pageable) {	
+		if (filter.getName().trim().length() > 0) {
+			return plDao.findByNameIgnoreCase(filter.getName(), pageable);
+		} else if (filter.getLeague().trim().length() > 0){
+			LeagueTite lgTite = leagueDao.findOneByName(filter.getLeague());
+			return plDao.findByIdLeague(lgTite.getId(), pageable);		
+		} else if (filter.getPosition().trim().length() > 0) {
+			return plDao.findByPositionIgnoreCaseAndRatingGreaterThanEqual(filter.getPosition(), filter.getRating(), pageable);
+		}
+		return null;
 	}
 	
+	@CrossOrigin	
+	@RequestMapping(value="/player/getByLeague")
+	public Page<PlayerTite> getPlayersByLeague(@RequestBody PlayerFilter filter, @PageableDefault(value = 50) Pageable pageable) {		
+		LeagueTite lgTite = leagueDao.findOneByName(filter.getLeague());
+		return plDao.findByIdLeague(lgTite.getId(), pageable);
+	}
+	
+
 
 }

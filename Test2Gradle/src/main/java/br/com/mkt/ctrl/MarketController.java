@@ -16,6 +16,8 @@ import br.com.mkt.model.BidInfo;
 import br.com.mkt.model.BidStatus;
 import br.com.mkt.model.BidTite;
 import br.com.mkt.model.BidTiteRepository;
+import br.com.notification.model.NotificationTite;
+import br.com.notification.model.NotificationTiteRepository;
 import br.com.player.model.PlayerTite;
 import br.com.player.model.PlayerTiteRepository;
 import br.com.team.model.TeamTite;
@@ -32,6 +34,9 @@ public class MarketController {
 	private TeamTiteRepository teamDao;
 	@Autowired
 	private PlayerTiteRepository plDao;
+	
+	@Autowired
+	private NotificationTiteRepository ntDao;
 
 	@CrossOrigin
 	@RequestMapping(value="/market/placeBid", method=RequestMethod.POST)	
@@ -40,7 +45,8 @@ public class MarketController {
 		TeamTite team = teamDao.findOne(bid.getTeamID());
 		BidTite bidBase = bidDao.findOneByPlayerId(bid.getPlayerID());		
 		PlayerTite player = plDao.findOne(bid.getPlayerID());
-		BidInfo bidReturn;	
+		BidInfo bidReturn;
+		
 
 		if (bidBase == null) {
 			bidReturn = new BidInfo(bid);			
@@ -55,8 +61,20 @@ public class MarketController {
 						player = updateStatusBid(player);
 					}
 
-					//logDao.save(convertEntityToLog(bidBase));				
+					//logDao.save(convertEntityToLog(bidBase));	
+					NotificationTite ntTite = new NotificationTite();
+					ntTite.setTeamId(bidBase.getTeamID());
+					ntTite.setPlayerName(player.getName());
+					ntTite.setNotification("Seu lance pelo jogador: "+ player.getName() +" foi superado.");
+					ntDao.save(ntTite);
 					bidDao.delete(bidBase);
+					
+					bid.setPlayerName(player.getName());
+					NotificationTite ntNewBid = new NotificationTite();
+					ntNewBid.setTeamId(bid.getTeamID());
+					ntNewBid.setPlayerName(player.getName());
+					ntNewBid.setNotification("Seu lance pelo jogador: "+ player.getName() +" foi realizado com sucesso.");
+					ntDao.save(ntNewBid);				
 					bid = bidDao.save(bid);
 
 					bidReturn = BidInfoFactory.newProtectedBid(player, bid.getBidValue());
@@ -91,6 +109,12 @@ public class MarketController {
 				team = decreaseBudget(team, bid.getBidValue());	
 				player = updateStatusBid(player);
 				//logDao.save(convertInfoToLog(bid));
+				bid.setPlayerName(player.getName());
+				NotificationTite ntNewBid = new NotificationTite();
+				ntNewBid.setTeamId(bid.getTeamID());
+				ntNewBid.setPlayerName(player.getName());
+				ntNewBid.setNotification("Seu lance pelo jogador: "+ player.getName() +" foi realizado com sucesso.");
+				ntDao.save(ntNewBid);
 				bidDao.save(bid);				
 				bidReturn = BidInfoFactory.newProtectedBid(player, bid.getBidValue());
 				bidReturn.setStatus(BidStatus.APROVED);

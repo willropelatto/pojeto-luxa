@@ -21,6 +21,15 @@ public class BidTite {
 	private int teamId;
 	@Column(name="originalValue")
 	private double originalValue;
+	@Column(name="playerName")
+	private String playerName;
+	
+	public String getPlayerName() {
+		return playerName;
+	}
+	public void setPlayerName(String playerName) {
+		this.playerName = playerName;
+	}
 	
 	public Integer getId() {
 		return id;

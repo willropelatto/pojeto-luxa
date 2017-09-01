@@ -10,4 +10,5 @@ public interface LeagueTiteRepository extends PagingAndSortingRepository<LeagueT
 	
 	LeagueTite findOneByOriginalId(int originalId);
 
+	LeagueTite findOneByName(String name);
 }
