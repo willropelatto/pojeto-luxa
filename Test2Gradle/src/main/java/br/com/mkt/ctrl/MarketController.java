@@ -5,10 +5,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.BidInfoFactory;
@@ -24,6 +25,7 @@ import br.com.team.model.TeamTite;
 import br.com.team.model.TeamTiteRepository;
 
 @RestController
+@RequestMapping("/market")
 public class MarketController {
 
 	@Autowired
@@ -39,7 +41,7 @@ public class MarketController {
 	private NotificationTiteRepository ntDao;
 
 	@CrossOrigin
-	@RequestMapping(value="/market/placeBid", method=RequestMethod.POST)	
+	@PostMapping("/placeBid")	
 	public BidInfo placeBid(@RequestBody BidTite bid) {		
 
 		TeamTite team = teamDao.findOne(bid.getTeamID());
@@ -93,7 +95,7 @@ public class MarketController {
 	}	
 
 	@CrossOrigin
-	@RequestMapping(value="/market/initialBid", method=RequestMethod.POST)	
+	@PostMapping("/initialBid")	
 	public BidInfo initialBid(@RequestBody BidTite bid) {
 
 		TeamTite team = teamDao.findOne(bid.getTeamID());
@@ -129,7 +131,7 @@ public class MarketController {
 	}	
 
 	@CrossOrigin
-	@RequestMapping("/market/player/getBid/{player}")	
+	@GetMapping("/player/getBid/{player}")
 	public BidInfo getBidFromPlayerId(@PathVariable("player") Integer idPlayer){ 		
 
 		BidTite bid = bidDao.findOneByPlayerId(idPlayer);
@@ -145,13 +147,13 @@ public class MarketController {
 	}
 
 	@CrossOrigin
-	@RequestMapping("/market/team/getBid/{team}")
+	@GetMapping("/team/getBid/{team}")
 	public Page<BidTite> getBidFromTeamId(@PathVariable("team") Integer idTeam, @PageableDefault(value = 25) Pageable pageable) {		
 		return bidDao.findByTeamId(idTeam, pageable);	
 	}	 	 	
 
 	@CrossOrigin
-	@RequestMapping("/market/list")
+	@GetMapping("/list")
 	public Page<BidTite> getBids(@PageableDefault(value = 25) Pageable pageable){
 		return bidDao.findAll(pageable);
 	}  	

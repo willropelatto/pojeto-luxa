@@ -64,7 +64,7 @@ public class EnterData {
 		PlayerTite player;
 		PlayerTite plcomp;
 		FullPlayer fullPlay;	
-		ArrayList<PlayerAttributes> attributes;
+		List<PlayerAttributes> attributes;
 		ArrayList<League> leagues = new ArrayList<League>();
 
 		while ((pg != null) && (pg.getTotalPages() >= pg.getPage())) {
@@ -88,7 +88,8 @@ public class EnterData {
 					if (savePlayer(player, plcomp)) {
 						System.out.println(player);
 						attributes = (convertAttributes(fullPlay.getAttributes()));
-						player.setAttributes((List<PlayerAttributes>) attributesDao.save(attributes));
+						attributesDao.save(attributes);
+						player.setAttributes(attributes);
 						playerDao.save(player);						
 					}
 				}	    		
@@ -142,8 +143,8 @@ public class EnterData {
 		return entity;	
 	}	
 	
-	private ArrayList<PlayerAttributes> convertAttributes(Attributes[] attributes){
-		ArrayList<PlayerAttributes> entity = new ArrayList<PlayerAttributes>();
+	private List<PlayerAttributes> convertAttributes(Attributes[] attributes){
+		List<PlayerAttributes> entity = new ArrayList<PlayerAttributes>();
 		for (Attributes attributes2 : attributes) {
 			PlayerAttributes plAtt = new PlayerAttributes();
 			plAtt.setId(0);

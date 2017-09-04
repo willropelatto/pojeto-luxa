@@ -5,16 +5,18 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.team.model.TeamTite;
 import br.com.team.model.TeamTiteRepository;
 
 @RestController
+@RequestMapping("/team")
 public class TeamController {
 
 	@Autowired
@@ -22,19 +24,19 @@ public class TeamController {
 	
 	
 	@CrossOrigin			
-	@RequestMapping("/team/list")
+	@GetMapping("/list")
 	public Page<TeamTite> listTeams(@PageableDefault(value = 50) Pageable pageable) {
 		return ttDao.findAll(pageable);		
 	}
 	
 	@CrossOrigin		
-	@RequestMapping("/team/getByUser/{user}")
+	@GetMapping("/getByUser/{user}")
 	public TeamTite getByUser(@PathVariable("user") Integer user) {		
 		return ttDao.findOneByIdUser(user);				 
 	}	
 	
 	@CrossOrigin		
-	@RequestMapping(value="/team/register", method=RequestMethod.POST)
+	@PostMapping("/register")	
 	public TeamTite register(@RequestBody TeamTite team) {		
 		return ttDao.save(team);
 	}	

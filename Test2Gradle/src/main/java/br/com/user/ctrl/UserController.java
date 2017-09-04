@@ -5,41 +5,43 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.user.model.UserDetail;
 import br.com.user.model.UserDetailRepository;
 
 @RestController
+@RequestMapping("/user")
 public class UserController {
 
 	@Autowired
 	private UserDetailRepository userDao;	
 
 	@CrossOrigin
-	@RequestMapping("/user/get/{code}")	
+	@GetMapping("/get/{code}")	
 	public UserDetail GetUser(@PathVariable("code") Integer codigo) {
 		return userDao.findOne(codigo);		
 	}
 
 	@CrossOrigin  
-	@RequestMapping(value = "/user/register", method=RequestMethod.POST)	
+	@PostMapping("/register")
 	public UserDetail Register(@RequestBody UserDetail user) {		
 		return userDao.save(user);		
 	}	
 
 	@CrossOrigin
-	@RequestMapping("/user/update")	
+	@PostMapping("/update")
 	public UserDetail Update(UserDetail user){			
 		return userDao.save(user);		
 	}
 
 	@CrossOrigin    	
-	@RequestMapping(value = "/user/login", method=RequestMethod.POST)
+	@PostMapping("/login")	
 	public UserDetail login(@RequestBody UserDetail user, @PageableDefault(value = 1) Pageable pageable) {
 
 		try	{
@@ -61,9 +63,5 @@ public class UserController {
 		}
 
 		return null;
-	}			
-
-
+	}
 }
-
-
