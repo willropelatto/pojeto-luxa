@@ -14,28 +14,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
-import com.model.in.Attributes;
-import com.model.in.FullPlayer;
-import com.model.in.League;
-import com.model.in.PageIn;
 
-import br.com.league.model.LeagueTite;
-import br.com.league.model.LeagueTiteRepository;
-import br.com.player.model.PlayerAttributes;
-import br.com.player.model.PlayerAttributesRepository;
-import br.com.player.model.PlayerTite;
-import br.com.player.model.PlayerTiteRepository;
+import br.com.in.model.Attributes;
+import br.com.in.model.FullPlayer;
+import br.com.in.model.League;
+import br.com.in.model.PageIn;
+import br.com.model.LeagueTite;
+import br.com.model.LeagueTiteRepository;
+import br.com.model.PlayerAttributes;
+import br.com.model.PlayerAttributesRepository;
+import br.com.model.PlayerTite;
+import br.com.model.PlayerTiteRepository;
 
 @RestController
 public class EnterData {
 
 	@Autowired
-	private PlayerTiteRepository playerDao;	
+	private PlayerTiteRepository playerDao;
 	@Autowired
-	private LeagueTiteRepository leagueDao;	
+	private LeagueTiteRepository leagueDao;
 	@Autowired
 	private PlayerAttributesRepository attributesDao;
-
 
 	private PlayerTite convertPlayer(FullPlayer fullpl) {
 		PlayerTite player = new PlayerTite();
@@ -45,34 +44,33 @@ public class EnterData {
 		player.setPosition(fullpl.getPosition());
 		player.setBaseId(fullpl.getBaseId());
 		player.setRating(fullpl.getRating());
-		player.setIdLeague(idLeague); 
+		player.setIdLeague(idLeague);
 		player.setOriginalId(fullpl.getId());
 		player.setHasBid(false);
 
 		return player;
-	}		
-
+	}
 
 	@CrossOrigin
-	@RequestMapping("/main/update")	
+	@RequestMapping("/main/update")
 	public void UpdateStoredPlayers() {
 		Client client = ClientBuilder.newClient();
-		WebTarget target = client.target("https://www.easports.com/fifa/ultimate-team/api/fut/item?page=0");						
-		String json = target.request(MediaType.APPLICATION_JSON).get().readEntity(String.class);	    
-		Gson gson = new Gson();	    
-		PageIn pg = gson.fromJson(json, PageIn.class);		
+		WebTarget target = client.target("https://www.easports.com/fifa/ultimate-team/api/fut/item?page=0");
+		String json = target.request(MediaType.APPLICATION_JSON).get().readEntity(String.class);
+		Gson gson = new Gson();
+		PageIn pg = gson.fromJson(json, PageIn.class);
 		PlayerTite player;
 		PlayerTite plcomp;
-		FullPlayer fullPlay;	
+		FullPlayer fullPlay;
 		List<PlayerAttributes> attributes;
 		ArrayList<League> leagues = new ArrayList<League>();
 
 		while ((pg != null) && (pg.getTotalPages() >= pg.getPage())) {
 			for (int i = 0; i < pg.getItems().length; i++) {
-				fullPlay = pg.getItems()[i];    		
+				fullPlay = pg.getItems()[i];
 
-				if ((fullPlay.getPlayerType().equals("rare") || fullPlay.getPlayerType().equals("standard")) &&
-						!fullPlay.getColor().isEmpty())	{
+				if ((fullPlay.getPlayerType().equals("rare") || fullPlay.getPlayerType().equals("standard"))
+						&& !fullPlay.getColor().isEmpty()) {
 					League league = fullPlay.getLeague();
 
 					if (!leagues.contains(league)) {
@@ -82,68 +80,68 @@ public class EnterData {
 						leagues.add(league);
 					}
 
-					player = convertPlayer(fullPlay);		
+					player = convertPlayer(fullPlay);
 					plcomp = playerDao.findOneByBaseId(player.getBaseId());
-					
+
 					if (savePlayer(player, plcomp)) {
 						System.out.println(player);
 						attributes = (convertAttributes(fullPlay.getAttributes()));
 						attributesDao.save(attributes);
 						player.setAttributes(attributes);
-						playerDao.save(player);						
+						playerDao.save(player);
 					}
-				}	    		
+				}
 
 			}
 
-			int pageToGo = pg.getPage()+1;	   
+			int pageToGo = pg.getPage() + 1;
 
-			if (pg.getPage() < pg.getTotalPages()) {	    	
-				System.out.println("Indo para a pagina:"+pageToGo);
+			if (pg.getPage() < pg.getTotalPages()) {
+				System.out.println("Indo para a pagina:" + pageToGo);
 				try {
-					target = client.target("https://www.easports.com/fifa/ultimate-team/api/fut/item?page="+pageToGo);
+					target = client.target("https://www.easports.com/fifa/ultimate-team/api/fut/item?page=" + pageToGo);
 					json = target.request(MediaType.APPLICATION_JSON).get().readEntity(String.class);
 					gson = new Gson();
-					pg = gson.fromJson(json, PageIn.class);						
-				} catch (Exception e) { 
-					System.out.println("ERRO "+e.getMessage());
+					pg = gson.fromJson(json, PageIn.class);
+				} catch (Exception e) {
+					System.out.println("ERRO " + e.getMessage());
 				}
 
 			}
 		}
-	}			
+	}
 
 	private boolean savePlayer(PlayerTite player, PlayerTite plbase) {
-		
+
 		if (plbase == null) {
 			return true;
 		}
-		
+
 		Integer ori, dst;
-		
+
 		ori = Integer.parseInt(player.getOriginalId());
 		dst = Integer.parseInt(plbase.getOriginalId());
-		
-		if (Integer.compare(ori, dst) > 0) {			
+
+		if (Integer.compare(ori, dst) > 0) {
 			player.setId(plbase.getId());
 			return true;
 		}
-		 
+
 		return false;
 	}
 
-	private LeagueTite convertLeague(League league) {		
-		LeagueTite entity = new LeagueTite();				
+	private LeagueTite convertLeague(League league) {
+		LeagueTite entity = new LeagueTite();
 		entity.setId(0);
 		entity.setAbbrName(league.getAbbrName());
 		entity.setImgUrl(league.getImgUrl());
 		entity.setName(league.getName());
 		entity.setOriginalId(league.getId());
 
-		return entity;	
-	}	
-	
-	private List<PlayerAttributes> convertAttributes(Attributes[] attributes){
+		return entity;
+	}
+
+	private List<PlayerAttributes> convertAttributes(Attributes[] attributes) {
 		List<PlayerAttributes> entity = new ArrayList<PlayerAttributes>();
 		for (Attributes attributes2 : attributes) {
 			PlayerAttributes plAtt = new PlayerAttributes();
@@ -152,7 +150,7 @@ public class EnterData {
 			name.replaceAll("fut.attribute.", "");
 			plAtt.setName(name);
 			plAtt.setValue(attributes2.getValue());
-			entity.add(plAtt);			
+			entity.add(plAtt);
 		}
 		return entity;
 	}

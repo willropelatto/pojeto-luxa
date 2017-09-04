@@ -1,8 +1,8 @@
 package br.com;
 
-import br.com.mkt.model.BidInfo;
-import br.com.mkt.model.BidTite;
-import br.com.player.model.PlayerTite;
+import br.com.model.BidInfo;
+import br.com.model.BidTite;
+import br.com.model.PlayerTite;
 
 public class BidInfoFactory {
 
