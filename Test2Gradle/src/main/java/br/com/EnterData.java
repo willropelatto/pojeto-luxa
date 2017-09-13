@@ -46,8 +46,14 @@ public class EnterData {
 		player.setRating(fullpl.getRating());
 		player.setIdLeague(idLeague);
 		player.setOriginalId(fullpl.getId());
-		player.setHasBid(false);
-
+		player.setHasBid(false);		
+		
+		if (fullpl.getClub() != null) {
+			player.setClubName(fullpl.getClub().getName());
+		} else {
+			player.setClubName("Undefined");
+		}
+		
 		return player;
 	}
 

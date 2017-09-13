@@ -2,9 +2,13 @@ package br.com.model;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
-public interface PlayerTiteRepository extends PagingAndSortingRepository<PlayerTite, Integer> {	
+public interface PlayerTiteRepository extends PagingAndSortingRepository<PlayerTite, Integer>, 
+												JpaRepository<PlayerTite, Integer>, 
+												JpaSpecificationExecutor<PlayerTite> {		
 	
 	Page<PlayerTite> findByPositionIgnoreCaseAndRatingGreaterThanEqual(String position, int rating, Pageable pageable);
 	
@@ -14,5 +18,6 @@ public interface PlayerTiteRepository extends PagingAndSortingRepository<PlayerT
 	
 	Page<PlayerTite> findByIdLeague(Integer idLeague, Pageable pageable);
 	
-	PlayerTite findOneByBaseId(int baseId);
+	PlayerTite findOneByBaseId(int baseId);	
+	
 }
