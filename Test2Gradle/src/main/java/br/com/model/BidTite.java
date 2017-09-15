@@ -1,5 +1,7 @@
 package br.com.model;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,6 +25,8 @@ public class BidTite {
 	private double originalValue;
 	@Column(name="playerName")
 	private String playerName;
+	@Column(name="bidTime")
+	private LocalDateTime bidTime;
 	
 	public String getPlayerName() {
 		return playerName;
@@ -60,6 +64,12 @@ public class BidTite {
 	}
 	public void setOriginalValue(double originalValue) {
 		this.originalValue = originalValue;
+	}
+	public LocalDateTime getBidTime() {
+		return bidTime;
+	}
+	public void setBidTime(LocalDateTime bidTime) {
+		this.bidTime = bidTime;
 	}
 	
 	

@@ -23,7 +23,7 @@ public class NotificationController {
 	
 	@CrossOrigin	
 	@GetMapping("/getByTeam/{team}")
-	public Page<NotificationTite> listTeams(@PathVariable("team") Integer team, @PageableDefault(value = 50) Pageable pageable) {
+	public Page<NotificationTite> listTeams(@PathVariable("team") Integer team, @PageableDefault(value = 20) Pageable pageable) {
 		return ntDao.findByTeamId(team, pageable);		
 	}
 	

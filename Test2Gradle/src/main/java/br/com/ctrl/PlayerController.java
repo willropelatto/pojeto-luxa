@@ -30,7 +30,7 @@ public class PlayerController {
 	@CrossOrigin
 	@GetMapping("/league/{league}")
 	public Page<PlayerTite> getLeaguePlayers(@PathVariable("league") Integer league,
-			@PageableDefault(value = 50) Pageable pageable) {
+			@PageableDefault(value = 20) Pageable pageable) {
 		return plDao.findByIdLeague(league, pageable);
 	}
 
@@ -43,13 +43,13 @@ public class PlayerController {
 	@CrossOrigin
 	@GetMapping("/getByName/{name}")
 	public Page<PlayerTite> getPlayerByName(@RequestBody PlayerFilter filter,
-			@PageableDefault(value = 50) Pageable pageable) {
+			@PageableDefault(value = 20) Pageable pageable) {
 		return plDao.findByNameIgnoreCase(filter.getName(), pageable);
 	}
 
 	@CrossOrigin
 	@GetMapping("/list")
-	public Page<PlayerTite> getAllPlayers(@PageableDefault(value = 50) Pageable pageable) {
+	public Page<PlayerTite> getAllPlayers(@PageableDefault(value = 20) Pageable pageable) {
 		return plDao.findAll(pageable);
 	}
 
@@ -57,7 +57,7 @@ public class PlayerController {
 	@CrossOrigin
 	@PostMapping("/getPlayers")
 	public Page<PlayerTite> getPlayers(@RequestBody PlayerFilter filter,
-			@PageableDefault(value = 50) Pageable pageable) {		
+			@PageableDefault(value = 20) Pageable pageable) {		
 
 		Specifications<PlayerTite> teste = null;
 		PlayerSpecification rat = new PlayerSpecification(new SearchCriteria("rating", OperationCriteria.GREATER_THAN_EQUALS, filter.getRating()));
@@ -79,16 +79,6 @@ public class PlayerController {
 		}
 
 		return plDao.findAll(teste, pageable);
-	}
-
-	@CrossOrigin
-	@GetMapping("/getByLeague")
-	public Page<PlayerTite> getPlayersByLeague(@RequestBody PlayerFilter filter,
-			@PageableDefault(value = 50) Pageable pageable) {
-		//		LeagueTite lgTite = leagueDao.findOneByName(filter.getLeague());
-		//		return plDao.findByIdLeague(lgTite.getId(), pageable);
-
-		return null;
 	}
 
 }

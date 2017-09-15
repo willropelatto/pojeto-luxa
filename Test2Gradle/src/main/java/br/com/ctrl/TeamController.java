@@ -25,7 +25,7 @@ public class TeamController {
 	
 	@CrossOrigin			
 	@GetMapping("/list")
-	public Page<TeamTite> listTeams(@PageableDefault(value = 50) Pageable pageable) {
+	public Page<TeamTite> listTeams(@PageableDefault(value = 20) Pageable pageable) {
 		return ttDao.findAll(pageable);		
 	}
 	

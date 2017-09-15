@@ -14,7 +14,7 @@ public class SearchCriteria {
 	private Object value;
 
 	public String getKey() {
-		return key.toLowerCase();
+		return key;
 	}
 
 	public void setKey(String key) {

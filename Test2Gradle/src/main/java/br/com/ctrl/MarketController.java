@@ -1,9 +1,16 @@
 package br.com.ctrl;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,7 +41,6 @@ public class MarketController {
 	private TeamTiteRepository teamDao;
 	@Autowired
 	private PlayerTiteRepository plDao;
-
 	@Autowired
 	private NotificationTiteRepository ntDao;
 
@@ -71,9 +77,9 @@ public class MarketController {
 					NotificationTite ntNewBid = new NotificationTite();
 					ntNewBid.setTeamId(bid.getTeamID());
 					ntNewBid.setPlayerName(player.getName());
-					ntNewBid.setNotification(
-							"Seu lance pelo jogador: " + player.getName() + " foi realizado com sucesso.");
+					ntNewBid.setNotification("Seu lance pelo jogador: " + player.getName() + " foi realizado com sucesso.");
 					ntDao.save(ntNewBid);
+					bid.setBidTime(LocalDateTime.now());
 					bid = bidDao.save(bid);
 
 					bidReturn = BidInfoFactory.newProtectedBid(player, bid.getBidValue());
@@ -113,6 +119,7 @@ public class MarketController {
 				ntNewBid.setPlayerName(player.getName());
 				ntNewBid.setNotification("Seu lance pelo jogador: " + player.getName() + " foi realizado com sucesso.");
 				ntDao.save(ntNewBid);
+				bid.setBidTime(LocalDateTime.now());
 				bidDao.save(bid);
 				bidReturn = BidInfoFactory.newProtectedBid(player, bid.getBidValue());
 				bidReturn.setStatus(BidStatus.APROVED);
@@ -153,6 +160,47 @@ public class MarketController {
 	@GetMapping("/list")
 	public Page<BidTite> getBids(@PageableDefault(value = 25) Pageable pageable) {
 		return bidDao.findAll(pageable);
+	}
+	
+    @Scheduled(fixedRate = 600000) //10 minutos
+    public void reportCurrentTime() {        
+    	System.out.println("The time is now " + LocalDateTime.now());
+    	Random random = new Random();
+//        return random.nextInt((maximo - minimo) + 1) + minimo;
+    }	
+
+	private void closeMarket() {
+		Iterable<TeamTite> teams = teamDao.findAll();
+		for (TeamTite team : teams) {
+			NotificationTite notification = new NotificationTite();
+			notification.setTeamId(team.getId());
+			notification.setPlayerName("Teu pai");
+			notification.setNotification("O mercado está fechado.");
+			ntDao.save(notification);			
+		}
+		
+		Iterable<BidTite> bids = bidDao.findAll(new Sort(Sort.Direction.ASC, "teamId"));		
+		int teamid = 0;
+		List<PlayerTite> pls = new ArrayList<PlayerTite>();
+		
+		for (BidTite bid : bids) {			
+			if (teamid==0) {
+				teamid = bid.getTeamID();
+			}
+			
+			PlayerTite player = plDao.findOne(bid.getPlayerID());
+			
+			if (teamid != bid.getTeamID()) {			
+				TeamTite team = teamDao.findOne(bid.getTeamID());
+				team.setPlayers(pls);
+				teamDao.save(team);
+				
+				pls.clear();
+			} 
+			
+			pls.add(player);			
+		}
+
 	}
 
 	private PlayerTite updateStatusBid(PlayerTite player) {
