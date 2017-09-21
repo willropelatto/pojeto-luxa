@@ -1,10 +1,13 @@
 package br.com.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class PlayerAttributes {
@@ -15,8 +18,9 @@ public class PlayerAttributes {
 	private Integer id;
 	@Column(name="name")
 	private String name;
-	@Column(name="value")
-	private int value;
+	
+	@OneToMany(mappedBy = "attribute")
+	private List<PlayerAttributeAssociation> players;
 	
 	public String getName() {
 		return name;
@@ -24,17 +28,17 @@ public class PlayerAttributes {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getValue() {
-		return value;
-	}
-	public void setValue(int value) {
-		this.value = value;
-	}
 	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	public List<PlayerAttributeAssociation> getPlayers() {
+		return players;
+	}
+	public void setPlayers(List<PlayerAttributeAssociation> players) {
+		this.players = players;
 	}	
 	
 }

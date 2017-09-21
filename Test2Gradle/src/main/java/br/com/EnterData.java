@@ -1,7 +1,6 @@
 package br.com;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -38,22 +37,27 @@ public class EnterData {
 
 	private PlayerTite convertPlayer(FullPlayer fullpl) {
 		PlayerTite player = new PlayerTite();
-		Integer idLeague = new Integer(fullpl.getLeague().getId());
 		player.setId(0);
 		player.setName(fullpl.getName());
 		player.setPosition(fullpl.getPosition());
 		player.setBaseId(fullpl.getBaseId());
 		player.setRating(fullpl.getRating());
-		player.setIdLeague(idLeague);
+		player.setIdLeague(new Integer(fullpl.getLeague().getId()));
 		player.setOriginalId(fullpl.getId());
-		player.setHasBid(false);		
-		
+		player.setHasBid(false);
+		player.setAge(fullpl.getAge());
+		player.setHeight(fullpl.getHeight());
+		player.setWeight(fullpl.getWeight());
+		player.setFoot(fullpl.getFoot());
+		player.setAtkWorkRate(fullpl.getAtkWorkRate());
+		player.setDefWorkRate(fullpl.getDefWorkRate());
+
 		if (fullpl.getClub() != null) {
 			player.setClubName(fullpl.getClub().getName());
 		} else {
 			player.setClubName("Undefined");
 		}
-		
+
 		return player;
 	}
 
@@ -68,7 +72,6 @@ public class EnterData {
 		PlayerTite player;
 		PlayerTite plcomp;
 		FullPlayer fullPlay;
-		List<PlayerAttributes> attributes;
 		ArrayList<League> leagues = new ArrayList<League>();
 
 		while ((pg != null) && (pg.getTotalPages() >= pg.getPage())) {
@@ -89,11 +92,15 @@ public class EnterData {
 					player = convertPlayer(fullPlay);
 					plcomp = playerDao.findOneByBaseId(player.getBaseId());
 
-					if (savePlayer(player, plcomp)) {
-						System.out.println(player);
-						attributes = (convertAttributes(fullPlay.getAttributes()));
-						attributesDao.save(attributes);
-						player.setAttributes(attributes);
+					if (savePlayer(player, plcomp)) {						
+						for (Attributes attr : fullPlay.getAttributes()) {
+							PlayerAttributes patt = new PlayerAttributes();
+							patt.setId(0);							
+							patt.setName(attr.getName().replaceAll("fut.attribute.", ""));							
+							player.addAttribute(patt, attr.getValue());
+							attributesDao.save(patt);
+						}
+						
 						playerDao.save(player);
 					}
 				}
@@ -103,7 +110,7 @@ public class EnterData {
 			int pageToGo = pg.getPage() + 1;
 
 			if (pg.getPage() < pg.getTotalPages()) {
-				System.out.println("Indo para a pagina:" + pageToGo);
+				System.out.println("pagina:" + pageToGo);
 				try {
 					target = client.target("https://www.easports.com/fifa/ultimate-team/api/fut/item?page=" + pageToGo);
 					json = target.request(MediaType.APPLICATION_JSON).get().readEntity(String.class);
@@ -144,20 +151,6 @@ public class EnterData {
 		entity.setName(league.getName());
 		entity.setOriginalId(league.getId());
 
-		return entity;
-	}
-
-	private List<PlayerAttributes> convertAttributes(Attributes[] attributes) {
-		List<PlayerAttributes> entity = new ArrayList<PlayerAttributes>();
-		for (Attributes attributes2 : attributes) {
-			PlayerAttributes plAtt = new PlayerAttributes();
-			plAtt.setId(0);
-			String name = attributes2.getName();
-			name.replaceAll("fut.attribute.", "");
-			plAtt.setName(name);
-			plAtt.setValue(attributes2.getValue());
-			entity.add(plAtt);
-		}
 		return entity;
 	}
 

@@ -6,11 +6,11 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 public interface NotificationTiteRepository extends PagingAndSortingRepository<NotificationTite, Integer> {
 	
-	Page<NotificationTite> findByTeamId(Integer teamid, Pageable pageable);
+	Page<NotificationTite> findByTeamIdAndRead(Integer teamid, boolean read, Pageable pageable);
 	
 	NotificationTite findOneByTeamId(Integer teamid);	
 	
-	Page<NotificationTite> findByTeamIdOrderByIdDesc(Integer teamid, Pageable pageable);
+	Page<NotificationTite> findByTeamIdAndReadOrderByIdDesc(Integer teamid, boolean read, Pageable pageable);
 	
 
 }

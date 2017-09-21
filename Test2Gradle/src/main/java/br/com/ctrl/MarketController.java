@@ -1,6 +1,8 @@
 package br.com.ctrl;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -10,7 +12,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +25,8 @@ import br.com.model.BidInfo;
 import br.com.model.BidStatus;
 import br.com.model.BidTite;
 import br.com.model.BidTiteRepository;
+import br.com.model.Market;
+import br.com.model.MarketRepository;
 import br.com.model.NotificationTite;
 import br.com.model.NotificationTiteRepository;
 import br.com.model.PlayerTite;
@@ -43,15 +46,23 @@ public class MarketController {
 	private PlayerTiteRepository plDao;
 	@Autowired
 	private NotificationTiteRepository ntDao;
+	@Autowired
+	private MarketRepository mkDao;	
 
 	@CrossOrigin
 	@PostMapping("/placeBid")
 	public BidInfo placeBid(@RequestBody BidTite bid) {
-
+		BidInfo bidReturn;
+		
+		if (verifyMarket()) {
+			bidReturn = new BidInfo(bid);
+			bidReturn.setStatus(BidStatus.MARKET_CLOSE);
+			return bidReturn;
+		}
+		
 		TeamTite team = teamDao.findOne(bid.getTeamID());
 		BidTite bidBase = bidDao.findOneByPlayerId(bid.getPlayerID());
-		PlayerTite player = plDao.findOne(bid.getPlayerID());
-		BidInfo bidReturn;
+		PlayerTite player = plDao.findOne(bid.getPlayerID());		
 
 		if (bidBase == null) {
 			bidReturn = new BidInfo(bid);
@@ -100,37 +111,60 @@ public class MarketController {
 	@CrossOrigin
 	@PostMapping("/initialBid")
 	public BidInfo initialBid(@RequestBody BidTite bid) {
-
+		BidInfo result;
+		
+		if (verifyMarket()) {
+			result = new BidInfo(bid);
+			result.setStatus(BidStatus.MARKET_CLOSE);
+			return result;
+		}
+		
 		TeamTite team = teamDao.findOne(bid.getTeamID());
 		BidTite bidBase = bidDao.findOneByPlayerId(bid.getPlayerID());
-		PlayerTite player = plDao.findOne(bid.getPlayerID());
-		BidInfo bidReturn;
+		PlayerTite player = plDao.findOne(bid.getPlayerID());		
 
 		if (bidBase != null) {
-			bidReturn = new BidInfo(bid);
-			bidReturn.setStatus(BidStatus.RESYNC);
+			result = new BidInfo(bid);
+			result.setStatus(BidStatus.RESYNC);
 		} else {
 			if (teamHaveMoney(bid.getBidValue(), team)) {
 				team = decreaseBudget(team, bid.getBidValue());
 				player = updateStatusBid(player);
 				bid.setPlayerName(player.getName());
+				
+				
 				NotificationTite ntNewBid = new NotificationTite();
 				ntNewBid.setTeamId(bid.getTeamID());
 				ntNewBid.setPlayerName(player.getName());
 				ntNewBid.setNotification("Seu lance pelo jogador: " + player.getName() + " foi realizado com sucesso.");
 				ntDao.save(ntNewBid);
+				
+				
 				bid.setBidTime(LocalDateTime.now());
 				bidDao.save(bid);
-				bidReturn = BidInfoFactory.newProtectedBid(player, bid.getBidValue());
-				bidReturn.setStatus(BidStatus.APROVED);
+				
+				result = BidInfoFactory.newProtectedBid(player, bid.getBidValue());
+				result.setStatus(BidStatus.APROVED);
 			} else {
-				bidReturn = BidInfoFactory.newBid(player);
-				bidReturn.getBid().setBidValue(bidReturn.getBid().getOriginalValue());
-				bidReturn.setStatus(BidStatus.NO_MONEY);
+				result = BidInfoFactory.newBid(player);
+				result.getBid().setBidValue(result.getBid().getOriginalValue());
+				result.setStatus(BidStatus.NO_MONEY);
 			}
 		}
 
-		return bidReturn;
+		return result;
+	}
+
+	private boolean verifyMarket() {
+		LocalDateTime base = LocalDateTime.now();
+		Iterable<Market> mks = mkDao.findAll();
+		for (Market market : mks) {
+			if (base.isAfter(market.getCloseTime())) {
+				closeMarket();
+				return true;
+			}
+		}
+		return false;
 	}
 
 	@CrossOrigin
@@ -162,14 +196,26 @@ public class MarketController {
 		return bidDao.findAll(pageable);
 	}
 	
-    @Scheduled(fixedRate = 600000) //10 minutos
-    public void reportCurrentTime() {        
-    	System.out.println("The time is now " + LocalDateTime.now());
-    	Random random = new Random();
-//        return random.nextInt((maximo - minimo) + 1) + minimo;
-    }	
+	@CrossOrigin
+	@GetMapping("/open")	
+	public void openMarket() {    	
+		mkDao.deleteAll();
+		
+		Random random = new Random();
+    	int hour = random.nextInt(3) + 18; //entre 18 as 21
+    	int minute = random.nextInt(59);
+    	
+    	LocalDate dt = LocalDate.now();
+    	dt.plusDays(3);    	
+    	LocalTime tm = LocalTime.of(hour, minute);   	
+    	
+    	Market mk = new Market();
+    	mk.setCupId(1);
+    	mk.setCloseTime(LocalDateTime.of(dt, tm));
+    	mkDao.save(mk);		
+	}
 
-	private void closeMarket() {
+	public void closeMarket() {
 		Iterable<TeamTite> teams = teamDao.findAll();
 		for (TeamTite team : teams) {
 			NotificationTite notification = new NotificationTite();

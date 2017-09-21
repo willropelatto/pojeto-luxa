@@ -24,15 +24,22 @@ public class NotificationController {
 	@CrossOrigin	
 	@GetMapping("/getByTeam/{team}")
 	public Page<NotificationTite> listTeams(@PathVariable("team") Integer team, @PageableDefault(value = 20) Pageable pageable) {
-		return ntDao.findByTeamId(team, pageable);		
+		return ntDao.findByTeamIdAndRead(team, false, pageable);		
 	}
 	
 	@CrossOrigin	
 	@GetMapping("/getLasts/{team}")
 	public Page<NotificationTite> getLastNotifications(@PathVariable("team") Integer team, @PageableDefault(value = 5) Pageable pageable) {
-		return ntDao.findByTeamIdOrderByIdDesc(team, pageable);		
+		return ntDao.findByTeamIdAndReadOrderByIdDesc(team, false, pageable);		
 	}
 	
+	@CrossOrigin
+	@GetMapping("/markAsRead/{notification}")
+	public int markAsRead(@PathVariable("notification") Integer notification) {
+		NotificationTite nt = ntDao.findOne(notification);
+		nt.setRead(true);		
+		return 1;
+	}
 	
 	
 }

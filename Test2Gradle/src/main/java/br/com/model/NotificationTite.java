@@ -19,6 +19,8 @@ public class NotificationTite {
 	private String playerName;
 	@Column(name="notification")
 	private String notification;	
+	@Column(name="read")
+	private boolean read;
 	
 	public Integer getId() {
 		return id;
@@ -43,6 +45,12 @@ public class NotificationTite {
 	}
 	public void setNotification(String notification) {
 		this.notification = notification;
+	}
+	public boolean isRead() {
+		return read;
+	}
+	public void setRead(boolean read) {
+		this.read = read;
 	}
 	
 	
