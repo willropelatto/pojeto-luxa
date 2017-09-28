@@ -6,6 +6,8 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 public interface PlayerAttributesRepository extends PagingAndSortingRepository<PlayerAttributes, Integer> {	
 	
-	Page<PlayerAttributesRepository> findByName(String name, Pageable pageable);
+	Page<PlayerAttributes> findByName(String name, Pageable pageable);
+	
+	PlayerAttributes findOneByName(String name);
 	
 }

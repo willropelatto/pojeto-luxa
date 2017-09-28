@@ -1,6 +1,7 @@
 package br.com.model;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,32 +14,42 @@ import javax.persistence.OneToMany;
 public class PlayerAttributes {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id")	
-	private Integer id;
-	@Column(name="name")
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
+	private int id;
+	@Column(name = "name")
 	private String name;
-	
-	@OneToMany(mappedBy = "attribute")
-	private List<PlayerAttributeAssociation> players;
+
+	@OneToMany(mappedBy = "attribute")	
+	private Set<PlayerAttributeAssociation> players;
+
+	public PlayerAttributes() {
+		super();
+		this.players = new HashSet<>();
+	}	
 	
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Integer getId() {
+
+	public int getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+
+	public void setId(int id) {
 		this.id = id;
 	}
-	public List<PlayerAttributeAssociation> getPlayers() {
+
+	public Set<PlayerAttributeAssociation> getPlayers() {
 		return players;
 	}
-	public void setPlayers(List<PlayerAttributeAssociation> players) {
+
+	public void setPlayers(Set<PlayerAttributeAssociation> players) {
 		this.players = players;
-	}	
-	
+	}
+
 }

@@ -2,10 +2,7 @@ package br.com.ctrl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.jpa.domain.Specifications;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -16,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.in.model.Attributes;
 import br.com.model.OperationCriteria;
 import br.com.model.PlayerFilter;
 import br.com.model.PlayerSpecification;
@@ -41,7 +37,7 @@ public class PlayerController {
 	@CrossOrigin
 	@GetMapping("/get/{playerId}")
 	public PlayerTite getPlayerFromId(@PathVariable("playerId") Integer playerId) {
-		return plDao.findOne(playerId);
+		return plDao.findOne(playerId);		
 	}
 
 	@CrossOrigin
@@ -61,7 +57,7 @@ public class PlayerController {
 	@PostMapping("/getPlayers")
 	public Page<PlayerTite> getPlayers(@RequestBody PlayerFilter input,
 			@PageableDefault(value = 20) Pageable pageable) {
-		
+
 		Specifications<PlayerTite> filter = Specifications.where(PlayerSpecification.search(
 				new SearchCriteria("rating", OperationCriteria.GREATER_THAN_EQUALS, input.getRating())));
 
@@ -79,33 +75,9 @@ public class PlayerController {
 			filter = Specifications.where(filter).and(PlayerSpecification.search(
 					new SearchCriteria("position", OperationCriteria.EQUAL, input.getPosition())));
 		}
-		
-		for (int i = 0; i < input.getAttributes().length; i++) {
-			Attributes at = input.getAttributes()[i];
-			
-			filter = Specifications.where(filter).and(PlayerSpecification.whereAssociation(at.getValue()));
-			filter = Specifications.where(filter).and(PlayerSpecification.whereAttributes(at.getName()));					
-		}
 
-		Sort ord = new Sort(Direction.ASC, "id");
-		for (int i = 0; i < input.getOrdenacao().length; i++) {
-			Sort ordaux = null;
 
-			switch (input.getOrdenacao()[i]) {
-			case POSITION:
-				ordaux = new Sort(Direction.DESC, "position");
-				break;
-			case RATING:
-				ordaux = new Sort(Direction.DESC, "rating");
-				break;
-			default:
-				ordaux = new Sort(Direction.ASC, "name");
-			}
-
-			ord = ordaux.and(ord);
-		}
-
-		return plDao.findAll(filter, new PageRequest(pageable.getPageNumber(), pageable.getPageSize(), ord));
+		return plDao.findAll(filter, pageable);
 	}
 
 }

@@ -20,6 +20,7 @@ import br.com.in.model.League;
 import br.com.in.model.PageIn;
 import br.com.model.LeagueTite;
 import br.com.model.LeagueTiteRepository;
+import br.com.model.PlayerAttributeAssociation;
 import br.com.model.PlayerAttributes;
 import br.com.model.PlayerAttributesRepository;
 import br.com.model.PlayerTite;
@@ -44,7 +45,7 @@ public class EnterData {
 		player.setRating(fullpl.getRating());
 		player.setIdLeague(new Integer(fullpl.getLeague().getId()));
 		player.setOriginalId(fullpl.getId());
-		player.setHasBid(false);
+//		player.setHasBid(false);
 		player.setAge(fullpl.getAge());
 		player.setHeight(fullpl.getHeight());
 		player.setWeight(fullpl.getWeight());
@@ -65,7 +66,8 @@ public class EnterData {
 	@RequestMapping("/main/update")
 	public void UpdateStoredPlayers() {
 		Client client = ClientBuilder.newClient();
-		WebTarget target = client.target("https://www.easports.com/fifa/ultimate-team/api/fut/item?page=0");
+		//WebTarget target = client.target("https://www.easports.com/fifa/ultimate-team/api/fut/item?page=0");
+		WebTarget target = client.target("http://smartwaysolucoes.com/item.json");		
 		String json = target.request(MediaType.APPLICATION_JSON).get().readEntity(String.class);
 		Gson gson = new Gson();
 		PageIn pg = gson.fromJson(json, PageIn.class);
@@ -74,7 +76,7 @@ public class EnterData {
 		FullPlayer fullPlay;
 		ArrayList<League> leagues = new ArrayList<League>();
 
-		while ((pg != null) && (pg.getTotalPages() >= pg.getPage())) {
+//		while ((pg != null) && (pg.getTotalPages() >= pg.getPage())) {
 			for (int i = 0; i < pg.getItems().length; i++) {
 				fullPlay = pg.getItems()[i];
 
@@ -94,34 +96,43 @@ public class EnterData {
 
 					if (savePlayer(player, plcomp)) {						
 						for (Attributes attr : fullPlay.getAttributes()) {
-							PlayerAttributes patt = new PlayerAttributes();
-							patt.setId(0);							
-							patt.setName(attr.getName().replaceAll("fut.attribute.", ""));							
-							player.addAttribute(patt, attr.getValue());
-							attributesDao.save(patt);
-						}
-						
-						playerDao.save(player);
+							String nm = attr.getName().replaceAll("fut.attribute.", "");
+							PlayerAttributes patt = attributesDao.findOneByName(nm);
+							
+							if (patt == null) {
+								patt = new PlayerAttributes();
+								patt.setId(0);
+								patt.setName(nm);
+							}
+														
+							PlayerAttributeAssociation association = new PlayerAttributeAssociation();
+							association.setAttribute(patt);
+							association.setPlayer(player);
+							association.setValue(attr.getValue());
+							player.getAttributes().add(association);					
+							
+							attributesDao.save(patt);		
+							playerDao.save(player);
+						}						
 					}
 				}
-
 			}
 
-			int pageToGo = pg.getPage() + 1;
+//			int pageToGo = pg.getPage() + 1;
+//			
+//			if (pg.getPage() < pg.getTotalPages()) {
+//				System.out.println("pagina:" + pageToGo);
+//				try {
+//					target = client.target("https://www.easports.com/fifa/ultimate-team/api/fut/item?page=" + pageToGo);
+//					json = target.request(MediaType.APPLICATION_JSON).get().readEntity(String.class);
+//					gson = new Gson();
+//					pg = gson.fromJson(json, PageIn.class);
+//				} catch (Exception e) {
+//					System.out.println("ERRO " + e.getMessage());
+//				}
 
-			if (pg.getPage() < pg.getTotalPages()) {
-				System.out.println("pagina:" + pageToGo);
-				try {
-					target = client.target("https://www.easports.com/fifa/ultimate-team/api/fut/item?page=" + pageToGo);
-					json = target.request(MediaType.APPLICATION_JSON).get().readEntity(String.class);
-					gson = new Gson();
-					pg = gson.fromJson(json, PageIn.class);
-				} catch (Exception e) {
-					System.out.println("ERRO " + e.getMessage());
-				}
-
-			}
-		}
+//			}
+//		}
 	}
 
 	private boolean savePlayer(PlayerTite player, PlayerTite plbase) {

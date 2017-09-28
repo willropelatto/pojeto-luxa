@@ -1,8 +1,9 @@
 package br.com.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,12 +14,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 public class PlayerTite {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
-	private Integer id;
+	private int id;
 	@Column(name = "position")
 	private String position;
 	@Column(name = "name")
@@ -34,42 +37,38 @@ public class PlayerTite {
 	@Column(name = "hasBid", columnDefinition = "boolean default false", nullable = false)
 	private boolean hasBid;
 	@Column(name = "clubName")
-	private String clubName;
-
-	private int height;
-	private int weight;
-	private int age;
-	private String foot;
-	private String atkWorkRate;
+	private String clubName;	
+	@Column(name = "height")
+	private int height;	
+	@Column(name = "weight")
+	private int weight;	
+	@Column(name = "age")
+	private int age;	
+	@Column(name = "foot")
+	private String foot;	
+	@Column(name = "atkWorkRate")
+	private String atkWorkRate;	
+	@Column(name = "defWorkRate")
 	private String defWorkRate;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "team_id")
-	private TeamTite team;
-
-	@OneToMany(mappedBy = "player")
-	private List<PlayerAttributeAssociation> attributes;
+	@JsonBackReference
+	private TeamTite team;	
 	
-	//TODO mover isso aqui depois
-	  public void addAttribute(PlayerAttributes attr, int value) {
-		  PlayerAttributeAssociation association = new PlayerAttributeAssociation();
-		    association.setAttribute(attr);
-		    association.setPlayer(this);
-		    association.setAttributeId(attr.getId());
-		    association.setPlayerId(this.getId());
-		    association.setValue(value);
-		    if(this.attributes == null)
-		       this.attributes = new ArrayList<>();
+	@OneToMany(mappedBy = "player", cascade = CascadeType.ALL, orphanRemoval = true)
+	private Set<PlayerAttributeAssociation> attributes;
 
-		    this.attributes.add(association);
-		    attr.getPlayers().add(association);
-		  }
+	public PlayerTite() {
+		super();
+		this.attributes = new HashSet<>();
+	}
 
-	public Integer getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -129,11 +128,11 @@ public class PlayerTite {
 		this.hasBid = hasBid;
 	}
 
-	public List<PlayerAttributeAssociation> getAttributes() {
+	public Set<PlayerAttributeAssociation> getAttributes() {
 		return attributes;
 	}
 
-	public void setAttributes(List<PlayerAttributeAssociation> attributes) {
+	public void setAttributes(Set<PlayerAttributeAssociation> attributes) {
 		this.attributes = attributes;
 	}
 

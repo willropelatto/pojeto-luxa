@@ -1,60 +1,50 @@
 package br.com.model;
 
+import java.io.Serializable;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
-@IdClass(PlayerAttributeAssociationId.class)
-public class PlayerAttributeAssociation {
+@Table(name = "PlayerAttributeAssociation")
+public class PlayerAttributeAssociation  implements Serializable {
 
-	@Id
-	private int attributeId;
-	@Id
-	private int playerId;
-
+	private static final long serialVersionUID = 1L;
+	private PlayerTite player;
+    private PlayerAttributes attribute;
+    
+	@Column(name = "value")
 	private int value;
 
-	@ManyToOne
-	@PrimaryKeyJoinColumn(name = "attributeId", referencedColumnName = "ID")
-	/*
-	 * if this JPA model doesn't create a table for the "PROJ_EMP" entity,
-	 * please comment out the @PrimaryKeyJoinColumn, and use the ff:
-	 * 
-	 * @JoinColumn(name = "employeeId", updatable = false, insertable = false)
-	 * or @JoinColumn(name = "employeeId", updatable = false, insertable =
-	 * false, referencedColumnName = "id")
-	 */
-	private PlayerAttributes attribute;
-	@ManyToOne
-	@PrimaryKeyJoinColumn(name = "playerId", referencedColumnName = "ID")
-	/*
-	 * the same goes here: if this JPA model doesn't create a table for the
-	 * "PROJ_EMP" entity, please comment out the @PrimaryKeyJoinColumn, and use
-	 * the ff:
-	 * 
-	 * @JoinColumn(name = "projectId", updatable = false, insertable = false)
-	 * or @JoinColumn(name = "projectId", updatable = false, insertable = false,
-	 * referencedColumnName = "id")
-	 */
-	private PlayerTite player;
-
-	public int getAttributeId() {
-		return attributeId;
+    @Id
+    @ManyToOne
+    @JoinColumn(name = "player_id")
+	@JsonBackReference
+	public PlayerTite getPlayer() {
+		return player;
 	}
 
-	public void setAttributeId(int attributeId) {
-		this.attributeId = attributeId;
+	public void setPlayer(PlayerTite player) {
+		this.player = player;
+	}
+	
+    @Id
+    @ManyToOne
+    @JoinColumn(name = "attribute_id")
+	@JsonBackReference
+	public PlayerAttributes getAttribute() {
+		return attribute;
 	}
 
-	public int getPlayerId() {
-		return playerId;
-	}
-
-	public void setPlayerId(int playerId) {
-		this.playerId = playerId;
+	public void setAttribute(PlayerAttributes attribute) {
+		this.attribute = attribute;
 	}
 
 	public int getValue() {
@@ -64,21 +54,15 @@ public class PlayerAttributeAssociation {
 	public void setValue(int value) {
 		this.value = value;
 	}
-
-	public PlayerAttributes getAttribute() {
-		return attribute;
+	
+	@Transient
+	public String getName() {
+		return this.attribute.getName();
 	}
-
-	public void setAttribute(PlayerAttributes attribute) {
-		this.attribute = attribute;
-	}
-
-	public PlayerTite getPlayer() {
-		return player;
-	}
-
-	public void setPlayer(PlayerTite player) {
-		this.player = player;
+	
+	@Transient
+	public void setName(String name) {
+		this.attribute.setName(name);
 	}
 
 }
