@@ -2,7 +2,10 @@ package br.com.ctrl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.jpa.domain.Specifications;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -49,8 +52,8 @@ public class PlayerController {
 
 	@CrossOrigin
 	@GetMapping("/list")
-	public Page<PlayerTite> getAllPlayers(@PageableDefault(value = 20) Pageable pageable) {
-		return plDao.findAll(pageable);
+	public Page<PlayerTite> getAllPlayers(@PageableDefault(value = 20) Pageable pageable) {		
+		return plDao.findAll(new PageRequest(pageable.getPageNumber(), pageable.getPageSize(), new Sort(Direction.ASC, "id")));
 	}
 
 	@CrossOrigin
@@ -76,8 +79,7 @@ public class PlayerController {
 					new SearchCriteria("position", OperationCriteria.EQUAL, input.getPosition())));
 		}
 
-
-		return plDao.findAll(filter, pageable);
+		return plDao.findAll(filter, new PageRequest(pageable.getPageNumber(), pageable.getPageSize(), new Sort(Direction.ASC, "id")));
 	}
 
 }

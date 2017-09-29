@@ -1,6 +1,7 @@
 package br.com.model;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,9 +29,14 @@ public class TeamTite {
 	private Integer idUser;
 
 	@OneToMany(mappedBy="team")	
-	private List<PlayerTite> players;	
+	private Set<PlayerTite> players;	
 
 
+	public TeamTite() {
+		super();
+		this.players = new HashSet<PlayerTite>();
+	}
+	
 	public Integer getId() {
 		return id;
 	}
@@ -67,10 +73,10 @@ public class TeamTite {
 	public void setIdUser(Integer idUser) {
 		this.idUser = idUser;
 	}
-	public List<PlayerTite> getPlayers() {
+	public Set<PlayerTite> getPlayers() {
 		return players;
 	}
-	public void setPlayers(List<PlayerTite> players) {
+	public void setPlayers(Set<PlayerTite> players) {
 		this.players = players;
 	}	
 

@@ -3,9 +3,9 @@ package br.com.ctrl;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -227,7 +227,7 @@ public class MarketController {
 		
 		Iterable<BidTite> bids = bidDao.findAll(new Sort(Sort.Direction.ASC, "teamId"));		
 		int teamid = 0;
-		List<PlayerTite> pls = new ArrayList<PlayerTite>();
+		Set<PlayerTite> pls = new HashSet<PlayerTite>();
 		
 		for (BidTite bid : bids) {			
 			if (teamid==0) {

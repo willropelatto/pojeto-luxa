@@ -1,6 +1,9 @@
 package br.com.ctrl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,37 +21,37 @@ import br.com.model.UserDetailRepository;
 public class UserController {
 
 	@Autowired
-	private UserDetailRepository userDao;	
+	private UserDetailRepository userDao;
 
 	@CrossOrigin
-	@GetMapping("/get/{code}")	
+	@GetMapping("/get/{code}")
 	public UserDetail GetUser(@PathVariable("code") Integer codigo) {
-		return userDao.findOne(codigo);		
+		return userDao.findOne(codigo);
 	}
 
-	@CrossOrigin  
+	@CrossOrigin
 	@PostMapping("/register")
-	public UserDetail Register(@RequestBody UserDetail user) {		
-		return userDao.save(user);		
-	}	
+	public UserDetail Register(@RequestBody UserDetail user) {
+		return userDao.save(user);
+	}
 
 	@CrossOrigin
 	@PostMapping("/update")
-	public UserDetail Update(UserDetail user){			
-		return userDao.save(user);		
+	public UserDetail Update(UserDetail user) {
+		return userDao.save(user);
 	}
 
-	@CrossOrigin    	
-	@PostMapping("/login")	
+	@CrossOrigin
+	@PostMapping("/login")
 	public UserDetail login(@RequestBody UserDetail user) {
-		try	{
+		try {
 			UserDetail entity = userDao.findOneByLoginAllIgnoringCase(user.getLogin());
 
 			if (entity != null) {
-				
+
 				if (entity.getSenha().equals(user.getSenha())) {
 					String keyAuth = UserAuthToken.GerarToken(user.getLogin());
-					entity.setKeyAuth(keyAuth);	
+					entity.setKeyAuth(keyAuth);
 					entity = userDao.save(entity);
 					entity.setSenha("");
 					return entity;
@@ -59,4 +62,11 @@ public class UserController {
 		}
 		return null;
 	}
+
+	@CrossOrigin
+	@GetMapping("/list")
+	public Page<UserDetail> listUsers(@PageableDefault(value = 20) Pageable pageable) {
+		return userDao.findAll(pageable);
+	}
+
 }

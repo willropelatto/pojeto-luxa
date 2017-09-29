@@ -1,7 +1,5 @@
 package br.com.model;
 
-import br.com.in.model.Attributes;
-
 public class PlayerFilter {
 
 	private String name;
@@ -10,8 +8,6 @@ public class PlayerFilter {
 	private double endValue;
 	private double startValue;
 	private int league;
-	private OrdType[] ordenation;
-	private Attributes[] attributes;
 
 	public String getName() {
 		return name;
@@ -59,22 +55,6 @@ public class PlayerFilter {
 
 	public void setLeague(int league) {
 		this.league = league;
-	}
-
-	public OrdType[] getOrdenacao() {
-		return ordenation;
-	}
-
-	public void setOrdenacao(OrdType[] ordenacao) {
-		this.ordenation = ordenacao;
-	}
-
-	public Attributes[] getAttributes() {
-		return attributes;
-	}
-
-	public void setAttributes(Attributes[] attributes) {
-		this.attributes = attributes;
 	}
 
 }
