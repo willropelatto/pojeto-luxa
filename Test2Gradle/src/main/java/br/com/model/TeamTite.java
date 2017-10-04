@@ -3,6 +3,7 @@ package br.com.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,10 +31,9 @@ public class TeamTite {
 	@Column(name="idUser")
 	private Integer idUser;
 
+	@OneToMany(mappedBy="team", cascade=CascadeType.ALL)
 	@JsonIgnore
-	@OneToMany(mappedBy="team")	
 	private Set<PlayerTite> players;	
-
 
 	public TeamTite() {
 		super();
