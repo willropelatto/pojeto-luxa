@@ -23,7 +23,7 @@ public class NotificationController {
 	
 	@CrossOrigin	
 	@GetMapping("/getByTeam/{team}")
-	public Page<NotificationTite> listTeams(@PathVariable("team") Integer team, @PageableDefault(value = 20) Pageable pageable) {
+	public Page<NotificationTite> listTeams(@PathVariable("team") Integer team, @PageableDefault(value = 50) Pageable pageable) {
 		return ntDao.findByTeamIdAndRead(team, false, pageable);		
 	}
 	
@@ -37,7 +37,8 @@ public class NotificationController {
 	@GetMapping("/markAsRead/{notification}")
 	public int markAsRead(@PathVariable("notification") Integer notification) {
 		NotificationTite nt = ntDao.findOne(notification);
-		nt.setRead(true);		
+		nt.setRead(true);	
+		ntDao.save(nt);
 		return 1;
 	}
 	

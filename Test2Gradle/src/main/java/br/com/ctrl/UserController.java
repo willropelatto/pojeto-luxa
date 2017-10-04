@@ -65,7 +65,7 @@ public class UserController {
 
 	@CrossOrigin
 	@GetMapping("/list")
-	public Page<UserDetail> listUsers(@PageableDefault(value = 20) Pageable pageable) {
+	public Page<UserDetail> listUsers(@PageableDefault(value = 50) Pageable pageable) {
 		return userDao.findAll(pageable);
 	}
 

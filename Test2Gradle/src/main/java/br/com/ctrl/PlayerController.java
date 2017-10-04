@@ -52,14 +52,14 @@ public class PlayerController {
 
 	@CrossOrigin
 	@GetMapping("/list")
-	public Page<PlayerTite> getAllPlayers(@PageableDefault(value = 20) Pageable pageable) {		
+	public Page<PlayerTite> getAllPlayers(@PageableDefault(value = 50) Pageable pageable) {		
 		return plDao.findAll(new PageRequest(pageable.getPageNumber(), pageable.getPageSize(), new Sort(Direction.ASC, "id")));
 	}
 
 	@CrossOrigin
 	@PostMapping("/getPlayers")
 	public Page<PlayerTite> getPlayers(@RequestBody PlayerFilter input,
-			@PageableDefault(value = 20) Pageable pageable) {
+			@PageableDefault(value = 50) Pageable pageable) {
 
 		Specifications<PlayerTite> filter = Specifications.where(PlayerSpecification.search(
 				new SearchCriteria("rating", OperationCriteria.GREATER_THAN_EQUALS, input.getRating())));
