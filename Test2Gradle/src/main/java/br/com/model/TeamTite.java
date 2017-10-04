@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class TeamTite {
 
@@ -30,6 +32,7 @@ public class TeamTite {
 	private Integer idUser;
 
 	@OneToMany(mappedBy="team", cascade=CascadeType.ALL)
+	@JsonIgnore
 	private Set<PlayerTite> players;	
 
 	public TeamTite() {

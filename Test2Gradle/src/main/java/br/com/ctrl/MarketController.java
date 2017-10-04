@@ -159,6 +159,7 @@ public class MarketController {
 		LocalDateTime base = LocalDateTime.now();
 		Iterable<Market> mks = mkDao.findAll();
 		for (Market market : mks) {
+			System.out.println(market.getCloseTime());
 			if (base.isAfter(market.getCloseTime())) {
 				closeMarket();
 				return true;
@@ -209,10 +210,19 @@ public class MarketController {
     	dt.plusDays(3);    	
     	LocalTime tm = LocalTime.of(hour, minute);   	
     	
+    	dt = LocalDate.now();
+    	tm = LocalTime.of(13, 15);
+    	
     	Market mk = new Market();
     	mk.setCupId(1);
     	mk.setCloseTime(LocalDateTime.of(dt, tm));
     	mkDao.save(mk);		
+	}
+	
+	@CrossOrigin
+	@GetMapping("/isopen")
+	public Boolean isOpen() {		
+		return verifyMarket();		
 	}
 
 	public void closeMarket() {

@@ -27,6 +27,9 @@ public class BidTite {
 	private String playerName;
 	@Column(name="bidTime")
 	private LocalDateTime bidTime;
+	@Column(name="position")
+	private String position;
+	
 	
 	public String getPlayerName() {
 		return playerName;
@@ -71,6 +74,13 @@ public class BidTite {
 	public void setBidTime(LocalDateTime bidTime) {
 		this.bidTime = bidTime;
 	}
+	public String getPosition() {
+		return position;
+	}
+	public void setPosition(String position) {
+		this.position = position;
+	}
+	
 	
 	
 }

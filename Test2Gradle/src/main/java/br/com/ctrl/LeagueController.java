@@ -21,7 +21,7 @@ public class LeagueController {
 
 	@CrossOrigin
 	@GetMapping("/list")
-	public Page<LeagueTite> getLeagues(@PageableDefault(value = 20) Pageable pageable) {
+	public Page<LeagueTite> getLeagues(@PageableDefault(value = 100) Pageable pageable) {
 		return leagueDao.findAll(pageable);
 	}
 
