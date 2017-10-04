@@ -3,14 +3,11 @@ package br.com.ctrl;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.HashSet;
 import java.util.Random;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -217,12 +214,6 @@ public class MarketController {
     	mk.setCupId(1);
     	mk.setCloseTime(LocalDateTime.of(dt, tm));
     	mkDao.save(mk);		
-	}
-	
-	@CrossOrigin
-	@GetMapping("/isopen")
-	public Boolean isOpen() {		
-		return verifyMarket();		
 	}
 
 	public void closeMarket() {
