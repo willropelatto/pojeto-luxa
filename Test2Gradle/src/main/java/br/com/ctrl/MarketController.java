@@ -222,31 +222,15 @@ public class MarketController {
 			notification.setTeamId(team.getId());
 			notification.setPlayerName("Teu pai");
 			notification.setNotification("O mercado está fechado.");
-			ntDao.save(notification);			
-		}
-		
-		Iterable<BidTite> bids = bidDao.findAll(new Sort(Sort.Direction.ASC, "teamId"));		
-		int teamid = 0;
-		Set<PlayerTite> pls = new HashSet<PlayerTite>();
-		
-		for (BidTite bid : bids) {			
-			if (teamid==0) {
-				teamid = bid.getTeamID();
-			}
+			ntDao.save(notification);	
 			
-			PlayerTite player = plDao.findOne(bid.getPlayerID());
-			
-			if (teamid != bid.getTeamID()) {			
-				TeamTite team = teamDao.findOne(bid.getTeamID());
-				team.setPlayers(pls);
-				teamDao.save(team);
-				
-				pls.clear();
-			} 
-			
-			pls.add(player);			
-		}
-
+			Iterable<BidTite> bids = bidDao.findByTeamId(team.getId());
+			for (BidTite bid : bids) {			
+				PlayerTite player = plDao.findOne(bid.getPlayerID());					
+				player.setTeam(team);
+				plDao.save(player);		
+			}			
+		}		
 	}
 
 	private PlayerTite updateStatusBid(PlayerTite player) {
