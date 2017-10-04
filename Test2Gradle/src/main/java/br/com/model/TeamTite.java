@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class TeamTite {
@@ -32,7 +33,7 @@ public class TeamTite {
 	private Integer idUser;
 
 	@OneToMany(mappedBy="team", cascade=CascadeType.ALL)
-	@JsonIgnore
+	@JsonManagedReference(value="team-ref")
 	private Set<PlayerTite> players;	
 
 	public TeamTite() {

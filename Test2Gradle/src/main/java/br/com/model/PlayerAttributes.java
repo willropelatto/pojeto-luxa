@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 public class PlayerAttributes {
 
@@ -21,6 +23,7 @@ public class PlayerAttributes {
 	private String name;
 
 	@OneToMany(mappedBy = "attribute")	
+	@JsonManagedReference(value="attr-ref")
 	private Set<PlayerAttributeAssociation> players;
 
 	public PlayerAttributes() {

@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class PlayerTite {
@@ -53,10 +54,11 @@ public class PlayerTite {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "team_id")
-	@JsonBackReference
+	@JsonBackReference(value="team-ref")
 	private TeamTite team;	
 	
 	@OneToMany(mappedBy = "player", cascade = CascadeType.ALL, orphanRemoval = true)
+	@JsonManagedReference(value="player-ref")
 	private Set<PlayerAttributeAssociation> attributes;
 
 	public PlayerTite() {

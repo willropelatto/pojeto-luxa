@@ -26,7 +26,7 @@ public class PlayerAttributeAssociation  implements Serializable {
     @Id
     @ManyToOne
     @JoinColumn(name = "player_id")
-	@JsonBackReference
+	@JsonBackReference(value="player-ref")
 	public PlayerTite getPlayer() {
 		return player;
 	}
@@ -38,7 +38,7 @@ public class PlayerAttributeAssociation  implements Serializable {
     @Id
     @ManyToOne
     @JoinColumn(name = "attribute_id")
-	@JsonBackReference
+	@JsonBackReference(value="attr-ref")
 	public PlayerAttributes getAttribute() {
 		return attribute;
 	}
