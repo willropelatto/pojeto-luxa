@@ -1,1 +1,0 @@
-export * from './league-cadastrar.component';

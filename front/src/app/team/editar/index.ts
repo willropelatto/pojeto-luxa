@@ -1,1 +1,0 @@
-export * from './team-editar.component';

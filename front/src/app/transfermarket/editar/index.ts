@@ -1,1 +1,0 @@
-export * from './transfermarket-editar.component';
