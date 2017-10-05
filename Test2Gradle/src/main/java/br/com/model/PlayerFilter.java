@@ -5,6 +5,7 @@ public class PlayerFilter {
 	private String name;
 	private String position;
 	private int rating;
+	private int ratingend;
 	private double endValue;
 	private double startValue;
 	private int league;
@@ -55,6 +56,14 @@ public class PlayerFilter {
 
 	public void setLeague(int league) {
 		this.league = league;
+	}
+
+	public int getRatingend() {
+		return ratingend;
+	}
+
+	public void setRatingend(int ratingend) {
+		this.ratingend = ratingend;
 	}
 
 }

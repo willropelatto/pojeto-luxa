@@ -52,7 +52,8 @@ public class EnterData {
 		player.setFoot(fullpl.getFoot());
 		player.setAtkWorkRate(fullpl.getAtkWorkRate());
 		player.setDefWorkRate(fullpl.getDefWorkRate());
-
+		player.setHeadshotImgUrl(fullpl.getHeadshotImgUrl());
+		
 		if (fullpl.getClub() != null) {
 			player.setClubName(fullpl.getClub().getName());
 		} else {

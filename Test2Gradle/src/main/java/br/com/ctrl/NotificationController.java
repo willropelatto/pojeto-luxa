@@ -1,5 +1,7 @@
 package br.com.ctrl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -42,5 +44,17 @@ public class NotificationController {
 		return 1;
 	}
 	
+	@CrossOrigin	
+	@GetMapping("/markAllAsRead/{team}")
+	public int markAllAsRead(@PathVariable("team") Integer team) {
+		List<NotificationTite> nts = ntDao.findByTeamIdAndRead(team, false);
+
+		for (NotificationTite nt : nts) {
+			nt.setRead(true);			
+		}
+		
+		ntDao.save(nts);		
+		return 1;		
+	}	
 	
 }

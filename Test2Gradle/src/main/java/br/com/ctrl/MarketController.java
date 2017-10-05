@@ -231,7 +231,9 @@ public class MarketController {
 				player.setTeam(team);
 				plDao.save(player);		
 			}			
-		}		
+		}	
+		
+		bidDao.deleteAll();		
 	}
 
 	private PlayerTite updateStatusBid(PlayerTite player) {

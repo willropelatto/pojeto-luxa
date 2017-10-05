@@ -51,6 +51,8 @@ public class PlayerTite {
 	private String atkWorkRate;	
 	@Column(name = "defWorkRate")
 	private String defWorkRate;
+	@Column(name = "headshotImgUrl")
+	private String headshotImgUrl;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "team_id")
@@ -204,5 +206,13 @@ public class PlayerTite {
 
 	public void setIdLeague(int idLeague) {
 		this.idLeague = idLeague;
+	}
+
+	public String getHeadshotImgUrl() {
+		return headshotImgUrl;
+	}
+
+	public void setHeadshotImgUrl(String headshotImgUrl) {
+		this.headshotImgUrl = headshotImgUrl;
 	}	
 }

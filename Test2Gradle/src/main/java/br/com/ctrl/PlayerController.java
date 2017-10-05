@@ -64,6 +64,11 @@ public class PlayerController {
 		Specifications<PlayerTite> filter = Specifications.where(PlayerSpecification.search(
 				new SearchCriteria("rating", OperationCriteria.GREATER_THAN_EQUALS, input.getRating())));
 
+		if (input.getRatingend() > 0) {
+			filter = Specifications.where(filter).and(PlayerSpecification.search(
+					new SearchCriteria("rating", OperationCriteria.LESS_THAN_EQUAL, input.getRatingend())));
+		}
+		
 		if (!input.getName().isEmpty()) {
 			filter = Specifications.where(filter).and(PlayerSpecification.search(
 					new SearchCriteria("name", OperationCriteria.CONTAINING, input.getName())));
