@@ -15,7 +15,7 @@ public class PlayerSpecification implements Specification<PlayerTite> {
 			public Predicate toPredicate(Root<PlayerTite> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
 				switch (criteria.getOperation()) {
 				case CONTAINING:
-					return cb.like(root.<String>get(criteria.getKey()), "%" + criteria.getValue() + "%");
+					return cb.like(cb.upper(root.<String>get(criteria.getKey())), "%" + criteria.getValue().toString().toUpperCase() + "%");
 				case GREATER_THAN_EQUALS:
 					return cb.greaterThanOrEqualTo(root.<String>get(criteria.getKey()), criteria.getValue().toString());
 				case LESS_THAN_EQUAL:
