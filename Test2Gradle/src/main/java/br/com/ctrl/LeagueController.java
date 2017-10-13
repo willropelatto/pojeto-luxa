@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.model.LeagueTite;
-import br.com.model.LeagueTiteRepository;
+import br.com.model.bean.LeagueMO;
+import br.com.model.repo.LeagueTiteRepository;
 
 @RestController
 @RequestMapping("/league")
@@ -21,7 +21,7 @@ public class LeagueController {
 
 	@CrossOrigin
 	@GetMapping("/list")
-	public Page<LeagueTite> getLeagues(@PageableDefault(value = 100) Pageable pageable) {
+	public Page<LeagueMO> getLeagues(@PageableDefault(value = 100) Pageable pageable) {
 		return leagueDao.findAll(pageable);
 	}
 

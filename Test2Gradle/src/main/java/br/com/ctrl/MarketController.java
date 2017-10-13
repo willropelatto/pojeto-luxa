@@ -17,19 +17,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.BidInfoFactory;
-import br.com.model.BidInfo;
-import br.com.model.BidStatus;
-import br.com.model.BidTite;
-import br.com.model.BidTiteRepository;
-import br.com.model.Market;
-import br.com.model.MarketRepository;
-import br.com.model.NotificationTite;
-import br.com.model.NotificationTiteRepository;
-import br.com.model.PlayerTite;
-import br.com.model.PlayerTiteRepository;
-import br.com.model.TeamTite;
-import br.com.model.TeamTiteRepository;
+import br.com.model.bean.BidMO;
+import br.com.model.bean.MarketMO;
+import br.com.model.bean.NotificationMO;
+import br.com.model.bean.PlayerMO;
+import br.com.model.bean.TeamMO;
+import br.com.model.misc.BidInfo;
+import br.com.model.misc.BidInfoFactory;
+import br.com.model.misc.BidStatus;
+import br.com.model.repo.BidTiteRepository;
+import br.com.model.repo.MarketRepository;
+import br.com.model.repo.NotificationTiteRepository;
+import br.com.model.repo.PlayerTiteRepository;
+import br.com.model.repo.TeamTiteRepository;
 
 @RestController
 @RequestMapping("/market")
@@ -48,7 +48,7 @@ public class MarketController {
 
 	@CrossOrigin
 	@PostMapping("/placeBid")
-	public BidInfo placeBid(@RequestBody BidTite bid) {
+	public BidInfo placeBid(@RequestBody BidMO bid) {
 		BidInfo bidReturn;
 		
 		if (verifyMarket()) {
@@ -57,9 +57,9 @@ public class MarketController {
 			return bidReturn;
 		}
 		
-		TeamTite team = teamDao.findOne(bid.getTeamID());
-		BidTite bidBase = bidDao.findOneByPlayerId(bid.getPlayerID());
-		PlayerTite player = plDao.findOne(bid.getPlayerID());		
+		TeamMO team = teamDao.findOne(bid.getTeamID());
+		BidMO bidBase = bidDao.findOneByPlayerId(bid.getPlayerID());
+		PlayerMO player = plDao.findOne(bid.getPlayerID());		
 
 		if (bidBase == null) {
 			bidReturn = new BidInfo(bid);
@@ -74,7 +74,7 @@ public class MarketController {
 						player = updateStatusBid(player);
 					}
 
-					NotificationTite ntTite = new NotificationTite();
+					NotificationMO ntTite = new NotificationMO();
 					ntTite.setTeamId(bidBase.getTeamID());
 					ntTite.setPlayerName(player.getName());
 					ntTite.setNotification("Seu lance pelo jogador: " + player.getName() + " foi superado.");
@@ -82,7 +82,7 @@ public class MarketController {
 					bidDao.delete(bidBase);
 
 					bid.setPlayerName(player.getName());
-					NotificationTite ntNewBid = new NotificationTite();
+					NotificationMO ntNewBid = new NotificationMO();
 					ntNewBid.setTeamId(bid.getTeamID());
 					ntNewBid.setPlayerName(player.getName());
 					ntNewBid.setNotification("Seu lance pelo jogador: " + player.getName() + " foi realizado com sucesso.");
@@ -107,7 +107,7 @@ public class MarketController {
 
 	@CrossOrigin
 	@PostMapping("/initialBid")
-	public BidInfo initialBid(@RequestBody BidTite bid) {
+	public BidInfo initialBid(@RequestBody BidMO bid) {
 		BidInfo result;
 		
 		if (verifyMarket()) {
@@ -116,9 +116,9 @@ public class MarketController {
 			return result;
 		}
 		
-		TeamTite team = teamDao.findOne(bid.getTeamID());
-		BidTite bidBase = bidDao.findOneByPlayerId(bid.getPlayerID());
-		PlayerTite player = plDao.findOne(bid.getPlayerID());		
+		TeamMO team = teamDao.findOne(bid.getTeamID());
+		BidMO bidBase = bidDao.findOneByPlayerId(bid.getPlayerID());
+		PlayerMO player = plDao.findOne(bid.getPlayerID());		
 
 		if (bidBase != null) {
 			result = new BidInfo(bid);
@@ -130,7 +130,7 @@ public class MarketController {
 				bid.setPlayerName(player.getName());
 				
 				
-				NotificationTite ntNewBid = new NotificationTite();
+				NotificationMO ntNewBid = new NotificationMO();
 				ntNewBid.setTeamId(bid.getTeamID());
 				ntNewBid.setPlayerName(player.getName());
 				ntNewBid.setNotification("Seu lance pelo jogador: " + player.getName() + " foi realizado com sucesso.");
@@ -154,8 +154,8 @@ public class MarketController {
 
 	private boolean verifyMarket() {
 		LocalDateTime base = LocalDateTime.now();
-		Iterable<Market> mks = mkDao.findAll();
-		for (Market market : mks) {
+		Iterable<MarketMO> mks = mkDao.findAll();
+		for (MarketMO market : mks) {
 			System.out.println(market.getCloseTime());
 			if (base.isAfter(market.getCloseTime())) {
 				closeMarket();
@@ -169,7 +169,7 @@ public class MarketController {
 	@GetMapping("/player/getBid/{player}")
 	public BidInfo getBidFromPlayerId(@PathVariable("player") Integer idPlayer) {
 
-		BidTite bid = bidDao.findOneByPlayerId(idPlayer);
+		BidMO bid = bidDao.findOneByPlayerId(idPlayer);
 		BidInfo result = new BidInfo(bid);
 
 		if (bid == null) {
@@ -183,14 +183,14 @@ public class MarketController {
 
 	@CrossOrigin
 	@GetMapping("/team/getBid/{team}")
-	public Page<BidTite> getBidFromTeamId(@PathVariable("team") Integer idTeam,
+	public Page<BidMO> getBidFromTeamId(@PathVariable("team") Integer idTeam,
 			@PageableDefault(value = 25) Pageable pageable) {
 		return bidDao.findByTeamId(idTeam, pageable);
 	}
 
 	@CrossOrigin
 	@GetMapping("/list")
-	public Page<BidTite> getBids(@PageableDefault(value = 25) Pageable pageable) {
+	public Page<BidMO> getBids(@PageableDefault(value = 25) Pageable pageable) {
 		return bidDao.findAll(pageable);
 	}
 	
@@ -210,24 +210,24 @@ public class MarketController {
     	dt = LocalDate.now();
     	tm = LocalTime.of(13, 15);
     	
-    	Market mk = new Market();
+    	MarketMO mk = new MarketMO();
     	mk.setCupId(1);
     	mk.setCloseTime(LocalDateTime.of(dt, tm));
     	mkDao.save(mk);		
 	}
 
 	public void closeMarket() {
-		Iterable<TeamTite> teams = teamDao.findAll();
-		for (TeamTite team : teams) {
-			NotificationTite notification = new NotificationTite();
+		Iterable<TeamMO> teams = teamDao.findAll();
+		for (TeamMO team : teams) {
+			NotificationMO notification = new NotificationMO();
 			notification.setTeamId(team.getId());
 			notification.setPlayerName("Teu pai");
 			notification.setNotification("O mercado está fechado.");
 			ntDao.save(notification);	
 			
-			Iterable<BidTite> bids = bidDao.findByTeamId(team.getId());
-			for (BidTite bid : bids) {			
-				PlayerTite player = plDao.findOne(bid.getPlayerID());					
+			Iterable<BidMO> bids = bidDao.findByTeamId(team.getId());
+			for (BidMO bid : bids) {			
+				PlayerMO player = plDao.findOne(bid.getPlayerID());					
 				player.setTeam(team);
 				plDao.save(player);		
 			}			
@@ -236,22 +236,22 @@ public class MarketController {
 		bidDao.deleteAll();		
 	}
 
-	private PlayerTite updateStatusBid(PlayerTite player) {
+	private PlayerMO updateStatusBid(PlayerMO player) {
 		player.setHasBid(true);
 		return plDao.save(player);
 	}
 
-	private TeamTite decreaseBudget(TeamTite team, double bidValue) {
+	private TeamMO decreaseBudget(TeamMO team, double bidValue) {
 		team.setBudget(team.getBudget() - bidValue);
 		return teamDao.save(team);
 	}
 
-	private TeamTite increaseBudget(TeamTite team, double bidValue) {
+	private TeamMO increaseBudget(TeamMO team, double bidValue) {
 		team.setBudget(team.getBudget() + bidValue);
 		return teamDao.save(team);
 	}
 
-	private boolean teamHaveMoney(double value, TeamTite team) {
+	private boolean teamHaveMoney(double value, TeamMO team) {
 		double remainBudget = team.getBudget();
 		return !(value > remainBudget);
 	}

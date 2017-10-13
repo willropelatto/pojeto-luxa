@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.model.UserApp;
-import br.com.model.UserAppRepository;
+import br.com.model.bean.UserAppMO;
+import br.com.model.repo.UserAppRepository;
 
 @RestController
 @RequestMapping("/user")
@@ -32,29 +32,29 @@ public class UserController {
 
 	@CrossOrigin
 	@GetMapping("/get/{code}")
-	public UserApp GetUser(@PathVariable("code") Integer codigo) {
+	public UserAppMO GetUser(@PathVariable("code") Integer codigo) {
 		return userDao.findOne(codigo);
 	}
 
 	@CrossOrigin
 	@PostMapping("/register")
-	public UserApp Register(@RequestBody UserApp user) {
+	public UserAppMO Register(@RequestBody UserAppMO user) {
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		return userDao.save(user);
 	}
 
 	@CrossOrigin
 	@PostMapping("/update")
-	public UserApp Update(UserApp user) {
+	public UserAppMO Update(UserAppMO user) {
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		return userDao.save(user);
 	}
 
 	@CrossOrigin
 	@PostMapping("/login")
-	public UserApp login(@RequestBody UserApp user) {
+	public UserAppMO login(@RequestBody UserAppMO user) {
 		try {
-			UserApp entity = userDao.findOneByUsernameAllIgnoringCase(user.getUsername());
+			UserAppMO entity = userDao.findOneByUsernameAllIgnoringCase(user.getUsername());
 
 			if (entity != null) {
 
@@ -73,7 +73,7 @@ public class UserController {
 
 	@CrossOrigin
 	@GetMapping("/list")
-	public Page<UserApp> listUsers(@PageableDefault(value = 50) Pageable pageable) {
+	public Page<UserAppMO> listUsers(@PageableDefault(value = 50) Pageable pageable) {
 		return userDao.findAll(pageable);
 	}
 

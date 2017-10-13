@@ -14,17 +14,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
 
-import br.com.in.model.Attributes;
-import br.com.in.model.FullPlayer;
-import br.com.in.model.League;
-import br.com.in.model.PageIn;
-import br.com.model.LeagueTite;
-import br.com.model.LeagueTiteRepository;
-import br.com.model.PlayerAttributeAssociation;
-import br.com.model.PlayerAttributes;
-import br.com.model.PlayerAttributesRepository;
-import br.com.model.PlayerTite;
-import br.com.model.PlayerTiteRepository;
+import br.com.model.bean.LeagueMO;
+import br.com.model.bean.PlayerAttributeAssociationMO;
+import br.com.model.bean.PlayerAttributesMO;
+import br.com.model.bean.PlayerMO;
+import br.com.model.input.Attributes;
+import br.com.model.input.FullPlayer;
+import br.com.model.input.League;
+import br.com.model.input.PageIn;
+import br.com.model.repo.LeagueTiteRepository;
+import br.com.model.repo.PlayerAttributesRepository;
+import br.com.model.repo.PlayerTiteRepository;
 
 @RestController
 public class EnterData {
@@ -36,8 +36,8 @@ public class EnterData {
 	@Autowired
 	private PlayerAttributesRepository attributesDao;
 
-	private PlayerTite convertPlayer(FullPlayer fullpl) {
-		PlayerTite player = new PlayerTite();
+	private PlayerMO convertPlayer(FullPlayer fullpl) {
+		PlayerMO player = new PlayerMO();
 		player.setId(0);
 		player.setName(fullpl.getName());
 		player.setPosition(fullpl.getPosition());
@@ -72,8 +72,8 @@ public class EnterData {
 		String json = target.request(MediaType.APPLICATION_JSON).get().readEntity(String.class);
 		Gson gson = new Gson();
 		PageIn pg = gson.fromJson(json, PageIn.class);
-		PlayerTite player;
-		PlayerTite plcomp;
+		PlayerMO player;
+		PlayerMO plcomp;
 		FullPlayer fullPlay;
 		ArrayList<League> leagues = new ArrayList<League>();
 
@@ -98,15 +98,15 @@ public class EnterData {
 					if (savePlayer(player, plcomp)) {						
 						for (Attributes attr : fullPlay.getAttributes()) {
 							String nm = attr.getName().replaceAll("fut.attribute.", "");
-							PlayerAttributes patt = attributesDao.findOneByName(nm);
+							PlayerAttributesMO patt = attributesDao.findOneByName(nm);
 							
 							if (patt == null) {
-								patt = new PlayerAttributes();
+								patt = new PlayerAttributesMO();
 								patt.setId(0);
 								patt.setName(nm);
 							}
 														
-							PlayerAttributeAssociation association = new PlayerAttributeAssociation();
+							PlayerAttributeAssociationMO association = new PlayerAttributeAssociationMO();
 							association.setAttribute(patt);
 							association.setPlayer(player);
 							association.setValue(attr.getValue());
@@ -137,7 +137,7 @@ public class EnterData {
 		}
 	}
 
-	private boolean savePlayer(PlayerTite player, PlayerTite plbase) {
+	private boolean savePlayer(PlayerMO player, PlayerMO plbase) {
 
 		if (plbase == null) {
 			return true;
@@ -156,8 +156,8 @@ public class EnterData {
 		return false;
 	}
 
-	private LeagueTite convertLeague(League league) {
-		LeagueTite entity = new LeagueTite();
+	private LeagueMO convertLeague(League league) {
+		LeagueMO entity = new LeagueMO();
 		entity.setId(0);
 		entity.setAbbrName(league.getAbbrName());
 		entity.setImgUrl(league.getImgUrl());
