@@ -1,4 +1,4 @@
-package br.com.model.security;
+package br.com.security;
 
 import javax.ws.rs.HttpMethod;
 

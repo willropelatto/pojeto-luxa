@@ -1,4 +1,4 @@
-package br.com.model.security;
+package br.com.security;
 
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;

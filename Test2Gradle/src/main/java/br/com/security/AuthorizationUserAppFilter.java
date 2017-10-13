@@ -1,4 +1,4 @@
-package br.com.model.security;
+package br.com.security;
 
 import java.io.IOException;
 import java.util.ArrayList;

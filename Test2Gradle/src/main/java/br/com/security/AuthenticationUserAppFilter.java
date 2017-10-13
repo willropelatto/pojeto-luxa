@@ -1,4 +1,4 @@
-package br.com.model.security;
+package br.com.security;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import br.com.model.bean.UserAppMO;
-import br.com.model.security.AuthConstants;
+import br.com.security.AuthConstants;
 
 public class AuthenticationUserAppFilter extends UsernamePasswordAuthenticationFilter {
 

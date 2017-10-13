@@ -1,4 +1,4 @@
-package br.com.model.security;
+package br.com.security;
 
 public class AuthConstants {
 //    public static final String SECRET = "SecretKeyToGenJWTs";
