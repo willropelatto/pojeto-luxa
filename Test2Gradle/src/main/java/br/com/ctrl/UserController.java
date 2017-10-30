@@ -35,6 +35,12 @@ public class UserController {
 	public UserAppMO GetUser(@PathVariable("code") Integer codigo) {
 		return userDao.findOne(codigo);
 	}
+	
+	@CrossOrigin
+	@GetMapping("/getUser/{username}")
+	public UserAppMO GetUser(@PathVariable("username") String username) {
+		return userDao.findOneByUsernameAllIgnoringCase(username);
+	}
 
 	@CrossOrigin
 	@PostMapping("/register")

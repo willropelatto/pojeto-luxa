@@ -56,6 +56,6 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 		source.registerCorsConfiguration("/**", config);
 		
 		return source;
-	}
+	} 
 
 }
