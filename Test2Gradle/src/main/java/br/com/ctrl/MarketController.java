@@ -207,8 +207,8 @@ public class MarketController {
     	dt.plusDays(3);    	
     	LocalTime tm = LocalTime.of(hour, minute);   	
     	
-    	dt = LocalDate.now();
-    	tm = LocalTime.of(13, 15);
+//    	dt = LocalDate.now();
+//    	tm = LocalTime.of(13, 15);
     	
     	Market mk = new Market();
     	mk.setCupId(1);
@@ -222,7 +222,7 @@ public class MarketController {
 			NotificationTite notification = new NotificationTite();
 			notification.setTeamId(team.getId());
 			notification.setPlayerName("Teu pai");
-			notification.setNotification("O mercado est· fechado.");
+			notification.setNotification("O mercado est√° fechado.");
 			ntDao.save(notification);	
 			
 			Iterable<BidTite> bids = bidDao.findByTeamId(team.getId());
