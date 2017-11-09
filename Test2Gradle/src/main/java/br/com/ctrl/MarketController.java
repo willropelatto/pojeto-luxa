@@ -45,6 +45,28 @@ public class MarketController {
 	private NotificationTiteRepository ntDao;
 	@Autowired
 	private MarketRepository mkDao;	
+	
+	@CrossOrigin
+	@PostMapping("/gambi")	
+	public void reopenMarket() {
+		Iterable<TeamTite> teams = teamDao.findAll();
+		for (TeamTite team : teams) {
+			for (PlayerTite player : team.getPlayers()) {
+				player.setTeam(null);//se der pau mete 0				
+				BidTite bid = new BidTite();
+				bid.setTeamID(team.getId());
+				bid.setPlayerID(player.getId());		
+				bid.setOriginalValue(BidInfoFactory.getOriginalValue(player.getRating()));
+				bid.setPlayerName(player.getName());
+				bid.setBidTime(LocalDateTime.now());
+				bid.setId(0);
+				bid.setBidValue(bid.getOriginalValue());
+				bid.setPosition(player.getPosition());
+				bidDao.save(bid);
+				plDao.save(player);	
+			}		
+		}	
+	}
 
 	@CrossOrigin
 	@PostMapping("/placeBid")

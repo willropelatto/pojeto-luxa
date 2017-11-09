@@ -6,7 +6,7 @@ import br.com.model.PlayerTite;
 
 public class BidInfoFactory {
 
-	private static double getOriginalValue(int rating) {
+	public static double getOriginalValue(int rating) {
 
 		if (rating > 90) {
 			return 5000;
