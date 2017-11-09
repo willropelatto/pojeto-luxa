@@ -226,7 +226,7 @@ public class MarketController {
     	int minute = random.nextInt(59);
     	
     	LocalDate dt = LocalDate.now();
-    	dt.plusDays(3);    	
+    	dt = dt.plusDays(3);     	
     	LocalTime tm = LocalTime.of(hour, minute);   	
     	
 //    	dt = LocalDate.now();
