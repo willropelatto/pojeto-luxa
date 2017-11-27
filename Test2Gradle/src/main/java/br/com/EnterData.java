@@ -67,8 +67,9 @@ public class EnterData {
 	@RequestMapping("/main/update")
 	public void UpdateStoredPlayers() {
 		Client client = ClientBuilder.newClient();
-		WebTarget target = client.target("https://www.easports.com/fifa/ultimate-team/api/fut/item?page=0");
-		//WebTarget target = client.target("http://smartwaysolucoes.com/item.json");		
+		//WebTarget target = client.target("https://www.easports.com/fifa/ultimate-team/api/fut/item?page=0");
+		//WebTarget target = client.target("http://smartwaysolucoes.com/item.json");
+		WebTarget target = client.target("http://smartwaysolucoes.com/json.txt"); 
 		String json = target.request(MediaType.APPLICATION_JSON).get().readEntity(String.class);
 		Gson gson = new Gson();
 		PageIn pg = gson.fromJson(json, PageIn.class);
