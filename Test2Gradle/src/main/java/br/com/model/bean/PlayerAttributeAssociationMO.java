@@ -2,7 +2,6 @@ package br.com.model.bean;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -14,19 +13,22 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "PlayerAttributeAssociation")
-public class PlayerAttributeAssociationMO  implements Serializable {
+public class PlayerAttributeAssociationMO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+
+	@Id
+	@ManyToOne
+	@JoinColumn(name = "attribute_id")
+	@JsonBackReference(value = "attr-ref")
 	private PlayerMO player;
-    private PlayerAttributesMO attribute;
-    
-	@Column(name = "value")
+	@Id
+	@ManyToOne
+	@JoinColumn(name = "player_id")
+	@JsonBackReference(value = "player-ref")
+	private PlayerAttributesMO attribute;
 	private int value;
 
-    @Id
-    @ManyToOne
-    @JoinColumn(name = "player_id")
-	@JsonBackReference(value="player-ref")
 	public PlayerMO getPlayer() {
 		return player;
 	}
@@ -34,11 +36,7 @@ public class PlayerAttributeAssociationMO  implements Serializable {
 	public void setPlayer(PlayerMO player) {
 		this.player = player;
 	}
-	
-    @Id
-    @ManyToOne
-    @JoinColumn(name = "attribute_id")
-	@JsonBackReference(value="attr-ref")
+
 	public PlayerAttributesMO getAttribute() {
 		return attribute;
 	}
@@ -54,12 +52,12 @@ public class PlayerAttributeAssociationMO  implements Serializable {
 	public void setValue(int value) {
 		this.value = value;
 	}
-	
+
 	@Transient
 	public String getName() {
 		return this.attribute.getName();
 	}
-	
+
 	@Transient
 	public void setName(String name) {
 		this.attribute.setName(name);

@@ -8,7 +8,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 import br.com.model.bean.NotificationMO;
 
-public interface NotificationTiteRepository extends PagingAndSortingRepository<NotificationMO, Integer> {
+public interface NotificationRepo extends PagingAndSortingRepository<NotificationMO, Integer> {
 	
 	Page<NotificationMO> findByTeamIdAndRead(Integer teamid, boolean read, Pageable pageable);		
 	

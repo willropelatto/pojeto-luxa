@@ -8,7 +8,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 import br.com.model.bean.PlayerMO;
 
-public interface PlayerTiteRepository extends PagingAndSortingRepository<PlayerMO, Integer>, 
+public interface PlayerRepo extends PagingAndSortingRepository<PlayerMO, Integer>, 
 												JpaRepository<PlayerMO, Integer>, 
 												JpaSpecificationExecutor<PlayerMO> {		
 	
@@ -18,7 +18,7 @@ public interface PlayerTiteRepository extends PagingAndSortingRepository<PlayerM
 	
 	Page<PlayerMO> findByOriginalId(String originalId, Pageable pageable);
 	
-	Page<PlayerMO> findByIdLeague(Integer idLeague, Pageable pageable);
+	//Page<PlayerMO> findByIdLeague(Integer idLeague, Pageable pageable);
 	
 	PlayerMO findOneByBaseId(int baseId);	
 	

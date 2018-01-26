@@ -21,20 +21,21 @@ import br.com.model.misc.OperationCriteria;
 import br.com.model.misc.PlayerFilter;
 import br.com.model.misc.PlayerSpecification;
 import br.com.model.misc.SearchCriteria;
-import br.com.model.repo.PlayerTiteRepository;
+import br.com.model.repo.PlayerRepo;
 
 @RestController
 @RequestMapping("/player")
 public class PlayerController {
 
 	@Autowired
-	private PlayerTiteRepository plDao;
+	private PlayerRepo plDao;
 
 	@CrossOrigin
 	@GetMapping("/league/{league}")
 	public Page<PlayerMO> getLeaguePlayers(@PathVariable("league") Integer league,
 			@PageableDefault(value = 20) Pageable pageable) {
-		return plDao.findByIdLeague(league, pageable);
+		return null; //plDao.findByIdLeague(league, pageable);
+				//TODO rever aqui
 	}
 
 	@CrossOrigin

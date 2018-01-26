@@ -30,19 +30,18 @@ public class BidInfoFactory {
 
 	}
 
-	public static BidInfo newBid(PlayerMO player) {
+	public static BidMO newBid(PlayerMO player) {
 		BidMO bid = new BidMO();
-		bid.setPlayerID(player.getId());		
 		bid.setOriginalValue(getOriginalValue(player.getRating()));	
 
-		return new BidInfo(bid);
+		return bid;
 	}
-
-	public static BidInfo newProtectedBid(PlayerMO player, double value) {
+	
+	/*public static BidInfo newProtectedBid(PlayerMO player, double value) {
 		BidInfo bid = newBid(player);
 		bid.getBid().setBidValue((bid.getBid().getOriginalValue() * 0.05) + value);
 
 		return bid;
-	}
+	}*/
 
 }

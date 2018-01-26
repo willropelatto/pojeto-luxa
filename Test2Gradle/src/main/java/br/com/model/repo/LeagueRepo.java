@@ -6,7 +6,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 import br.com.model.bean.LeagueMO;
 
-public interface LeagueTiteRepository extends PagingAndSortingRepository<LeagueMO, Integer> {
+public interface LeagueRepo extends PagingAndSortingRepository<LeagueMO, Integer> {
 	
 	Page<LeagueMO> findByNameAllIgnoringCase(String name, Pageable pageable);
 	

@@ -7,16 +7,16 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import br.com.model.bean.UserAppMO;
-import br.com.model.repo.UserAppRepository;
+import br.com.model.repo.UserAppRepo;
 
 import static java.util.Collections.emptyList;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 	
-	private UserAppRepository applicationUserRepository;
+	private UserAppRepo applicationUserRepository;
 
-    public UserDetailsServiceImpl(UserAppRepository applicationUserRepository) {
+    public UserDetailsServiceImpl(UserAppRepo applicationUserRepository) {
         this.applicationUserRepository = applicationUserRepository;
     }
 	

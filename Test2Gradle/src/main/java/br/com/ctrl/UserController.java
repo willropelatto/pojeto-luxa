@@ -14,14 +14,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.model.bean.UserAppMO;
-import br.com.model.repo.UserAppRepository;
+import br.com.model.repo.UserAppRepo;
 
 @RestController
 @RequestMapping("/user")
 public class UserController {
 
 	@Autowired
-	private UserAppRepository userDao;
+	private UserAppRepo userDao;
 
 	private BCryptPasswordEncoder bCryptPasswordEncoder;	
 	

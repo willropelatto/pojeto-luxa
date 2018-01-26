@@ -1,11 +1,18 @@
 package br.com.model.input;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import br.com.model.bean.LeagueMO;
+
 public class League {
 
     private String abbrName;
     private int id;
     private String imgUrl;
     private String name;
+    
+    @JsonIgnore
+    private LeagueMO league;
     
 	public String getAbbrName() {
 		return abbrName;
@@ -39,6 +46,12 @@ public class League {
 	    }
 	    final League other = (League) obj;
 	    return this.getId() == other.getId();
+	}
+	public LeagueMO getLeague() {
+		return league;
+	}
+	public void setLeague(LeagueMO league) {
+		this.league = league;
 	}
 
     

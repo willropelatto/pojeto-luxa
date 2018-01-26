@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -13,68 +12,65 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import br.com.model.misc.BidInfoFactory;
+
 @Entity
 @Table(name = "Players")
 public class PlayerMO {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private int id;
-	@Column(name = "position")
+	private Integer id;
 	private String position;
-	@Column(name = "name")
 	private String name;
-	@Column(name = "baseId")
 	private Integer baseId;
-	@Column(name = "rating")
 	private Integer rating;
-	@Column(name = "idLeague")
-	private int idLeague; // LeagueTite.getOriginalId
-	@Column(name = "originalId")
 	private String originalId;
-	@Column(name = "hasBid", columnDefinition = "boolean default false", nullable = false)
-	private boolean hasBid;
-	@Column(name = "clubName")
-	private String clubName;	
-	@Column(name = "height")
-	private int height;	
-	@Column(name = "weight")
-	private int weight;	
-	@Column(name = "age")
-	private int age;	
-	@Column(name = "foot")
-	private String foot;	
-	@Column(name = "atkWorkRate")
-	private String atkWorkRate;	
-	@Column(name = "defWorkRate")
+	private String clubName;
+	private int height;
+	private int weight;
+	private int age;
+	private String foot;
+	private String atkWorkRate;
 	private String defWorkRate;
-	@Column(name = "headshotImgUrl")
 	private String headshotImgUrl;
+
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "bid_id")
+	private BidMO bid;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "league_id")
+	@JsonBackReference(value = "leagueplayer-ref")
+	// @JsonIgnore
+	private LeagueMO league;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "team_id")
-	@JsonBackReference(value="team-ref")
-	private TeamMO team;	
-	
+	@JsonBackReference(value = "team-ref")
+	private TeamMO team;
+
 	@OneToMany(mappedBy = "player", cascade = CascadeType.ALL, orphanRemoval = true)
-	@JsonManagedReference(value="player-ref")
+	@JsonManagedReference(value = "player-ref")
 	private Set<PlayerAttributeAssociationMO> attributes;
 
 	public PlayerMO() {
 		super();
 		this.attributes = new HashSet<>();
+		setBid(null);
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -110,28 +106,12 @@ public class PlayerMO {
 		this.rating = rating;
 	}
 
-	public Integer getIdLeague() {
-		return idLeague;
-	}
-
-	public void setIdLeague(Integer idLeague) {
-		this.idLeague = idLeague;
-	}
-
 	public String getOriginalId() {
 		return originalId;
 	}
 
 	public void setOriginalId(String originalId) {
 		this.originalId = originalId;
-	}
-
-	public boolean isHasBid() {
-		return hasBid;
-	}
-
-	public void setHasBid(boolean hasBid) {
-		this.hasBid = hasBid;
 	}
 
 	public Set<PlayerAttributeAssociationMO> getAttributes() {
@@ -206,15 +186,31 @@ public class PlayerMO {
 		this.defWorkRate = defWorkRate;
 	}
 
-	public void setIdLeague(int idLeague) {
-		this.idLeague = idLeague;
-	}
-
 	public String getHeadshotImgUrl() {
 		return headshotImgUrl;
 	}
 
 	public void setHeadshotImgUrl(String headshotImgUrl) {
 		this.headshotImgUrl = headshotImgUrl;
-	}	
+	}
+
+	public LeagueMO getLeague() {
+		return league;
+	}
+
+	public void setLeague(LeagueMO league) {
+		this.league = league;
+	}
+
+	public BidMO getBid() {
+		if (bid == null) {
+			bid = BidInfoFactory.newBid(this);
+		}
+		
+		return bid;
+	}
+
+	public void setBid(BidMO bid) {
+		this.bid = bid;
+	}
 }

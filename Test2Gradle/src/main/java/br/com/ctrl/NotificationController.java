@@ -13,14 +13,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.model.bean.NotificationMO;
-import br.com.model.repo.NotificationTiteRepository;
+import br.com.model.repo.NotificationRepo;
 
 @RestController
 @RequestMapping("/notification")
 public class NotificationController {
 
 	@Autowired
-	private NotificationTiteRepository ntDao;
+	private NotificationRepo ntDao;
 	
 	
 	@CrossOrigin	

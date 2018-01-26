@@ -6,7 +6,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 import br.com.model.bean.TeamMO;
 
-public interface TeamTiteRepository extends PagingAndSortingRepository<TeamMO, Integer> {
+public interface TeamRepo extends PagingAndSortingRepository<TeamMO, Integer> {
 
 	Page<TeamMO> findByidUser(Integer iduser, Pageable pageable);
 	

@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.model.bean.LeagueMO;
-import br.com.model.repo.LeagueTiteRepository;
+import br.com.model.repo.LeagueRepo;
 
 @RestController
 @RequestMapping("/league")
 public class LeagueController {
 
 	@Autowired
-	private LeagueTiteRepository leagueDao;
+	private LeagueRepo leagueDao;
 
 	@CrossOrigin
 	@GetMapping("/list")

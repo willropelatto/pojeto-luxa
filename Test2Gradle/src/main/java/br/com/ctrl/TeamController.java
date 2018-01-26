@@ -13,14 +13,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.model.bean.TeamMO;
-import br.com.model.repo.TeamTiteRepository;
+import br.com.model.repo.TeamRepo;
 
 @RestController
 @RequestMapping("/team")
 public class TeamController {
 
 	@Autowired
-	private TeamTiteRepository ttDao;
+	private TeamRepo ttDao;
 	
 	
 	@CrossOrigin			

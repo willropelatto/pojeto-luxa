@@ -1,11 +1,17 @@
 package br.com.model.bean;
 
-import javax.persistence.Column;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "Leagues")
@@ -13,16 +19,20 @@ public class LeagueMO {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id")
 	private Integer id;
-	@Column(name="abbrName")
 	private String abbrName;
-	@Column(name="originalId")
     private int originalId;
-	@Column(name="imgUrl")
     private String imgUrl;
-	@Column(name="name")
     private String name;
+
+	@OneToMany(mappedBy="league", cascade=CascadeType.ALL)
+	@JsonManagedReference(value="leagueplayer-ref")
+	private Set<PlayerMO> players;		
+	
+	public LeagueMO() {
+		super();
+		this.players = new HashSet<PlayerMO>();
+	}
 	
 	public Integer getId() {
 		return id;
