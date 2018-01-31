@@ -31,14 +31,6 @@ public class PlayerController {
 	private PlayerRepo plDao;
 
 	@CrossOrigin
-	@GetMapping("/league/{league}")
-	public Page<PlayerMO> getLeaguePlayers(@PathVariable("league") Integer league,
-			@PageableDefault(value = 20) Pageable pageable) {
-		return null; //plDao.findByIdLeague(league, pageable);
-				//TODO rever aqui
-	}
-
-	@CrossOrigin
 	@GetMapping("/get/{playerId}")
 	public PlayerMO getPlayerFromId(@PathVariable("playerId") Integer playerId) {
 		return plDao.findOne(playerId);		

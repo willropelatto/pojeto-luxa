@@ -33,7 +33,13 @@ public class TeamController {
 	@GetMapping("/getByUser/{user}")
 	public TeamMO getByUser(@PathVariable("user") Integer user) {		
 		return ttDao.findOneByIdUser(user);				 
-	}	
+	}
+	
+	@CrossOrigin		
+	@GetMapping("/getTeam/{team}")
+	public TeamMO getTeam(@PathVariable("team") Integer team) {		
+		return ttDao.findOne(team);				 
+	}		
 	
 	@CrossOrigin		
 	@PostMapping("/register")	
