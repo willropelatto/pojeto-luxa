@@ -1,9 +1,9 @@
-package br.com.model.misc;
+package br.com.ctrl;
 
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 
 import br.com.model.bean.LeagueMO;
 import br.com.model.bean.PlayerAttributeAssociationMO;
@@ -15,15 +15,17 @@ import br.com.model.input.League;
 import br.com.model.repo.PlayerAttributesRepo;
 import br.com.model.repo.PlayerRepo;
 
-@Controller
+
+@Service
 public class PlayerCore {
 	
 	@Autowired
 	private PlayerAttributesRepo attributesDao;
 	@Autowired
 	private PlayerRepo playerDao;
-	
+	@Autowired
 	private LeagueCore lgCore;
+	
 	private ArrayList<League> leagues;
 	
 	public PlayerMO convertPlayer(FullPlayer fullpl, LeagueMO lg) {
@@ -35,7 +37,6 @@ public class PlayerCore {
 		player.setRating(fullpl.getRating());		
 		player.setLeague(lg);		
 		player.setOriginalId(fullpl.getId());
-		player.setBid(null); //TODO ver de criar a bid basica
 		player.setTeam(null);
 		player.setAge(fullpl.getAge());
 		player.setHeight(fullpl.getHeight());
@@ -55,47 +56,82 @@ public class PlayerCore {
 	}	
 	
 	public PlayerCore() {
-		super();
+		super();	
 		
-		this.lgCore = new LeagueCore();
 		this.leagues = new ArrayList<League>();
 	}
 
-	public PageIterator initializeImport() {		
-		playerDao.deleteAll();
-		return new PageIterator();
-	}
-
 	public boolean validPlayer(FullPlayer player) {		
+
+		
+/*
+ * 		if (plbase == null) {
+			return true;
+		}
+
+		Integer ori, dst;
+
+		ori = Integer.parseInt(player.getOriginalId());
+		dst = Integer.parseInt(plbase.getOriginalId());
+
+		if (Integer.compare(ori, dst) > 0) {
+			player.setId(plbase.getId());
+			return true;
+		}
+
+		return false;
+	}*/		
+		
 		return ((player.getPlayerType().equals("rare") || player.getPlayerType().equals("standard"))
-				&& !player.getColor().isEmpty());		
+				&& !player.getColor().isEmpty());			
+		
 	}
 	
-	public PlayerMO persistImportPlayer(FullPlayer fpl) {		
-		LeagueMO lg = lgCore.persistLeague(leagues, fpl.getLeague()); 
-		PlayerMO player = convertPlayer(fpl, lg);		
+	private boolean savePlayer(PlayerMO player) {
+		PlayerMO plbase = playerDao.findOneByBaseId(player.getBaseId());
+		if (plbase != null) {
+			Integer nuId, oldId;
+
+			nuId = Integer.parseInt(player.getOriginalId());
+			oldId = Integer.parseInt(plbase.getOriginalId());
+
+			if (Integer.compare(nuId, oldId) > 0) {
+				player.setId(plbase.getId());
+				return true;
+			} 
+
+		} else
+			return true;
 		
-		for (Attributes attr : fpl.getAttributes()) {	
-			String attrName = attr.getName().replaceAll("fut.attribute.", "");
-			PlayerAttributesMO plAtt = attributesDao.findOneByName(attrName);
-			
-			if (plAtt == null) {
-				plAtt = new PlayerAttributesMO();
-				plAtt.setId(0);
-				plAtt.setName(attrName);
+		return false;
+	}
+	
+	public void persistImportPlayer(FullPlayer fpl) {						
+		LeagueMO lg = lgCore.persistLeague(leagues, fpl.getLeague());		
+		PlayerMO player = convertPlayer(fpl, lg);
+		
+		if (savePlayer(player)) {
+			for (Attributes attr : fpl.getAttributes()) {
+				String attrName = attr.getName().replaceAll("fut.attribute.", "");
+				PlayerAttributesMO plAtt = attributesDao.findOneByName(attrName);
+
+				if (plAtt == null) {
+					plAtt = new PlayerAttributesMO();
+					plAtt.setId(0);
+					plAtt.setName(attrName);
+				}
+
+				PlayerAttributeAssociationMO association = new PlayerAttributeAssociationMO();
+				association.setAttribute(plAtt);
+				association.setPlayer(player);
+				association.setValue(attr.getValue());
+				player.getAttributes().add(association);
+
+				attributesDao.save(plAtt);
+
 			}
-										
-			PlayerAttributeAssociationMO association = new PlayerAttributeAssociationMO();
-			association.setAttribute(plAtt);
-			association.setPlayer(player);
-			association.setValue(attr.getValue());
-			player.getAttributes().add(association);					
-			
-			attributesDao.save(plAtt);							
-								
-		}
-		
-		return playerDao.save(player);			
+			player = playerDao.save(player);
+		}		
 	}
 				
 	

@@ -29,42 +29,6 @@ public class PlayerSpecification implements Specification<PlayerMO> {
 		};
 	}
 
-//	public static Specification<PlayerTite> whereAttributes(String name) {
-//		return new PlayerSpecification() {
-//
-//			@Override
-//			public Predicate toPredicate(Root<PlayerTite> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-//				Path join = root.join("PlayerAttributes").get("attribute");
-//				Path field = join.get("name");		
-//
-////		        FetchParent<Categoria, Mercadoria> fetch = root.fetch("mercadorias");
-////		        Join<Categoria, Mercadoria> join = 
-////		          (Join<Categoria, Mercadoria>) fetch; //truque
-////		 
-////		        return builder.between(join.get("preco"),
-////		          precoDe, precoAte);	
-////		        
-////	        	Query consulta = entityManager .createQuery( "SELECT ctrl FROM ControleCartaProtocolada ctrl INNER JOIN ctrl.usuario u INNER JOIN ctrl.condomino c where ctrl.statusCarta = :status and c.nome like :name") .setParameter("status", statusCarta) .setParameter("name", nomeCondomino); controleCartaProtocolada = (ControleCartaProtocolada) consulta.getSingleResult()		        
-//				
-//				return cb.equal(field, name);
-//			}
-//		};
-//	}
-//	
-//	public static Specification<PlayerTite> whereAssociation(int val) {
-//		return new PlayerSpecification() {
-//
-//			@Override
-//			public Predicate toPredicate(Root<PlayerTite> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-//				Path join = root.join("PlayerAttributeAssociation").get("player");
-//				Path field = join.get("value");
-//			
-//				return cb.greaterThanOrEqualTo(field, val);
-//			}
-//		};
-//	}	
-
-
 	@Override
 	public Predicate toPredicate(Root<PlayerMO> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
 		// TODO Auto-generated method stub

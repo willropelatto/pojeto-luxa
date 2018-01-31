@@ -19,19 +19,20 @@ public class BidMO {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 
-	private Integer id;
+	private int id;
 	private double bidValue;
 	private double originalValue;
 	private LocalDateTime bidTime;
+	private int team;
 	
 	@Transient
 	private BidStatus status;
 
-	public Integer getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -74,7 +75,15 @@ public class BidMO {
 
 	@Transient
 	public void setNextValue(double nextValue) {		
-		//TODO do nothing
+		//do nothing
+	}
+
+	public int getTeam() {
+		return team;
+	}
+
+	public void setTeam(int team) {
+		this.team = team;
 	}
 
 }

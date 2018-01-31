@@ -1,9 +1,10 @@
 package br.com.model.input;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import br.com.model.bean.LeagueMO;
-
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class League {
 
     private String abbrName;

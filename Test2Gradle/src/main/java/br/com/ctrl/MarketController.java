@@ -6,7 +6,6 @@ import java.time.LocalTime;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,8 +17,6 @@ import br.com.model.bean.MarketMO;
 import br.com.model.bean.PlayerMO;
 import br.com.model.bean.TeamMO;
 import br.com.model.misc.BidStatus;
-import br.com.model.misc.NotificationCore;
-import br.com.model.misc.TeamCore;
 import br.com.model.repo.BidRepo;
 import br.com.model.repo.MarketRepo;
 import br.com.model.repo.PlayerRepo;
@@ -34,13 +31,14 @@ public class MarketController {
 	private PlayerRepo plDao;
 	@Autowired
 	private MarketRepo mkDao;
+	@Autowired
+	private TeamCore tmCore;
+	@Autowired
+	private NotificationCore ntCore;
 
 	@CrossOrigin
 	@PostMapping("/placeBid")
 	public PlayerMO placeBid(@RequestBody PlayerMO playerBid) {
-
-		TeamCore tmCore = new TeamCore();
-		NotificationCore ntCore = new NotificationCore();
 		
 		if (isMarketClose()) {
 			closeMarket(ntCore, tmCore);
@@ -48,14 +46,13 @@ public class MarketController {
 			playerBid.getBid().setStatus(BidStatus.RESYNC);
 			return playerBid;
 		}
-				
+
 		PlayerMO player = plDao.findOne(playerBid.getId());
 
-		if (player.getBid().getBidValue() > playerBid.getBid().getBidValue()) {
-
+		if (player.getBid().getBidValue() > playerBid.getBid().getBidValue()) {			
 			if (tmCore.haveMoney(playerBid)) {
-
-				if (player.getTeam() != null) {
+				
+				if (player.getBid().getTeam() > 0) {
 					tmCore.increaseBudget(player);
 					ntCore.setBidSupass(player);
 				}
@@ -63,9 +60,10 @@ public class MarketController {
 				tmCore.decreaseBudget(playerBid);
 				ntCore.setBidSucess(playerBid);
 
-				playerBid.getBid().setBidTime(LocalDateTime.now());
-
+				playerBid.getBid().setBidTime(LocalDateTime.now());				
+				playerBid.getBid().setId(player.getBid().getId());				
 				bidDao.save(playerBid.getBid());
+				
 				playerBid = plDao.save(playerBid);
 
 				playerBid.getBid().setStatus(BidStatus.APROVED);
@@ -119,10 +117,10 @@ public class MarketController {
 			ntCore.setMarketClosed(team);	
 	}	
 	
-	@Scheduled(fixedDelay = 100000) //milisec
+	/*@Scheduled(fixedDelay = 100000) //milisec
 	public void abc() {
-		System.out.println("agora é" + LocalDate.now());
-	}
+		System.out.println("agora é " + LocalDateTime.now());
+	}*/
 	
 
 }

@@ -19,14 +19,16 @@ public class PlayerAttributeAssociationMO implements Serializable {
 
 	@Id
 	@ManyToOne
-	@JoinColumn(name = "attribute_id")
-	@JsonBackReference(value = "attr-ref")
-	private PlayerMO player;
-	@Id
-	@ManyToOne
 	@JoinColumn(name = "player_id")
 	@JsonBackReference(value = "player-ref")
-	private PlayerAttributesMO attribute;
+	private PlayerMO player;
+	
+	@Id
+	@ManyToOne
+	@JoinColumn(name = "attribute_id")
+	@JsonBackReference(value = "attr-ref")
+	private PlayerAttributesMO attribute;	
+	
 	private int value;
 
 	public PlayerMO getPlayer() {

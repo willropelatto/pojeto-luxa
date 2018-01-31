@@ -1,14 +1,14 @@
-package br.com.model.misc;
+package br.com.ctrl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 
 import br.com.model.bean.NotificationMO;
 import br.com.model.bean.PlayerMO;
 import br.com.model.bean.TeamMO;
 import br.com.model.repo.NotificationRepo;
 
-@Controller
+@Service
 public class NotificationCore {
 	
 	@Autowired

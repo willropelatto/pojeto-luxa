@@ -2,8 +2,10 @@ package br.com.model.input;
 
 import java.util.ArrayList;
 
-import br.com.model.bean.PlayerMO;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import br.com.model.bean.PlayerMO;
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Team {
 
 	private int id;

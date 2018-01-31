@@ -1,29 +1,37 @@
-package br.com.model.misc;
+package br.com.ctrl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 
 import br.com.model.bean.PlayerMO;
 import br.com.model.bean.TeamMO;
 import br.com.model.repo.TeamRepo;
 
-@Controller
+@Service
 public class TeamCore {
 
 	@Autowired
 	private TeamRepo teamDao;	
 	
 	public boolean haveMoney(PlayerMO player) {		
+		if (player.getTeam() == null)
+			player.setTeam(teamDao.findOne(player.getBid().getTeam()));		
+		
 		return !(player.getBid().getBidValue() > player.getTeam().getBudget());
 	}
 	
 	public TeamMO decreaseBudget(PlayerMO player) {
+		if (player.getTeam() == null)
+			player.setTeam(teamDao.findOne(player.getBid().getTeam()));
+		
 		player.getTeam().setBudget(player.getTeam().getBudget() - player.getBid().getBidValue());
 		return teamDao.save(player.getTeam());
 	}
 
 	public TeamMO increaseBudget(PlayerMO player) {
-		player.getTeam().setBudget(player.getTeam().getBudget() + player.getBid().getBidValue());
+		if (player.getTeam() == null)
+			player.getTeam().setBudget(player.getTeam().getBudget() + player.getBid().getBidValue());
+		
 		return teamDao.save(player.getTeam());
 	}	
 	

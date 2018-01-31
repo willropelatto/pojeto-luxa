@@ -1,7 +1,15 @@
 package br.com.model.input;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class FullPlayer {
 
+	@Override
+	public String toString() {
+		return "Jogador: " + name + " tipo: " + playerType + " cor: " + color;
+	}
+	
 	private String commonName;
 	private String firstName;
 	private String headshotImgUrl;

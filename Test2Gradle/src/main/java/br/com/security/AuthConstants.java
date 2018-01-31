@@ -9,4 +9,6 @@ public class AuthConstants {
     public static final String HEADER_STRING = "Authorization";
     public static final String SIGN_UP_URL = "/user/register";
     public static final String TEAM_REG = "/team/register";
+    public static final String UPD_PLA = "/main/update";
+    public static final String ALL_SHITS = "/**";
 }

@@ -26,7 +26,7 @@ public class PlayerMO {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private int id;
 	private String position;
 	private String name;
 	private Integer baseId;
@@ -66,11 +66,11 @@ public class PlayerMO {
 		setBid(null);
 	}
 
-	public Integer getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -203,9 +203,8 @@ public class PlayerMO {
 	}
 
 	public BidMO getBid() {
-		if (bid == null) {
+		if (bid == null) 
 			bid = BidInfoFactory.newBid(this);
-		}
 		
 		return bid;
 	}

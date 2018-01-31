@@ -32,16 +32,10 @@ public class BidInfoFactory {
 
 	public static BidMO newBid(PlayerMO player) {
 		BidMO bid = new BidMO();
-		bid.setOriginalValue(getOriginalValue(player.getRating()));	
+		bid.setOriginalValue(getOriginalValue(player.getRating()));
+		bid.setBidValue(bid.getOriginalValue());
+		bid.setStatus(BidStatus.UNSET);
 
 		return bid;
 	}
-	
-	/*public static BidInfo newProtectedBid(PlayerMO player, double value) {
-		BidInfo bid = newBid(player);
-		bid.getBid().setBidValue((bid.getBid().getOriginalValue() * 0.05) + value);
-
-		return bid;
-	}*/
-
 }

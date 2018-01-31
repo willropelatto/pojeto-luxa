@@ -1,5 +1,8 @@
 package br.com.model.input;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class PageIn {
 	
 	private int page;

@@ -1,15 +1,15 @@
-package br.com.model.misc;
+package br.com.ctrl;
 
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 
 import br.com.model.bean.LeagueMO;
 import br.com.model.input.League;
 import br.com.model.repo.LeagueRepo;
 
-@Controller
+@Service
 public class LeagueCore {
 
 	@Autowired
@@ -37,15 +37,6 @@ public class LeagueCore {
 			leagues.add(league);
 			return lg;
 		}
-
-		/*
-		if (!leagues.contains(league)) {			
-			leagues.add(league);
-			return leagueDao.save(convertLeagueToMO(league)); 
-		}
-		
-		return leagueDao.findOneByOriginalId(league.getId());
-		*/
 	}
 	
 	
