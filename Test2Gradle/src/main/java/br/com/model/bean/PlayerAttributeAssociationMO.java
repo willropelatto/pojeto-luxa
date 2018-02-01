@@ -62,7 +62,7 @@ public class PlayerAttributeAssociationMO implements Serializable {
 
 	@Transient
 	public void setName(String name) {
-		this.attribute.setName(name);
+		//do nothing
 	}
 
 }

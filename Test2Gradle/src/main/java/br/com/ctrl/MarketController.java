@@ -25,8 +25,8 @@ import br.com.model.repo.PlayerRepo;
 @RequestMapping("/market")
 public class MarketController {
 
-	@Autowired
-	private BidRepo bidDao;
+	/*@Autowired
+	private BidRepo bidDao;*/
 	@Autowired
 	private PlayerRepo plDao;
 	@Autowired
@@ -43,28 +43,30 @@ public class MarketController {
 		if (isMarketClose()) {
 			closeMarket(ntCore, tmCore);
 			
-			playerBid.getBid().setStatus(BidStatus.RESYNC);
+			playerBid.getBid().setStatus(BidStatus.MARKET_CLOSE);
 			return playerBid;
 		}
 
 		PlayerMO player = plDao.findOne(playerBid.getId());
+		TeamMO team = player.getTeam();
+		double bidValue = player.getBid().getBidValue();
 
-		if (player.getBid().getBidValue() > playerBid.getBid().getBidValue()) {			
-			if (tmCore.haveMoney(playerBid)) {
-				
-				if (player.getBid().getTeam() > 0) {
-					tmCore.increaseBudget(player);
-					ntCore.setBidSupass(player);
-				}
-
-				tmCore.decreaseBudget(playerBid);
-				ntCore.setBidSucess(playerBid);
-
+		if (playerBid.getBid().getBidValue() > bidValue) {			
+			if (tmCore.haveMoney(playerBid)) {	
 				playerBid.getBid().setBidTime(LocalDateTime.now());				
 				playerBid.getBid().setId(player.getBid().getId());				
-				bidDao.save(playerBid.getBid());
+				playerBid.setAttributes(player.getAttributes());			
 				
-				playerBid = plDao.save(playerBid);
+				tmCore.decreaseBudget(playerBid);				
+				playerBid = plDao.save(playerBid);				
+				ntCore.setBidSucess(playerBid);
+				tmCore.persistTeam(playerBid.getTeam());
+				
+				if (team != null) {
+					ntCore.setBidSupass(player);
+					tmCore.increaseBudget(team, bidValue);
+					tmCore.persistTeam(team);					
+				}
 
 				playerBid.getBid().setStatus(BidStatus.APROVED);
 			} else {
@@ -84,7 +86,6 @@ public class MarketController {
 		LocalDateTime base = LocalDateTime.now();
 		Iterable<MarketMO> mks = mkDao.findAll();
 		for (MarketMO market : mks) {
-			//System.out.println(market.getCloseTime());
 			if (base.isAfter(market.getCloseTime())) {				
 				return true;
 			}

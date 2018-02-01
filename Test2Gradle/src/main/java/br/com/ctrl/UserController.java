@@ -56,7 +56,7 @@ public class UserController {
 		return userDao.save(user);
 	}
 
-	@CrossOrigin
+	/*@CrossOrigin
 	@PostMapping("/login")
 	public UserAppMO login(@RequestBody UserAppMO user) {
 		try {
@@ -75,7 +75,7 @@ public class UserController {
 			return null;
 		}
 		return null;
-	}
+	}*/
 
 	@CrossOrigin
 	@GetMapping("/list")

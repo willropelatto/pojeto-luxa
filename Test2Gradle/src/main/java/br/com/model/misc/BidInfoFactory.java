@@ -33,7 +33,7 @@ public class BidInfoFactory {
 	public static BidMO newBid(PlayerMO player) {
 		BidMO bid = new BidMO();
 		bid.setOriginalValue(getOriginalValue(player.getRating()));
-		bid.setBidValue(bid.getOriginalValue());
+		//bid.setBidValue(bid.getOriginalValue());
 		bid.setStatus(BidStatus.UNSET);
 
 		return bid;

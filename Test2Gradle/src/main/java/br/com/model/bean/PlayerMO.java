@@ -41,7 +41,7 @@ public class PlayerMO {
 	private String defWorkRate;
 	private String headshotImgUrl;
 
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "bid_id")
 	private BidMO bid;
 
@@ -51,7 +51,7 @@ public class PlayerMO {
 	// @JsonIgnore
 	private LeagueMO league;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "team_id")
 	@JsonBackReference(value = "team-ref")
 	private TeamMO team;

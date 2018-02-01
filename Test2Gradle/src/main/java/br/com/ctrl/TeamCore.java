@@ -20,23 +20,26 @@ public class TeamCore {
 		return !(player.getBid().getBidValue() > player.getTeam().getBudget());
 	}
 	
-	public TeamMO decreaseBudget(PlayerMO player) {
+	public void decreaseBudget(PlayerMO player) {
 		if (player.getTeam() == null)
 			player.setTeam(teamDao.findOne(player.getBid().getTeam()));
 		
 		player.getTeam().setBudget(player.getTeam().getBudget() - player.getBid().getBidValue());
-		return teamDao.save(player.getTeam());
+		//return teamDao.save(player.getTeam());
 	}
 
-	public TeamMO increaseBudget(PlayerMO player) {
-		if (player.getTeam() == null)
-			player.getTeam().setBudget(player.getTeam().getBudget() + player.getBid().getBidValue());
+	public void increaseBudget(TeamMO team, double value) {
+		team.setBudget(team.getBudget() + value);
 		
-		return teamDao.save(player.getTeam());
+		//return teamDao.save(player.getTeam());
 	}	
 	
 	public Iterable<TeamMO> findAll() {
 		return teamDao.findAll();
+	}
+	
+	public void persistTeam(TeamMO team) {
+		teamDao.save(team);
 	}
 	
 }

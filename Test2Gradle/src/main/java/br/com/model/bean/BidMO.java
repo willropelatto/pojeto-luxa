@@ -18,8 +18,8 @@ public class BidMO {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-
 	private int id;
+	
 	private double bidValue;
 	private double originalValue;
 	private LocalDateTime bidTime;
@@ -60,10 +60,12 @@ public class BidMO {
 		this.bidTime = bidTime;
 	}
 
+	@Transient
 	public BidStatus getStatus() {
 		return status;
 	}
-
+	
+	@Transient
 	public void setStatus(BidStatus status) {
 		this.status = status;
 	}

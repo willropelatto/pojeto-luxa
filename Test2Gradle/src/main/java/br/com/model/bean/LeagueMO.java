@@ -19,7 +19,7 @@ public class LeagueMO {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private int id;
 	private String abbrName;
     private int originalId;
     private String imgUrl;
@@ -34,10 +34,10 @@ public class LeagueMO {
 		this.players = new HashSet<PlayerMO>();
 	}
 	
-	public Integer getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public String getAbbrName() {
