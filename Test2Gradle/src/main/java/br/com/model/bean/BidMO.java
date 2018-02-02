@@ -22,7 +22,6 @@ public class BidMO {
 	
 	private double bidValue;
 	private double originalValue;
-	private LocalDateTime bidTime;
 	private int team;
 	
 	@Transient
@@ -52,16 +51,12 @@ public class BidMO {
 		this.originalValue = originalValue;
 	}
 
-	public LocalDateTime getBidTime() {
-		return bidTime;
-	}
-
-	public void setBidTime(LocalDateTime bidTime) {
-		this.bidTime = bidTime;
-	}
 
 	@Transient
 	public BidStatus getStatus() {
+		if (this.id > 0 )
+			 status = BidStatus.APROVED;
+		
 		return status;
 	}
 	

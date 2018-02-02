@@ -53,7 +53,6 @@ public class MarketController {
 
 		if (playerBid.getBid().getBidValue() > bidValue) {			
 			if (tmCore.haveMoney(playerBid)) {	
-				playerBid.getBid().setBidTime(LocalDateTime.now());				
 				playerBid.getBid().setId(player.getBid().getId());				
 				playerBid.setAttributes(player.getAttributes());			
 				
