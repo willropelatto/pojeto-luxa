@@ -53,7 +53,6 @@ public class MarketController {
 
 		if (playerBid.getBid().getBidValue() > bidValue) {			
 			if (tmCore.haveMoney(playerBid)) {	
-				playerBid.getBid().setBidTime(LocalDateTime.now());				
 				playerBid.getBid().setId(player.getBid().getId());				
 				playerBid.setAttributes(player.getAttributes());			
 				
@@ -83,14 +82,18 @@ public class MarketController {
 	}
 
 	private boolean isMarketClose() {
+		boolean aberto = false;
 		LocalDateTime base = LocalDateTime.now();
-		Iterable<MarketMO> mks = mkDao.findAll();
+		Iterable<MarketMO> mks = mkDao.findAll();		
 		for (MarketMO market : mks) {
+			aberto = true;
 			if (base.isAfter(market.getCloseTime())) {				
 				return true;
-			}
+			} 							
 		}
-		return false;
+		
+		//Caso mercado não esteja aberto, considerar fechado.
+		return (!aberto);
 	}
 
 	@CrossOrigin

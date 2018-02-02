@@ -45,7 +45,7 @@ public class PlayerMO {
 	@JoinColumn(name = "bid_id")
 	private BidMO bid;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "league_id")
 	@JsonBackReference(value = "leagueplayer-ref")
 	// @JsonIgnore
