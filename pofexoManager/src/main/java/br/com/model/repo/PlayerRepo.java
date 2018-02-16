@@ -16,8 +16,6 @@ public interface PlayerRepo extends JpaRepository<PlayerMO, Integer>,
 	
 	Page<PlayerMO> findByOriginalId(String originalId, Pageable pageable);
 	
-	//Page<PlayerMO> findByIdLeague(Integer idLeague, Pageable pageable);
-	
 	PlayerMO findOneByBaseId(int baseId);	
 	
 }
