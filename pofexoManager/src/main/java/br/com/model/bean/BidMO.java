@@ -17,7 +17,7 @@ public class BidMO {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+	 
 	private double bidValue;
 	private double originalValue;
 	private int team;
@@ -49,10 +49,6 @@ public class BidMO {
 	}
 
 	public BidStatus getStatus() {
-//TODO limpar
-//		if (this.id > 0 )
-//			 status = BidStatus.APROVED;
-		
 		return status;
 	}
 	
