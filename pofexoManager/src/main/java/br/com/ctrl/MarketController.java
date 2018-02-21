@@ -17,16 +17,14 @@ import br.com.model.bean.MarketMO;
 import br.com.model.bean.PlayerMO;
 import br.com.model.bean.TeamMO;
 import br.com.model.misc.BidStatus;
-import br.com.model.misc.PlayerStatus;
 import br.com.model.repo.MarketRepo;
-import br.com.model.repo.PlayerRepo;
 
 @RestController
 @RequestMapping("/market")
 public class MarketController {
 
 	@Autowired
-	private PlayerRepo plDao;
+	private PlayerCore playerCore;
 	@Autowired
 	private MarketRepo mkDao;
 	@Autowired
@@ -38,7 +36,7 @@ public class MarketController {
 	@PostMapping("/placeBid")
 	public PlayerMO placeBid(@RequestBody PlayerMO playerBid) {
 		
-		PlayerMO player = plDao.findOne(playerBid.getId());
+		PlayerMO player = playerCore.getPlayer(playerBid.getId());
 		if (isMarketClose()) {
 			closeMarket(ntCore, tmCore);
 			
@@ -52,14 +50,9 @@ public class MarketController {
 
 		if (playerBid.getBid().getBidValue() > bidValue) {			
 			if (tmCore.haveMoney(playerBid)) {	
-				playerBid.getBid().setId(player.getBid().getId()); //Manter o mesmo id, pq? boa pergunta...				
-				playerBid.setAttributes(player.getAttributes()); //Gambi para não sobrescrever os atributos.			
-				playerBid.setLeague(player.getLeague()); //Gambi para não sobrescrever a liga.
-				
+				playerBid = playerCore.preparePlayerBid(playerBid, player);				
 				tmCore.decreaseBudget(playerBid);				
-				playerBid.getBid().setStatus(BidStatus.APROVED);
-				playerBid.setStatus(PlayerStatus.ON_BID);
-				playerBid = plDao.save(playerBid);				
+				playerBid = playerCore.persistPlayerBid(playerBid);				
 				
 				ntCore.setBidSucess(playerBid);
 				tmCore.persistTeam(playerBid.getTeam());
@@ -86,7 +79,8 @@ public class MarketController {
 	private boolean isMarketClose() {
 		boolean aberto = false;
 		LocalDateTime base = LocalDateTime.now();
-		Iterable<MarketMO> mks = mkDao.findAll();		
+		Iterable<MarketMO> mks = mkDao.findAll();
+		
 		for (MarketMO market : mks) {
 			aberto = true;
 			if (base.isAfter(market.getCloseTime())) {				
@@ -117,11 +111,20 @@ public class MarketController {
 	}
 
 	public void closeMarket(NotificationCore ntCore, TeamCore tmCore) {		
-		Iterable<TeamMO> teams = tmCore.findAll();
-		
+		Iterable<TeamMO> teams = tmCore.findAll();				
 		for (TeamMO team : teams) 
-			ntCore.setMarketClosed(team);	
+			ntCore.setMarketClosed(team);		
+			
+		//TODO TESTAR verificar se o player irá gravar corretamente.
+		playerCore.setContractPlayers();
 	}	
+	
+	@CrossOrigin
+	@PostMapping("/setAvaibleLeagues")
+	public long setAvaibleLeagues(@RequestBody Integer[] ids) {
+		
+		return playerCore.setAvaiblePlayers(ids);
+	}
 	
 	/*@Scheduled(fixedDelay = 100000) //milisec
 	public void abc() {

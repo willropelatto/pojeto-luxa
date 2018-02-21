@@ -12,9 +12,10 @@ import br.com.model.bean.PlayerMO;
 import br.com.model.input.Attributes;
 import br.com.model.input.FullPlayer;
 import br.com.model.input.League;
+import br.com.model.misc.BidStatus;
+import br.com.model.misc.PlayerStatus;
 import br.com.model.repo.PlayerAttributesRepo;
 import br.com.model.repo.PlayerRepo;
-
 
 @Service
 public class PlayerCore {
@@ -28,7 +29,7 @@ public class PlayerCore {
 	
 	private ArrayList<League> leagues;
 	
-	public PlayerMO convertPlayer(FullPlayer fullpl, LeagueMO lg) {
+	private PlayerMO convertPlayer(FullPlayer fullpl, LeagueMO lg) {
 		PlayerMO player = new PlayerMO();
 		player.setId(0);
 		player.setName(fullpl.getName());
@@ -62,26 +63,6 @@ public class PlayerCore {
 	}
 
 	public boolean validPlayer(FullPlayer player) {		
-
-		
-/*
- * 		if (plbase == null) {
-			return true;
-		}
-
-		Integer ori, dst;
-
-		ori = Integer.parseInt(player.getOriginalId());
-		dst = Integer.parseInt(plbase.getOriginalId());
-
-		if (Integer.compare(ori, dst) > 0) {
-			player.setId(plbase.getId());
-			return true;
-		}
-
-		return false;
-	}*/		
-		
 		return ((player.getPlayerType().equals("rare") || player.getPlayerType().equals("standard"))
 				&& !player.getColor().isEmpty());			
 		
@@ -132,6 +113,39 @@ public class PlayerCore {
 			}
 			player = playerDao.save(player);
 		}		
+	}
+	
+	
+	public long setContractPlayers() {	
+	//public void setContractPlayers(Set<PlayerMO> players) {
+		/*for (PlayerMO player : players) {
+			player.setStatus(PlayerStatus.CONTRACT);		
+		}*/
+		
+		//TODO TESTAR validar se isso é ok.
+		return playerDao.updateContract();
+	}
+	
+	public PlayerMO getPlayer(int id) {
+		return playerDao.findOne(id);		
+	}
+	
+	public PlayerMO persistPlayerBid(PlayerMO player) {
+		player.getBid().setStatus(BidStatus.APROVED);
+		player.setStatus(PlayerStatus.ON_BID);
+		return playerDao.save(player);		
+	}
+	
+	public PlayerMO preparePlayerBid(PlayerMO bid, PlayerMO base) {
+		bid.getBid().setId(base.getBid().getId()); //Manter o mesmo id, pq? boa pergunta...				
+		bid.setAttributes(base.getAttributes()); //Gambi para não sobrescrever os atributos.			
+		bid.setLeague(base.getLeague()); //Gambi para não sobrescrever a liga.		
+		return bid;
+	}
+	
+	//TODO verificar a performance, usar o exemplo que está no playerrepo
+	public long setAvaiblePlayers(Integer[] ids ) {		
+		return playerDao.updateAvaliable(ids);		
 	}
 				
 	

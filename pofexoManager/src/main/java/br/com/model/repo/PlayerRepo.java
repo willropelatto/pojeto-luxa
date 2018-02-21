@@ -4,11 +4,15 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.querydsl.QueryDslPredicateExecutor;
+import org.springframework.stereotype.Repository;
 
 import br.com.model.bean.PlayerMO;
 
+@Repository
 public interface PlayerRepo extends JpaRepository<PlayerMO, Integer>, 
-									QueryDslPredicateExecutor<PlayerMO> {		
+									QueryDslPredicateExecutor<PlayerMO>,
+									PlayerRepoCustom
+									{		
 	
 	Page<PlayerMO> findByPositionIgnoreCaseAndRatingGreaterThanEqual(String position, int rating, Pageable pageable);
 	
@@ -17,5 +21,5 @@ public interface PlayerRepo extends JpaRepository<PlayerMO, Integer>,
 	Page<PlayerMO> findByOriginalId(String originalId, Pageable pageable);
 	
 	PlayerMO findOneByBaseId(int baseId);	
-	
+
 }

@@ -27,8 +27,8 @@ public class EnterData {
 	public void UpdateStoredPlayers() {
 		log.info("inicio as: " + LocalDateTime.now());		
 		RestTemplate rest = new RestTemplate();
-		PageIn pg = rest.getForObject("http://smartwaysolucoes.com/item.json", PageIn.class);
-		//PageIn pg = rest.getForObject("https://www.easports.com/fifa/ultimate-team/api/fut/item?page=0", PageIn.class);
+//		PageIn pg = rest.getForObject("http://smartwaysolucoes.com/item.json", PageIn.class);
+		PageIn pg = rest.getForObject("https://www.easports.com/fifa/ultimate-team/api/fut/item?page=0", PageIn.class);
 		
 		while (pg.getPage() <= pg.getTotalPages()) {
 			log.info("página: " + pg.getPage());
@@ -44,9 +44,9 @@ public class EnterData {
 			}
 			
 		
-//			if ((pg.getPage() < pg.getTotalPages()))
-//				pg = rest.getForObject("https://www.easports.com/fifa/ultimate-team/api/fut/item?page="+ pg.getPage()+1, PageIn.class);
-//			else
+			if ((pg.getPage() < pg.getTotalPages()))
+				pg = rest.getForObject("https://www.easports.com/fifa/ultimate-team/api/fut/item?page="+ pg.getPage()+1, PageIn.class);
+			else
 				break;
 		}
 		
