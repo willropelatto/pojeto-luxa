@@ -12,33 +12,33 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.model.NotificationTite;
-import br.com.model.NotificationTiteRepository;
+import br.com.model.bean.NotificationMO;
+import br.com.model.repo.NotificationRepo;
 
 @RestController
 @RequestMapping("/notification")
 public class NotificationController {
 
 	@Autowired
-	private NotificationTiteRepository ntDao;
+	private NotificationRepo ntDao;
 	
 	
 	@CrossOrigin	
 	@GetMapping("/getByTeam/{team}")
-	public Page<NotificationTite> listTeams(@PathVariable("team") Integer team, @PageableDefault(value = 50) Pageable pageable) {
+	public Page<NotificationMO> listTeams(@PathVariable("team") Integer team, @PageableDefault(value = 50) Pageable pageable) {
 		return ntDao.findByTeamIdAndRead(team, false, pageable);		
 	}
 	
 	@CrossOrigin	
 	@GetMapping("/getLasts/{team}")
-	public Page<NotificationTite> getLastNotifications(@PathVariable("team") Integer team, @PageableDefault(value = 5) Pageable pageable) {
+	public Page<NotificationMO> getLastNotifications(@PathVariable("team") Integer team, @PageableDefault(value = 5) Pageable pageable) {
 		return ntDao.findByTeamIdAndReadOrderByIdDesc(team, false, pageable);		
 	}
 	
 	@CrossOrigin
 	@GetMapping("/markAsRead/{notification}")
 	public int markAsRead(@PathVariable("notification") Integer notification) {
-		NotificationTite nt = ntDao.findOne(notification);
+		NotificationMO nt = ntDao.findOne(notification);
 		nt.setRead(true);	
 		ntDao.save(nt);
 		return 1;
@@ -47,9 +47,9 @@ public class NotificationController {
 	@CrossOrigin	
 	@GetMapping("/markAllAsRead/{team}")
 	public int markAllAsRead(@PathVariable("team") Integer team) {
-		List<NotificationTite> nts = ntDao.findByTeamIdAndRead(team, false);
+		List<NotificationMO> nts = ntDao.findByTeamIdAndRead(team, false);
 
-		for (NotificationTite nt : nts) {
+		for (NotificationMO nt : nts) {
 			nt.setRead(true);			
 		}
 		

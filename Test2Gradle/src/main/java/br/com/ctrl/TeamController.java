@@ -12,32 +12,38 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.model.TeamTite;
-import br.com.model.TeamTiteRepository;
+import br.com.model.bean.TeamMO;
+import br.com.model.repo.TeamRepo;
 
 @RestController
 @RequestMapping("/team")
 public class TeamController {
 
 	@Autowired
-	private TeamTiteRepository ttDao;
+	private TeamRepo ttDao;
 	
 	
 	@CrossOrigin			
 	@GetMapping("/list")
-	public Page<TeamTite> listTeams(@PageableDefault(value = 50) Pageable pageable) {
+	public Page<TeamMO> listTeams(@PageableDefault(value = 50) Pageable pageable) {
 		return ttDao.findAll(pageable);		
 	}
 	
 	@CrossOrigin		
 	@GetMapping("/getByUser/{user}")
-	public TeamTite getByUser(@PathVariable("user") Integer user) {		
+	public TeamMO getByUser(@PathVariable("user") Integer user) {		
 		return ttDao.findOneByIdUser(user);				 
-	}	
+	}
+	
+	@CrossOrigin		
+	@GetMapping("/getTeam/{team}")
+	public TeamMO getTeam(@PathVariable("team") Integer team) {		
+		return ttDao.findOne(team);				 
+	}		
 	
 	@CrossOrigin		
 	@PostMapping("/register")	
-	public TeamTite register(@RequestBody TeamTite team) {		
+	public TeamMO register(@RequestBody TeamMO team) {		
 		return ttDao.save(team);
 	}	
 	

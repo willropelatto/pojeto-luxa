@@ -14,7 +14,7 @@ apply plugin: 'org.springframework.boot'
 
 jar {
     baseName = 'gs-rest-service'
-    version =  '1.0.0'
+    version =  '0.1.0'
 }
 
 repositories {
@@ -30,6 +30,9 @@ dependencies {
     compile("org.postgresql:postgresql:42.1.1.jre7")    
 	compile("org.apache.commons:commons-lang3:3.5")	
 	compile("javax.ws.rs:javax.ws.rs-api:2.1")
+	
+	compile("org.springframework.boot:spring-boot-starter-security")
+	compile("io.jsonwebtoken:jjwt:0.7.0")
 	
 	compile group: 'org.glassfish.jersey', name: 'jersey-bom', version: '2.25.1', ext: 'pom'
 	compile group: 'org.glassfish.jersey.containers', name: 'jersey-container-servlet-core', version: '2.25.1'

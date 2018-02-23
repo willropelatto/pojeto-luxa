@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,48 +13,61 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.model.UserAuthToken;
-import br.com.model.UserDetail;
-import br.com.model.UserDetailRepository;
+import br.com.model.bean.UserAppMO;
+import br.com.model.repo.UserAppRepo;
 
 @RestController
 @RequestMapping("/user")
 public class UserController {
 
 	@Autowired
-	private UserDetailRepository userDao;
+	private UserAppRepo userDao;
+
+	private BCryptPasswordEncoder bCryptPasswordEncoder;	
+	
+	public UserController(BCryptPasswordEncoder bCryptPasswordEncoder) {
+		super();
+		this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+	}
 
 	@CrossOrigin
 	@GetMapping("/get/{code}")
-	public UserDetail GetUser(@PathVariable("code") Integer codigo) {
+	public UserAppMO GetUser(@PathVariable("code") Integer codigo) {
 		return userDao.findOne(codigo);
+	}
+	
+	@CrossOrigin
+	@GetMapping("/getUser/{username}")
+	public UserAppMO GetUser(@PathVariable("username") String username) {
+		return userDao.findOneByUsernameAllIgnoringCase(username);
 	}
 
 	@CrossOrigin
 	@PostMapping("/register")
-	public UserDetail Register(@RequestBody UserDetail user) {
+	public UserAppMO Register(@RequestBody UserAppMO user) {
+		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		return userDao.save(user);
 	}
 
 	@CrossOrigin
 	@PostMapping("/update")
-	public UserDetail Update(UserDetail user) {
+	public UserAppMO Update(UserAppMO user) {
+		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		return userDao.save(user);
 	}
 
-	@CrossOrigin
+	/*@CrossOrigin
 	@PostMapping("/login")
-	public UserDetail login(@RequestBody UserDetail user) {
+	public UserAppMO login(@RequestBody UserAppMO user) {
 		try {
-			UserDetail entity = userDao.findOneByLoginAllIgnoringCase(user.getLogin());
+			UserAppMO entity = userDao.findOneByUsernameAllIgnoringCase(user.getUsername());
 
 			if (entity != null) {
 
-				if (entity.getSenha().equals(user.getSenha())) {
-					String keyAuth = UserAuthToken.GerarToken(user.getLogin());
-					entity.setKeyAuth(keyAuth);
+				if (entity.getPassword().equals(user.getPassword())) {
+					user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 					entity = userDao.save(entity);
-					entity.setSenha("");
+					entity.setPassword("");
 					return entity;
 				}
 			}
@@ -61,11 +75,11 @@ public class UserController {
 			return null;
 		}
 		return null;
-	}
+	}*/
 
 	@CrossOrigin
 	@GetMapping("/list")
-	public Page<UserDetail> listUsers(@PageableDefault(value = 50) Pageable pageable) {
+	public Page<UserAppMO> listUsers(@PageableDefault(value = 50) Pageable pageable) {
 		return userDao.findAll(pageable);
 	}
 

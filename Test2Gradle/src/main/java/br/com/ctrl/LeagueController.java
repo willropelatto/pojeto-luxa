@@ -6,23 +6,31 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.model.LeagueTite;
-import br.com.model.LeagueTiteRepository;
+import br.com.model.bean.LeagueMO;
+import br.com.model.repo.LeagueRepo;
 
 @RestController
 @RequestMapping("/league")
 public class LeagueController {
 
 	@Autowired
-	private LeagueTiteRepository leagueDao;
+	private LeagueRepo leagueDao;
 
 	@CrossOrigin
 	@GetMapping("/list")
-	public Page<LeagueTite> getLeagues(@PageableDefault(value = 100) Pageable pageable) {
+	public Page<LeagueMO> getLeagues(@PageableDefault(value = 100) Pageable pageable) {
 		return leagueDao.findAll(pageable);
 	}
+	
+	@CrossOrigin
+	@GetMapping("/getLeague/{league}")
+	public LeagueMO getLeague(@PathVariable("league") Integer league) {
+		return leagueDao.findOne(league);
+				
+	}	
 
 }
