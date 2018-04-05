@@ -133,17 +133,17 @@ public class PlayerCore {
 		return playerDao.findOne(id);		
 	}
 	
-	public PlayerMO persistPlayerBid(PlayerMO player) {
-		player.getBid().setStatus(BidStatus.APROVED);
-		player.setStatus(PlayerStatus.ON_BID);
+	public PlayerMO persistPlayerBid(PlayerMO player) {		
 		return playerDao.save(player);		
 	}
 	
-	public PlayerMO preparePlayerBid(PlayerMO bid, PlayerMO base) {
-		bid.getBid().setId(base.getBid().getId()); //Manter o mesmo id, pq? boa pergunta...				
-		bid.setAttributes(base.getAttributes()); //Gambi para não sobrescrever os atributos.			
-		bid.setLeague(base.getLeague()); //Gambi para não sobrescrever a liga.		
-		return bid;
+	public PlayerMO preparePlayerBid(PlayerMO player, PlayerMO base) {
+		player.getBid().setId(base.getBid().getId()); //Manter o mesmo id, pq? boa pergunta...				
+		player.setAttributes(base.getAttributes()); 			
+		player.setLeague(base.getLeague()); 
+		player.getBid().setStatus(BidStatus.APROVED);
+		player.setStatus(PlayerStatus.ON_BID);
+		return player;
 	}
 	
 	public long setAvaiblePlayers(Integer[] ids ) {		

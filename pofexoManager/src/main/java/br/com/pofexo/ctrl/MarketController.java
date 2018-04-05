@@ -17,6 +17,7 @@ import br.com.pofexo.model.bean.MarketMO;
 import br.com.pofexo.model.bean.PlayerMO;
 import br.com.pofexo.model.bean.TeamMO;
 import br.com.pofexo.model.misc.BidStatus;
+import br.com.pofexo.model.misc.PlayerStatus;
 import br.com.pofexo.model.repo.MarketRepo;
 
 @RestController
@@ -32,6 +33,34 @@ public class MarketController {
 	@Autowired
 	private NotificationCore ntCore;
 
+	
+	@CrossOrigin
+	@PostMapping("/dismiss")
+	public PlayerMO dismiss(@RequestBody PlayerMO playerBid) {
+		PlayerMO player = playerCore.getPlayer(playerBid.getId());
+		if (isMarketClose()) {
+			closeMarket(ntCore, tmCore);
+			
+			player.getBid().setStatus(BidStatus.MARKET_CLOSE);
+			return player;
+		}	
+		
+		TeamMO team = player.getTeam();
+		double bidValue = player.getBid().getBidValue();
+
+		if (player.getStatus() == PlayerStatus.CONTRACT) {
+			player.setBid(null);
+			player.setStatus(PlayerStatus.UNAVAIBLE);
+			playerBid = playerCore.persistPlayerBid(player);
+			tmCore.increaseBudget(team, bidValue);
+			tmCore.persistTeam(team);
+		} else
+			playerBid = player;
+
+		return playerBid;	
+		
+	}
+	
 	@CrossOrigin
 	@PostMapping("/placeBid")
 	public PlayerMO placeBid(@RequestBody PlayerMO playerBid) {
