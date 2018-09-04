@@ -43,6 +43,8 @@ public class PlayerMO {
 	private String headshotImgUrl;
 	private PlayerStatus status;
 
+	//FetchType.EAGER = carregar junto com a classe
+	//CascadeType.ALL = ao gravar aqui todas as referencias são gravadas
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "bid_id")
 	private BidMO bid;
@@ -57,6 +59,7 @@ public class PlayerMO {
 	@JsonBackReference(value = "team-ref")
 	private TeamMO team;
 
+	//Os atributos do jogador poderiam ser apenas campos na classe do jogador... poderia ter especialização por tipo, poderia ser extensão não n/n
 	@OneToMany(mappedBy = "player", cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonManagedReference(value = "player-ref")
 	private Set<PlayerAttributeAssociationMO> attributes;
