@@ -1,0 +1,43 @@
+<h2>players</h2>
+
+<ul>  
+  <li *ngFor="let player of players" (click)="onSelect(player)">
+    <span>{{player.id}}</span> {{player.name}}
+  </li>
+</ul>
+
+
+<!--
+<div>
+  <label>id:
+    <input [(ngModel)]="hamburguer" placeholder="o que está no placholder não vai pra variavel otário">
+  </label>
+</div>
+<button (click)="getPlayer(hamburguer)">nhaca</button>
+<div *ngIf="cheese">
+  <app-player-detail [player]="cheese"></app-player-detail>
+</div>
+-->
+
+<app-player-detail [player]="selectedPlayer"></app-player-detail>
+
+
+
+<!--<div>
+<h2>My Heroes</h2>
+<ul class="heroes">
+  <li>
+    <span class="badge">{{hero.id}}</span> {{hero.name}}
+  </li>
+</ul>
+
+
+<h2>{{selectedHero.name | uppercase}} Details</h2>
+<div><span>id: </span>{{selectedHero.id}}</div>
+<div>
+  <label>name:
+    <input [(ngModel)]="selectedHero.name" placeholder="name">
+  </label>
+</div>
+-->
+

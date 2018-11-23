@@ -1,0 +1,12 @@
+<div *ngIf="player">
+    <h2>{{player.name | uppercase}} Details</h2>
+    <div><span>id: </span>{{player.id}}</div>
+    <div>
+      <label>rating:
+        <input [(ngModel)]="player.rating" placeholder="rating">
+      </label>
+      <label>position:
+          <input [(ngModel)]="player.position" placeholder="position">
+        </label>
+    </div>
+  </div>

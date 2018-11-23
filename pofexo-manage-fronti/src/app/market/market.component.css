@@ -1,0 +1,15 @@
+.example-headers-align .mat-expansion-panel-header-title,
+.example-headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+  padding: 10px;
+  align-content: center;
+}
+
+
+.mkt-container {
+    padding: 6px;
+}
+
+.table {
+  padding: 3px;
+}

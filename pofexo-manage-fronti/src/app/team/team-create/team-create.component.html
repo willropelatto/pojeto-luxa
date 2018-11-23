@@ -1,0 +1,45 @@
+<!--
+  //TODO: List of players grid bitch!    
+    players: Player[];
+    (ngSubmit)="onSubmit()"
+-->
+
+
+<div *ngIf="team">
+    <div class="basic-container">
+      <h1>Time</h1>
+      <form class="example-form"  #teamForm="ngForm">
+        <mat-form-field>
+          <input matInput placeholder="ID (disabled)" disabled [(ngModel)]="team.id" name="id">
+        </mat-form-field>
+  
+        <p>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Nome do Time" [(ngModel)]="team.name" name="name">
+          </mat-form-field>
+        </p>
+  
+        <p>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Manager" [(ngModel)]="team.manager" name="manager">
+          </mat-form-field>
+        </p>
+  
+        <p>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Budget" disabled [(ngModel)]="team.budget" name="budget">
+          </mat-form-field>
+        </p>
+  
+        <p>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Usuário" disabled [(ngModel)]="team.idUser" name="idUser">
+          </mat-form-field>
+        </p>
+  
+        <button mat-raised-button type="submit" (click)="newTeam(team); teamForm.reset()">Cadastrar</button>
+        <button mat-raised-button type="button" (click)="teamForm.reset()">Cancelar</button>
+      </form>
+    </div>
+  </div>
+  

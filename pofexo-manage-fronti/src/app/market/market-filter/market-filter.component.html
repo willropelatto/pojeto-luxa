@@ -1,0 +1,62 @@
+<div class="basic-container">
+  <h3>Filtros</h3>
+  <form class="example-form" #filterForm="ngForm">
+
+    <p>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Nome" [(ngModel)]="filter.name" name="name">
+      </mat-form-field>
+    </p>
+    <p >
+        <mat-select placeholder="Posição" [(ngModel)]="filter.position" name="position">
+          <mat-option *ngFor="let ps of positions" [value]="ps.name">
+            {{ps.name}}
+          </mat-option>
+        </mat-select>
+      </p>
+
+    <table class="example-full-width" cellspacing="0">
+      <tr>
+        <th>Rating Inicial</th>
+        <th>Rating Final</th>
+      </tr>
+      <tr>
+        <td>
+          <mat-slider class="example-margin" [max]="99" [min]="0" [thumbLabel]="true" [(ngModel)]="filter.rating" name="rating">
+          </mat-slider>
+        </td>
+        <td>
+          <mat-slider class="example-margin" [max]="100" [min]="1" [thumbLabel]="true" [(ngModel)]="filter.ratingend"
+            name="ratingend">
+          </mat-slider>
+        </td>
+      </tr>
+    </table>
+
+    <table class="example-full-width" cellspacing="0">
+      <tr>
+        <td>Valor Inicial</td>
+        <td>Valor Final</td>
+      </tr>
+      <tr>
+        <td>
+          <mat-slider class="example-margin" [min]="250" [step]="100" [max]="2500" [thumbLabel]="true" [(ngModel)]="filter.startValue" name="startValue">
+          </mat-slider>
+        </td>
+        <td>
+          <mat-slider class="example-margin" [min]="300" [max]="10000" [step]="100" [thumbLabel]="true" [(ngModel)]="filter.endValue" name="endValue">
+          </mat-slider>
+        </td>
+      </tr>
+    </table>
+
+    <p>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Liga" [(ngModel)]="filter.league" name="league">
+      </mat-form-field>
+    </p>
+
+    <button mat-raised-button type="submit" (click)="doFilterPlayer()">Filtrar</button>
+    <button mat-raised-button type="button" (click)="filterForm.reset()">Cancelar</button>
+  </form>
+</div>

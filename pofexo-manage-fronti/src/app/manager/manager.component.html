@@ -1,0 +1,44 @@
+<div *ngIf="luxa">
+  <div class="basic-container">
+    <h1>Manager</h1>
+    <form class="example-form" #managerForm="ngForm">
+      <mat-form-field hidden="true">
+        <input matInput placeholder="ID (disabled)" disabled [(ngModel)]="luxa.id" name="id">
+      </mat-form-field>
+
+      <table class="example-full-width" cellspacing="0">
+        <tr>
+          <td>
+            <mat-form-field>
+              <input matInput placeholder="Nome" [(ngModel)]="luxa.name" name="name">
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field>
+              <input matInput placeholder="Sobrenome" [(ngModel)]="luxa.lastname" name="lastname">
+            </mat-form-field>
+          </td>
+        </tr>
+      </table>
+
+      <p>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Email" [(ngModel)]="luxa.email" name="email">
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Login" [(ngModel)]="luxa.username" name="username">
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Password" [(ngModel)]="luxa.password" name="password" type="password">
+        </mat-form-field>
+      </p>
+
+      <button mat-raised-button type="submit" (click)="newManager(luxa); managerForm.reset()">Cadastrar</button>
+      <button mat-raised-button type="button" (click)="managerForm.reset()">Cancelar</button>
+    </form>
+  </div>
+</div>
