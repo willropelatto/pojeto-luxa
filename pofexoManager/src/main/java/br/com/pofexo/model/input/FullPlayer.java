@@ -7,7 +7,7 @@ public class FullPlayer {
 
 	@Override
 	public String toString() {
-		return "Jogador: " + name + " tipo: " + playerType + " cor: " + color;
+		return "Jogador: " + name + " tipo: " + rarityId;
 	}
 	
 	private String commonName;
@@ -71,6 +71,8 @@ public class FullPlayer {
     private Attributes[] attributes; 
     private String name;
     private String quality;
+    private Boolean isIcon;
+    private int rarityId;
     private String color;
     private Boolean isGK;
     private String positionFull;
@@ -87,6 +89,19 @@ public class FullPlayer {
     private int baseId;
     private int rating;
     
+    
+	public Boolean getIsIcon() {
+		return isIcon;
+	}
+	public void setIsIcon(Boolean isIcon) {
+		this.isIcon = isIcon;
+	}
+	public int getRarityId() {
+		return rarityId;
+	}
+	public void setRarityId(int rarityId) {
+		this.rarityId = rarityId;
+	}
 	public String getCommonName() {
 		return commonName;
 	}

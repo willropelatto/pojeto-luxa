@@ -22,17 +22,24 @@ public class PlayerRepoImpl implements PlayerRepoCustom {
     @Override
 	@Transactional	
 	public long updateAvaliable(Integer[] ids) {
-		return new JPAUpdateClause(em, playerMO).where(playerMO.league.id.notIn(ids))
-			    .set(playerMO.status, PlayerStatus.UNAVAIBLE)
+		return new JPAUpdateClause(em, playerMO).where(playerMO.league.id.in(ids)
+												.and(playerMO.status.eq(PlayerStatus.UNAVAIBLE)))
+			    .set(playerMO.status, PlayerStatus.AVAIBLE)
 			    .execute();
 	}
 
 	@Override	
 	@Transactional	
 	public long updateContract() {
-		return new JPAUpdateClause(em, playerMO).where(playerMO.status.eq(PlayerStatus.ON_BID))
+		long result = new JPAUpdateClause(em, playerMO).where(playerMO.status.eq(PlayerStatus.ON_BID))
 			    .set(playerMO.status, PlayerStatus.CONTRACT)
 			    .execute();
+		
+		result =+ new JPAUpdateClause(em, playerMO).where(playerMO.status.eq(PlayerStatus.AVAIBLE))
+			    .set(playerMO.status, PlayerStatus.UNAVAIBLE)
+			    .execute();
+		
+		return result;
 	}
 
 }

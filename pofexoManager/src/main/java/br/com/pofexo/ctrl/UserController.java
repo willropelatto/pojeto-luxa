@@ -56,27 +56,6 @@ public class UserController {
 		return userDao.save(user);
 	}
 
-	/*@CrossOrigin
-	@PostMapping("/login")
-	public UserAppMO login(@RequestBody UserAppMO user) {
-		try {
-			UserAppMO entity = userDao.findOneByUsernameAllIgnoringCase(user.getUsername());
-
-			if (entity != null) {
-
-				if (entity.getPassword().equals(user.getPassword())) {
-					user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-					entity = userDao.save(entity);
-					entity.setPassword("");
-					return entity;
-				}
-			}
-		} catch (Exception e) {
-			return null;
-		}
-		return null;
-	}*/
-
 	@CrossOrigin
 	@GetMapping("/list")
 	public Page<UserAppMO> listUsers(@PageableDefault(value = 50) Pageable pageable) {

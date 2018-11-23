@@ -52,7 +52,13 @@ public class AuthenticationUserAppFilter extends UsernamePasswordAuthenticationF
 				.setExpiration(new Date(System.currentTimeMillis() + AuthConstants.EXPIRATION_TIME))
 				.signWith(SignatureAlgorithm.HS512, AuthConstants.SECRET.getBytes()).compact();
 		
+		
+		res.getWriter().write("{\"token\":\"" + token + "\"}");
+				
+				//"{\"users\":[{\"name\":\"Lucas\", \"country\":\"Brazil\"}," +
+		          // "{\"name\":\"Jackie\",\"country\":\"China\"}]}");
 		res.addHeader(AuthConstants.HEADER_STRING, AuthConstants.TOKEN_PREFIX + token);
+		
 	}
 
 }

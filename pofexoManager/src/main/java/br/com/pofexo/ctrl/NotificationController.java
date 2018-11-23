@@ -9,6 +9,8 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -36,8 +38,8 @@ public class NotificationController {
 	}
 	
 	@CrossOrigin
-	@GetMapping("/markAsRead/{notification}")
-	public int markAsRead(@PathVariable("notification") Integer notification) {
+	@PostMapping("/markAsRead/{id}")
+	public int markAsRead(@RequestBody Integer notification) {
 		NotificationMO nt = ntDao.findOne(notification);
 		nt.setRead(true);	
 		ntDao.save(nt);
@@ -45,8 +47,8 @@ public class NotificationController {
 	}
 	
 	@CrossOrigin	
-	@GetMapping("/markAllAsRead/{team}")
-	public int markAllAsRead(@PathVariable("team") Integer team) {
+	@PostMapping("/markAllAsRead/{team}")
+	public int markAllAsRead(@RequestBody Integer team) {
 		List<NotificationMO> nts = ntDao.findByTeamIdAndRead(team, false);
 
 		for (NotificationMO nt : nts) {

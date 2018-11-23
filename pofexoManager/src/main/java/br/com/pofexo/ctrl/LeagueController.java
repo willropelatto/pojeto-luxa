@@ -22,7 +22,7 @@ public class LeagueController {
 
 	@CrossOrigin
 	@GetMapping("/list")
-	public Page<LeagueMO> getLeagues(@PageableDefault(value = 100) Pageable pageable) {
+	public Page<LeagueMO> getLeagues(@PageableDefault(value = 10) Pageable pageable) {
 		return leagueDao.findAll(pageable);
 	}
 	

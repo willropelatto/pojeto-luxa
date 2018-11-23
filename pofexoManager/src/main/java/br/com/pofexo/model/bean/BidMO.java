@@ -58,7 +58,7 @@ public class BidMO {
 	
 	@Transient
 	public double getNextValue() {
-		return (this.originalValue * 0.05) + this.bidValue;
+		return this.bidValue > 0 ? ((this.originalValue * 0.05) + this.bidValue) : this.originalValue;
 	}
 
 	@Transient

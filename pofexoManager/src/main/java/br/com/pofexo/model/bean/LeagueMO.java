@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -27,6 +28,7 @@ public class LeagueMO {
 
 	@OneToMany(mappedBy="league", cascade=CascadeType.ALL)
 	@JsonManagedReference(value="leagueplayer-ref")
+	@JsonIgnore
 	private Set<PlayerMO> players;		
 	
 	public LeagueMO() {

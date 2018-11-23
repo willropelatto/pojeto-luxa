@@ -30,14 +30,14 @@ public class PlayerController {
 
 	@CrossOrigin
 	@GetMapping("/getByName/{name}")
-	public Page<PlayerMO> getPlayerByName(@RequestBody PlayerFilter filter,
+	public Page<PlayerMO> getPlayerByName(@PathVariable("name") String name,
 			@PageableDefault(value = 20) Pageable pageable) {		
-		return playerCore.findPlayersByName(filter.getName(), pageable);
+		return playerCore.findPlayersByName(name, pageable);
 	}
 
 	@CrossOrigin
 	@GetMapping("/list")
-	public Page<PlayerMO> getAllPlayers(@PageableDefault(value = 50) Pageable pageable) {		
+	public Page<PlayerMO> getAllPlayers(@PageableDefault(value = 5) Pageable pageable) {		
 		return playerCore.findAllPlayers(pageable);
 	}
 

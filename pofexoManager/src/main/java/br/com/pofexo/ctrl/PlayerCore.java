@@ -4,6 +4,7 @@ import static br.com.pofexo.model.bean.QPlayerMO.playerMO;
 
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -56,7 +57,7 @@ public class PlayerCore {
 		player.setAtkWorkRate(fullpl.getAtkWorkRate());
 		player.setDefWorkRate(fullpl.getDefWorkRate());
 		player.setHeadshotImgUrl(fullpl.getHeadshotImgUrl());
-		player.setStatus(PlayerStatus.AVAIBLE);
+		player.setStatus(PlayerStatus.UNAVAIBLE);
 		
 		if (fullpl.getClub() != null) {
 			player.setClubName(fullpl.getClub().getName());
@@ -72,9 +73,7 @@ public class PlayerCore {
 	}
 
 	public boolean validPlayer(FullPlayer player) {		
-		return ((player.getPlayerType().equals("rare") || player.getPlayerType().equals("standard"))
-				&& !player.getColor().isEmpty());			
-		
+		return player.getRarityId() == 1 || player.getRarityId() == 0;		
 	}
 	
 	private boolean savePlayer(PlayerMO player) {
@@ -170,13 +169,13 @@ public class PlayerCore {
 		if (input.getRatingend() > 0) 
 			expr = expr.and(playerMO.rating.lt(input.getRatingend()));
 		
-		if (!input.getName().isEmpty())
+		if (!StringUtils.isEmpty(input.getName()))
 			expr = expr.and(playerMO.name.containsIgnoreCase(input.getName()));
 
 		if (input.getLeague() > 0) 			
 			expr = expr.and(playerMO.league.id.eq(input.getLeague()));		
 
-		if (!input.getPosition().isEmpty()) 
+		if (!StringUtils.isEmpty(input.getPosition())) 
 			expr = expr.and(playerMO.position.eq(input.getPosition()));
 		
 		return playerDao.findAll(expr, new PageRequest(pageable.getPageNumber(), pageable.getPageSize(), new Sort(Direction.ASC, "id")));
