@@ -1,3 +1,4 @@
 *.metadata
 *.recommenders
 *.bak
+pofexo-manage-fronti/node_modules/
