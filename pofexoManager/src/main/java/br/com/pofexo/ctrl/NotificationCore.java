@@ -1,6 +1,9 @@
 package br.com.pofexo.ctrl;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Service;
 
 import br.com.pofexo.model.bean.NotificationMO;
@@ -19,7 +22,14 @@ public class NotificationCore {
 		ntf.setTeamId(player.getTeam().getId());
 		ntf.setPlayerName(player.getName());
 		ntf.setNotification("Seu lance pelo jogador: " + player.getName() + " foi realizado com sucesso.");
-		ntDao.save(ntf);		
+		ntDao.save(ntf);
+		
+		Message msg = new Message(player, ntf);
+		try {
+			send(msg);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	} 
 	
 	public void setBidSupass(PlayerMO player) {
@@ -27,7 +37,14 @@ public class NotificationCore {
 		ntf.setTeamId(player.getTeam().getId());
 		ntf.setPlayerName(player.getName());
 		ntf.setNotification("Seu lance pelo jogador: " + player.getName() + " foi superado.");
-		ntDao.save(ntf);		
+		ntDao.save(ntf);	
+		
+		Message msg = new Message(player, ntf);
+		try {
+			send(msg);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}		
 	}
 	
 	public void setMarketClosed(TeamMO team) {
@@ -36,8 +53,21 @@ public class NotificationCore {
 		notification.setPlayerName(team.getName());
 		notification.setNotification("Mercado fechado!");
 		ntDao.save(notification);
+		Message msg = new Message();
+		msg.setMessage(notification.getNotification());
+		msg.setPlayerName(notification.getPlayerName());
+		msg.setTeamId(notification.getTeamId());
+		try {
+			send(msg);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}	
 	}
 	
-	
+	@MessageMapping("/notifications")
+	@SendTo("/pofexo/messages")
+	public JSONObject send(Message message) throws Exception {
+		return new JSONObject(message);
+	}
 	
 }
