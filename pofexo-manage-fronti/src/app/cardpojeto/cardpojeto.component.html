@@ -1,0 +1,26 @@
+<div id="accordion">
+  <div class="card">
+    <div class="card-header" [id]="getHeader()">
+      <div class="row">
+        <div class="col-md-1">{{ player.rating }}</div>
+        <div class="col-md-1">{{ player.position }}</div>
+        <div class="col-md-5">{{ player.name }}</div>
+        <div class="col-md-2">{{ player.clubName }}</div>
+        <div class="col-md-1">{{ player.bid.nextValue }}</div>
+        <div class="col-md-1 btn btn-secondary" (click)="feedback(player)">Dar Lance</div>
+        <div class="col-md-1 arrow-collapse" data-toggle="collapse" [attr.data-target]="getCollapseId()" aria-expanded="true" [attr.aria-controls]="getCollapse()"><i class="material-icons">keyboard_arrow_down</i></div>
+      </div>
+    </div>
+
+    <div [id]="getCollapse()" class="collapse" [attr.aria-labelledby]="getHeader()" data-parent="#accordion">
+      <div class="card-body">
+        <div class="row">
+          <div *ngFor="let att of player.attributes" class="col-md-2">{{ att.name }}</div>
+        </div>
+        <div class="row">
+            <div *ngFor="let att of player.attributes" class="col-md-2">{{ att.value }}</div>
+        </div>        
+      </div>
+    </div>
+  </div>
+</div>

@@ -33,3 +33,10 @@
   .juquinha {
       padding: 5px;
   }
+  .example-spacer {
+    flex: 1 1 auto;
+  }
+
+  .nompodeve {
+    display: none;
+  }

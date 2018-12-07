@@ -1,5 +1,6 @@
 import {MediaMatcher} from '@angular/cdk/layout';
 import {ChangeDetectorRef, Component, OnDestroy} from '@angular/core';
+import { AuthenticationService } from './services/authentication.service';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,9 @@ export class AppComponent {
 
   private _mobileQueryListener: () => void;
 
-  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
+  private logado = false;
+
+  constructor(private authService: AuthenticationService, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
@@ -21,4 +24,11 @@ export class AppComponent {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
 
+  ngOnInit(): void {
+    this.authService.sucessfull.subscribe(item => this.logado=item);
+  }
+
+  getLogado() {
+    return this.logado;
+  }
 }

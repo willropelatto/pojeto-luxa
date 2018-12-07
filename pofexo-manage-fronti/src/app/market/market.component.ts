@@ -90,5 +90,8 @@ export class MarketComponent implements OnInit {
       this.totalPlayer = juca['totalElements'];
     });
   }
+  receiveBid(player: Player) {
+    this.placeBid(player);
+  }
 
 }

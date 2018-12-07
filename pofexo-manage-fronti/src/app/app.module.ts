@@ -24,6 +24,7 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { TeamComponent } from './team/team.component';
 import { ManagerViewComponent } from './manager/manager-view/manager-view.component';
+import { CardpojetoComponent } from './cardpojeto/cardpojeto.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { ManagerViewComponent } from './manager/manager-view/manager-view.compon
     LoginComponent,
     HomeComponent,
     TeamComponent,
-    ManagerViewComponent
+    ManagerViewComponent,
+    CardpojetoComponent
     
   ],
   imports: [
@@ -50,7 +52,7 @@ import { ManagerViewComponent } from './manager/manager-view/manager-view.compon
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    DemoMaterialModule,    
+    DemoMaterialModule,
     ReactiveFormsModule
   ],
   providers: [

@@ -1,49 +1,6 @@
 <div class="basic-container">
-
-  <mat-accordion class="example-headers-align">
-
     <div class="mkt-container" *ngFor="let player of players">
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            {{player.name}}
-          </mat-panel-title>
-          <mat-panel-description>
-            <table>
-              <tr>
-                <td>
-                  {{player.rating}}
-                </td>
-                <td>
-                  {{player.position}}
-                </td>
-                <td>
-                  {{player.bid.nextValue}}
-                </td>
-                <td>
-                {{player.clubName}}
-              </td>
-              </tr>
-            </table>            
-          </mat-panel-description>
-
-        </mat-expansion-panel-header>
-
-        <ul>
-          <li *ngFor="let att of player.attributes">
-            <p>{{att.name}}: {{att.value}}</p>
-          </li>
-        </ul>
-
-        <mat-action-row>
-            <button mat-icon-button>
-                <mat-icon (click)="placeBid(player)">favorite</mat-icon>
-              </button>
-        </mat-action-row>
-
-      </mat-expansion-panel>
+      <cardpojeto [player]="player" (informaBid)="receiveBid($event)"></cardpojeto>
     </div>
-
-  </mat-accordion>
   <mat-paginator [length]="totalPlayer" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true"></mat-paginator>
 </div>
