@@ -22,7 +22,8 @@ export class TeamComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.teamId = JSON.parse(localStorage.getItem('currentTeam'));
+    this.team = JSON.parse(localStorage.getItem('currentTeam'));
+    this.teamId = this.team.id;
     this.user = JSON.parse(localStorage.getItem('currentUser'));    
     if (this.teamId > 0) {
       this.redirectToView();      
@@ -41,7 +42,7 @@ export class TeamComponent implements OnInit {
       .subscribe(tm => {
         if (tm) {
           this.teamId = tm.id;          
-          localStorage.setItem('currentTeam', JSON.stringify(this.teamId));          
+          localStorage.setItem('currentTeam', JSON.stringify(tm));          
           this.redirectToView();                    
         } else {          
           this.router.navigate(['/team/new']);        

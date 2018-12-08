@@ -7,7 +7,7 @@
       <h1 class="example-app-name">Pofexô Manager</h1>
       <span class="example-spacer"></span>
       <mat-icon class="example-icon" [class.nompodeve]="!getLogado()">attach_money</mat-icon>
-      <div [class.nompodeve]="!getLogado()">12000,00</div>
+      <div [class.nompodeve]="!getLogado()">{{ getBudget() }}</div>
     </mat-toolbar-row>
   </mat-toolbar>
 

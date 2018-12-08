@@ -6,6 +6,8 @@ import { MatPaginator, MatSnackBar } from '@angular/material';
 import { tap } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PlayerFilter } from '../beans/player-filter';
+import { Team } from '../beans/team';
+import { TeamService } from '../services/team.service';
 
 @Component({
   selector: 'app-market',
@@ -17,13 +19,14 @@ export class MarketComponent implements OnInit {
   players: Player[];
   totalPlayer = 0;
   private playerFilter: PlayerFilter;
-  private team = 0;
+  private team: Team;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(
     private marketService: MarketService,
     private playerService: PlayerService,
+    private teamService: TeamService,
     private snackBar: MatSnackBar,
     private route: ActivatedRoute,
     private router: Router
@@ -31,15 +34,14 @@ export class MarketComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.playerFilter = params["playerFilter"];
     });
-
     this.team = JSON.parse(localStorage.getItem('currentTeam'));
-    if (!(this.team > 0)) {
+    if (!(this.team.id > 0)) {
       this.router.navigate(['/team']);
     }
   }
 
   placeBid(player: Player) {
-    player.bid.team = this.team;
+    player.bid.team = this.team.id;
     player.bid.bidValue = player.bid.nextValue;
     console.log(player);
     this.marketService.placeBid(player).
@@ -57,6 +59,8 @@ export class MarketComponent implements OnInit {
             } else {
               this.snackBar.open('Lance efetuado pelo jogador ' + pl.name + '.', 'OK', { duration: 5000 });
             }
+        //chamada só pra atualizar budget    
+        this.teamService.getTeamId(this.team.id).subscribe();
         //todo: refresh na página?, só queria atualizar esse registro...
       },
         error => {

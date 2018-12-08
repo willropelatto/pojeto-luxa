@@ -26,7 +26,8 @@ export class TeamViewComponent implements OnInit {
   ) { }
 
   getTeam(): void {
-    const id = JSON.parse(localStorage.getItem('currentTeam'));
+    this.team = JSON.parse(localStorage.getItem('currentTeam'));
+    const id = this.team.id;
 
     this.teamService.getTeamId(id)
       .subscribe(team => {

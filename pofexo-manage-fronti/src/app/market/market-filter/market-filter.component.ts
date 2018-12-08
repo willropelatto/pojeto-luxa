@@ -4,6 +4,7 @@ import { PlayerFilter } from 'src/app/beans/player-filter';
 import { Player } from 'src/app/beans/player';
 import { POSITIONS } from 'src/app/beans/misc';
 import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
+import { Team } from 'src/app/beans/team';
 
 @Component({
   selector: 'app-market-filter',
@@ -15,21 +16,14 @@ export class MarketFilterComponent implements OnInit {
   @Input() filter = new PlayerFilter();
   players: Player[];
   positions = POSITIONS;
-  private team = 0;
+  private team: Team;
 
   constructor(
     private playerService: PlayerService,
     private router: Router,
     private route: ActivatedRoute    
   ) { 
-
     this.team = JSON.parse(localStorage.getItem('currentTeam'));
-    // if (!(this.team > 0)) {
-    //   console.log(this.team);
-    //   console.log(this.route.snapshot.queryParams['returnUrl'] || '/');
-    //   this.router.navigate(['/team']);      
-    // }
-
   }
 
   ngOnInit() {

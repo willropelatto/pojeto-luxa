@@ -69,7 +69,11 @@ export class LoginComponent implements OnInit {
                 usr => {
                     this.teamService.getTeamUser(usr.id)
                         .subscribe(
-                            tm => localStorage.setItem('currentTeam', JSON.stringify(tm.id))
+                            tm => { 
+                                if (tm.id !== null) {
+                                    localStorage.setItem('currentTeam', JSON.stringify(tm));
+                                }
+                            }
                         );
 
                     localStorage.setItem('currentUser', JSON.stringify(usr));

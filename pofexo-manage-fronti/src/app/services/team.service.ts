@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Output, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Team } from '../beans/team';
@@ -9,6 +9,8 @@ import { tap, catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class TeamService {
+
+  @Output() budgetEvent: EventEmitter<number> = new EventEmitter();
 
   constructor(private http: HttpClient
     ) { }
@@ -35,7 +37,10 @@ export class TeamService {
     return this.http
       .get<Team>(`${Configs.teamUrl}/getTeam/${id}`, options)
       .pipe(
-        tap(_ => Configs.log(`fetched Team id=${id}`)),
+        tap(tm => {
+          this.budgetEvent.emit(tm.budget);
+          Configs.log(`fetched Team id=${id}`);
+        }),
         catchError(Configs.handleError<Team>(`getTeam id=${id}`))
       );
   }
@@ -48,7 +53,11 @@ export class TeamService {
     return this.http
       .get<Team>(`${Configs.teamUrl}/getByUser/${user}`, options)
       .pipe(
-        tap(_ => Configs.log(`fetched user id=${user}`)
+        tap(tm => {
+          this.budgetEvent.emit(tm.budget);
+          Configs.log(`fetched user id=${user}`);
+        }
+          
         ),
         catchError(Configs.handleError<Team>(`getTeam id=${user}`))
       );
