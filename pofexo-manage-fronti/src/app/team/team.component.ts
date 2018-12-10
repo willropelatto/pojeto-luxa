@@ -3,6 +3,7 @@ import { Manager } from '../beans/manager';
 import { Team } from '../beans/team';
 import { TeamService } from '../services/team.service';
 import { Router } from '@angular/router';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-team',
@@ -18,12 +19,13 @@ export class TeamComponent implements OnInit {
 
   constructor(
     private teamService: TeamService,
+    private authService: AuthenticationService,
     private router: Router
   ) { }
 
   ngOnInit() {
-    this.team = JSON.parse(localStorage.getItem('currentTeam'));
-    this.user = JSON.parse(localStorage.getItem('currentUser'));   
+    this.team = this.teamService.getCurrentTeam();
+    this.user = this.authService.getCurrentUser();   
     if (this.team !== null) {
       this.redirectToView();      
     } else {

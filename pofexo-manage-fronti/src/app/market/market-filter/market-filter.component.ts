@@ -5,6 +5,7 @@ import { Player } from 'src/app/beans/player';
 import { POSITIONS } from 'src/app/beans/misc';
 import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
 import { Team } from 'src/app/beans/team';
+import { TeamService } from 'src/app/services/team.service';
 
 @Component({
   selector: 'app-market-filter',
@@ -20,10 +21,11 @@ export class MarketFilterComponent implements OnInit {
 
   constructor(
     private playerService: PlayerService,
+    private teamService: TeamService,
     private router: Router,
     private route: ActivatedRoute    
   ) { 
-    this.team = JSON.parse(localStorage.getItem('currentTeam'));
+    this.team = this.teamService.getCurrentTeam();
   }
 
   ngOnInit() {

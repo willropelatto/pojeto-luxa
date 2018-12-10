@@ -98,5 +98,12 @@ export class TeamService {
       );
   }
 
+  getCurrentTeam(): Team {
+    let team: Team;
+    team = JSON.parse(localStorage.getItem('currentTeam'));
+    this.budgetEvent.emit(team.budget);
+    return team;
+  }
+
 
 }

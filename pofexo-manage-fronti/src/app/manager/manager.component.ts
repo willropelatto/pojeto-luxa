@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ManagerService } from '../services/manager.service';
 import { first } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-manager',
@@ -18,11 +19,12 @@ export class ManagerComponent implements OnInit {
 
   constructor(
     private managerService: ManagerService,
+    private authService: AuthenticationService,
     private route: ActivatedRoute,
     private router: Router,
     private snackBar: MatSnackBar
   ) { 
-    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    this.currentUser = this.authService.getCurrentUser();
     console.log(this.currentUser);
     if (this.currentUser != undefined) { console.log('aeeee') } else { console.log('nops') }
   }

@@ -34,7 +34,7 @@ export class MarketComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.playerFilter = params["playerFilter"];
     });
-    this.team = JSON.parse(localStorage.getItem('currentTeam'));
+    this.team = this.teamService.getCurrentTeam();
     if (!(this.team.id > 0)) {
       this.router.navigate(['/team']);
     }

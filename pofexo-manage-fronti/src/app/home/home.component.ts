@@ -5,6 +5,7 @@ import { first } from 'rxjs/operators';
 import { Team } from '../beans/team';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TeamService } from '../services/team.service';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-home',
@@ -20,10 +21,10 @@ export class HomeComponent implements OnInit {
   constructor(
       private userService: ManagerService,
       private teamService: TeamService,
-      private route: ActivatedRoute,
+      private authService: AuthenticationService,
       private router: Router) {
-    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    this.team = JSON.parse(localStorage.getItem('currentTeam'));
+    this.currentUser = this.authService.getCurrentUser();
+    this.team = this.teamService.getCurrentTeam();
 
     if (this.team === null) {
       this.router.navigate(['/team']);
