@@ -1,3 +1,48 @@
-<h1>Hi {{currentUser.username}}!</h1>
+<!-->h1>Hi {{currentUser.username}}!</h1>
 <p>You're logged in with Angular 6!!</p>
-<p><a [routerLink]="['/login']">Logout</a></p>
+<p><a [routerLink]="['/login']">Logout</a></p-->
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <img src="assets/img/luxa.jpg" alt="Vand." style="width: 100%; height: 100%;">
+                            </div>
+                            <div class="col-md-6">
+                                <h2>{{ team.name }}</h2>
+                                <p>Manager: {{ team.manager }}</p>
+                                <p>Email: {{ currentUser.email }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h2>Seus jogadores:</h2>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Nome</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let player of team.players; index as i">
+                                    <th scope="row">{{ i+1 }}</th>
+                                    <td>{{ player.name }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p><a [routerLink]="['/login']">Logout</a></p>
+    </div>
