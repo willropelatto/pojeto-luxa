@@ -4,6 +4,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
 import br.com.pofexo.model.bean.NotificationMO;
@@ -64,10 +65,13 @@ public class NotificationCore {
 		}	
 	}
 	
+	@Autowired
+	private SimpMessagingTemplate messaging;
+	
 	@MessageMapping("/notifications")
 	@SendTo("/pofexo/messages")
-	public JSONObject send(Message message) throws Exception {
-		return new JSONObject(message);
+	public void send(Message message) throws Exception {
+		this.messaging.convertAndSend("/notifications/pofexo", message);
 	}
 	
 }
