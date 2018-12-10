@@ -4,6 +4,7 @@ import { ManagerService } from '../services/manager.service';
 import { first } from 'rxjs/operators';
 import { Team } from '../beans/team';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TeamService } from '../services/team.service';
 
 @Component({
   selector: 'app-home',
@@ -18,6 +19,7 @@ export class HomeComponent implements OnInit {
 
   constructor(
       private userService: ManagerService,
+      private teamService: TeamService,
       private route: ActivatedRoute,
       private router: Router) {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -29,7 +31,11 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    //this.loadAllUsers();
+    this.teamService.getTeamId(this.team.id)
+    .subscribe(team => {
+      this.team = team
+      }
+    );
   }
 
   private loadAllUsers() {
