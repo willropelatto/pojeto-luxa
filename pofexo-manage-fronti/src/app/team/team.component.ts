@@ -23,9 +23,8 @@ export class TeamComponent implements OnInit {
 
   ngOnInit() {
     this.team = JSON.parse(localStorage.getItem('currentTeam'));
-    this.teamId = this.team.id;
-    this.user = JSON.parse(localStorage.getItem('currentUser'));    
-    if (this.teamId > 0) {
+    this.user = JSON.parse(localStorage.getItem('currentUser'));   
+    if (this.team !== null) {
       this.redirectToView();      
     } else {
       this.getTeam();
