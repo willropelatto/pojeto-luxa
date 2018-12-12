@@ -1,9 +1,6 @@
 package br.com.pofexo.ctrl;
 
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
@@ -11,12 +8,16 @@ import br.com.pofexo.model.bean.NotificationMO;
 import br.com.pofexo.model.bean.PlayerMO;
 import br.com.pofexo.model.bean.TeamMO;
 import br.com.pofexo.model.repo.NotificationRepo;
+import br.com.pofexo.model.repo.UserAppRepo;
 
 @Service
 public class NotificationCore {
 	
 	@Autowired
 	private NotificationRepo ntDao;
+	
+	@Autowired
+	private UserAppRepo userDao;
 
 	public void setBidSucess(PlayerMO player) {
 		NotificationMO ntf = new NotificationMO();
@@ -27,7 +28,7 @@ public class NotificationCore {
 		
 		Message msg = new Message(player, ntf);
 		try {
-			send(msg);
+			send(userDao.findOne(player.getTeam().getIdUser()).getUsername(), msg);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -42,7 +43,7 @@ public class NotificationCore {
 		
 		Message msg = new Message(player, ntf);
 		try {
-			send(msg);
+			send(userDao.findOne(player.getTeam().getIdUser()).getUsername(), msg);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}		
@@ -59,7 +60,7 @@ public class NotificationCore {
 		msg.setPlayerName(notification.getPlayerName());
 		msg.setTeamId(notification.getTeamId());
 		try {
-			send(msg);
+			send(userDao.findOne(team.getIdUser()).getUsername(), msg);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}	
@@ -68,10 +69,8 @@ public class NotificationCore {
 	@Autowired
 	private SimpMessagingTemplate messaging;
 	
-	@MessageMapping("/notifications")
-	@SendTo("/pofexo/messages")
-	public void send(Message message) throws Exception {
-		this.messaging.convertAndSend("/notifications/pofexo", message);
+	public void send(String user, Message message) throws Exception {
+		this.messaging.convertAndSendToUser(user, "/notifications/messages", message);
 	}
 	
 }
