@@ -25,7 +25,7 @@ import { HomeComponent } from './home/home.component';
 import { TeamComponent } from './team/team.component';
 import { ManagerViewComponent } from './manager/manager-view/manager-view.component';
 import { CardpojetoComponent } from './cardpojeto/cardpojeto.component';
-// import { FlexLayoutModule } from '@angular/flex-layout';
+import { WsocketComponent } from './wsocket/wsocket.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +44,9 @@ import { CardpojetoComponent } from './cardpojeto/cardpojeto.component';
     HomeComponent,
     TeamComponent,
     ManagerViewComponent,
-    CardpojetoComponent
+    CardpojetoComponent,
+    WsocketComponent
+    
   ],
   imports: [
     BrowserModule,

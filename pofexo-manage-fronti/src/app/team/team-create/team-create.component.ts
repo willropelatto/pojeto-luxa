@@ -4,6 +4,7 @@ import { Team } from 'src/app/beans/team';
 import { MatSnackBar } from '@angular/material';
 import { Manager } from 'src/app/beans/manager';
 import { Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-team-create',
@@ -17,6 +18,7 @@ export class TeamCreateComponent implements OnInit {
 
   constructor(
     private teamService: TeamService,
+    private authService: AuthenticationService,
     private snackBar: MatSnackBar,
     private router: Router
   ) { }
@@ -35,7 +37,7 @@ export class TeamCreateComponent implements OnInit {
   }
 
   ngOnInit() {    
-    this.user = JSON.parse(localStorage.getItem('currentUser'));
+    this.user = this.authService.getCurrentUser();
     this.team = new Team();
     this.team.idUser = this.user.id;
     this.team.budget = 15000;  

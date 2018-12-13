@@ -30,7 +30,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 				.antMatchers(HttpMethod.POST, AuthConstants.SIGN_UP_URL).permitAll()
 				//.antMatchers(HttpMethod.POST, AuthConstants.TEAM_REG).permitAll() //GAMBI PARA O LUCIANO FICAR FELIZ
 				.antMatchers(HttpMethod.POST, AuthConstants.UPD_PLA).permitAll()				
-				//.antMatchers(HttpMethod.POST, AuthConstants.ALL_SHITS).permitAll() //TODO Provisório para liberar tudo
+				.antMatchers(HttpMethod.POST, AuthConstants.ALL_SHITS).permitAll() //TODO Provisório para liberar tudo
 				.anyRequest().authenticated().and()
 				.addFilter(new AuthenticationUserAppFilter(authenticationManager()))
 				.addFilter(new AuthorizationUserAppFilter(authenticationManager()));
