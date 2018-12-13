@@ -13,21 +13,21 @@ export class TeamService {
   @Output() budgetEvent: EventEmitter<number> = new EventEmitter();
 
   constructor(private http: HttpClient
-    ) { }
+  ) { }
 
- getTeamList(currentPage: any, pageSize: any) {
-  let options = {
-    headers: Configs.getHttpHeaders(),
-    params: Configs.getHttpParams(currentPage, pageSize)
-  };
+  getTeamList(currentPage: any, pageSize: any) {
+    let options = {
+      headers: Configs.getHttpHeaders(),
+      params: Configs.getHttpParams(currentPage, pageSize)
+    };
 
-  return this.http
-    .get<Team[]>(Configs.teamUrl + '/list', options)
-    .pipe(
-      tap(players => Configs.log('fetched Team')),
-      catchError(Configs.handleError("getTeamList", []))
-    );
-}  
+    return this.http
+      .get<Team[]>(Configs.teamUrl + '/list', options)
+      .pipe(
+        tap(players => Configs.log('fetched Team')),
+        catchError(Configs.handleError("getTeamList", []))
+      );
+  }
 
   getTeamId(id: number): Observable<Team> {
     let options = {
@@ -38,8 +38,10 @@ export class TeamService {
       .get<Team>(`${Configs.teamUrl}/getTeam/${id}`, options)
       .pipe(
         tap(tm => {
-          this.budgetEvent.emit(tm.budget);
-          Configs.log(`fetched Team id=${id}`);
+          if (tm !== null) {
+            this.budgetEvent.emit(tm.budget);
+            Configs.log(`fetched Team id=${id}`);
+          }
         }),
         catchError(Configs.handleError<Team>(`getTeam id=${id}`))
       );
@@ -54,10 +56,12 @@ export class TeamService {
       .get<Team>(`${Configs.teamUrl}/getByUser/${user}`, options)
       .pipe(
         tap(tm => {
-          this.budgetEvent.emit(tm.budget);
-          Configs.log(`fetched user id=${user}`);
+          if (tm !== null) {
+            this.budgetEvent.emit(tm.budget);
+            Configs.log(`fetched user id=${user}`);
+          }
         }
-          
+
         ),
         catchError(Configs.handleError<Team>(`getTeam id=${user}`))
       );
@@ -101,7 +105,9 @@ export class TeamService {
   getCurrentTeam(): Team {
     let team: Team;
     team = JSON.parse(localStorage.getItem('currentTeam'));
-    this.budgetEvent.emit(team.budget);
+    if (team !== null) {
+      this.budgetEvent.emit(team.budget);
+    }    
     return team;
   }
 

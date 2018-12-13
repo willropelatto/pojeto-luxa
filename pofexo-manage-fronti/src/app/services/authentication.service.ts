@@ -36,9 +36,7 @@ export class AuthenticationService {
             return manager;
         } else {
             this.logout();
-            this.router.navigate(['/login']);
         }
-
     }
 
     logout() {

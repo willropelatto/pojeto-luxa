@@ -25,6 +25,7 @@ export class ManagerComponent implements OnInit {
     private snackBar: MatSnackBar
   ) { 
     this.currentUser = this.authService.getCurrentUser();
+    //this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     console.log(this.currentUser);
     if (this.currentUser != undefined) { console.log('aeeee') } else { console.log('nops') }
   }

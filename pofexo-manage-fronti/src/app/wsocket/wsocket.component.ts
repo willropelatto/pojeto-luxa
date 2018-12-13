@@ -18,7 +18,7 @@ export class WsocketComponent implements OnInit {
   }
 
   connect() {
-    const socket = new SockJS('http://localhost:8080/notifications');
+    const socket = new SockJS('http://localhost:9595/notifications');
     console.log(socket);
     this.stompClient = Stomp.Stomp.over(socket);
     
