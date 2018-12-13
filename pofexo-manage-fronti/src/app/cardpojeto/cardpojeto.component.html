@@ -1,26 +1,163 @@
 <div id="accordion">
-  <div class="card">
-    <div class="card-header" [id]="getHeader()">
+  <mat-card class="real-card">
+    <div [id]="getHeader()">
       <div class="row">
-        <div class="col-md-1">{{ player.rating }}</div>
-        <div class="col-md-1">{{ player.position }}</div>
-        <div class="col-md-5">{{ player.name }}</div>
-        <div class="col-md-2">{{ player.clubName }}</div>
-        <div class="col-md-1">{{ player.bid.nextValue }}</div>
-        <div class="col-md-1 btn btn-secondary" (click)="feedback(player)">Dar Lance</div>
-        <div class="col-md-1 arrow-collapse" data-toggle="collapse" [attr.data-target]="getCollapseId()" aria-expanded="true" [attr.aria-controls]="getCollapse()"><i class="material-icons">keyboard_arrow_down</i></div>
+
+        <div class="col-md-6">
+          <mat-card-header>
+            <div mat-card-avatar [ngClass]="getRatingColor(player.rating)">{{ player.rating }}</div>
+            <mat-card-title class="xuxuzinho">{{ player.name }}</mat-card-title>
+            <mat-card-subtitle class="xuxuzinho">{{ player.clubName }}</mat-card-subtitle>
+          </mat-card-header>
+        </div>
+
+
+        <div class="col-md-2 misc-cols">{{ player.position }}</div>
+        <div class="col-md-2 misc-cols">$ {{ player.bid.nextValue }}</div>
+        <div class="col-md-1 bts-cols">
+          <button mat-icon-button (click)="feedback(player)">
+            <mat-icon>gavel</mat-icon>
+          </button>
+        </div>
+        <div class="col-md-1 arrow-collapse bts-cols">
+          <button mat-icon-button data-toggle="collapse" [attr.data-target]="getCollapseId()" aria-expanded="true"
+            [attr.aria-controls]="getCollapse()">
+            <mat-icon>keyboard_arrow_down</mat-icon>
+          </button>
+        </div>
+
+
       </div>
     </div>
 
     <div [id]="getCollapse()" class="collapse" [attr.aria-labelledby]="getHeader()" data-parent="#accordion">
-      <div class="card-body">
-        <div class="row">
-          <div *ngFor="let att of player.attributes" class="col-md-2">{{ att.name }}</div>
+      <div class="card-body juca">
+        <div class="row line-header">
+          <div *ngFor="let att of player.attributes"
+            class="col-md-1">
+            <p class="head-col-attr">{{ att.name.toLowerCase() }}</p>
+          </div>
+          <div class="col-md-2">
+            <p class="head-col-attr">wr</p>
+          </div>
+          <div class="col-md-2">
+            <p class="head-col-attr">idade</p>
+          </div>
+          <div class="col-md-1">
+            <p class="head-col-attr">peso</p>
+          </div>
+          <div class="col-md-1">
+            <p class="head-col-attr">altura</p>
+          </div>
         </div>
+
         <div class="row">
-            <div *ngFor="let att of player.attributes" class="col-md-2">{{ att.value }}</div>
-        </div>        
+          <div *ngFor="let att of player.attributes" class="col-md-1">
+            <p [ngClass]="getAttributeColor(att.value)">{{ att.value }}</p>
+          </div>
+          <div class="col-md-2">
+            <p class="misc-info-line">{{ player.atkWorkRate.charAt(0) }}/{{ player.defWorkRate.charAt(0) }}</p>
+          </div>
+          <div class="col-md-2">
+            <p class="misc-info-line">{{ player.age }}</p>
+          </div>
+          <div class="col-md-1">
+            <p class="misc-info-line">{{ player.weight }}kg</p>
+          </div>
+          <div class="col-md-1">
+            <p class="misc-info-line">{{ player.height / 100}}</p>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
+  </mat-card>
 </div>
+
+
+
+
+<!-- <div class="basic-container">
+  <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-around center">
+    <mat-card class="example-card" fxLayout.gt-xs="row" fxLayout.xs="column" fxFlexFill>
+      <div fxFlex="30%">
+        <mat-card-header>
+          <div mat-card-avatar>98</div>
+          <mat-card-title>Luiz Suarez</mat-card-title>
+          <mat-card-subtitle>Barcelona</mat-card-subtitle>
+        </mat-card-header>
+      </div>
+      <div fxFlex="70%">
+        <mat-card-content fxLayout.gt-xs="row" fxLayout.xs="column" fxFlexFill>
+          <div fxFlex="40%" fxLayoutAlign="space-around center">ST</div>
+          <div fxFlex="40%" fxLayoutAlign="space-around center">R$ 5000</div>
+          <div fxFlex="15%" fxLayoutAlign="space-around center">bid</div>
+          <div fxFlex="5%" fxLayoutAlign="end center">
+
+            <button mat-icon-button>
+              <mat-icon (click)="teste()">expand_more</mat-icon>
+            </button>
+
+          </div>
+        </mat-card-content>
+      </div>
+    </mat-card>
+  </div>
+
+  <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-around center">
+    <mat-card class="example-card" fxFlexFill fxLayoutGap="15px">
+      <mat-card-content fxFlexFill>
+        <div fxFlex="60%" fxLayout.gt-xs="row" fxLayout.xs="column" fxFlexFill fxLayoutAlign="space-evenly  center">
+          <p fxFlex="16%">PAC<br>95</p>
+          <p fxFlex="16%">SHO<br>95</p>
+          <p fxFlex="16%">DRI<br>95</p>
+          <p fxFlex="16%">PAS<br>95</p>
+          <p fxFlex="16%">DEF<br>95</p>
+          <p fxFlex="16%">PHY<br>95</p>
+        </div>
+        <div fxFlex="40%" fxLayout.gt-xs="row" fxLayout.xs="column" fxFlexFill>
+          <p fxFlex="35%">Altura<br>1.75</p>
+          <p fxFlex="35%">Peso<br>80 kg</p>
+          <p fxFlex="30%">Pé<br>Destro</p>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+
+</div> -->
+
+
+
+
+
+<!-- 
+<div id="accordion">
+    <div class="card">
+      <div class="card-header" [id]="getHeader()">
+        <div class="row">
+          <div class="col-md-1">{{ player.rating }}</div>
+          <div class="col-md-1">{{ player.position }}</div>
+          <div class="col-md-5">{{ player.name }}</div>
+          <div class="col-md-2">{{ player.clubName }}</div>
+          <div class="col-md-1">{{ player.bid.nextValue }}</div>
+          <div class="col-md-1 btn btn-secondary" (click)="feedback(player)">Dar Lance</div>
+          <div class="col-md-1 arrow-collapse" data-toggle="collapse" [attr.data-target]="getCollapseId()" aria-expanded="true"
+            [attr.aria-controls]="getCollapse()">
+            
+            <i class="material-icons">keyboard_arrow_down</i>
+          </div>
+        </div>
+      </div>
+  
+      <div [id]="getCollapse()" class="collapse" [attr.aria-labelledby]="getHeader()" data-parent="#accordion">
+        <div class="card-body">
+          <div class="row">
+            <div *ngFor="let att of player.attributes" class="col-md-2">{{ att.name }}</div>
+          </div>
+          <div class="row">
+            <div *ngFor="let att of player.attributes" class="col-md-2">{{ att.value }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->

@@ -25,6 +25,7 @@ import { HomeComponent } from './home/home.component';
 import { TeamComponent } from './team/team.component';
 import { ManagerViewComponent } from './manager/manager-view/manager-view.component';
 import { CardpojetoComponent } from './cardpojeto/cardpojeto.component';
+// import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,6 @@ import { CardpojetoComponent } from './cardpojeto/cardpojeto.component';
     TeamComponent,
     ManagerViewComponent,
     CardpojetoComponent
-    
   ],
   imports: [
     BrowserModule,
@@ -54,6 +54,7 @@ import { CardpojetoComponent } from './cardpojeto/cardpojeto.component';
     BrowserAnimationsModule,
     DemoMaterialModule,
     ReactiveFormsModule
+    // FlexLayoutModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

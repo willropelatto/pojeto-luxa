@@ -1,7 +1,110 @@
 .card-header {
-    background-color: white;
+  background-color: white;
 }
 
 .arrow-collapse {
-    text-align: right;
+  text-align: right;
+}
+
+.real-card {
+  padding: 8px;
+}
+
+.misc-cols {
+  padding-top: 12px;
+}
+
+.bts-cols {
+  padding-top: 5px;
+}
+
+.avt-col {
+  padding-top: 10px;
+  padding-left: 11px;
+  background-color: burlywood;
+  font-weight: bold;
+}
+
+.xuxuzinho {
+  margin-bottom: 5px !important;
+}
+
+.head-col-attr {
+  font-size: smaller;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+.misc-info-line {
+  margin-left: 10px;
+  font-size: 15px;
+}
+
+.line-header {
+  line-height: 0.3px;
+}
+
+.chip-attr {
+  display: inline-block;
+  padding: 0 13px;
+  height: 30px;
+  font-size: 13px;
+  font-weight: bold;
+  line-height: 30px;
+  border-radius: 25px;
+  background-color: #f1f1f1;
+  /* color irá mudar */
+}
+
+.juca {
+  padding-bottom: 0;
+}
+
+
+.stats-1-49 {
+  background: #bd2f2f;
+  color: #fff;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .16), 0 2px 10px 0 rgba(0, 0, 0, .12);
+}
+
+.stats-50-69 {
+  background: #c8790a;
+  color: #fff;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .16), 0 2px 10px 0 rgba(0, 0, 0, .12);
+}
+
+.stats-70-79 {
+  background: #e8b415;
+  color: #fff;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .16), 0 2px 10px 0 rgba(0, 0, 0, .12);
+}
+
+.stats-80-89 {
+  background: #99cf46;
+  color: #fff;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .16), 0 2px 10px 0 rgba(0, 0, 0, .12);
+}
+
+.stats-90-99 {
+  background: #1C8502;
+  color: #fff;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .16), 0 2px 10px 0 rgba(0, 0, 0, .12);
+}
+
+.rating-1-64 {
+  background: linear-gradient(180deg, #946f56, #6e4c35);
+  color: #fff;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .16), 0 2px 10px 0 rgba(0, 0, 0, .12);
+}
+
+.rating-65-74 {
+  background: linear-gradient(180deg, #c2c7ca, #a9aeb1);
+  color: black;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .16), 0 2px 10px 0 rgba(0, 0, 0, .12);
+}
+
+.rating-75-99 {
+  background: linear-gradient(180deg, #f2c40b, #c6a009);
+  color: black;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .16), 0 2px 10px 0 rgba(0, 0, 0, .12);
 }
