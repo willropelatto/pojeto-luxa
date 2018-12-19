@@ -50,6 +50,7 @@ public class MarketController {
 		if (player.getStatus() == PlayerStatus.CONTRACT) {
 			player.setBid(null);
 			player.setStatus(PlayerStatus.UNAVAIBLE);
+			player.setTeam(null);
 			playerBid = playerCore.persistPlayerBid(player);
 			tmCore.increaseBudget(team, bidValue);
 			tmCore.persistTeam(team);
