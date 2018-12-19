@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from '../services/authentication.service';
 import { AlertService } from '../services/alert.service';
-import { first } from 'rxjs/operators';
+import { first, tap } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material';
 import { ManagerService } from '../services/manager.service';
 import { TeamService } from '../services/team.service';
@@ -52,9 +52,8 @@ export class LoginComponent implements OnInit {
 
         this.loading = true;
         this.authenticationService.login(this.f.username.value, this.f.password.value)
-            .pipe(first())
             .subscribe(
-                data => {
+                _ => {
                     this.loadEnviromentUser(this.f.username.value);
                 },
                 error => {
@@ -63,21 +62,21 @@ export class LoginComponent implements OnInit {
                 });
     }
 
+
     private loadEnviromentUser(username) {
         this.managerService.getManagerName(username)
             .subscribe(
                 usr => {
                     this.teamService.getTeamUser(usr.id)
                         .subscribe(
-                            tm => { 
+                            tm => {
                                 if (tm.id !== null) {
                                     localStorage.setItem('currentTeam', JSON.stringify(tm));
+                                    localStorage.setItem('currentUser', JSON.stringify(usr));
+                                    this.router.navigate([this.returnUrl]);
                                 }
                             }
                         );
-
-                    localStorage.setItem('currentUser', JSON.stringify(usr));
-                    this.router.navigate([this.returnUrl]);
                 }
             );
     }

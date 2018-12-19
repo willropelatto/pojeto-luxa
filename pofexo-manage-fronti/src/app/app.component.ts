@@ -1,5 +1,5 @@
-import {MediaMatcher} from '@angular/cdk/layout';
-import {ChangeDetectorRef, Component, OnDestroy} from '@angular/core';
+import { MediaMatcher } from '@angular/cdk/layout';
+import { ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
 import { AuthenticationService } from './services/authentication.service';
 import { TeamService } from './services/team.service';
 
@@ -16,8 +16,12 @@ export class AppComponent {
   private logado = false;
   private budget = 0;
 
-  constructor(private authService: AuthenticationService, private teamService: TeamService, 
-    changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
+  constructor(
+    private authService: AuthenticationService,
+    private teamService: TeamService,
+    changeDetectorRef: ChangeDetectorRef,
+    media: MediaMatcher
+  ) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
@@ -28,8 +32,8 @@ export class AppComponent {
   }
 
   ngOnInit(): void {
-    this.authService.sucessfull.subscribe(item => this.logado=item);
-    this.teamService.budgetEvent.subscribe(value => this.budget=value);
+    this.authService.sucessfull.subscribe(item => this.logado = item);
+    this.teamService.budgetEvent.subscribe(value => this.budget = value);
   }
 
   getLogado() {

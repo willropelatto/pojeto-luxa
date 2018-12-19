@@ -15,7 +15,7 @@
         <div class="col-md-2 misc-cols">{{ player.position }}</div>
         <div class="col-md-2 misc-cols">$ {{ player.bid.nextValue }}</div>
         <div class="col-md-1 bts-cols">
-          <button mat-icon-button (click)="feedback(player)">
+          <button mat-icon-button (click)="feedback(player)" [disabled]="player.bid.team == team.id">
             <mat-icon>gavel</mat-icon>
           </button>
         </div>

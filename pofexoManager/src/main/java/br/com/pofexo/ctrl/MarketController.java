@@ -142,6 +142,12 @@ public class MarketController {
 		mkDao.save(mk);
 	}
 
+	@CrossOrigin
+	@GetMapping("/close")	
+	public void krose() {
+		closeMarket(ntCore, tmCore); 
+	}
+	
 	public void closeMarket(NotificationCore ntCore, TeamCore tmCore) {
 		Iterable<TeamMO> teams = tmCore.findAll();
 		for (TeamMO team : teams)

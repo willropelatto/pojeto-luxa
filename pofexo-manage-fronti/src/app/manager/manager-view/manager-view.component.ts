@@ -16,11 +16,13 @@ export class ManagerViewComponent implements OnInit {
 
   constructor(private authService: AuthenticationService,
     private teamService: TeamService) {
-    this.luxa = this.authService.getCurrentUser();
-    this.team = this.teamService.getCurrentTeam();   
+
   }
 
-  ngOnInit() {
+  ngOnInit(
+  ) {
+    this.luxa = this.authService.getCurrentUser();
+    this.team = this.teamService.getCurrentTeam();   
   }
 
 }

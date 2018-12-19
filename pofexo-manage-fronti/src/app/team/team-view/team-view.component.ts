@@ -2,9 +2,10 @@ import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { Team } from 'src/app/beans/team';
 import { TeamService } from 'src/app/services/team.service';
 import { ActivatedRoute } from '@angular/router';
-import { MatPaginator, MatTableDataSource } from '@angular/material';
+import { MatPaginator, MatTableDataSource, MatSnackBar } from '@angular/material';
 import { Player } from 'src/app/beans/player';
 import { tap } from 'rxjs/operators';
+import { MarketService } from 'src/app/services/market.service';
 
 @Component({
   selector: 'app-team-view',
@@ -13,7 +14,7 @@ import { tap } from 'rxjs/operators';
 })
 export class TeamViewComponent implements OnInit {
 
-  displayedColumns: string[] = ['position', 'name', 'rating', 'status'];
+  displayedColumns: string[] = ['position', 'name', 'rating', 'status', 'action'];
   dataSource: MatTableDataSource<Player>;
 
   @Input() team: Team;
@@ -22,6 +23,8 @@ export class TeamViewComponent implements OnInit {
 
   constructor(
     private teamService: TeamService,
+    private marketService: MarketService,
+    private snackBar: MatSnackBar,
     private route: ActivatedRoute
   ) { }
 
@@ -40,6 +43,21 @@ export class TeamViewComponent implements OnInit {
 
   ngOnInit() {
     this.getTeam();
+  }
+
+  sellPlayer(player: Player) {
+    player.bid.team = this.team.id;
+    player.bid.bidValue = player.bid.nextValue;
+    console.log(player);
+    this.marketService.dismissPlayer(player).
+      subscribe(p => {
+        this.teamService.getTeamId(this.team.id).subscribe();
+        this.snackBar.open(p.name + ' dispensado.', 'OK', { duration: 5000 })
+      },
+        error => {
+          this.snackBar.open('Não foi possivel dispensar o jogador.', 'OK', { duration: 5000 })
+        }
+      );
   }
 
 }

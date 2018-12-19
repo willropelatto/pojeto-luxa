@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Player } from '../beans/player';
 import { PLAYERATTRIBUTES } from '../beans/misc';
+import { Team } from '../beans/team';
+import { TeamService } from '../services/team.service';
 
 @Component({
   selector: 'cardpojeto',
@@ -10,13 +12,16 @@ import { PLAYERATTRIBUTES } from '../beans/misc';
 export class CardpojetoComponent implements OnInit {
 
   @Output() informaBid = new EventEmitter();
+  team: Team;
 
-  constructor() { }
+  constructor(private teamService: TeamService) { }
 
   ngOnInit() {
     this.player.attributes.sort(function (a, b) {
       return a.name < b.name ? -1 : a.name > b.name ? 1 : 0;
     })
+
+    this.team = this.teamService.getCurrentTeam();
   }
 
   @Input() player: Player;
@@ -42,7 +47,7 @@ export class CardpojetoComponent implements OnInit {
   }
 
   getAttributeColor(attribute: number) {
-    let res;
+    let res: string;
     if (attribute >= 90) {
       res = 'stats-90-99'
     } else if (attribute >= 80) {
@@ -58,7 +63,7 @@ export class CardpojetoComponent implements OnInit {
   }
 
   getRatingColor(attribute: number) {
-    let res;
+    let res: string;
     if (attribute >= 75) {
       res = 'rating-75-99'
     } else if (attribute >= 65) {

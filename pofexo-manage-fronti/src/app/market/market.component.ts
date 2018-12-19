@@ -55,12 +55,13 @@ export class MarketComponent implements OnInit {
             this.snackBar.open('Lance superado.', 'OK', { duration: 5000 });
           } else
             if (player.bid.status == "MARKET_CLOSE") {
-              this.snackBar.open('Mercado está fechado.', 'OK', { duration: 5000 });
+              this.snackBar.open('Mercado fechado.', 'OK', { duration: 5000 });
             } else {
               this.snackBar.open('Lance efetuado pelo jogador ' + pl.name + '.', 'OK', { duration: 5000 });
-            }
-        //chamada só pra atualizar budget    
-        this.teamService.getTeamId(this.team.id).subscribe();
+              //chamada só pra atualizar budget    
+              this.teamService.getTeamId(this.team.id).subscribe();
+            }      
+        
         //todo: refresh na página?, só queria atualizar esse registro...
       },
         error => {
@@ -94,6 +95,7 @@ export class MarketComponent implements OnInit {
       this.totalPlayer = juca['totalElements'];
     });
   }
+
   receiveBid(player: Player) {
     this.placeBid(player);
   }
