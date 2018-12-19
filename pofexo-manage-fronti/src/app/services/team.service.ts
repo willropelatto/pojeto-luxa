@@ -40,6 +40,7 @@ export class TeamService {
         tap(tm => {
           if (tm !== null) {
             this.budgetEvent.emit(tm.budget);
+            localStorage.setItem('currentTeam', JSON.stringify(tm));
             Configs.log(`fetched Team id=${id}`);
           }
         }),
@@ -58,6 +59,7 @@ export class TeamService {
         tap(tm => {
           if (tm !== null) {
             this.budgetEvent.emit(tm.budget);
+            localStorage.setItem('currentTeam', JSON.stringify(tm));
             Configs.log(`fetched user id=${user}`);
           }
         }
