@@ -13,6 +13,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 
 public class AuthorizationUserAppFilter extends BasicAuthenticationFilter {
@@ -41,12 +42,18 @@ public class AuthorizationUserAppFilter extends BasicAuthenticationFilter {
 		String token = request.getHeader(AuthConstants.HEADER_STRING);
 		if (token != null) {
 			// parse the token.
-			String user = Jwts.parser().setSigningKey(AuthConstants.SECRET.getBytes()).parseClaimsJws(token.replace(AuthConstants.TOKEN_PREFIX, ""))
-					.getBody().getSubject();
+			try {
+				String user = Jwts.parser().setSigningKey(AuthConstants.SECRET.getBytes()).parseClaimsJws(token.replace(AuthConstants.TOKEN_PREFIX, ""))
+						.getBody().getSubject();
 
-			if (user != null) {
-				return new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
+				if (user != null) {
+					return new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
+				}
+
 			}
+			catch (ExpiredJwtException e) {
+				return null;
+			}			
 			return null;
 		}
 		return null;
