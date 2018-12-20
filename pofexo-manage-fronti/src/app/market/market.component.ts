@@ -40,10 +40,9 @@ export class MarketComponent implements OnInit {
     }
   }
 
-  placeBid(player: Player) {
+  placeBid(player: Player) {  
     player.bid.team = this.team.id;
-    player.bid.bidValue = player.bid.nextValue;
-    console.log(player);
+    player.bid.bidValue = player.bid.nextValue;    
     this.marketService.placeBid(player).
       subscribe(pl => {
         player = pl;
@@ -59,10 +58,11 @@ export class MarketComponent implements OnInit {
             } else {
               this.snackBar.open('Lance efetuado pelo jogador ' + pl.name + '.', 'OK', { duration: 5000 });
               //chamada só pra atualizar budget    
-              this.teamService.getTeamId(this.team.id).subscribe();
-            }      
+              this.teamService.getTeamId(this.team.id).subscribe();              
+            }
         
         //todo: refresh na página?, só queria atualizar esse registro...
+        this.loadPlayersPage();        
       },
         error => {
           this.snackBar.open('Não foi possivel dar o lance no jogador.', 'OK', { duration: 5000 })

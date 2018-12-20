@@ -53,6 +53,7 @@ export class TeamViewComponent implements OnInit {
       subscribe(p => {
         this.teamService.getTeamId(this.team.id).subscribe();
         this.snackBar.open(p.name + ' dispensado.', 'OK', { duration: 5000 })
+        this.getTeam(); //refresh
       },
         error => {
           this.snackBar.open('Não foi possivel dispensar o jogador.', 'OK', { duration: 5000 })
