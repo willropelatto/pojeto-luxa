@@ -25,13 +25,10 @@ export class MarketFilterComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute    
   ) { 
-    
+    this.team = this.teamService.getCurrentTeam();
   }
 
   ngOnInit() {
-    this.team = this.teamService.getCurrentTeam();
-    //chamada só pra atualizar budget    
-    this.teamService.getTeamId(this.team.id).subscribe();      
   }
 
   filterExtra(filterPlayer: PlayerFilter): NavigationExtras {

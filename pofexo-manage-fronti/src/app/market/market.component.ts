@@ -8,8 +8,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PlayerFilter } from '../beans/player-filter';
 import { Team } from '../beans/team';
 import { TeamService } from '../services/team.service';
-import { AuthenticationService } from '../services/authentication.service';
-import { Manager } from '../beans/manager';
 
 @Component({
   selector: 'app-market',
@@ -22,7 +20,6 @@ export class MarketComponent implements OnInit {
   totalPlayer = 0;
   private playerFilter: PlayerFilter;
   private team: Team;
-  private currentUser: Manager;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -30,7 +27,6 @@ export class MarketComponent implements OnInit {
     private marketService: MarketService,
     private playerService: PlayerService,
     private teamService: TeamService,
-    private authService: AuthenticationService,
     private snackBar: MatSnackBar,
     private route: ActivatedRoute,
     private router: Router
@@ -42,9 +38,6 @@ export class MarketComponent implements OnInit {
     if (!(this.team.id > 0)) {
       this.router.navigate(['/team']);
     }
-
-    //chamada só pra atualizar budget    
-    this.teamService.getTeamId(this.team.id).subscribe();         
   }
 
   placeBid(player: Player) {
@@ -65,10 +58,9 @@ export class MarketComponent implements OnInit {
               this.snackBar.open('Mercado fechado.', 'OK', { duration: 5000 });
             } else {
               this.snackBar.open('Lance efetuado pelo jogador ' + pl.name + '.', 'OK', { duration: 5000 });
-
-            }     
-          //chamada só pra atualizar budget    
-          this.teamService.getTeamId(this.team.id).subscribe();            
+              //chamada só pra atualizar budget    
+              this.teamService.getTeamId(this.team.id).subscribe();
+            }      
         
         //todo: refresh na página?, só queria atualizar esse registro...
       },
@@ -80,7 +72,6 @@ export class MarketComponent implements OnInit {
 
   ngOnInit() {
     this.getPlayers(0, 5);
-    this.currentUser = this.authService.getCurrentUser();
   }
 
   ngAfterViewInit() {
