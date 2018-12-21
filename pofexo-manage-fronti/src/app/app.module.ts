@@ -17,7 +17,6 @@ import { TeamCreateComponent } from './team/team-create/team-create.component';
 import { LeagueComponent } from './league/league.component';
 import { MarketComponent } from './market/market.component';
 import { MarketFilterComponent } from './market/market-filter/market-filter.component';
-import { AlertComponent } from './alert/alert.component';
 import { ErrorInterceptor } from './misc/error.interceptor';
 import { JwtInterceptor } from './misc/jwt.interceptor';
 import { LoginComponent } from './login/login.component';
@@ -39,7 +38,6 @@ import { WsocketComponent } from './wsocket/wsocket.component';
     LeagueComponent,
     MarketComponent,
     MarketFilterComponent,
-    AlertComponent,
     LoginComponent,
     HomeComponent,
     TeamComponent,

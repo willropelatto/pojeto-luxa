@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material';
+import { Router } from '@angular/router';
 import { Manager } from '../beans/manager';
-import { ManagerService } from '../services/manager.service';
-import { first } from 'rxjs/operators';
 import { Team } from '../beans/team';
-import { ActivatedRoute, Router } from '@angular/router';
-import { TeamService } from '../services/team.service';
 import { AuthenticationService } from '../services/authentication.service';
 import { MarketService } from '../services/market.service';
-import { MatSnackBar } from '@angular/material';
+import { TeamService } from '../services/team.service';
 
 @Component({
   selector: 'app-home',
@@ -20,15 +18,13 @@ export class HomeComponent implements OnInit {
   team: Team;
   users: Manager[] = [];
 
-  constructor(
-    // private userService: ManagerService,
+  constructor(    
     private teamService: TeamService,
     private mktService: MarketService,
     private authService: AuthenticationService,
     private snackBar: MatSnackBar,
     private router: Router
   ) {
-
   }
 
   ngOnInit() {
@@ -56,13 +52,5 @@ export class HomeComponent implements OnInit {
       }
     );
   }
-
-  // private loadAllUsers() {
-  //   this.userService.getListManager(0, 5)
-  //     .pipe(first())
-  //     .subscribe(users => {
-  //       this.users = users;
-  //     });
-  // }
 
 }

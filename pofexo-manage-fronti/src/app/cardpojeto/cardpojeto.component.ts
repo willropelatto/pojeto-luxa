@@ -1,6 +1,5 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Player } from '../beans/player';
-import { PLAYERATTRIBUTES } from '../beans/misc';
 import { Team } from '../beans/team';
 import { TeamService } from '../services/team.service';
 
@@ -26,7 +25,7 @@ export class CardpojetoComponent implements OnInit {
 
   @Input() player: Player;
 
-  feedback(player: Player) {
+  feedback(player: Player) {    
     this.informaBid.emit(player);
   }
 
